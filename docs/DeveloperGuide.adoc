@@ -1,4 +1,4 @@
-= FlashCards - Developer Guide
+= AddressBook Level 4 - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -15,7 +15,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/se-edu/addressbook-level4/tree/master
 
-By: `Team M11-3`      Since: `Jan 2019`      Licence: `MIT`
+By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
 
 == Setting up
 
@@ -234,41 +234,16 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 This section describes some noteworthy details on how certain features are implemented.
 
 // tag::undoredo[]
-=== Toggle feature
+=== Undo/Redo feature
 ==== Current Implementation
 
-The toggle feature is facilitated by `FlashCards`.
-It is stored internally and implements the following operations:
+The undo/redo mechanism is facilitated by `VersionedAddressBook`.
+It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`.
+Additionally, it implements the following operations:
 
-* `FlashCards#n()` -- (next) Opens the next flash card in line.
-* `FlashCards#p()` -- (previous) Restore the previous flash card.
-* `FlashCards#s()` -- (skip) Skip the current flash card and move on to the next. The flash card skipped will move to the back of the line.
-* `FlashCards#c()` -- (change) Closes the flash cards in the current subject and move on to the next subject selected/in line.
-
-=== Modes of Quizzing feature
-==== Current Implementation
-
-The Modes of Quizzing feature is facilitated by `FlashCards`.
-For each subject the user has, he/she can create flash cards specifically for the topic. The user can also choose the testing mode he/she wishes to be tested on. These are the different modes available:
-
-* `"Subject" Knowledge Testing Mode` 
--- From the pool of flash cards under the selected subject, the user will choose the number of flash cards and there will be a mixture of frequency levels from the subject pool. This mode will focus on a specific subject and can be used for revision before mini quizzes held in school.
-
-* `"Focus" Subject Testing Mode` 
--- This mode will be largely focused on weaker concepts and cards with higher frequency of being chosen from the database “FlashCards”. The frequency level can be toggled in this mode for the user to focus more on weaker concepts or strengthen their concepts. This mode is encouraged when exam dates are drawing near.
-
-* `"Random" Mass Testing Mode` 
--- After selecting the number of cards to be tested, random flash cards will be chosen from the database “FlashCards” with varying frequency for the user to quiz himself/herself. This mode is encouraged if the user has free time or to pass time when travelling.
-
-=== Shelf-Life of FlashCards
-==== Current Implementation
-
-The user can determine how long the flash cards will exist in the database “FlashCards”. 
-The following operations are available:
-* `FlashCards#clearall()` -- Clears the entire database.
-* `FlashCards#clear()` -- Clears a specific subject when in "Subject" Knowledge Testing Mode.
-
-For easier modes of implementation, the user can also choose to set a date whereby the flash cards would be unavailable thereafter. For example, in the event where the user knows the specific exam date for the selected subject, he/she can set the exam date under the “Subject Details” and the flash cards will be available for another month after the exam before the auto deletion function is activated.
+* `VersionedAddressBook#commit()` -- Saves the current address book state in its history.
+* `VersionedAddressBook#undo()` -- Restores the previous address book state from its history.
+* `VersionedAddressBook#redo()` -- Restores a previously undone address book state from its history.
 
 These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
 
@@ -836,17 +811,13 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 *Target user profile*:
 
-* (Mainly) Secondary School students
-* Has a need to memorise notes across different subjects
-* Prefer digital notes over paper and pen
-* Reasonably comfortable with using CLI apps
+* has a need to manage a significant number of contacts
+* prefer desktop apps over other types
+* can type fast
+* prefers typing over mouse input
+* is reasonably comfortable using CLI apps
 
-*Value proposition*: 
-
-* Digitizes notes for each subject
-* One-stop platform to get all one's notes for different subjects
-* Help with the memorisation of notes through the use of flash cards (e.g. before exams)
-* Organised one's notes in one platform
+*Value proposition*: manage contacts faster than a typical mouse/GUI driven app
 
 [appendix]
 == User Stories
@@ -856,143 +827,53 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |New User |See usage instructions |Refer to instructions when I forget how to use the App
+|`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
 
-|`* * *` |New User |Create a new account |Only see flash cards and subjects that are related and customised for me 
+|`* * *` |user |add a new person |
 
-|`* * *` |User |Login |
+|`* * *` |user |delete a person |remove entries that I no longer need
 
-|`* * *` |User |Add a new flash card |
+|`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
 
-|`* * *` |User |Edit a flash card |Change my mistakes
+|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
 
-|`* * *` |User |Delete a flash card |Remove notes that I no longer need
-
-|`* * *` |User |List flash cards categorized by subjects |Have an overview of the flash cards I currently have
-
-|`* * *` |User |Find a flash card |Locate the flash card i need without going through the entire list
-
-|`* *` |User |Categorize each flash card by importance |Prioritise which information to study/memorise first
-
-|`* *` |User |Retrieve a recently deleted flash card |Retrieve the flash card which I might have accidentally deleted
+|`*` |user with many persons in the address book |sort persons by name |locate a person easily
 |=======================================================================
 
-_{More to be added in future versions of the developer guide}_
+_{More to be added}_
 
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `FlashCards` and the *Actor* is the `User`, unless specified otherwise)
+(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
-=== Use case: Create Account
+=== Use case: Delete person
 
 *MSS*
 
-1.  User enters a new username
-2.  FlashCards creates a new User Account
+1.  User requests to list persons
+2.  AddressBook shows a list of persons
+3.  User requests to delete a specific person in the list
+4.  AddressBook deletes the person
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 1a. Username is taken
-** 1a1. FlashCards prints error message
-+
-Use case resumes at step 1.
-
-[discrete]
-=== Use case: Login
-
-*MSS*
-
-1.  User enters username
-2.  FlashCards retrieves all relevant data for user account
+* 2a. The list is empty.
 +
 Use case ends.
 
-*Extensions*
-
+* 3a. The given index is invalid.
++
 [none]
-* 1a. Account not found
-** 1a1. FlashCards prints error message
+** 3a1. AddressBook shows an error message.
 +
-Use case resumes at step 1.
+Use case resumes at step 2.
 
-[discrete]
-=== Use case: Adding a Flash Card
-
-*MSS*
-
-1.  User enters subject and data to add as a flash card
-2.  FlashCards displays the flash card that was just added
-+
-Use case ends.
-
-[discrete]
-=== Use case: Editing a Flash Card
-
-*MSS*
-
-1.  User enters the subject of the flash card to be edited
-2.  FlashCards displays a list of flash cards belonging to the same subject
-3.  User selects the index of the flash card to edit
-4.  FlashCards prompts for new data
-5. User enters new data
-6. FlashCards displays the updated flash card
-+
-Use case ends.
-
-[discrete]
-=== Use case: Deleting a Flash Card
-
-*MSS*
-
-1.  User enters the subject of the flash card to be deleted
-2.  FlashCards displays a list of flash cards belonging to the same subject
-3.  User selects the index of the flash card to delete
-4.  FlashCards displays the updated list of flash cards
-+
-Use case ends.
-
-[discrete]
-=== Use case: Listing all Flash Cards categorized by Subjects
-
-*MSS*
-
-1.  FlashCards displays an indexed list of flash cards categorized by subjects 
-+
-Use case ends.
-
-[discrete]
-=== Use case: Finding a Flash Card
-
-*MSS*
-
-1.  User enters a keyword
-2.  FlashCards displays all flash cards that contains the given keyword
-+
-Use case ends.
-
-*Extensions*
-
-[none]
-* 1a. Keyword not found
-+
-Use case ends.
-
-[discrete]
-=== Use case: Clear all Data of a particular User
-
-*MSS*
-
-1.  User enters clear command
-2.  FlashCards clears all flash cards of the user
-+
-Use case ends.
-
-_{More use cases to be added in future versions of the developer guide}_
+_{More to be added}_
 
 [appendix]
 == Non Functional Requirements
@@ -1000,24 +881,6 @@ _{More use cases to be added in future versions of the developer guide}_
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
 .  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-=== Performance Requirement
-The product will have a high performance speed of less than 2 seconds.
-
-=== Interface Requirement
-The product will have a simple and user-friendly interface, making it easy even for new users using our application.
-
-=== Portability Requirement
-The product can be used through both laptop and smartphone allowing users to use them on the go.
-
-=== Operational Requirement
-The system is capable of categorizing the cards based on the subjects and allows easy access to cards when searching for one.
-
-=== Technical Requirement 
-The system should work on common operating systems such as Mac OS, Windows, Linux and Solaris platform.
-
-=== Constraints
-The system is built on Java 9 and it is advisable to use it with the recommended version of Java 9. When used on a newer/older version of Java, the user might not be able to enjoy the full benefits of the application.
 
 _{More to be added}_
 
