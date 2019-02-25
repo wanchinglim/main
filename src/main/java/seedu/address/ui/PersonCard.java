@@ -14,6 +14,8 @@ public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
 
+    private static final String[] TAG_COLOURS = {"white", "black", "orange", "maroon", "pink", "green", "blue", "purple", "navy", "beige"};
+
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -47,8 +49,21 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        tagger(person);
     }
+
+    public String getTagColourIndex(String tagName) {
+        return TAG_COLOURS[Math.floorMod(tagName.hashCode(), TAG_COLOURS.length)];
+    }
+
+    public void tagger(Person p) {
+        p.getTags().forEach(tagT -> {
+            Label tagLabel = new Label(tagT.tagName);
+            tagLabel.getStyleClass().add(getTagColourIndex(tagT.tagName));
+            tags.getChildren().add(tagLabel);
+        });
+    }
+
 
     @Override
     public boolean equals(Object other) {
