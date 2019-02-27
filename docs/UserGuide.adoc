@@ -72,7 +72,7 @@ Examples:
 === Listing all persons : `list` `l`
 
 Shows a list of all persons in the address book. +
-Format: `list`
+Format: `list` or `l`
 
 === Editing a person : `edit` `e`
 
@@ -91,7 +91,7 @@ Examples:
 
 * `edit 1 p/91234567 e/johndoe@example.com` +
 Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` +
+* `e 2 n/Betsy Crower t/` +
 Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
 === Locating persons by name: `find` `f`
@@ -111,7 +111,7 @@ Examples:
 
 * `find John` +
 Returns `john` and `John Doe`
-* `find Betsy Tim John` +
+* `f Betsy Tim John` +
 Returns any person having names `Betsy`, `Tim`, or `John`
 
 === Deleting a person : `delete` `d`
@@ -130,8 +130,9 @@ Examples:
 * `list` +
 `delete 2` +
 Deletes the 2nd person in the address book.
-* `find Betsy` +
-`delete 1` +
+
+* `f Betsy` +
+`d 1` +
 Deletes the 1st person in the results of the `find` command.
 
 === Selecting a person : `select`
@@ -217,7 +218,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 === Clearing all entries : `clear` `c`
 
 Clears all entries from the address book. +
-Format: `clear`
+Format: `clear` or `c`
 
 === Exiting the program : `exit`
 
@@ -244,14 +245,16 @@ _{explain how the user can enable/disable data encryption}_
 
 * *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
 e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-* *Clear* : `clear`
+* *Clear* : `clear` or `c`
 * *Delete* : `delete INDEX` +
-e.g. `delete 3`
+e.g. `delete 3` or `d 3`
 * *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-e.g. `edit 2 n/James Lee e/jameslee@example.com`
+e.g. `edit 2 n/James Lee e/jameslee@example.com` or
+e.g. `e 2 n/James Lee e/jameslee@example.com` or
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake`
-* *List* : `list`
+e.g. `find James Jake` or
+e.g. `f James Jake`
+* *List* : `list` or `l`
 * *Help* : `help`
 * *Select* : `select INDEX` +
 e.g.`select 2`
