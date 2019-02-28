@@ -54,7 +54,9 @@ public class Person {
         return address;
     }
 
-    public Deadline getDeadline() { return deadline; }
+    public Deadline getDeadline() {
+        return deadline;
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}

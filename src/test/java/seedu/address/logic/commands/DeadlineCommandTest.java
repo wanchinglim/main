@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
-import static org.junit.Assert.assertFalse;
+//import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DEADLINE_AMY;
+//import static seedu.address.logic.commands.CommandTestUtil.VALID_DEADLINE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEADLINE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -13,8 +13,6 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.Test;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
@@ -22,8 +20,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Deadline;
+import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
 /**
@@ -42,11 +40,12 @@ public class DeadlineCommandTest {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson).withDeadline(DEADLINE_STUB).build();
 
-        DeadlineCommand deadlineCommand = new DeadlineCommand(INDEX_FIRST_PERSON, new Deadline(editedPerson.getDeadline().value));
+        DeadlineCommand deadlineCommand = new DeadlineCommand(INDEX_FIRST_PERSON,
+                new Deadline(editedPerson.getDeadline().value));
 
         String expectedMessage = String.format(DeadlineCommand.MESSAGE_ADD_DEADLINE_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
         expectedModel.commitAddressBook();
 
@@ -73,14 +72,15 @@ public class DeadlineCommandTest {
     }
 
     @Test
-    public void execute_filteredList_Success() {
+    public void execute_filteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
                 .withDeadline(DEADLINE_STUB).build();
 
-        DeadlineCommand deadlineCommand = new DeadlineCommand(INDEX_FIRST_PERSON, new Deadline(editedPerson.getDeadline().value));
+        DeadlineCommand deadlineCommand = new DeadlineCommand(INDEX_FIRST_PERSON,
+                new Deadline(editedPerson.getDeadline().value));
 
         String expectedMessage = String.format(DeadlineCommand.MESSAGE_ADD_DEADLINE_SUCCESS, editedPerson);
 
@@ -182,31 +182,5 @@ public class DeadlineCommandTest {
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
 
     }
-
-    @Test
-    public void equals() {
-        final DeadlineCommand standardCommand = new DeadlineCommand(INDEX_FIRST_PERSON, VALID_DEADLINE_AMY);
-
-        //same values -> returns true
-        DeadlineCommand commandWithSameValues = new DeadlineCommand(INDEX_FIRST_PERSON, VALID_DEADLINE_AMY);
-        assertTrue(standardCommand.equals(commandWithSameValues));
-
-        //same object -> returns true
-        assertTrue(standardCommand.equals(standardCommand));
-
-        //null -> returns false
-        assertFalse(standardCommand.equals(null));
-
-        //different types -> returns false
-        assertFalse(standardCommand.equals(new ClearCommand()));
-
-        //different index -> returns false
-        assertFalse(standardCommand.equals(new DeadlineCommand(INDEX_SECOND_PERSON, VALID_DEADLINE_AMY)));
-
-        //different deadline -> returns false
-        assertFalse(standardCommand.equals(new DeadlineCommand(INDEX_FIRST_PERSON, VALID_DEADLINE_BOB)));
-
-    }
-
 
 }

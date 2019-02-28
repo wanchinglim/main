@@ -27,7 +27,7 @@ public class Deadline {
     public boolean equals(Object other) {
         return other == this //short circuit if same object
             || (other instanceof Deadline // instanceof handles nulls
-            && value.equals(((Deadline) other). value));
+            && value.equals(((Deadline) other).value));
     }
 
     @Override

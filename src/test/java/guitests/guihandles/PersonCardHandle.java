@@ -68,7 +68,9 @@ public class PersonCardHandle extends NodeHandle<Node> {
         return emailLabel.getText();
     }
 
-    public String getDeadline() { return deadlineLabel.getText(); }
+    public String getDeadline() {
+        return deadlineLabel.getText();
+    }
 
     public List<String> getTags() {
         return tagLabels
