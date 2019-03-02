@@ -1,5 +1,7 @@
 package seedu.address.commons.core;
 
+import seedu.address.commons.events.BaseEvent;
+
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.logging.ConsoleHandler;
@@ -108,5 +110,19 @@ public class LogsCenter {
         ConsoleHandler consoleHandler = new ConsoleHandler();
         consoleHandler.setLevel(currentLogLevel);
         return consoleHandler;
+    }
+
+    /**
+     * Decorates the given string to create a log message suitable for logging event handling methods.
+     */
+    public static String getEventHandlingLogMessage(BaseEvent e, String message) {
+        return "---[Event handled][" + e + "]" + message;
+    }
+
+    /**
+     * @see #getEventHandlingLogMessage(BaseEvent, String)
+     */
+    public static String getEventHandlingLogMessage(BaseEvent e) {
+        return getEventHandlingLogMessage(e, "");
     }
 }
