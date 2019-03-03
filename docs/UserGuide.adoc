@@ -1,4 +1,4 @@
-= AddressBook Level 4 - User Guide
+= FlashCards - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -14,11 +14,12 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/cs2113-ay1819s2-m11-3/main/
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team M11-3`      Since: `Jan 2019`      Licence: `MIT`
 
 == Introduction
 
-AddressBook Level 4 (AB4) is for those who *prefer to use a desktop app for managing contacts*. More importantly, AB4 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+FlashCards is for those who *prefer to use a desktop app for managing contacts*.
+More importantly, AB4 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
@@ -52,99 +53,132 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 ====
 
+=== Creating an account: `create`
+
+Create an account for the user. +
+Supports multiple users. +
+Format: `create <username>`
+
+* Subsequent adding of flash cards will be tagged to the same user account.
+
+Examples:
+
+* `create John Doe`
+
+=== Logging in: `login`
+
+Login to the user account to perform operations pertaining to your own flash cards. +
+Secures the data with a password. +
+Supports multiple users. +
+Format: `login <username> <password>`
+
+Examples:
+
+* `login John Doe john123`
+
 === Viewing help : `help`
 
 Format: `help`
 
-=== Adding a person: `add`
+=== Adding a subject or flash card: `add`
 
-Adds a person to the address book +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Adds a flash card with subject and data field. +
+Format: `add <subject> <data>`
+
+* Lists the flash card that was just added.
 
 [TIP]
 A person can have any number of tags (including 0)
 
 Examples:
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add maths pythagoras' theorem`
+* `add science definition`
 
-=== Listing all persons : `list` `l`
+=== Listing all flash cards categorized by subjects : `list` `l`
 
-Shows a list of all persons in the address book. +
+Displays an indexed list of flash cards categorized by subjects. +
 Format: `list` or `l`
 
 Tags will be colour-coded. Same tags will have the same colour.
 
-=== Editing a person : `edit` `e`
+=== Editing a flash card : `edit` `e`
 
-Edits an existing person in the address book. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Edits the content of a flash card. +
+Enter the subject that the flash card belongs to.
+Format: `edit INDEX <subject>`
 
 ****
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
+* Edits the flash card at the specified `INDEX`. The index refers to the index number shown in the displayed subject list. The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
+* A list of flash cards belonging to that subject will be displayed.
+* Select the index of the flash card to edit.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person's tags by typing `t/` without specifying any tags after it.
+* The updated flash card will be displayed.
+* When editing flash cards, the existing tags of the flash card will be removed i.e adding of tags is not cumulative.
+* You can remove all the flash card's tags by typing `t/` without specifying any tags after it.
 ****
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@example.com` +
-Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `e 2 n/Betsy Crower t/` +
-Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `edit 1 definition` +
+Edits the content of flash card.
+* `e 2 definition` +
+Edits the content of flash card.
 
-=== Locating persons by name: `find` `f`
+=== Finding a flash card: `find` `f`
 
-Finds persons whose names contain any of the given keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Find flash cards based on the given keyword. +
+Format: `find <KEYWORD> [MORE_KEYWORDS]`
 
 ****
-* The search is case insensitive. e.g `hans` will match `Hans`
+* The search is case insensitive. e.g `hans` will not match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
+* The search is based on the flash card's content.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Flash cards containing the keyword will be displayed (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 ****
 
 Examples:
 
-* `find John` +
-Returns `john` and `John Doe`
-* `f Betsy Tim John` +
-Returns any person having names `Betsy`, `Tim`, or `John`
+* `find math` +
+Returns `math` and `Mathematics`
+* `f science english math` +
+Returns any flash cards having names `science`, `english`, or `math`
 
-=== Deleting a person : `delete` `d`
+=== Deleting a subject or flash card : `delete` `d`
 
-Deletes the specified person from the address book. +
-Format: `delete INDEX`
+Deletes the specified subject or flash card. +
+Enter the subject that the flash card belongs to. +
+Format: `delete INDEX <subject>`
 
 ****
-* Deletes the person at the specified `INDEX`.
+* A list of flash cards belonging to the subject will be displayed.
+* Select the index of the flash card to delete.
+* Deletes the flash card at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index *must be a positive integer* 1, 2, 3, ...
+* The updated list of flash cards will be displayed.
 ****
 
 Examples:
 
 * `list` +
 `delete 2` +
-Deletes the 2nd person in the address book.
+Deletes the specified content of index 2.
 
 * `f Betsy` +
 `d 1` +
-Deletes the 1st person in the results of the `find` command.
+Deletes the specified content of index 1.
 
 === Selecting a person : `select`
 
-Selects the person identified by the index number used in the displayed person list. +
+Selects the flash card identified by the index number used in the displayed list. +
 Format: `select INDEX`
 
 ****
-* Selects the person and loads the Google search page the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Selects the flash card and loads the content of the flash card at the specified `INDEX`.
+* The index refers to the index number shown in the displayed list.
 * The index *must be a positive integer* `1, 2, 3, ...`
 ****
 
@@ -152,10 +186,10 @@ Examples:
 
 * `list` +
 `select 2` +
-Selects the 2nd person in the address book.
-* `find Betsy` +
+Selects the 2nd flash card in the list.
+* `find definition` +
 `select 1` +
-Selects the 1st person in the results of the `find` command.
+Selects the 1st flash card in the results of the `find` command.
 
 === Listing entered commands : `history`
 
@@ -170,12 +204,12 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 // tag::undoredo[]
 === Undoing previous command : `undo`
 
-Restores the address book to the state before the previous _undoable_ command was executed. +
+Restores the flash card to the state before the previous _undoable_ command was executed. +
 Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
+Undoable commands: those commands that modify the flash card's content (`add`, `delete`, `edit` and `clear`).
 ====
 
 Examples:
@@ -217,9 +251,9 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
-=== Clearing all entries : `clear` `c`
+=== Clearing all flash cards : `clear` `c`
 
-Clears all entries from the address book. +
+Clears all flash cards belonging to user. +
 Format: `clear` or `c`
 
 === Exiting the program : `exit`
@@ -229,7 +263,7 @@ Format: `exit`
 
 === Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data. +
+FlashCards data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
 // tag::dataencryption[]
@@ -245,17 +279,17 @@ _{explain how the user can enable/disable data encryption}_
 
 == Command Summary
 
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+* *Add* `add <subject> <data>` +
+e.g. `add science definition`
 * *Clear* : `clear` or `c`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3` or `d 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-e.g. `edit 2 n/James Lee e/jameslee@example.com` or
-e.g. `e 2 n/James Lee e/jameslee@example.com` or
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake` or
-e.g. `f James Jake`
+* *Edit* : `edit INDEX <subject>` +
+e.g. `edit 2 definition` or
+e.g. `e 2 definition`
+* *Find* : `find <KEYWORD> [MORE_KEYWORDS]` +
+e.g. `find math` or
+e.g. `f science english math`
 * *List* : `list` or `l`
 * *Help* : `help`
 * *Select* : `select INDEX` +
