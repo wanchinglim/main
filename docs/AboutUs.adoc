@@ -10,7 +10,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 == Project Team
 
 === Dannica Ong
-image::dannong.jng[width="150", align="left"]
+image::dannong.png[width="150", align="left"]
 {empty}[https://github.com/dannong[github]] [<<dannicaong#, portfolio>>]
 
 Role: Team Lead and Developer +
