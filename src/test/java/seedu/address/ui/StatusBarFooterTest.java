@@ -31,12 +31,11 @@ public class StatusBarFooterTest extends GuiUnitTest {
     private static final Clock originalClock = StatusBarFooter.getClock();
     private static final Clock injectedClock = Clock.fixed(Instant.now(), ZoneId.systemDefault());
 
-    private StatusBarFooterHandle statusBarFooterHandle;
+    private static final int INITIAL_TOTAL_PERSONS = 0;
     private static final AddressBookChangedEvent EVENT_STUB = new AddressBookChangedEvent(
             new AddressBookBuilder().withPerson(ALICE).build());
 
-
-    private static final int INITIAL_TOTAL_PERSONS = 0;
+    private StatusBarFooterHandle statusBarFooterHandle;
 
 
     @BeforeClass
@@ -55,7 +54,6 @@ public class StatusBarFooterTest extends GuiUnitTest {
     public void setUp() {
         StatusBarFooter statusBarFooter = new StatusBarFooter(STUB_SAVE_LOCATION, INITIAL_TOTAL_PERSONS);
         uiPartRule.setUiPart(statusBarFooter);
-
         statusBarFooterHandle = new StatusBarFooterHandle(statusBarFooter.getRoot());
     }
 
@@ -77,7 +75,7 @@ public class StatusBarFooterTest extends GuiUnitTest {
      * sync status matches that of {@code expectedSyncStatus}.
      */
     private void assertStatusBarContent(String expectedSaveLocation, String expectedSyncStatus,
-                                        String expectedTotalPersonsStatus)  {
+                                        String expectedTotalPersonsStatus) {
         assertEquals(expectedSaveLocation, statusBarFooterHandle.getSaveLocation());
         assertEquals(expectedSyncStatus, statusBarFooterHandle.getSyncStatus());
         assertEquals(expectedTotalPersonsStatus, statusBarFooterHandle.getTotalPersonsStatus());

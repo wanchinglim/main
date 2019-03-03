@@ -7,14 +7,15 @@ import java.util.Date;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
+
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.ReadOnlyAddressBook;
-import javafx.application.Platform;
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.model.ReadOnlyAddressBook;
+
 
 
 /**
@@ -22,12 +23,11 @@ import seedu.address.commons.events.model.AddressBookChangedEvent;
  */
 public class StatusBarFooter extends UiPart<Region> {
 
-    private static final Logger logger = LogsCenter.getLogger(StatusBarFooter.class);
-
-
     public static final String SYNC_STATUS_INITIAL = "Not updated yet in this session";
-    public static final String SYNC_STATUS_UPDATED = "Last Updated: %s";
     public static final String TOTAL_PERSONS_STATUS = "%d person(s) total";
+    public static final String SYNC_STATUS_UPDATED = "Last Updated: %s";
+
+    private static final Logger logger = LogsCenter.getLogger(StatusBarFooter.class);
 
 
     /**

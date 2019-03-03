@@ -6,6 +6,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
+import static seedu.address.ui.StatusBarFooter.TOTAL_PERSONS_STATUS;
 import static seedu.address.ui.testutil.GuiTestAssert.assertListMatching;
 
 import java.net.MalformedURLException;
@@ -39,7 +40,8 @@ import seedu.address.model.Model;
 import seedu.address.testutil.TypicalPersons;
 import seedu.address.ui.BrowserPanel;
 import seedu.address.ui.CommandBox;
-import static seedu.address.ui.StatusBarFooter.TOTAL_PERSONS_STATUS;
+
+
 
 /**
  * A system test class for AddressBook, which provides access to handles of GUI components and helper methods
