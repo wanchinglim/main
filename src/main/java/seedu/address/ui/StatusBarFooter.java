@@ -4,11 +4,19 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Clock;
 import java.util.Date;
+import java.util.logging.Logger;
 
+import com.google.common.eventbus.Subscribe;
+
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.model.ReadOnlyAddressBook;
+
+
 
 /**
  * A ui for the status bar that is displayed at the footer of the application.
@@ -16,7 +24,11 @@ import seedu.address.model.ReadOnlyAddressBook;
 public class StatusBarFooter extends UiPart<Region> {
 
     public static final String SYNC_STATUS_INITIAL = "Not updated yet in this session";
+    public static final String TOTAL_PERSONS_STATUS = "%d person(s) total";
     public static final String SYNC_STATUS_UPDATED = "Last Updated: %s";
+
+    private static final Logger logger = LogsCenter.getLogger(StatusBarFooter.class);
+
 
     /**
      * Used to generate time stamps.
@@ -35,12 +47,29 @@ public class StatusBarFooter extends UiPart<Region> {
     @FXML
     private Label saveLocationStatus;
 
+    @FXML
+    private Label totalPersonsStatus;
 
-    public StatusBarFooter(Path saveLocation, ReadOnlyAddressBook addressBook) {
+
+
+    public StatusBarFooter(Path saveLocation, ReadOnlyAddressBook addressBook, int totalPersons) {
         super(FXML);
         addressBook.addListener(observable -> updateSyncStatus());
         syncStatus.setText(SYNC_STATUS_INITIAL);
+        setTotalPersons(totalPersons);
         saveLocationStatus.setText(Paths.get(".").resolve(saveLocation).toString());
+    }
+
+    public StatusBarFooter(Path stubSaveLocation, int initialTotalPersons) {
+        super(stubSaveLocation, initialTotalPersons);
+    }
+
+    private void setTotalPersons(int totalPersons) {
+        Platform.runLater(() -> totalPersonsStatus.setText(String.format(TOTAL_PERSONS_STATUS, totalPersons)));
+    }
+
+    private void setSyncStatus(String status) {
+        Platform.runLater(() -> syncStatus.setText(status));
     }
 
     /**
@@ -65,5 +94,16 @@ public class StatusBarFooter extends UiPart<Region> {
         String lastUpdated = new Date(now).toString();
         syncStatus.setText(String.format(SYNC_STATUS_UPDATED, lastUpdated));
     }
+
+    @Subscribe
+    public void handleAddressBookChangedEvent(AddressBookChangedEvent abce) {
+        long now = clock.millis();
+        String lastUpdated = new Date(now).toString();
+        logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));
+        setSyncStatus(String.format(SYNC_STATUS_UPDATED, lastUpdated));
+        setTotalPersons(abce.data.getPersonList().size());
+    }
+
+
 
 }
