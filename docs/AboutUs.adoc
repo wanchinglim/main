@@ -19,7 +19,7 @@ Responsibilities: Logic
 '''
 
 === Jemine Kan
-image::m133225.jpg[width="150", align="left"]
+image::jeminekan.png[width="150", align="left"]
 {empty}[http://github.com/jemine1998[github]] [<<jeminekan#, portfolio>>]
 
 Role: Testing and Developer +
