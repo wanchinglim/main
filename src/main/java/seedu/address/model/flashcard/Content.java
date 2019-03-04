@@ -3,6 +3,10 @@ package seedu.address.model.flashcard;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a FlashCard's content in the book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidContent(String)}
+ */
 public class Content {
 
     public static final String MESSAGE_CONSTRAINTS =

@@ -3,6 +3,10 @@ package seedu.address.model.flashcard;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a FlashCard's subject in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidSubject(String)}
+ */
 public class Subject {
     public static final String MESSAGE_CONSTRAINTS =
             "Subjects should only contain alphanumeric characters and spaces, and it should not be blank";
