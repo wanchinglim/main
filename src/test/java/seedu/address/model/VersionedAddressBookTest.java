@@ -2,27 +2,26 @@ package seedu.address.model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
-import static seedu.address.testutil.TypicalPersons.CARL;
+//import static org.junit.Assert.assertTrue;
+//import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.address.testutil.TypicalFlashCards.CHINESE;
+import static seedu.address.testutil.TypicalFlashCards.ENGLISH;
+import static seedu.address.testutil.TypicalFlashCards.PHYSICS;
+//import java.util.Arrays;
+//import java.util.Collections;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-
-import org.junit.Test;
+//import org.junit.Test;
 
 import seedu.address.testutil.AddressBookBuilder;
 
 public class VersionedAddressBookTest {
 
-    private final ReadOnlyAddressBook addressBookWithAmy = new AddressBookBuilder().withPerson(AMY).build();
-    private final ReadOnlyAddressBook addressBookWithBob = new AddressBookBuilder().withPerson(BOB).build();
-    private final ReadOnlyAddressBook addressBookWithCarl = new AddressBookBuilder().withPerson(CARL).build();
+    private final ReadOnlyAddressBook addressBookWithAmy = new AddressBookBuilder().withFlashCard(ENGLISH).build();
+    private final ReadOnlyAddressBook addressBookWithBob = new AddressBookBuilder().withFlashCard(CHINESE).build();
+    private final ReadOnlyAddressBook addressBookWithCarl = new AddressBookBuilder().withFlashCard(PHYSICS).build();
     private final ReadOnlyAddressBook emptyAddressBook = new AddressBookBuilder().build();
-
+    /**
     @Test
     public void commit_singleAddressBook_noStatesRemovedCurrentStateSaved() {
         VersionedAddressBook versionedAddressBook = prepareAddressBookList(emptyAddressBook);

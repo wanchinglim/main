@@ -25,7 +25,8 @@ import systemtests.ModelHelper;
  */
 public class TestApp extends MainApp {
 
-    public static final Path SAVE_LOCATION_FOR_TESTING = TestUtil.getFilePathInSandboxFolder("sampleData.json");
+    public static final Path SAVE_LOCATION_FOR_TESTING =
+            TestUtil.getFilePathInSandboxFolder("sampleData.json");
 
     protected static final Path DEFAULT_PREF_FILE_LOCATION_FOR_TESTING =
             TestUtil.getFilePathInSandboxFolder("pref_testing.json");
@@ -93,7 +94,7 @@ public class TestApp extends MainApp {
      */
     public Model getModel() {
         Model copy = new ModelManager((model.getAddressBook()), new UserPrefs());
-        ModelHelper.setFilteredList(copy, model.getFilteredPersonList());
+        ModelHelper.setFilteredList(copy, model.getFilteredFlashCardList());
         return copy;
     }
 

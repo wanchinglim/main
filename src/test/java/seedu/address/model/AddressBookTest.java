@@ -3,10 +3,9 @@ package seedu.address.model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_ENGLISH;
+import static seedu.address.testutil.TypicalFlashCards.MALAY;
+import static seedu.address.testutil.TypicalFlashCards.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -21,9 +20,9 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.flashcard.FlashCard;
+import seedu.address.model.flashcard.exceptions.DuplicateFlashCardException;
+import seedu.address.testutil.FlashCardBuilder;
 
 public class AddressBookTest {
 
@@ -34,7 +33,7 @@ public class AddressBookTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), addressBook.getFlashCardList());
     }
 
     @Test
@@ -51,46 +50,45 @@ public class AddressBookTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
-        List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+    public void resetData_withDuplicateFlashCards_throwsDuplicateFlashCardException() {
+        // Two flashcards with the same identity fields
+        FlashCard editedMalay = new FlashCardBuilder(MALAY).withTags(VALID_TAG_ENGLISH).build();
+        List<FlashCard> newFlashCards = Arrays.asList(MALAY, editedMalay);
+        AddressBookStub newData = new AddressBookStub(newFlashCards);
 
-        thrown.expect(DuplicatePersonException.class);
+        thrown.expect(DuplicateFlashCardException.class);
         addressBook.resetData(newData);
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasFlashCard_nullFlashCard_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        addressBook.hasPerson(null);
+        addressBook.hasFlashCard(null);
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPerson(ALICE));
+    public void hasFlashCard_flashcardNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasFlashCard(MALAY));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        assertTrue(addressBook.hasPerson(ALICE));
+    public void hasFlashCard_flashcardInAddressBook_returnsTrue() {
+        addressBook.addFlashCard(MALAY);
+        assertTrue(addressBook.hasFlashCard(MALAY));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+    public void hasFlashCard_flashcardWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addFlashCard(MALAY);
+        FlashCard editedMalay = new FlashCardBuilder(MALAY).withTags(VALID_TAG_ENGLISH)
                 .build();
-        assertTrue(addressBook.hasPerson(editedAlice));
+        assertTrue(addressBook.hasFlashCard(editedMalay));
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getFlashCardList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        addressBook.getPersonList().remove(0);
+        addressBook.getFlashCardList().remove(0);
     }
 
     @Test
@@ -98,7 +96,7 @@ public class AddressBookTest {
         SimpleIntegerProperty counter = new SimpleIntegerProperty();
         InvalidationListener listener = observable -> counter.set(counter.get() + 1);
         addressBook.addListener(listener);
-        addressBook.addPerson(ALICE);
+        addressBook.addFlashCard(MALAY);
         assertEquals(1, counter.get());
     }
 
@@ -108,23 +106,23 @@ public class AddressBookTest {
         InvalidationListener listener = observable -> counter.set(counter.get() + 1);
         addressBook.addListener(listener);
         addressBook.removeListener(listener);
-        addressBook.addPerson(ALICE);
+        addressBook.addFlashCard(MALAY);
         assertEquals(0, counter.get());
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyAddressBook whose flashcards list can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
-        private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<FlashCard> flashcards = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons) {
-            this.persons.setAll(persons);
+        AddressBookStub(Collection<FlashCard> flashcards) {
+            this.flashcards.setAll(flashcards);
         }
 
         @Override
-        public ObservableList<Person> getPersonList() {
-            return persons;
+        public ObservableList<FlashCard> getFlashCardList() {
+            return flashcards;
         }
 
         @Override
@@ -137,5 +135,4 @@ public class AddressBookTest {
             throw new AssertionError("This method should not be called.");
         }
     }
-
 }

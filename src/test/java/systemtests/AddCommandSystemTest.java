@@ -1,180 +1,162 @@
 package systemtests;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+/**import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.CONTENT_DESC_CHINESE;
+import static seedu.address.logic.commands.CommandTestUtil.CONTENT_DESC_ENGLISH;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_CONTENT_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_SUBJECT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC_CHINESE;
+import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC_ENGLISH;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_CHINESE;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_ENGLISH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTENT_CHINESE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_CHINESE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
-import static seedu.address.testutil.TypicalPersons.CARL;
-import static seedu.address.testutil.TypicalPersons.HOON;
-import static seedu.address.testutil.TypicalPersons.IDA;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+import static seedu.address.testutil.TypicalFlashCards.ACCOUNTING;
+import static seedu.address.testutil.TypicalFlashCards.CHINESE;
+import static seedu.address.testutil.TypicalFlashCards.ENGLISH;
+import static seedu.address.testutil.TypicalFlashCards.KEYWORD_MATCHING_PRINCIPLES;
+import static seedu.address.testutil.TypicalFlashCards.MALAY;
+import static seedu.address.testutil.TypicalFlashCards.PHYSICS;
+import static seedu.address.testutil.TypicalFlashCards.PSYCH;
 
-import org.junit.Test;
+//import org.junit.Test;**/
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
+//import seedu.address.commons.core.Messages;
+//import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.UndoCommand;
+//import seedu.address.logic.commands.RedoCommand;
+//import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
+//import seedu.address.model.flashcard.Content;
+import seedu.address.model.flashcard.FlashCard;
+//import seedu.address.model.flashcard.Subject;
+//import seedu.address.model.tag.Tag;
+//import seedu.address.testutil.FlashCardBuilder;
+import seedu.address.testutil.FlashCardUtil;
 
 public class AddCommandSystemTest extends AddressBookSystemTest {
 
-    @Test
+    /**@Test
     public void add() {
         Model model = getModel();
 
         /* ------------------------ Perform add operations on the shown unfiltered list ----------------------------- */
 
-        /* Case: add a person without tags to a non-empty address book, command with leading spaces and trailing spaces
-         * -> added
-         */
-        Person toAdd = AMY;
-        String command = "   " + AddCommand.COMMAND_WORD + "  " + NAME_DESC_AMY + "  " + PHONE_DESC_AMY + " "
-                + EMAIL_DESC_AMY + "   " + ADDRESS_DESC_AMY + "   " + TAG_DESC_FRIEND + " ";
+    /* Case: add a flashcard without tags to a non-empty address book,
+     * command with leading spaces and trailing spaces -> added
+     */
+    /**
+        FlashCard toAdd = ENGLISH;
+        String command = "   " + AddCommand.COMMAND_WORD + "  " + SUBJECT_DESC_ENGLISH + "  "
+                + CONTENT_DESC_ENGLISH + "   " + TAG_DESC_CHINESE + " ";
         assertCommandSuccess(command, toAdd);
 
-        /* Case: undo adding Amy to the list -> Amy deleted */
+        /* Case: undo adding English to the list -> English deleted */
+    /**
         command = UndoCommand.COMMAND_WORD;
         String expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, model, expectedResultMessage);
 
-        /* Case: redo adding Amy to the list -> Amy added again */
+        /* Case: redo adding English to the list -> English added again */
+    /**
         command = RedoCommand.COMMAND_WORD;
-        model.addPerson(toAdd);
+        model.addFlashCard(toAdd);
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, model, expectedResultMessage);
 
-        /* Case: add a person with all fields same as another person in the address book except name -> added */
-        toAdd = new PersonBuilder(AMY).withName(VALID_NAME_BOB).build();
-        command = AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                + TAG_DESC_FRIEND;
+        /* Case: add a flashcard with all fields same as another flashcard in the address book except subject-> added */
+    /**
+        toAdd = new FlashCardBuilder(ENGLISH).withSubject(VALID_SUBJECT_CHINESE).build();
+        command = AddCommand.COMMAND_WORD + SUBJECT_DESC_CHINESE + CONTENT_DESC_ENGLISH
+                + TAG_DESC_CHINESE;
         assertCommandSuccess(command, toAdd);
 
-        /* Case: add a person with all fields same as another person in the address book except phone and email
+        /* Case: add a flashcard with all fields same as another flashcard in the address book except content and email
          * -> added
          */
-        toAdd = new PersonBuilder(AMY).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
-        command = PersonUtil.getAddCommand(toAdd);
+    /**
+        toAdd = new FlashCardBuilder(ENGLISH).withContent(VALID_CONTENT_CHINESE).build();
+        command = FlashCardUtil.getAddCommand(toAdd);
         assertCommandSuccess(command, toAdd);
 
         /* Case: add to empty address book -> added */
-        deleteAllPersons();
-        assertCommandSuccess(ALICE);
+    /**
+        deleteAllFlashCards();
+        assertCommandSuccess(MALAY);
 
-        /* Case: add a person with tags, command with parameters in random order -> added */
-        toAdd = BOB;
-        command = AddCommand.COMMAND_WORD + TAG_DESC_FRIEND + PHONE_DESC_BOB + ADDRESS_DESC_BOB + NAME_DESC_BOB
-                + TAG_DESC_HUSBAND + EMAIL_DESC_BOB;
+        /* Case: add a flashcard with tags, command with parameters in random order -> added */
+    /**
+        toAdd = CHINESE;
+        command = AddCommand.COMMAND_WORD + TAG_DESC_CHINESE + CONTENT_DESC_CHINESE + SUBJECT_DESC_CHINESE
+                + TAG_DESC_ENGLISH;
         assertCommandSuccess(command, toAdd);
 
-        /* Case: add a person, missing tags -> added */
-        assertCommandSuccess(HOON);
+        /* Case: add a flashcard, missing tags -> added */
+    /**
+        assertCommandSuccess(PSYCH);
 
         /* -------------------------- Perform add operation on the shown filtered list ------------------------------ */
 
-        /* Case: filters the person list before adding -> added */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        assertCommandSuccess(IDA);
+    /* Case: filters the flashcard list before adding -> added */
+    /**
+        showFlashCardsWithSubject(KEYWORD_MATCHING_PRINCIPLES);
+        assertCommandSuccess(ACCOUNTING);
 
-        /* ------------------------ Perform add operation while a person card is selected --------------------------- */
+        /* ------------------- Perform add operation while a flashcard card is selected ---------------------- */
 
-        /* Case: selects first card in the person list, add a person -> added, card selection remains unchanged */
-        selectPerson(Index.fromOneBased(1));
-        assertCommandSuccess(CARL);
+    /* Case: selects first card in the flashcard list, add a flashcard -> added, card selection remains unchanged */
+    /**
+        selectFlashCard(Index.fromOneBased(1));
+        assertCommandSuccess(PHYSICS);
 
         /* ----------------------------------- Perform invalid add operations --------------------------------------- */
 
-        /* Case: add a duplicate person -> rejected */
-        command = PersonUtil.getAddCommand(HOON);
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
+    /* Case: add a duplicate flashcard -> rejected */
+    /**
+        command = FlashCardUtil.getAddCommand(PSYCH);
+        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_FLASHCARD);
 
-        /* Case: add a duplicate person except with different phone -> rejected */
-        toAdd = new PersonBuilder(HOON).withPhone(VALID_PHONE_BOB).build();
-        command = PersonUtil.getAddCommand(toAdd);
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
+        /* Case: add a duplicate flashcard except with different content -> rejected */
+    /**
+        toAdd = new FlashCardBuilder(PSYCH).withContent(VALID_CONTENT_CHINESE).build();
+        command = FlashCardUtil.getAddCommand(toAdd);
+        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_FLASHCARD);
 
-        /* Case: add a duplicate person except with different email -> rejected */
-        toAdd = new PersonBuilder(HOON).withEmail(VALID_EMAIL_BOB).build();
-        command = PersonUtil.getAddCommand(toAdd);
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
+        /* Case: add a duplicate flashcard except with different tags -> rejected */
+    /**
+        command = FlashCardUtil.getAddCommand(PSYCH) + " " + PREFIX_TAG.getPrefix() + "friends";
+        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_FLASHCARD);
 
-        /* Case: add a duplicate person except with different address -> rejected */
-        toAdd = new PersonBuilder(HOON).withAddress(VALID_ADDRESS_BOB).build();
-        command = PersonUtil.getAddCommand(toAdd);
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
-
-        /* Case: add a duplicate person except with different tags -> rejected */
-        command = PersonUtil.getAddCommand(HOON) + " " + PREFIX_TAG.getPrefix() + "friends";
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
-
-        /* Case: missing name -> rejected */
-        command = AddCommand.COMMAND_WORD + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
+        /* Case: missing subject -> rejected */
+    /**
+        command = AddCommand.COMMAND_WORD + CONTENT_DESC_ENGLISH;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
-        /* Case: missing phone -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
-        assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-
-        /* Case: missing email -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + ADDRESS_DESC_AMY;
-        assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-
-        /* Case: missing address -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY;
+        /* Case: missing content -> rejected */
+    /**
+        command = AddCommand.COMMAND_WORD + SUBJECT_DESC_ENGLISH;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         /* Case: invalid keyword -> rejected */
-        command = "adds " + PersonUtil.getPersonDetails(toAdd);
+    /**
+        command = "adds " + FlashCardUtil.getFlashCardDetails(toAdd);
         assertCommandFailure(command, Messages.MESSAGE_UNKNOWN_COMMAND);
 
-        /* Case: invalid name -> rejected */
-        command = AddCommand.COMMAND_WORD + INVALID_NAME_DESC + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
-        assertCommandFailure(command, Name.MESSAGE_CONSTRAINTS);
+        /* Case: invalid subject -> rejected */
+    /**
+        command = AddCommand.COMMAND_WORD + INVALID_SUBJECT_DESC + CONTENT_DESC_ENGLISH;
+        assertCommandFailure(command, Subject.MESSAGE_CONSTRAINTS);
 
-        /* Case: invalid phone -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + INVALID_PHONE_DESC + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
-        assertCommandFailure(command, Phone.MESSAGE_CONSTRAINTS);
-
-        /* Case: invalid email -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + INVALID_EMAIL_DESC + ADDRESS_DESC_AMY;
-        assertCommandFailure(command, Email.MESSAGE_CONSTRAINTS);
-
-        /* Case: invalid address -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + INVALID_ADDRESS_DESC;
-        assertCommandFailure(command, Address.MESSAGE_CONSTRAINTS);
+        /* Case: invalid content -> rejected */
+    /**
+        command = AddCommand.COMMAND_WORD + SUBJECT_DESC_ENGLISH + INVALID_CONTENT_DESC;
+        assertCommandFailure(command, Content.MESSAGE_CONSTRAINTS);
 
         /* Case: invalid tag -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                + INVALID_TAG_DESC;
+    /**
+        command = AddCommand.COMMAND_WORD + SUBJECT_DESC_ENGLISH + CONTENT_DESC_ENGLISH + INVALID_TAG_DESC;
         assertCommandFailure(command, Tag.MESSAGE_CONSTRAINTS);
     }
 
@@ -184,7 +166,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
      * 2. Command box has the default style class.<br>
      * 3. Result display box displays the success message of executing {@code AddCommand} with the details of
      * {@code toAdd}.<br>
-     * 4. {@code Storage} and {@code PersonListPanel} equal to the corresponding components in
+     * 4. {@code Storage} and {@code FlashCardListPanel} equal to the corresponding components in
      * the current model added with {@code toAdd}.<br>
      * 5. Browser url and selected card remain unchanged.<br>
      * 6. Status bar's sync status changes.<br>
@@ -192,30 +174,30 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
      * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
-    private void assertCommandSuccess(Person toAdd) {
-        assertCommandSuccess(PersonUtil.getAddCommand(toAdd), toAdd);
+    private void assertCommandSuccess(FlashCard toAdd) {
+        assertCommandSuccess(FlashCardUtil.getAddCommand(toAdd), toAdd);
     }
 
     /**
-     * Performs the same verification as {@code assertCommandSuccess(Person)}. Executes {@code command}
+     * Performs the same verification as {@code assertCommandSuccess(FlashCard)}. Executes {@code command}
      * instead.
-     * @see AddCommandSystemTest#assertCommandSuccess(Person)
+     * @see AddCommandSystemTest#assertCommandSuccess(FlashCard)
      */
-    private void assertCommandSuccess(String command, Person toAdd) {
+    private void assertCommandSuccess(String command, FlashCard toAdd) {
         Model expectedModel = getModel();
-        expectedModel.addPerson(toAdd);
+        expectedModel.addFlashCard(toAdd);
         String expectedResultMessage = String.format(AddCommand.MESSAGE_SUCCESS, toAdd);
 
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
     }
 
     /**
-     * Performs the same verification as {@code assertCommandSuccess(String, Person)} except asserts that
+     * Performs the same verification as {@code assertCommandSuccess(String, FlashCard)} except asserts that
      * the,<br>
      * 1. Result display box displays {@code expectedResultMessage}.<br>
-     * 2. {@code Storage} and {@code PersonListPanel} equal to the corresponding components in
+     * 2. {@code Storage} and {@code FlashCardListPanel} equal to the corresponding components in
      * {@code expectedModel}.<br>
-     * @see AddCommandSystemTest#assertCommandSuccess(String, Person)
+     * @see AddCommandSystemTest#assertCommandSuccess(String, FlashCard)
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {
         executeCommand(command);
@@ -230,7 +212,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
      * 1. Command box displays {@code command}.<br>
      * 2. Command box has the error style class.<br>
      * 3. Result display box displays {@code expectedResultMessage}.<br>
-     * 4. {@code Storage} and {@code PersonListPanel} remain unchanged.<br>
+     * 4. {@code Storage} and {@code FlashCardListPanel} remain unchanged.<br>
      * 5. Browser url, selected card and status bar remain unchanged.<br>
      * Verifications 1, 3 and 4 are performed by
      * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
