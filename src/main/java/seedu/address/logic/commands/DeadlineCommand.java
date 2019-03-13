@@ -17,7 +17,7 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
- * Changes the deadline or exam of an existing subject in the address book/flashcards.
+ * Adds/Changes the deadline or exam of an existing subject in the address book/flashcards.
  */
 
 public class DeadlineCommand extends Command {
