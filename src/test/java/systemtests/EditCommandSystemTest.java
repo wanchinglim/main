@@ -45,8 +45,8 @@ import seedu.address.model.subject.Name;
 import seedu.address.model.subject.Phone;
 import seedu.address.model.subject.Subject;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonUtil;
 import seedu.address.testutil.SubjectBuilder;
+import seedu.address.testutil.SubjectUtil;
 
 public class EditCommandSystemTest extends AddressBookSystemTest {
 
@@ -183,7 +183,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
                 + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS);
 
         /* Case: edit a subject with new values same as another subject's values -> rejected */
-        executeCommand(PersonUtil.getAddCommand(BOB));
+        executeCommand(SubjectUtil.getAddCommand(BOB));
         assertTrue(getModel().getAddressBook().getPersonList().contains(BOB));
         index = INDEX_FIRST_PERSON;
         assertFalse(getModel().getFilteredPersonList().get(index.getZeroBased()).equals(BOB));

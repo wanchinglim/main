@@ -54,18 +54,18 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This subject already exists in the address book.";
 
     private final Index index;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final EditSubjectDescriptor editSubjectDescriptor;
 
     /**
      * @param index of the subject in the filtered subject list to edit
-     * @param editPersonDescriptor details to edit the subject with
+     * @param editSubjectDescriptor details to edit the subject with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditCommand(Index index, EditSubjectDescriptor editSubjectDescriptor) {
         requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+        requireNonNull(editSubjectDescriptor);
 
         this.index = index;
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.editSubjectDescriptor = new EditSubjectDescriptor(editSubjectDescriptor);
     }
 
     @Override
@@ -78,7 +78,7 @@ public class EditCommand extends Command {
         }
 
         Subject subjectToEdit = lastShownList.get(index.getZeroBased());
-        Subject editedSubject = createEditedPerson(subjectToEdit, editPersonDescriptor);
+        Subject editedSubject = createEditedPerson(subjectToEdit, editSubjectDescriptor);
 
         if (!subjectToEdit.isSameSubject(editedSubject) && model.hasPerson(editedSubject)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
@@ -92,17 +92,17 @@ public class EditCommand extends Command {
 
     /**
      * Creates and returns a {@code Subject} with the details of {@code subjectToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * edited with {@code editSubjectDescriptor}.
      */
-    private static Subject createEditedPerson(Subject subjectToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Subject createEditedPerson(Subject subjectToEdit, EditSubjectDescriptor editSubjectDescriptor) {
         assert subjectToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(subjectToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(subjectToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(subjectToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(subjectToEdit.getAddress());
+        Name updatedName = editSubjectDescriptor.getName().orElse(subjectToEdit.getName());
+        Phone updatedPhone = editSubjectDescriptor.getPhone().orElse(subjectToEdit.getPhone());
+        Email updatedEmail = editSubjectDescriptor.getEmail().orElse(subjectToEdit.getEmail());
+        Address updatedAddress = editSubjectDescriptor.getAddress().orElse(subjectToEdit.getAddress());
         Deadline updatedDeadline = subjectToEdit.getDeadline(); //edit command does not allow editing deadlines
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(subjectToEdit.getTags());
+        Set<Tag> updatedTags = editSubjectDescriptor.getTags().orElse(subjectToEdit.getTags());
 
         return new Subject(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedDeadline, updatedTags);
     }
@@ -122,27 +122,27 @@ public class EditCommand extends Command {
         // state check
         EditCommand e = (EditCommand) other;
         return index.equals(e.index)
-                && editPersonDescriptor.equals(e.editPersonDescriptor);
+                && editSubjectDescriptor.equals(e.editSubjectDescriptor);
     }
 
     /**
      * Stores the details to edit the subject with. Each non-empty field value will replace the
      * corresponding field value of the subject.
      */
-    public static class EditPersonDescriptor {
+    public static class EditSubjectDescriptor {
         private Name name;
         private Phone phone;
         private Email email;
         private Address address;
         private Set<Tag> tags;
 
-        public EditPersonDescriptor() {}
+        public EditSubjectDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+        public EditSubjectDescriptor(EditSubjectDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
@@ -214,12 +214,12 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof EditSubjectDescriptor)) {
                 return false;
             }
 
             // state check
-            EditPersonDescriptor e = (EditPersonDescriptor) other;
+            EditSubjectDescriptor e = (EditSubjectDescriptor) other;
 
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())

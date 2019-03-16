@@ -20,7 +20,7 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeadlineCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditCommand.EditSubjectDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -34,8 +34,8 @@ import seedu.address.model.subject.Deadline;
 import seedu.address.model.subject.NameContainsKeywordsPredicate;
 import seedu.address.model.subject.Subject;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonUtil;
 import seedu.address.testutil.SubjectBuilder;
+import seedu.address.testutil.SubjectUtil;
 
 public class AddressBookParserTest {
     @Rule
@@ -46,7 +46,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Subject subject = new SubjectBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(subject));
+        AddCommand command = (AddCommand) parser.parseCommand(SubjectUtil.getAddCommand(subject));
         assertEquals(new AddCommand(subject), command);
     }
 
@@ -79,18 +79,18 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_edit() throws Exception {
         Subject subject = new SubjectBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(subject).build();
+        EditCommand.EditSubjectDescriptor descriptor = new EditPersonDescriptorBuilder(subject).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+                + INDEX_FIRST_PERSON.getOneBased() + " " + SubjectUtil.getEditSubjectDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
     @Test
     public void parseCommand_editAlias() throws Exception {
         Subject subject = new SubjectBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(subject).build();
+        EditSubjectDescriptor descriptor = new EditPersonDescriptorBuilder(subject).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_ALIAS + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+                + INDEX_FIRST_PERSON.getOneBased() + " " + SubjectUtil.getEditSubjectDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
