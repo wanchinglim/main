@@ -17,51 +17,51 @@ public class SubjectCardTest extends GuiUnitTest {
     public void display() {
         // no tags
         Subject subjectWithNoTags = new SubjectBuilder().withTags(new String[0]).build();
-        PersonCard personCard = new PersonCard(subjectWithNoTags, 1);
-        uiPartRule.setUiPart(personCard);
-        assertCardDisplay(personCard, subjectWithNoTags, 1);
+        SubjectCard subjectCard = new SubjectCard(subjectWithNoTags, 1);
+        uiPartRule.setUiPart(subjectCard);
+        assertCardDisplay(subjectCard, subjectWithNoTags, 1);
 
         // with tags
         Subject subjectWithTags = new SubjectBuilder().build();
-        personCard = new PersonCard(subjectWithTags, 2);
-        uiPartRule.setUiPart(personCard);
-        assertCardDisplay(personCard, subjectWithTags, 2);
+        subjectCard = new SubjectCard(subjectWithTags, 2);
+        uiPartRule.setUiPart(subjectCard);
+        assertCardDisplay(subjectCard, subjectWithTags, 2);
     }
 
     @Test
     public void equals() {
         Subject subject = new SubjectBuilder().build();
-        PersonCard personCard = new PersonCard(subject, 0);
+        SubjectCard subjectCard = new SubjectCard(subject, 0);
 
         // same subject, same index -> returns true
-        PersonCard copy = new PersonCard(subject, 0);
-        assertTrue(personCard.equals(copy));
+        SubjectCard copy = new SubjectCard(subject, 0);
+        assertTrue(subjectCard.equals(copy));
 
         // same object -> returns true
-        assertTrue(personCard.equals(personCard));
+        assertTrue(subjectCard.equals(subjectCard));
 
         // null -> returns false
-        assertFalse(personCard.equals(null));
+        assertFalse(subjectCard.equals(null));
 
         // different types -> returns false
-        assertFalse(personCard.equals(0));
+        assertFalse(subjectCard.equals(0));
 
         // different subject, same index -> returns false
         Subject differentSubject = new SubjectBuilder().withName("differentName").build();
-        assertFalse(personCard.equals(new PersonCard(differentSubject, 0)));
+        assertFalse(subjectCard.equals(new SubjectCard(differentSubject, 0)));
 
         // same subject, different index -> returns false
-        assertFalse(personCard.equals(new PersonCard(subject, 1)));
+        assertFalse(subjectCard.equals(new SubjectCard(subject, 1)));
     }
 
     /**
-     * Asserts that {@code personCard} displays the details of {@code expectedSubject} correctly and matches
+     * Asserts that {@code subjectCard} displays the details of {@code expectedSubject} correctly and matches
      * {@code expectedId}.
      */
-    private void assertCardDisplay(PersonCard personCard, Subject expectedSubject, int expectedId) {
+    private void assertCardDisplay(SubjectCard subjectCard, Subject expectedSubject, int expectedId) {
         guiRobot.pauseForHuman();
 
-        PersonCardHandle personCardHandle = new PersonCardHandle(personCard.getRoot());
+        PersonCardHandle personCardHandle = new PersonCardHandle(subjectCard.getRoot());
 
         // verify id is displayed correctly
         assertEquals(Integer.toString(expectedId) + ". ", personCardHandle.getId());

@@ -52,7 +52,7 @@ public class PersonListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Subject} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Subject} using a {@code SubjectCard}.
      */
     class PersonListViewCell extends ListCell<Subject> {
         @Override
@@ -63,7 +63,7 @@ public class PersonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(subject, getIndex() + 1).getRoot());
+                setGraphic(new SubjectCard(subject, getIndex() + 1).getRoot());
             }
         }
     }
