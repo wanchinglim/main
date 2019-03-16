@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.subject;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
@@ -8,20 +8,20 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.subject.exceptions.DuplicatePersonException;
+import seedu.address.model.subject.exceptions.PersonNotFoundException;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A subject is considered unique by comparing using {@code Subject#isSamePerson(Subject)}.
- * As such, adding and updating of persons uses Subject#isSamePerson(Subject) for equality so as to
+ * A subject is considered unique by comparing using {@code Subject#isSameSubject(Subject)}.
+ * As such, adding and updating of persons uses Subject#isSameSubject(Subject) for equality so as to
  * ensure that the subject being added or updated is unique in terms of identity in the UniquePersonList.
  * However, the removal of a subject uses Subject#equals(Object) so
  * as to ensure that the subject with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
- * @see Subject#isSamePerson(Subject)
+ * @see Subject#isSameSubject(Subject)
  */
 public class UniquePersonList implements Iterable<Subject> {
 
@@ -34,7 +34,7 @@ public class UniquePersonList implements Iterable<Subject> {
      */
     public boolean contains(Subject toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSamePerson);
+        return internalList.stream().anyMatch(toCheck::isSameSubject);
     }
 
     /**
@@ -62,7 +62,7 @@ public class UniquePersonList implements Iterable<Subject> {
             throw new PersonNotFoundException();
         }
 
-        if (!target.isSamePerson(editedSubject) && contains(editedSubject)) {
+        if (!target.isSameSubject(editedSubject) && contains(editedSubject)) {
             throw new DuplicatePersonException();
         }
 
@@ -128,7 +128,7 @@ public class UniquePersonList implements Iterable<Subject> {
     private boolean personsAreUnique(List<Subject> subjects) {
         for (int i = 0; i < subjects.size() - 1; i++) {
             for (int j = i + 1; j < subjects.size(); j++) {
-                if (subjects.get(i).isSamePerson(subjects.get(j))) {
+                if (subjects.get(i).isSameSubject(subjects.get(j))) {
                     return false;
                 }
             }

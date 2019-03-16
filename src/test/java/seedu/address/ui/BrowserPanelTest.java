@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import guitests.guihandles.BrowserPanelHandle;
 import javafx.beans.property.SimpleObjectProperty;
-import seedu.address.model.person.Subject;
+import seedu.address.model.subject.Subject;
 
 public class BrowserPanelTest extends GuiUnitTest {
     private SimpleObjectProperty<Subject> selectedPerson = new SimpleObjectProperty<>();

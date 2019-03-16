@@ -20,8 +20,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Deadline;
-import seedu.address.model.person.Subject;
+import seedu.address.model.subject.Deadline;
+import seedu.address.model.subject.Subject;
 import seedu.address.testutil.PersonBuilder;
 
 /**

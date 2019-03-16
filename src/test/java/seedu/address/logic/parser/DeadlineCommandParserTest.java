@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeadlineCommand;
-import seedu.address.model.person.Deadline;
+import seedu.address.model.subject.Deadline;
 
 public class DeadlineCommandParserTest {
     private DeadlineCommandParser parser = new DeadlineCommandParser();

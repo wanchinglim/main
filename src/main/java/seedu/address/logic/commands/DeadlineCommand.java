@@ -11,10 +11,10 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Deadline;
-import seedu.address.model.person.Subject;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.subject.Deadline;
+import seedu.address.model.subject.Subject;
+import seedu.address.model.subject.exceptions.DuplicatePersonException;
+import seedu.address.model.subject.exceptions.PersonNotFoundException;
 
 /**
  * Adds/Changes the deadline or exam of an existing subject in the address book/flashcards.

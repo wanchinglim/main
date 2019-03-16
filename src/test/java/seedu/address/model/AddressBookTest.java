@@ -21,8 +21,8 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Subject;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.subject.Subject;
+import seedu.address.model.subject.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {

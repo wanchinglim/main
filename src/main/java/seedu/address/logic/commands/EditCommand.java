@@ -20,12 +20,12 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Deadline;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Subject;
+import seedu.address.model.subject.Address;
+import seedu.address.model.subject.Deadline;
+import seedu.address.model.subject.Email;
+import seedu.address.model.subject.Name;
+import seedu.address.model.subject.Phone;
+import seedu.address.model.subject.Subject;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -80,7 +80,7 @@ public class EditCommand extends Command {
         Subject subjectToEdit = lastShownList.get(index.getZeroBased());
         Subject editedSubject = createEditedPerson(subjectToEdit, editPersonDescriptor);
 
-        if (!subjectToEdit.isSamePerson(editedSubject) && model.hasPerson(editedSubject)) {
+        if (!subjectToEdit.isSameSubject(editedSubject) && model.hasPerson(editedSubject)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 

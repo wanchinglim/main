@@ -15,8 +15,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Subject;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.subject.Subject;
+import seedu.address.model.subject.exceptions.PersonNotFoundException;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -203,7 +203,7 @@ public class ModelManager implements Model {
             }
 
             boolean wasSelectedPersonRemoved = change.getRemoved().stream()
-                    .anyMatch(removedPerson -> selectedPerson.getValue().isSamePerson(removedPerson));
+                    .anyMatch(removedPerson -> selectedPerson.getValue().isSameSubject(removedPerson));
             if (wasSelectedPersonRemoved) {
                 // Select the subject that came before it in the list,
                 // or clear the selection if there is no such subject.
