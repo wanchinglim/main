@@ -109,11 +109,11 @@ public class ModelManager implements Model {
     @Override
     public void addPerson(Subject subject) {
         versionedAddressBook.addPerson(subject);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredSubjectList(PREDICATE_SHOW_ALL_SUBJECTS);
     }
 
     @Override
-    public void setPerson(Subject target, Subject editedSubject) {
+    public void setSubject(Subject target, Subject editedSubject) {
         requireAllNonNull(target, editedSubject);
 
         versionedAddressBook.setPerson(target, editedSubject);
@@ -126,12 +126,12 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Subject> getFilteredPersonList() {
+    public ObservableList<Subject> getFilteredSubjectList() {
         return filteredSubjects;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Subject> predicate) {
+    public void updateFilteredSubjectList(Predicate<Subject> predicate) {
         requireNonNull(predicate);
         filteredSubjects.setPredicate(predicate);
     }
@@ -166,17 +166,17 @@ public class ModelManager implements Model {
     //=========== Selected subject ===========================================================================
 
     @Override
-    public ReadOnlyProperty<Subject> selectedPersonProperty() {
+    public ReadOnlyProperty<Subject> selectedSubjectProperty() {
         return selectedPerson;
     }
 
     @Override
-    public Subject getSelectedPerson() {
+    public Subject getSelectedSubject() {
         return selectedPerson.getValue();
     }
 
     @Override
-    public void setSelectedPerson(Subject subject) {
+    public void setSelectedSubject(Subject subject) {
         if (subject != null && !filteredSubjects.contains(subject)) {
             throw new PersonNotFoundException();
         }

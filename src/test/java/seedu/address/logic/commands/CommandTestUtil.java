@@ -113,8 +113,8 @@ public class CommandTestUtil {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
-        List<Subject> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
-        Subject expectedSelectedSubject = actualModel.getSelectedPerson();
+        List<Subject> expectedFilteredList = new ArrayList<>(actualModel.getFilteredSubjectList());
+        Subject expectedSelectedSubject = actualModel.getSelectedSubject();
 
         CommandHistory expectedCommandHistory = new CommandHistory(actualCommandHistory);
 
@@ -124,8 +124,8 @@ public class CommandTestUtil {
         } catch (CommandException e) {
             assertEquals(expectedMessage, e.getMessage());
             assertEquals(expectedAddressBook, actualModel.getAddressBook());
-            assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
-            assertEquals(expectedSelectedSubject, actualModel.getSelectedPerson());
+            assertEquals(expectedFilteredList, actualModel.getFilteredSubjectList());
+            assertEquals(expectedSelectedSubject, actualModel.getSelectedSubject());
             assertEquals(expectedCommandHistory, actualCommandHistory);
         }
     }
@@ -135,20 +135,20 @@ public class CommandTestUtil {
      * {@code model}'s address book.
      */
     public static void showPersonAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredSubjectList().size());
 
-        Subject subject = model.getFilteredPersonList().get(targetIndex.getZeroBased());
+        Subject subject = model.getFilteredSubjectList().get(targetIndex.getZeroBased());
         final String[] splitName = subject.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredSubjectList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
-        assertEquals(1, model.getFilteredPersonList().size());
+        assertEquals(1, model.getFilteredSubjectList().size());
     }
 
     /**
      * Deletes the first subject in {@code model}'s filtered list from {@code model}'s address book.
      */
     public static void deleteFirstPerson(Model model) {
-        Subject firstSubject = model.getFilteredPersonList().get(0);
+        Subject firstSubject = model.getFilteredSubjectList().get(0);
         model.deletePerson(firstSubject);
         model.commitAddressBook();
     }

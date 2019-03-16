@@ -13,7 +13,7 @@ import seedu.address.model.subject.Subject;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Subject> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Subject> PREDICATE_SHOW_ALL_SUBJECTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -76,16 +76,16 @@ public interface Model {
      * The subject identity of {@code editedSubject} must not
      * be the same as another existing subject in the address book.
      */
-    void setPerson(Subject target, Subject editedSubject);
+    void setSubject(Subject target, Subject editedSubject);
 
     /** Returns an unmodifiable view of the filtered subject list */
-    ObservableList<Subject> getFilteredPersonList();
+    ObservableList<Subject> getFilteredSubjectList();
 
     /**
      * Updates the filter of the filtered subject list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Subject> predicate);
+    void updateFilteredSubjectList(Predicate<Subject> predicate);
 
     /**
      * Returns true if the model has previous address book states to restore.
@@ -116,16 +116,16 @@ public interface Model {
      * Selected subject in the filtered subject list.
      * null if no subject is selected.
      */
-    ReadOnlyProperty<Subject> selectedPersonProperty();
+    ReadOnlyProperty<Subject> selectedSubjectProperty();
 
     /**
      * Returns the selected subject in the filtered subject list.
      * null if no subject is selected.
      */
-    Subject getSelectedPerson();
+    Subject getSelectedSubject();
 
     /**
      * Sets the selected subject in the filtered subject list.
      */
-    void setSelectedPerson(Subject subject);
+    void setSelectedSubject(Subject subject);
 }

@@ -59,14 +59,14 @@ public interface Logic {
      * Selected subject in the filtered subject list.
      * null if no subject is selected.
      *
-     * @see seedu.address.model.Model#selectedPersonProperty()
+     * @see seedu.address.model.Model#selectedSubjectProperty()
      */
     ReadOnlyProperty<Subject> selectedPersonProperty();
 
     /**
      * Sets the selected subject in the filtered subject list.
      *
-     * @see seedu.address.model.Model#setSelectedPerson(Subject)
+     * @see seedu.address.model.Model#setSelectedSubject(Subject)
      */
     void setSelectedPerson(Subject subject);
 }

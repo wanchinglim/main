@@ -148,17 +148,17 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setPerson(Subject target, Subject editedSubject) {
+        public void setSubject(Subject target, Subject editedSubject) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Subject> getFilteredPersonList() {
+        public ObservableList<Subject> getFilteredSubjectList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Subject> predicate) {
+        public void updateFilteredSubjectList(Predicate<Subject> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -188,17 +188,17 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyProperty<Subject> selectedPersonProperty() {
+        public ReadOnlyProperty<Subject> selectedSubjectProperty() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public Subject getSelectedPerson() {
+        public Subject getSelectedSubject() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setSelectedPerson(Subject subject) {
+        public void setSelectedSubject(Subject subject) {
             throw new AssertionError("This method should not be called.");
         }
     }

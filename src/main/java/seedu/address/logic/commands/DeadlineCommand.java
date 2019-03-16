@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SUBJECTS;
 
 import java.util.List;
 
@@ -56,7 +56,7 @@ public class DeadlineCommand extends Command {
 
     @Override
     public CommandResult execute (Model model, CommandHistory history) throws CommandException {
-        List<Subject> lastShownList = model.getFilteredPersonList();
+        List<Subject> lastShownList = model.getFilteredSubjectList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -67,7 +67,7 @@ public class DeadlineCommand extends Command {
                 subjectToEdit.getAddress(), deadline, subjectToEdit.getTags());
 
         try {
-            model.setPerson(subjectToEdit, editedSubject);
+            model.setSubject(subjectToEdit, editedSubject);
         } catch (DuplicatePersonException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         } catch (PersonNotFoundException pnfe) {
@@ -75,7 +75,7 @@ public class DeadlineCommand extends Command {
         }
 
         //model.updatePerson(subjectToEdit, editedSubject);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredSubjectList(PREDICATE_SHOW_ALL_SUBJECTS);
         model.commitAddressBook();
 
         return new CommandResult(generateSuccessMessage(editedSubject));
