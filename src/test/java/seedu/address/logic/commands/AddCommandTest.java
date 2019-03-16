@@ -36,31 +36,31 @@ public class AddCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullSubject_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         new AddCommand(null);
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+    public void execute_subjectAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingSubjectAdded modelStub = new ModelStubAcceptingSubjectAdded();
         Subject validSubject = new SubjectBuilder().build();
 
         CommandResult commandResult = new AddCommand(validSubject).execute(modelStub, commandHistory);
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validSubject), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validSubject), modelStub.personsAdded);
+        assertEquals(Arrays.asList(validSubject), modelStub.subjectsAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() throws Exception {
+    public void execute_duplicateSubject_throwsCommandException() throws Exception {
         Subject validSubject = new SubjectBuilder().build();
         AddCommand addCommand = new AddCommand(validSubject);
-        ModelStub modelStub = new ModelStubWithPerson(validSubject);
+        ModelStub modelStub = new ModelStubWithSubject(validSubject);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
+        thrown.expectMessage(AddCommand.MESSAGE_DUPLICATE_SUBJECT);
         addCommand.execute(modelStub, commandHistory);
     }
 
@@ -123,7 +123,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addPerson(Subject subject) {
+        public void addSubject(Subject subject) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -138,12 +138,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Subject subject) {
+        public boolean hasSubject(Subject subject) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deletePerson(Subject target) {
+        public void deleteSubject(Subject target) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -206,16 +206,16 @@ public class AddCommandTest {
     /**
      * A Model stub that contains a single subject.
      */
-    private class ModelStubWithPerson extends ModelStub {
+    private class ModelStubWithSubject extends ModelStub {
         private final Subject subject;
 
-        ModelStubWithPerson(Subject subject) {
+        ModelStubWithSubject(Subject subject) {
             requireNonNull(subject);
             this.subject = subject;
         }
 
         @Override
-        public boolean hasPerson(Subject subject) {
+        public boolean hasSubject(Subject subject) {
             requireNonNull(subject);
             return this.subject.isSameSubject(subject);
         }
@@ -224,19 +224,19 @@ public class AddCommandTest {
     /**
      * A Model stub that always accept the subject being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Subject> personsAdded = new ArrayList<>();
+    private class ModelStubAcceptingSubjectAdded extends ModelStub {
+        final ArrayList<Subject> subjectsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Subject subject) {
+        public boolean hasSubject(Subject subject) {
             requireNonNull(subject);
-            return personsAdded.stream().anyMatch(subject::isSameSubject);
+            return subjectsAdded.stream().anyMatch(subject::isSameSubject);
         }
 
         @Override
-        public void addPerson(Subject subject) {
+        public void addSubject(Subject subject) {
             requireNonNull(subject);
-            personsAdded.add(subject);
+            subjectsAdded.add(subject);
         }
 
         @Override

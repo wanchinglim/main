@@ -20,7 +20,7 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleDataUtil {
     public static final Deadline EMPTY_DEADLINE = new Deadline("");
-    public static Subject[] getSamplePersons() {
+    public static Subject[] getSampleSubjects() {
         return new Subject[] {
             new Subject(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"), EMPTY_DEADLINE,
@@ -45,8 +45,8 @@ public class SampleDataUtil {
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
-        for (Subject sampleSubject : getSamplePersons()) {
-            sampleAb.addPerson(sampleSubject);
+        for (Subject sampleSubject : getSampleSubjects()) {
+            sampleAb.addSubject(sampleSubject);
         }
         return sampleAb;
     }

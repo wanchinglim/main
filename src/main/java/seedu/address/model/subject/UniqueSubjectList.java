@@ -8,14 +8,14 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.subject.exceptions.DuplicatePersonException;
-import seedu.address.model.subject.exceptions.PersonNotFoundException;
+import seedu.address.model.subject.exceptions.DuplicateSubjectException;
+import seedu.address.model.subject.exceptions.SubjectNotFoundException;
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
+ * A list of subjects that enforces uniqueness between its elements and does not allow nulls.
  * A subject is considered unique by comparing using {@code Subject#isSameSubject(Subject)}.
- * As such, adding and updating of persons uses Subject#isSameSubject(Subject) for equality so as to
- * ensure that the subject being added or updated is unique in terms of identity in the UniquePersonList.
+ * As such, adding and updating of subjects uses Subject#isSameSubject(Subject) for equality so as to
+ * ensure that the subject being added or updated is unique in terms of identity in the UniqueSubjectList.
  * However, the removal of a subject uses Subject#equals(Object) so
  * as to ensure that the subject with exactly the same fields will be removed.
  *
@@ -23,7 +23,7 @@ import seedu.address.model.subject.exceptions.PersonNotFoundException;
  *
  * @see Subject#isSameSubject(Subject)
  */
-public class UniquePersonList implements Iterable<Subject> {
+public class UniqueSubjectList implements Iterable<Subject> {
 
     private final ObservableList<Subject> internalList = FXCollections.observableArrayList();
     private final ObservableList<Subject> internalUnmodifiableList =
@@ -44,7 +44,7 @@ public class UniquePersonList implements Iterable<Subject> {
     public void add(Subject toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateSubjectException();
         }
         internalList.add(toAdd);
     }
@@ -54,16 +54,16 @@ public class UniquePersonList implements Iterable<Subject> {
      * {@code target} must exist in the list.
      * The subject identity of {@code editedSubject} must not be the same as another existing subject in the list.
      */
-    public void setPerson(Subject target, Subject editedSubject) {
+    public void setSubject(Subject target, Subject editedSubject) {
         requireAllNonNull(target, editedSubject);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new PersonNotFoundException();
+            throw new SubjectNotFoundException();
         }
 
         if (!target.isSameSubject(editedSubject) && contains(editedSubject)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateSubjectException();
         }
 
         internalList.set(index, editedSubject);
@@ -76,11 +76,11 @@ public class UniquePersonList implements Iterable<Subject> {
     public void remove(Subject toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            throw new PersonNotFoundException();
+            throw new SubjectNotFoundException();
         }
     }
 
-    public void setPersons(UniquePersonList replacement) {
+    public void setSubjects(UniqueSubjectList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
@@ -89,10 +89,10 @@ public class UniquePersonList implements Iterable<Subject> {
      * Replaces the contents of this list with {@code subjects}.
      * {@code subjects} must not contain duplicate subjects.
      */
-    public void setPersons(List<Subject> subjects) {
+    public void setSubjects(List<Subject> subjects) {
         requireAllNonNull(subjects);
-        if (!personsAreUnique(subjects)) {
-            throw new DuplicatePersonException();
+        if (!subjectsAreUnique(subjects)) {
+            throw new DuplicateSubjectException();
         }
 
         internalList.setAll(subjects);
@@ -113,8 +113,8 @@ public class UniquePersonList implements Iterable<Subject> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof UniquePersonList // instanceof handles nulls
-                        && internalList.equals(((UniquePersonList) other).internalList));
+                || (other instanceof UniqueSubjectList // instanceof handles nulls
+                        && internalList.equals(((UniqueSubjectList) other).internalList));
     }
 
     @Override
@@ -125,7 +125,7 @@ public class UniquePersonList implements Iterable<Subject> {
     /**
      * Returns true if {@code subjects} contains only unique subjects.
      */
-    private boolean personsAreUnique(List<Subject> subjects) {
+    private boolean subjectsAreUnique(List<Subject> subjects) {
         for (int i = 0; i < subjects.size() - 1; i++) {
             for (int j = i + 1; j < subjects.size(); j++) {
                 if (subjects.get(i).isSameSubject(subjects.get(j))) {

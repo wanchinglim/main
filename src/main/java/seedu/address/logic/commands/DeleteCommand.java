@@ -24,7 +24,7 @@ public class DeleteCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Subject: %1$s";
+    public static final String MESSAGE_DELETE_SUBJECT_SUCCESS = "Deleted Subject: %1$s";
 
     private final Index targetIndex;
 
@@ -38,13 +38,13 @@ public class DeleteCommand extends Command {
         List<Subject> lastShownList = model.getFilteredSubjectList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_SUBJECT_DISPLAYED_INDEX);
         }
 
         Subject subjectToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(subjectToDelete);
+        model.deleteSubject(subjectToDelete);
         model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, subjectToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_SUBJECT_SUCCESS, subjectToDelete));
     }
 
     @Override

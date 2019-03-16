@@ -5,9 +5,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SUBJECTS;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalSubjects.ALICE;
+import static seedu.address.testutil.TypicalSubjects.BENSON;
+import static seedu.address.testutil.TypicalSubjects.BOB;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -21,7 +21,7 @@ import org.junit.rules.ExpectedException;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.subject.NameContainsKeywordsPredicate;
 import seedu.address.model.subject.Subject;
-import seedu.address.model.subject.exceptions.PersonNotFoundException;
+import seedu.address.model.subject.exceptions.SubjectNotFoundException;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.SubjectBuilder;
 
@@ -86,43 +86,43 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasSubject_nullSubject_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        modelManager.hasPerson(null);
+        modelManager.hasSubject(null);
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasPerson(ALICE));
+    public void hasSubject_subjectNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasSubject(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        modelManager.addPerson(ALICE);
-        assertTrue(modelManager.hasPerson(ALICE));
+    public void hasSubject_subjectInAddressBook_returnsTrue() {
+        modelManager.addSubject(ALICE);
+        assertTrue(modelManager.hasSubject(ALICE));
     }
 
     @Test
-    public void deletePerson_personIsSelectedAndFirstPersonInFilteredPersonList_selectionCleared() {
-        modelManager.addPerson(ALICE);
+    public void deleteSubject_subjectIsSelectedAndFirstSubjectInFilteredSubjectList_selectionCleared() {
+        modelManager.addSubject(ALICE);
         modelManager.setSelectedSubject(ALICE);
-        modelManager.deletePerson(ALICE);
+        modelManager.deleteSubject(ALICE);
         assertEquals(null, modelManager.getSelectedSubject());
     }
 
     @Test
-    public void deletePerson_personIsSelectedAndSecondPersonInFilteredPersonList_firstPersonSelected() {
-        modelManager.addPerson(ALICE);
-        modelManager.addPerson(BOB);
+    public void deleteSubject_subjectIsSelectedAndSecondSubjectInFilteredSubjectList_firstSubjectSelected() {
+        modelManager.addSubject(ALICE);
+        modelManager.addSubject(BOB);
         assertEquals(Arrays.asList(ALICE, BOB), modelManager.getFilteredSubjectList());
         modelManager.setSelectedSubject(BOB);
-        modelManager.deletePerson(BOB);
+        modelManager.deleteSubject(BOB);
         assertEquals(ALICE, modelManager.getSelectedSubject());
     }
 
     @Test
-    public void setPerson_personIsSelected_selectedPersonUpdated() {
-        modelManager.addPerson(ALICE);
+    public void setSubject_subjectIsSelected_selectedSubjectUpdated() {
+        modelManager.addSubject(ALICE);
         modelManager.setSelectedSubject(ALICE);
         Subject updatedAlice = new SubjectBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         modelManager.setSubject(ALICE, updatedAlice);
@@ -130,20 +130,20 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getFilteredSubjectList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         modelManager.getFilteredSubjectList().remove(0);
     }
 
     @Test
-    public void setSelectedPerson_personNotInFilteredPersonList_throwsPersonNotFoundException() {
-        thrown.expect(PersonNotFoundException.class);
+    public void setSelectedSubject_subjectNotInFilteredSubjectList_throwsSubjectNotFoundException() {
+        thrown.expect(SubjectNotFoundException.class);
         modelManager.setSelectedSubject(ALICE);
     }
 
     @Test
-    public void setSelectedPerson_personInFilteredPersonList_setsSelectedPerson() {
-        modelManager.addPerson(ALICE);
+    public void setSelectedSubject_subjectInFilteredSubjectList_setsSelectedSubject() {
+        modelManager.addSubject(ALICE);
         assertEquals(Collections.singletonList(ALICE), modelManager.getFilteredSubjectList());
         modelManager.setSelectedSubject(ALICE);
         assertEquals(ALICE, modelManager.getSelectedSubject());
@@ -151,7 +151,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        AddressBook addressBook = new AddressBookBuilder().withSubject(ALICE).withSubject(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 

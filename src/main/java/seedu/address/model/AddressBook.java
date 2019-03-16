@@ -8,7 +8,7 @@ import javafx.beans.InvalidationListener;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.InvalidationListenerManager;
 import seedu.address.model.subject.Subject;
-import seedu.address.model.subject.UniquePersonList;
+import seedu.address.model.subject.UniqueSubjectList;
 
 /**
  * Wraps all data at the address-book level
@@ -16,7 +16,7 @@ import seedu.address.model.subject.UniquePersonList;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniquePersonList persons;
+    private final UniqueSubjectList subjects;
     private final InvalidationListenerManager invalidationListenerManager = new InvalidationListenerManager();
 
     /*
@@ -27,13 +27,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
+        subjects = new UniqueSubjectList();
     }
 
     public AddressBook() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an AddressBook using the Subjects in the {@code toBeCopied}
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
@@ -46,8 +46,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Replaces the contents of the subject list with {@code subjects}.
      * {@code subjects} must not contain duplicate subjects.
      */
-    public void setPersons(List<Subject> subjects) {
-        this.persons.setPersons(subjects);
+    public void setSubjects(List<Subject> subjects) {
+        this.subjects.setSubjects(subjects);
         indicateModified();
     }
 
@@ -57,7 +57,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getPersonList());
+        setSubjects(newData.getSubjectList());
     }
 
     //// subject-level operations
@@ -65,17 +65,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if a subject with the same identity as {@code subject} exists in the address book.
      */
-    public boolean hasPerson(Subject subject) {
+    public boolean hasSubject(Subject subject) {
         requireNonNull(subject);
-        return persons.contains(subject);
+        return subjects.contains(subject);
     }
 
     /**
      * Adds a subject to the address book.
      * The subject must not already exist in the address book.
      */
-    public void addPerson(Subject p) {
-        persons.add(p);
+    public void addSubject(Subject p) {
+        subjects.add(p);
         indicateModified();
     }
 
@@ -85,10 +85,10 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The subject identity of {@code editedSubject} must not be the same as another
      * existing subject in the address book.
      */
-    public void setPerson(Subject target, Subject editedSubject) {
+    public void setSubject(Subject target, Subject editedSubject) {
         requireNonNull(editedSubject);
 
-        persons.setPerson(target, editedSubject);
+        subjects.setSubject(target, editedSubject);
         indicateModified();
     }
 
@@ -96,8 +96,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removePerson(Subject key) {
-        persons.remove(key);
+    public void removeSubject(Subject key) {
+        subjects.remove(key);
         indicateModified();
     }
 
@@ -122,24 +122,24 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
+        return subjects.asUnmodifiableObservableList().size() + " subjects";
         // TODO: refine later
     }
 
     @Override
-    public ObservableList<Subject> getPersonList() {
-        return persons.asUnmodifiableObservableList();
+    public ObservableList<Subject> getSubjectList() {
+        return subjects.asUnmodifiableObservableList();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
+                && subjects.equals(((AddressBook) other).subjects));
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return subjects.hashCode();
     }
 }

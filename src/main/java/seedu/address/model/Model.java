@@ -56,19 +56,19 @@ public interface Model {
     /**
      * Returns true if a subject with the same identity as {@code subject} exists in the address book.
      */
-    boolean hasPerson(Subject subject);
+    boolean hasSubject(Subject subject);
 
     /**
      * Deletes the given subject.
      * The subject must exist in the address book.
      */
-    void deletePerson(Subject target);
+    void deleteSubject(Subject target);
 
     /**
      * Adds the given subject.
      * {@code subject} must not already exist in the address book.
      */
-    void addPerson(Subject subject);
+    void addSubject(Subject subject);
 
     /**
      * Replaces the given subject {@code target} with {@code editedSubject}.

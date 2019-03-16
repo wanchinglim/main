@@ -49,7 +49,7 @@ public class TestUtil {
     /**
      * Returns the subject in the {@code model}'s subject list at {@code index}.
      */
-    public static Subject getPerson(Model model, Index index) {
+    public static Subject getSubject(Model model, Index index) {
         return model.getFilteredSubjectList().get(index.getZeroBased());
     }
 }

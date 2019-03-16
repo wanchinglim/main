@@ -3,17 +3,17 @@ package seedu.address.ui;
 import static java.time.Duration.ofMillis;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
-import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysPerson;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SUBJECT;
+import static seedu.address.testutil.TypicalSubjects.getTypicalSubjects;
+import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysSubject;
 import static seedu.address.ui.testutil.GuiTestAssert.assertCardEquals;
 
 import java.util.Collections;
 
 import org.junit.Test;
 
-import guitests.guihandles.PersonCardHandle;
-import guitests.guihandles.PersonListPanelHandle;
+import guitests.guihandles.SubjectCardHandle;
+import guitests.guihandles.SubjectListPanelHandle;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,41 +26,42 @@ import seedu.address.model.subject.Subject;
 
 public class SubjectListPanelTest extends GuiUnitTest {
     private static final ObservableList<Subject> TYPICAL_SUBJECTS =
-            FXCollections.observableList(getTypicalPersons());
+            FXCollections.observableList(getTypicalSubjects());
 
     private static final long CARD_CREATION_AND_DELETION_TIMEOUT = 2500;
 
-    private final SimpleObjectProperty<Subject> selectedPerson = new SimpleObjectProperty<>();
-    private PersonListPanelHandle personListPanelHandle;
+    private final SimpleObjectProperty<Subject> selectedSubject = new SimpleObjectProperty<>();
+    private SubjectListPanelHandle subjectListPanelHandle;
 
     @Test
     public void display() {
         initUi(TYPICAL_SUBJECTS);
 
         for (int i = 0; i < TYPICAL_SUBJECTS.size(); i++) {
-            personListPanelHandle.navigateToCard(TYPICAL_SUBJECTS.get(i));
+            subjectListPanelHandle.navigateToCard(TYPICAL_SUBJECTS.get(i));
             Subject expectedSubject = TYPICAL_SUBJECTS.get(i);
-            PersonCardHandle actualCard = personListPanelHandle.getPersonCardHandle(i);
+            SubjectCardHandle actualCard = subjectListPanelHandle.getSubjectCardHandle(i);
 
-            assertCardDisplaysPerson(expectedSubject, actualCard);
+            assertCardDisplaysSubject(expectedSubject, actualCard);
             assertEquals(Integer.toString(i + 1) + ". ", actualCard.getId());
         }
     }
 
     @Test
-    public void selection_modelSelectedPersonChanged_selectionChanges() {
+    public void selection_modelSelectedSubjectChanged_selectionChanges() {
         initUi(TYPICAL_SUBJECTS);
-        Subject secondSubject = TYPICAL_SUBJECTS.get(INDEX_SECOND_PERSON.getZeroBased());
-        guiRobot.interact(() -> selectedPerson.set(secondSubject));
+        Subject secondSubject = TYPICAL_SUBJECTS.get(INDEX_SECOND_SUBJECT.getZeroBased());
+        guiRobot.interact(() -> selectedSubject.set(secondSubject));
         guiRobot.pauseForHuman();
 
-        PersonCardHandle expectedPerson = personListPanelHandle.getPersonCardHandle(INDEX_SECOND_PERSON.getZeroBased());
-        PersonCardHandle selectedPerson = personListPanelHandle.getHandleToSelectedCard();
-        assertCardEquals(expectedPerson, selectedPerson);
+        SubjectCardHandle expectedSubject = subjectListPanelHandle
+                .getSubjectCardHandle(INDEX_SECOND_SUBJECT.getZeroBased());
+        SubjectCardHandle selectedSubject = subjectListPanelHandle.getHandleToSelectedCard();
+        assertCardEquals(expectedSubject, selectedSubject);
     }
 
     /**
-     * Verifies that creating and deleting large number of persons in {@code PersonListPanel} requires lesser than
+     * Verifies that creating and deleting large number of subjects in {@code SubjectListPanel} requires lesser than
      * {@code CARD_CREATION_AND_DELETION_TIMEOUT} milliseconds to execute.
      */
     @Test
@@ -74,12 +75,12 @@ public class SubjectListPanelTest extends GuiUnitTest {
     }
 
     /**
-     * Returns a list of persons containing {@code personCount} persons that is used to populate the
-     * {@code PersonListPanel}.
+     * Returns a list of subjects containing {@code subjectCount} subjects that is used to populate the
+     * {@code SubjectListPanel}.
      */
-    private ObservableList<Subject> createBackingList(int personCount) {
+    private ObservableList<Subject> createBackingList(int subjectCount) {
         ObservableList<Subject> backingList = FXCollections.observableArrayList();
-        for (int i = 0; i < personCount; i++) {
+        for (int i = 0; i < subjectCount; i++) {
             Name name = new Name(i + "a");
             Phone phone = new Phone("000");
             Email email = new Email("a@aa");
@@ -92,15 +93,15 @@ public class SubjectListPanelTest extends GuiUnitTest {
     }
 
     /**
-     * Initializes {@code personListPanelHandle} with a {@code PersonListPanel} backed by {@code backingList}.
-     * Also shows the {@code Stage} that displays only {@code PersonListPanel}.
+     * Initializes {@code subjectListPanelHandle} with a {@code SubjectListPanel} backed by {@code backingList}.
+     * Also shows the {@code Stage} that displays only {@code SubjectListPanel}.
      */
     private void initUi(ObservableList<Subject> backingList) {
-        PersonListPanel personListPanel =
-                new PersonListPanel(backingList, selectedPerson, selectedPerson::set);
-        uiPartRule.setUiPart(personListPanel);
+        SubjectListPanel subjectListPanel =
+                new SubjectListPanel(backingList, selectedSubject, selectedSubject::set);
+        uiPartRule.setUiPart(subjectListPanel);
 
-        personListPanelHandle = new PersonListPanelHandle(getChildNode(personListPanel.getRoot(),
-                PersonListPanelHandle.PERSON_LIST_VIEW_ID));
+        subjectListPanelHandle = new SubjectListPanelHandle(getChildNode(subjectListPanel.getRoot(),
+                SubjectListPanelHandle.SUBJECT_LIST_VIEW_ID));
     }
 }

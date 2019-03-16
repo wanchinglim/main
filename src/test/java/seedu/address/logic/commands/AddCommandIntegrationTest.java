@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalSubjects.getTypicalAddressBook;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -28,11 +28,11 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_newPerson_success() {
+    public void execute_newSubject_success() {
         Subject validSubject = new SubjectBuilder().build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addPerson(validSubject);
+        expectedModel.addSubject(validSubject);
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(new AddCommand(validSubject), model, commandHistory,
@@ -40,10 +40,10 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Subject subjectInList = model.getAddressBook().getPersonList().get(0);
+    public void execute_duplicateSubject_throwsCommandException() {
+        Subject subjectInList = model.getAddressBook().getSubjectList().get(0);
         assertCommandFailure(new AddCommand(subjectInList), model, commandHistory,
-                AddCommand.MESSAGE_DUPLICATE_PERSON);
+                AddCommand.MESSAGE_DUPLICATE_SUBJECT);
     }
 
 }

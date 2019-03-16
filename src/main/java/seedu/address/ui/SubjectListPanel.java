@@ -14,39 +14,39 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.subject.Subject;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of subjects.
  */
-public class PersonListPanel extends UiPart<Region> {
-    private static final String FXML = "PersonListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+public class SubjectListPanel extends UiPart<Region> {
+    private static final String FXML = "SubjectListPanel.fxml";
+    private final Logger logger = LogsCenter.getLogger(SubjectListPanel.class);
 
     @FXML
-    private ListView<Subject> personListView;
+    private ListView<Subject> subjectListView;
 
-    public PersonListPanel(ObservableList<Subject> subjectList, ObservableValue<Subject> selectedPerson,
-                           Consumer<Subject> onSelectedPersonChange) {
+    public SubjectListPanel(ObservableList<Subject> subjectList, ObservableValue<Subject> selectedSubject,
+                            Consumer<Subject> onSelectedSubjectChange) {
         super(FXML);
-        personListView.setItems(subjectList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
-        personListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+        subjectListView.setItems(subjectList);
+        subjectListView.setCellFactory(listView -> new SubjectListViewCell());
+        subjectListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             logger.fine("Selection in subject list panel changed to : '" + newValue + "'");
-            onSelectedPersonChange.accept(newValue);
+            onSelectedSubjectChange.accept(newValue);
         });
-        selectedPerson.addListener((observable, oldValue, newValue) -> {
+        selectedSubject.addListener((observable, oldValue, newValue) -> {
             logger.fine("Selected subject changed to: " + newValue);
 
             // Don't modify selection if we are already selecting the selected subject,
             // otherwise we would have an infinite loop.
-            if (Objects.equals(personListView.getSelectionModel().getSelectedItem(), newValue)) {
+            if (Objects.equals(subjectListView.getSelectionModel().getSelectedItem(), newValue)) {
                 return;
             }
 
             if (newValue == null) {
-                personListView.getSelectionModel().clearSelection();
+                subjectListView.getSelectionModel().clearSelection();
             } else {
-                int index = personListView.getItems().indexOf(newValue);
-                personListView.scrollTo(index);
-                personListView.getSelectionModel().clearAndSelect(index);
+                int index = subjectListView.getItems().indexOf(newValue);
+                subjectListView.scrollTo(index);
+                subjectListView.getSelectionModel().clearAndSelect(index);
             }
         });
     }
@@ -54,7 +54,7 @@ public class PersonListPanel extends UiPart<Region> {
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Subject} using a {@code SubjectCard}.
      */
-    class PersonListViewCell extends ListCell<Subject> {
+    class SubjectListViewCell extends ListCell<Subject> {
         @Override
         protected void updateItem(Subject subject, boolean empty) {
             super.updateItem(subject, empty);

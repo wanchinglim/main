@@ -9,26 +9,26 @@ import javafx.scene.control.ListView;
 import seedu.address.model.subject.Subject;
 
 /**
- * Provides a handle for {@code PersonListPanel} containing the list of {@code SubjectCard}.
+ * Provides a handle for {@code SubjectListPanel} containing the list of {@code SubjectCard}.
  */
-public class PersonListPanelHandle extends NodeHandle<ListView<Subject>> {
-    public static final String PERSON_LIST_VIEW_ID = "#personListView";
+public class SubjectListPanelHandle extends NodeHandle<ListView<Subject>> {
+    public static final String SUBJECT_LIST_VIEW_ID = "#subjectListView";
 
     private static final String CARD_PANE_ID = "#cardPane";
 
-    private Optional<Subject> lastRememberedSelectedPersonCard;
+    private Optional<Subject> lastRememberedSelectedSubjectCard;
 
-    public PersonListPanelHandle(ListView<Subject> personListPanelNode) {
-        super(personListPanelNode);
+    public SubjectListPanelHandle(ListView<Subject> subjectListPanelNode) {
+        super(subjectListPanelNode);
     }
 
     /**
-     * Returns a handle to the selected {@code PersonCardHandle}.
+     * Returns a handle to the selected {@code SubjectCardHandle}.
      * A maximum of 1 item can be selected at any time.
      * @throws AssertionError if no card is selected, or more than 1 card is selected.
      * @throws IllegalStateException if the selected card is currently not in the scene graph.
      */
-    public PersonCardHandle getHandleToSelectedCard() {
+    public SubjectCardHandle getHandleToSelectedCard() {
         List<Subject> selectedSubjectList = getRootNode().getSelectionModel().getSelectedItems();
 
         if (selectedSubjectList.size() != 1) {
@@ -36,7 +36,7 @@ public class PersonListPanelHandle extends NodeHandle<ListView<Subject>> {
         }
 
         return getAllCardNodes().stream()
-                .map(PersonCardHandle::new)
+                .map(SubjectCardHandle::new)
                 .filter(handle -> handle.equals(selectedSubjectList.get(0)))
                 .findFirst()
                 .orElseThrow(IllegalStateException::new);
@@ -101,15 +101,15 @@ public class PersonListPanelHandle extends NodeHandle<ListView<Subject>> {
      * Returns the subject card handle of a subject associated with the {@code index} in the list.
      * @throws IllegalStateException if the selected card is currently not in the scene graph.
      */
-    public PersonCardHandle getPersonCardHandle(int index) {
+    public SubjectCardHandle getSubjectCardHandle(int index) {
         return getAllCardNodes().stream()
-                .map(PersonCardHandle::new)
-                .filter(handle -> handle.equals(getPerson(index)))
+                .map(SubjectCardHandle::new)
+                .filter(handle -> handle.equals(getSubject(index)))
                 .findFirst()
                 .orElseThrow(IllegalStateException::new);
     }
 
-    private Subject getPerson(int index) {
+    private Subject getSubject(int index) {
         return getRootNode().getItems().get(index);
     }
 
@@ -125,28 +125,28 @@ public class PersonListPanelHandle extends NodeHandle<ListView<Subject>> {
     /**
      * Remembers the selected {@code SubjectCard} in the list.
      */
-    public void rememberSelectedPersonCard() {
+    public void rememberSelectedSubjectCard() {
         List<Subject> selectedItems = getRootNode().getSelectionModel().getSelectedItems();
 
         if (selectedItems.size() == 0) {
-            lastRememberedSelectedPersonCard = Optional.empty();
+            lastRememberedSelectedSubjectCard = Optional.empty();
         } else {
-            lastRememberedSelectedPersonCard = Optional.of(selectedItems.get(0));
+            lastRememberedSelectedSubjectCard = Optional.of(selectedItems.get(0));
         }
     }
 
     /**
      * Returns true if the selected {@code SubjectCard} is different from the value remembered by the most recent
-     * {@code rememberSelectedPersonCard()} call.
+     * {@code rememberSelectedSubjectCard()} call.
      */
-    public boolean isSelectedPersonCardChanged() {
+    public boolean isSelectedSubjectCardChanged() {
         List<Subject> selectedItems = getRootNode().getSelectionModel().getSelectedItems();
 
         if (selectedItems.size() == 0) {
-            return lastRememberedSelectedPersonCard.isPresent();
+            return lastRememberedSelectedSubjectCard.isPresent();
         } else {
-            return !lastRememberedSelectedPersonCard.isPresent()
-                    || !lastRememberedSelectedPersonCard.get().equals(selectedItems.get(0));
+            return !lastRememberedSelectedSubjectCard.isPresent()
+                    || !lastRememberedSelectedSubjectCard.get().equals(selectedItems.get(0));
         }
     }
 

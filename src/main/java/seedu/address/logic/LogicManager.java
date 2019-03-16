@@ -72,7 +72,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Subject> getFilteredPersonList() {
+    public ObservableList<Subject> getFilteredSubjectList() {
         return model.getFilteredSubjectList();
     }
 
@@ -97,12 +97,12 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyProperty<Subject> selectedPersonProperty() {
+    public ReadOnlyProperty<Subject> selectedSubjectProperty() {
         return model.selectedSubjectProperty();
     }
 
     @Override
-    public void setSelectedPerson(Subject subject) {
+    public void setSelectedSubject(Subject subject) {
         model.setSelectedSubject(subject);
     }
 }

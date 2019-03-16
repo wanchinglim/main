@@ -1,12 +1,12 @@
 {
-  "persons": [ {
-    "name": "Valid Person",
+  "subjects": [ {
+    "name": "Valid Subject",
     "phone": "9482424",
     "email": "hans@example.com",
     "address": "4th street",
     "deadline": "21 July 2022"
   }, {
-    "name": "Person With Invalid Phone Field",
+    "name": "Subject With Invalid Phone Field",
     "phone": "948asdf2424",
     "email": "hans@example.com",
     "address": "4th street",

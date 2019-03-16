@@ -21,13 +21,13 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
-import static seedu.address.testutil.TypicalPersons.CARL;
-import static seedu.address.testutil.TypicalPersons.HOON;
-import static seedu.address.testutil.TypicalPersons.IDA;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+import static seedu.address.testutil.TypicalSubjects.ALICE;
+import static seedu.address.testutil.TypicalSubjects.AMY;
+import static seedu.address.testutil.TypicalSubjects.BOB;
+import static seedu.address.testutil.TypicalSubjects.CARL;
+import static seedu.address.testutil.TypicalSubjects.HOON;
+import static seedu.address.testutil.TypicalSubjects.IDA;
+import static seedu.address.testutil.TypicalSubjects.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
 
@@ -69,7 +69,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: redo adding Amy to the list -> Amy added again */
         command = RedoCommand.COMMAND_WORD;
-        model.addPerson(toAdd);
+        model.addSubject(toAdd);
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, model, expectedResultMessage);
 
@@ -87,7 +87,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         assertCommandSuccess(command, toAdd);
 
         /* Case: add to empty address book -> added */
-        deleteAllPersons();
+        deleteAllSubjects();
         assertCommandSuccess(ALICE);
 
         /* Case: add a subject with tags, command with parameters in random order -> added */
@@ -102,39 +102,39 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         /* -------------------------- Perform add operation on the shown filtered list ------------------------------ */
 
         /* Case: filters the subject list before adding -> added */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+        showSubjectsWithName(KEYWORD_MATCHING_MEIER);
         assertCommandSuccess(IDA);
 
         /* --------------------- Perform add operation while a subject card is selected ------------------------ */
 
         /* Case: selects first card in the subject list, add a subject -> added, card selection remains unchanged */
-        selectPerson(Index.fromOneBased(1));
+        selectSubject(Index.fromOneBased(1));
         assertCommandSuccess(CARL);
 
         /* ----------------------------------- Perform invalid add operations --------------------------------------- */
 
         /* Case: add a duplicate subject -> rejected */
         command = SubjectUtil.getAddCommand(HOON);
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_SUBJECT);
 
         /* Case: add a duplicate subject except with different phone -> rejected */
         toAdd = new SubjectBuilder(HOON).withPhone(VALID_PHONE_BOB).build();
         command = SubjectUtil.getAddCommand(toAdd);
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_SUBJECT);
 
         /* Case: add a duplicate subject except with different email -> rejected */
         toAdd = new SubjectBuilder(HOON).withEmail(VALID_EMAIL_BOB).build();
         command = SubjectUtil.getAddCommand(toAdd);
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_SUBJECT);
 
         /* Case: add a duplicate subject except with different address -> rejected */
         toAdd = new SubjectBuilder(HOON).withAddress(VALID_ADDRESS_BOB).build();
         command = SubjectUtil.getAddCommand(toAdd);
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_SUBJECT);
 
         /* Case: add a duplicate subject except with different tags -> rejected */
         command = SubjectUtil.getAddCommand(HOON) + " " + PREFIX_TAG.getPrefix() + "friends";
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_SUBJECT);
 
         /* Case: missing name -> rejected */
         command = AddCommand.COMMAND_WORD + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
@@ -184,7 +184,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
      * 2. Command box has the default style class.<br>
      * 3. Result display box displays the success message of executing {@code AddCommand} with the details of
      * {@code toAdd}.<br>
-     * 4. {@code Storage} and {@code PersonListPanel} equal to the corresponding components in
+     * 4. {@code Storage} and {@code SubjectListPanel} equal to the corresponding components in
      * the current model added with {@code toAdd}.<br>
      * 5. Browser url and selected card remain unchanged.<br>
      * 6. Status bar's sync status changes.<br>
@@ -203,7 +203,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
      */
     private void assertCommandSuccess(String command, Subject toAdd) {
         Model expectedModel = getModel();
-        expectedModel.addPerson(toAdd);
+        expectedModel.addSubject(toAdd);
         String expectedResultMessage = String.format(AddCommand.MESSAGE_SUCCESS, toAdd);
 
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
@@ -213,7 +213,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
      * Performs the same verification as {@code assertCommandSuccess(String, Subject)} except asserts that
      * the,<br>
      * 1. Result display box displays {@code expectedResultMessage}.<br>
-     * 2. {@code Storage} and {@code PersonListPanel} equal to the corresponding components in
+     * 2. {@code Storage} and {@code SubjectListPanel} equal to the corresponding components in
      * {@code expectedModel}.<br>
      * @see AddCommandSystemTest#assertCommandSuccess(String, Subject)
      */
@@ -229,7 +229,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
      * 1. Command box displays {@code command}.<br>
      * 2. Command box has the error style class.<br>
      * 3. Result display box displays {@code expectedResultMessage}.<br>
-     * 4. {@code Storage} and {@code PersonListPanel} remain unchanged.<br>
+     * 4. {@code Storage} and {@code SubjectListPanel} remain unchanged.<br>
      * 5. Browser url, selected card and status bar remain unchanged.<br>
      * Verifications 1, 3 and 4 are performed by
      * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>

@@ -21,7 +21,7 @@ import seedu.address.model.subject.Subject;
 /**
  * A utility class containing a list of {@code Subject} objects to be used in tests.
  */
-public class TypicalPersons {
+public class TypicalSubjects {
 
     public static final Subject ALICE = new SubjectBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
@@ -57,20 +57,20 @@ public class TypicalPersons {
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
-    private TypicalPersons() {} // prevents instantiation
+    private TypicalSubjects() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code AddressBook} with all the typical subjects.
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
-        for (Subject subject : getTypicalPersons()) {
-            ab.addPerson(subject);
+        for (Subject subject : getTypicalSubjects()) {
+            ab.addSubject(subject);
         }
         return ab;
     }
 
-    public static List<Subject> getTypicalPersons() {
+    public static List<Subject> getTypicalSubjects() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 }

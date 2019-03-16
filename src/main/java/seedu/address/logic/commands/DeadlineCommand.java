@@ -13,8 +13,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.subject.Deadline;
 import seedu.address.model.subject.Subject;
-import seedu.address.model.subject.exceptions.DuplicatePersonException;
-import seedu.address.model.subject.exceptions.PersonNotFoundException;
+import seedu.address.model.subject.exceptions.DuplicateSubjectException;
+import seedu.address.model.subject.exceptions.SubjectNotFoundException;
 
 /**
  * Adds/Changes the deadline or exam of an existing subject in the address book/flashcards.
@@ -35,7 +35,7 @@ public class DeadlineCommand extends Command {
 
     public static final String MESSAGE_ADD_DEADLINE_SUCCESS = "Added deadline to Subject: %1$s";
     public static final String MESSAGE_DELETE_DEADLINE_SUCCESS = "Removed deadline from Subject: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This deadline clashes with another in the address book.";
+    public static final String MESSAGE_DUPLICATE_SUBJECT = "This deadline clashes with another in the address book.";
 
     private final Index index;
     private final Deadline deadline;
@@ -59,7 +59,7 @@ public class DeadlineCommand extends Command {
         List<Subject> lastShownList = model.getFilteredSubjectList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_SUBJECT_DISPLAYED_INDEX);
         }
 
         Subject subjectToEdit = lastShownList.get(index.getZeroBased());
@@ -68,9 +68,9 @@ public class DeadlineCommand extends Command {
 
         try {
             model.setSubject(subjectToEdit, editedSubject);
-        } catch (DuplicatePersonException dpe) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        } catch (PersonNotFoundException pnfe) {
+        } catch (DuplicateSubjectException dpe) {
+            throw new CommandException(MESSAGE_DUPLICATE_SUBJECT);
+        } catch (SubjectNotFoundException pnfe) {
             throw new AssertionError("The target subject cannot be missing");
         }
 

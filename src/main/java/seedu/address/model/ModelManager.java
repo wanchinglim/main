@@ -16,7 +16,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.subject.Subject;
-import seedu.address.model.subject.exceptions.PersonNotFoundException;
+import seedu.address.model.subject.exceptions.SubjectNotFoundException;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -27,7 +27,7 @@ public class ModelManager implements Model {
     private final VersionedAddressBook versionedAddressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Subject> filteredSubjects;
-    private final SimpleObjectProperty<Subject> selectedPerson = new SimpleObjectProperty<>();
+    private final SimpleObjectProperty<Subject> selectedSubject = new SimpleObjectProperty<>();
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -40,8 +40,8 @@ public class ModelManager implements Model {
 
         versionedAddressBook = new VersionedAddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredSubjects = new FilteredList<>(versionedAddressBook.getPersonList());
-        filteredSubjects.addListener(this::ensureSelectedPersonIsValid);
+        filteredSubjects = new FilteredList<>(versionedAddressBook.getSubjectList());
+        filteredSubjects.addListener(this::ensureSelectedSubjectIsValid);
     }
 
     public ModelManager() {
@@ -96,19 +96,19 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Subject subject) {
+    public boolean hasSubject(Subject subject) {
         requireNonNull(subject);
-        return versionedAddressBook.hasPerson(subject);
+        return versionedAddressBook.hasSubject(subject);
     }
 
     @Override
-    public void deletePerson(Subject target) {
-        versionedAddressBook.removePerson(target);
+    public void deleteSubject(Subject target) {
+        versionedAddressBook.removeSubject(target);
     }
 
     @Override
-    public void addPerson(Subject subject) {
-        versionedAddressBook.addPerson(subject);
+    public void addSubject(Subject subject) {
+        versionedAddressBook.addSubject(subject);
         updateFilteredSubjectList(PREDICATE_SHOW_ALL_SUBJECTS);
     }
 
@@ -116,7 +116,7 @@ public class ModelManager implements Model {
     public void setSubject(Subject target, Subject editedSubject) {
         requireAllNonNull(target, editedSubject);
 
-        versionedAddressBook.setPerson(target, editedSubject);
+        versionedAddressBook.setSubject(target, editedSubject);
     }
 
     //=========== Filtered Subject List Accessors =============================================================
@@ -167,47 +167,48 @@ public class ModelManager implements Model {
 
     @Override
     public ReadOnlyProperty<Subject> selectedSubjectProperty() {
-        return selectedPerson;
+        return selectedSubject;
     }
 
     @Override
     public Subject getSelectedSubject() {
-        return selectedPerson.getValue();
+        return selectedSubject.getValue();
     }
 
     @Override
     public void setSelectedSubject(Subject subject) {
         if (subject != null && !filteredSubjects.contains(subject)) {
-            throw new PersonNotFoundException();
+            throw new SubjectNotFoundException();
         }
-        selectedPerson.setValue(subject);
+        selectedSubject.setValue(subject);
     }
 
     /**
-     * Ensures {@code selectedPerson} is a valid subject in {@code filteredSubjects}.
+     * Ensures {@code selectedSubject} is a valid subject in {@code filteredSubjects}.
      */
-    private void ensureSelectedPersonIsValid(ListChangeListener.Change<? extends Subject> change) {
+    private void ensureSelectedSubjectIsValid(ListChangeListener.Change<? extends Subject> change) {
         while (change.next()) {
-            if (selectedPerson.getValue() == null) {
+            if (selectedSubject.getValue() == null) {
                 // null is always a valid selected subject, so we do not need to check that it is valid anymore.
                 return;
             }
 
-            boolean wasSelectedPersonReplaced = change.wasReplaced() && change.getAddedSize() == change.getRemovedSize()
-                    && change.getRemoved().contains(selectedPerson.getValue());
-            if (wasSelectedPersonReplaced) {
-                // Update selectedPerson to its new value.
-                int index = change.getRemoved().indexOf(selectedPerson.getValue());
-                selectedPerson.setValue(change.getAddedSubList().get(index));
+            boolean wasSelectedSubjectReplaced = change.wasReplaced()
+                    && change.getAddedSize() == change.getRemovedSize()
+                    && change.getRemoved().contains(selectedSubject.getValue());
+            if (wasSelectedSubjectReplaced) {
+                // Update selectedSubject to its new value.
+                int index = change.getRemoved().indexOf(selectedSubject.getValue());
+                selectedSubject.setValue(change.getAddedSubList().get(index));
                 continue;
             }
 
-            boolean wasSelectedPersonRemoved = change.getRemoved().stream()
-                    .anyMatch(removedPerson -> selectedPerson.getValue().isSameSubject(removedPerson));
-            if (wasSelectedPersonRemoved) {
+            boolean wasSelectedSubjectRemoved = change.getRemoved().stream()
+                    .anyMatch(removedSubject -> selectedSubject.getValue().isSameSubject(removedSubject));
+            if (wasSelectedSubjectRemoved) {
                 // Select the subject that came before it in the list,
                 // or clear the selection if there is no such subject.
-                selectedPerson.setValue(change.getFrom() > 0 ? change.getList().get(change.getFrom() - 1) : null);
+                selectedSubject.setValue(change.getFrom() > 0 ? change.getList().get(change.getFrom() - 1) : null);
             }
         }
     }
@@ -229,7 +230,7 @@ public class ModelManager implements Model {
         return versionedAddressBook.equals(other.versionedAddressBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredSubjects.equals(other.filteredSubjects)
-                && Objects.equals(selectedPerson.get(), other.selectedPerson.get());
+                && Objects.equals(selectedSubject.get(), other.selectedSubject.get());
     }
 
 }

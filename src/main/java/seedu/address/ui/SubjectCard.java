@@ -12,7 +12,7 @@ import seedu.address.model.subject.Subject;
  */
 public class SubjectCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "SubjectListCard.fxml";
     private static final String[] TAG_COLOURS =
         {"white", "black", "orange", "maroon", "pink", "green", "blue", "purple", "navy", "beige"};
 

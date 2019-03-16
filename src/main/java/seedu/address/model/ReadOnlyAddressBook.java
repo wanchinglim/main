@@ -10,9 +10,9 @@ import seedu.address.model.subject.Subject;
 public interface ReadOnlyAddressBook extends Observable {
 
     /**
-     * Returns an unmodifiable view of the persons list.
-     * This list will not contain any duplicate persons.
+     * Returns an unmodifiable view of the subjects list.
+     * This list will not contain any duplicate subjects.
      */
-    ObservableList<Subject> getPersonList();
+    ObservableList<Subject> getSubjectList();
 
 }

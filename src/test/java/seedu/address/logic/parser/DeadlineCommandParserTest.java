@@ -4,7 +4,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SUBJECT;
 
 import org.junit.Test;
 
@@ -19,14 +19,14 @@ public class DeadlineCommandParserTest {
     @Test
     public void parse_indexSpecified_success() {
         //have deadline
-        Index targetIndex = INDEX_FIRST_PERSON;
+        Index targetIndex = INDEX_FIRST_SUBJECT;
         String userInput = targetIndex.getOneBased() + " " + PREFIX_DEADLINE + nonEmptyDeadline;
-        DeadlineCommand expectedCommand = new DeadlineCommand(INDEX_FIRST_PERSON, nonEmptyDeadline);
+        DeadlineCommand expectedCommand = new DeadlineCommand(INDEX_FIRST_SUBJECT, nonEmptyDeadline);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         //no deadline
         userInput = targetIndex.getOneBased() + " " + PREFIX_DEADLINE;
-        expectedCommand = new DeadlineCommand(INDEX_FIRST_PERSON, new Deadline(""));
+        expectedCommand = new DeadlineCommand(INDEX_FIRST_SUBJECT, new Deadline(""));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 

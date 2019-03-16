@@ -31,8 +31,8 @@ public interface Logic {
      */
     ReadOnlyAddressBook getAddressBook();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Subject> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered list of subjects */
+    ObservableList<Subject> getFilteredSubjectList();
 
     /**
      * Returns an unmodifiable view of the list of commands entered by the user.
@@ -61,12 +61,12 @@ public interface Logic {
      *
      * @see seedu.address.model.Model#selectedSubjectProperty()
      */
-    ReadOnlyProperty<Subject> selectedPersonProperty();
+    ReadOnlyProperty<Subject> selectedSubjectProperty();
 
     /**
      * Sets the selected subject in the filtered subject list.
      *
      * @see seedu.address.model.Model#setSelectedSubject(Subject)
      */
-    void setSelectedPerson(Subject subject);
+    void setSelectedSubject(Subject subject);
 }

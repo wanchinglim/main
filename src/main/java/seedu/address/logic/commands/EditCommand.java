@@ -49,9 +49,9 @@ public class EditCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Subject: %1$s";
+    public static final String MESSAGE_EDIT_SUBJECT_SUCCESS = "Edited Subject: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This subject already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_SUBJECT = "This subject already exists in the address book.";
 
     private final Index index;
     private final EditSubjectDescriptor editSubjectDescriptor;
@@ -74,27 +74,27 @@ public class EditCommand extends Command {
         List<Subject> lastShownList = model.getFilteredSubjectList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_SUBJECT_DISPLAYED_INDEX);
         }
 
         Subject subjectToEdit = lastShownList.get(index.getZeroBased());
-        Subject editedSubject = createEditedPerson(subjectToEdit, editSubjectDescriptor);
+        Subject editedSubject = createEditedSubject(subjectToEdit, editSubjectDescriptor);
 
-        if (!subjectToEdit.isSameSubject(editedSubject) && model.hasPerson(editedSubject)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (!subjectToEdit.isSameSubject(editedSubject) && model.hasSubject(editedSubject)) {
+            throw new CommandException(MESSAGE_DUPLICATE_SUBJECT);
         }
 
         model.setSubject(subjectToEdit, editedSubject);
         model.updateFilteredSubjectList(PREDICATE_SHOW_ALL_SUBJECTS);
         model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedSubject));
+        return new CommandResult(String.format(MESSAGE_EDIT_SUBJECT_SUCCESS, editedSubject));
     }
 
     /**
      * Creates and returns a {@code Subject} with the details of {@code subjectToEdit}
      * edited with {@code editSubjectDescriptor}.
      */
-    private static Subject createEditedPerson(Subject subjectToEdit, EditSubjectDescriptor editSubjectDescriptor) {
+    private static Subject createEditedSubject(Subject subjectToEdit, EditSubjectDescriptor editSubjectDescriptor) {
         assert subjectToEdit != null;
 
         Name updatedName = editSubjectDescriptor.getName().orElse(subjectToEdit.getName());
