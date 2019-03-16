@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Path;
 
 import javafx.fxml.FXMLLoader;
 import seedu.address.MainApp;
@@ -49,6 +50,10 @@ public abstract class UiPart<T> {
      */
     public UiPart(String fxmlFileName, T root) {
         this(getFxmlFileUrl(fxmlFileName), root);
+    }
+
+    public UiPart(Comparable<Path> stubSaveLocation, int initialTotalPersons) {
+
     }
 
     /**
