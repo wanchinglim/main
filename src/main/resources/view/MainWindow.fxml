@@ -47,7 +47,7 @@
         </StackPane>
 
         <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.25, 0.5" VBox.vgrow="ALWAYS">
-          <VBox fx:id="personList" minWidth="240" prefWidth="240" SplitPane.resizableWithParent="false">
+          <VBox fx:id="subjectList" minWidth="240" prefWidth="240" SplitPane.resizableWithParent="false">
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>

@@ -16,8 +16,8 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Deadline;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Subject;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -46,9 +46,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Deadline deadline = new Deadline(""); //add command does not allow adding deadlines straightaway
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, deadline, tagList);
+        Subject subject = new Subject(name, phone, email, address, deadline, tagList);
 
-        return new AddCommand(person);
+        return new AddCommand(subject);
     }
 
     /**

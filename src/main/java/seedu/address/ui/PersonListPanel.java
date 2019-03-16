@@ -11,7 +11,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Subject;
 
 /**
  * Panel containing the list of persons.
@@ -21,21 +21,21 @@ public class PersonListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
 
     @FXML
-    private ListView<Person> personListView;
+    private ListView<Subject> personListView;
 
-    public PersonListPanel(ObservableList<Person> personList, ObservableValue<Person> selectedPerson,
-            Consumer<Person> onSelectedPersonChange) {
+    public PersonListPanel(ObservableList<Subject> subjectList, ObservableValue<Subject> selectedPerson,
+                           Consumer<Subject> onSelectedPersonChange) {
         super(FXML);
-        personListView.setItems(personList);
+        personListView.setItems(subjectList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
         personListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            logger.fine("Selection in person list panel changed to : '" + newValue + "'");
+            logger.fine("Selection in subject list panel changed to : '" + newValue + "'");
             onSelectedPersonChange.accept(newValue);
         });
         selectedPerson.addListener((observable, oldValue, newValue) -> {
-            logger.fine("Selected person changed to: " + newValue);
+            logger.fine("Selected subject changed to: " + newValue);
 
-            // Don't modify selection if we are already selecting the selected person,
+            // Don't modify selection if we are already selecting the selected subject,
             // otherwise we would have an infinite loop.
             if (Objects.equals(personListView.getSelectionModel().getSelectedItem(), newValue)) {
                 return;
@@ -52,18 +52,18 @@ public class PersonListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Subject} using a {@code PersonCard}.
      */
-    class PersonListViewCell extends ListCell<Person> {
+    class PersonListViewCell extends ListCell<Subject> {
         @Override
-        protected void updateItem(Person person, boolean empty) {
-            super.updateItem(person, empty);
+        protected void updateItem(Subject subject, boolean empty) {
+            super.updateItem(subject, empty);
 
-            if (empty || person == null) {
+            if (empty || subject == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
+                setGraphic(new PersonCard(subject, getIndex() + 1).getRoot());
             }
         }
     }

@@ -24,7 +24,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 public class StatusBarFooter extends UiPart<Region> {
 
     public static final String SYNC_STATUS_INITIAL = "Not updated yet in this session";
-    public static final String TOTAL_PERSONS_STATUS = "%d person(s) total";
+    public static final String TOTAL_PERSONS_STATUS = "%d subject(s) total";
     public static final String SYNC_STATUS_UPDATED = "Last Updated: %s";
 
     private static final Logger logger = LogsCenter.getLogger(StatusBarFooter.class);

@@ -21,7 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Deadline;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Subject;
 import seedu.address.testutil.PersonBuilder;
 
 /**
@@ -37,16 +37,16 @@ public class DeadlineCommandTest {
 
     @Test
     public void execute_addDeadlineUnfilteredList_success() {
-        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(firstPerson).withDeadline(DEADLINE_STUB).build();
+        Subject firstSubject = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Subject editedSubject = new PersonBuilder(firstSubject).withDeadline(DEADLINE_STUB).build();
 
         DeadlineCommand deadlineCommand = new DeadlineCommand(INDEX_FIRST_PERSON,
-                new Deadline(editedPerson.getDeadline().value));
+                new Deadline(editedSubject.getDeadline().value));
 
-        String expectedMessage = String.format(DeadlineCommand.MESSAGE_ADD_DEADLINE_SUCCESS, editedPerson);
+        String expectedMessage = String.format(DeadlineCommand.MESSAGE_ADD_DEADLINE_SUCCESS, editedSubject);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(firstPerson, editedPerson);
+        expectedModel.setPerson(firstSubject, editedSubject);
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(deadlineCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -55,16 +55,16 @@ public class DeadlineCommandTest {
 
     @Test
     public void execute_deleteDeadlineUnfilteredList_success() {
-        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(firstPerson).withDeadline("").build();
+        Subject firstSubject = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Subject editedSubject = new PersonBuilder(firstSubject).withDeadline("").build();
 
         DeadlineCommand deadlineCommand = new DeadlineCommand(INDEX_FIRST_PERSON,
-                new Deadline(editedPerson.getDeadline().toString()));
+                new Deadline(editedSubject.getDeadline().toString()));
 
-        String expectedMessage = String.format(DeadlineCommand.MESSAGE_DELETE_DEADLINE_SUCCESS, editedPerson);
+        String expectedMessage = String.format(DeadlineCommand.MESSAGE_DELETE_DEADLINE_SUCCESS, editedSubject);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(firstPerson, editedPerson);
+        expectedModel.setPerson(firstSubject, editedSubject);
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(deadlineCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -75,17 +75,17 @@ public class DeadlineCommandTest {
     public void execute_filteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
+        Subject firstSubject = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Subject editedSubject = new PersonBuilder(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
                 .withDeadline(DEADLINE_STUB).build();
 
         DeadlineCommand deadlineCommand = new DeadlineCommand(INDEX_FIRST_PERSON,
-                new Deadline(editedPerson.getDeadline().value));
+                new Deadline(editedSubject.getDeadline().value));
 
-        String expectedMessage = String.format(DeadlineCommand.MESSAGE_ADD_DEADLINE_SUCCESS, editedPerson);
+        String expectedMessage = String.format(DeadlineCommand.MESSAGE_ADD_DEADLINE_SUCCESS, editedSubject);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(firstPerson, editedPerson);
+        expectedModel.setPerson(firstSubject, editedSubject);
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(deadlineCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -118,21 +118,21 @@ public class DeadlineCommandTest {
 
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
-        Person personToModify = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person modifiedPerson = new PersonBuilder(personToModify).withDeadline(DEADLINE_STUB).build();
+        Subject subjectToModify = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Subject modifiedSubject = new PersonBuilder(subjectToModify).withDeadline(DEADLINE_STUB).build();
         DeadlineCommand deadlineCommand = new DeadlineCommand(INDEX_FIRST_PERSON, new Deadline(DEADLINE_STUB));
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.setPerson(personToModify, modifiedPerson);
+        expectedModel.setPerson(subjectToModify, modifiedSubject);
         expectedModel.commitAddressBook();
 
-        //deadline -> first person deadline changed
+        //deadline -> first subject deadline changed
         deadlineCommand.execute(model, commandHistory);
 
-        //undo -> reverts address book back to previous state and filtered person list to show all persons
+        //undo -> reverts address book back to previous state and filtered subject list to show all persons
         expectedModel.undoAddressBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
-        //redo -> same first person modified again
+        //redo -> same first subject modified again
         expectedModel.redoAddressBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
 
@@ -152,11 +152,11 @@ public class DeadlineCommandTest {
     }
 
     /**
-     * 1. Modifies {@code Person#deadline} from a filtered list.
+     * 1. Modifies {@code Subject#deadline} from a filtered list.
      * 2. Undo the modification.
-     * The unfiltered lsit should be shown now. Verify that the index of the previously modified person in the
+     * The unfiltered lsit should be shown now. Verify that the index of the previously modified subject in the
      * unfiltered list is different from the index at the filtered list.
-     * 4. Redo the modification. This ensures {@code RedoCommand} modifies the person object regardless of indexing.
+     * 4. Redo the modification. This ensures {@code RedoCommand} modifies the subject object regardless of indexing.
      */
 
     @Test
@@ -165,19 +165,19 @@ public class DeadlineCommandTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
         showPersonAtIndex(model, INDEX_SECOND_PERSON);
-        Person personToModify = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person modifiedPerson = new PersonBuilder(personToModify).withDeadline(DEADLINE_STUB).build();
-        expectedModel.setPerson(personToModify, modifiedPerson);
+        Subject subjectToModify = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Subject modifiedSubject = new PersonBuilder(subjectToModify).withDeadline(DEADLINE_STUB).build();
+        expectedModel.setPerson(subjectToModify, modifiedSubject);
         expectedModel.commitAddressBook();
 
-        //deadline -> modifies second person in unfiltered person list/first person in filtered person list
+        //deadline -> modifies second subject in unfiltered subject list/first subject in filtered subject list
         deadlineCommand.execute(model, commandHistory);
 
-        //undo -> reverts address book back to previous state and filtered person list to show all persons
+        //undo -> reverts address book back to previous state and filtered subject list to show all persons
         expectedModel.undoAddressBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
-        //redo -> modifies same second person in unfiltered person list
+        //redo -> modifies same second subject in unfiltered subject list
         expectedModel.redoAddressBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
 

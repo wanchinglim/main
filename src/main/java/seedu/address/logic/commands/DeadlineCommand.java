@@ -12,7 +12,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Deadline;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Subject;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -26,23 +26,23 @@ public class DeadlineCommand extends Command {
     public static final String COMMAND_ALIAS = "exam";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the deadline/exam of a subject identified "
-            + "by the index number used in the last person listing."
+            + "by the index number used in the last subject listing."
             + "Existing deadline will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_DEADLINE + "[DEADLINE]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_DEADLINE + "04 April 2028";
 
-    public static final String MESSAGE_ADD_DEADLINE_SUCCESS = "Added deadline to Person: %1$s";
-    public static final String MESSAGE_DELETE_DEADLINE_SUCCESS = "Removed deadline from Person: %1$s";
+    public static final String MESSAGE_ADD_DEADLINE_SUCCESS = "Added deadline to Subject: %1$s";
+    public static final String MESSAGE_DELETE_DEADLINE_SUCCESS = "Removed deadline from Subject: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This deadline clashes with another in the address book.";
 
     private final Index index;
     private final Deadline deadline;
 
     /**
-     * @param index of the person in the filtered person list to edit the deadline
-     * @param deadline of the person to be updated to
+     * @param index of the subject in the filtered subject list to edit the deadline
+     * @param deadline of the subject to be updated to
      */
 
     public DeadlineCommand(Index index, Deadline deadline) {
@@ -56,39 +56,39 @@ public class DeadlineCommand extends Command {
 
     @Override
     public CommandResult execute (Model model, CommandHistory history) throws CommandException {
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Subject> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), deadline, personToEdit.getTags());
+        Subject subjectToEdit = lastShownList.get(index.getZeroBased());
+        Subject editedSubject = new Subject(subjectToEdit.getName(), subjectToEdit.getPhone(), subjectToEdit.getEmail(),
+                subjectToEdit.getAddress(), deadline, subjectToEdit.getTags());
 
         try {
-            model.setPerson(personToEdit, editedPerson);
+            model.setPerson(subjectToEdit, editedSubject);
         } catch (DuplicatePersonException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         } catch (PersonNotFoundException pnfe) {
-            throw new AssertionError("The target person cannot be missing");
+            throw new AssertionError("The target subject cannot be missing");
         }
 
-        //model.updatePerson(personToEdit, editedPerson);
+        //model.updatePerson(subjectToEdit, editedSubject);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
 
-        return new CommandResult(generateSuccessMessage(editedPerson));
+        return new CommandResult(generateSuccessMessage(editedSubject));
     }
 
     /**
      * Generates a command execution success message based on whether the deadline is added to or removed from
-     * {@code personToEdit}.
+     * {@code subjectToEdit}.
      */
 
-    private String generateSuccessMessage(Person personToEdit) {
+    private String generateSuccessMessage(Subject subjectToEdit) {
         String message = !deadline.value.isEmpty() ? MESSAGE_ADD_DEADLINE_SUCCESS : MESSAGE_DELETE_DEADLINE_SUCCESS;
-        return String.format(message, personToEdit);
+        return String.format(message, subjectToEdit);
     }
 
     @Override

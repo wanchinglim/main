@@ -24,7 +24,7 @@ public class DeadlineTest {
         //null -> returns false
         assertFalse(deadline.equals(null));
 
-        //different person -> returns false
+        //different subject -> returns false
         Deadline differentDeadline = new Deadline("31 December 2019");
         assertFalse(deadline.equals(differentDeadline));
     }

@@ -5,10 +5,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Subject;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code Subject}.
  */
 public class PersonCard extends UiPart<Region> {
 
@@ -24,7 +24,7 @@ public class PersonCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Person person;
+    public final Subject subject;
 
     @FXML
     private HBox cardPane;
@@ -43,16 +43,16 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
-    public PersonCard(Person person, int displayedIndex) {
+    public PersonCard(Subject subject, int displayedIndex) {
         super(FXML);
-        this.person = person;
+        this.subject = subject;
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        deadline.setText(person.getDeadline().value);
-        tagger(person);
+        name.setText(subject.getName().fullName);
+        phone.setText(subject.getPhone().value);
+        address.setText(subject.getAddress().value);
+        email.setText(subject.getEmail().value);
+        deadline.setText(subject.getDeadline().value);
+        tagger(subject);
     }
 
     /**
@@ -63,9 +63,9 @@ public class PersonCard extends UiPart<Region> {
     }
 
     /**
-     * Creates the tag labels for {@code person}.
+     * Creates the tag labels for {@code subject}.
      */
-    private void tagger(Person p) {
+    private void tagger(Subject p) {
         p.getTags().forEach(tagT -> {
             Label tagLabel = new Label(tagT.tagName);
             tagLabel.getStyleClass().add(getTagColourIndex(tagT.tagName));
@@ -88,6 +88,6 @@ public class PersonCard extends UiPart<Region> {
         // state check
         PersonCard card = (PersonCard) other;
         return id.getText().equals(card.id.getText())
-                && person.equals(card.person);
+                && subject.equals(card.subject);
     }
 }

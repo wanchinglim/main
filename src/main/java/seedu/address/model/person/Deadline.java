@@ -9,7 +9,8 @@ import static java.util.Objects.requireNonNull;
 
 public class Deadline {
 
-    public static final String MESSAGE_DEADLINE_CONSTRAINTS = "Person deadlines can take any values, can even be blank";
+    public static final String MESSAGE_DEADLINE_CONSTRAINTS =
+                                            "Subject deadlines can take any values, can even be blank";
 
     public final String value;
 
