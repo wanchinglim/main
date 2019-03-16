@@ -9,20 +9,20 @@ import org.junit.Test;
 
 import guitests.guihandles.PersonCardHandle;
 import seedu.address.model.subject.Subject;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.SubjectBuilder;
 
 public class SubjectCardTest extends GuiUnitTest {
 
     @Test
     public void display() {
         // no tags
-        Subject subjectWithNoTags = new PersonBuilder().withTags(new String[0]).build();
+        Subject subjectWithNoTags = new SubjectBuilder().withTags(new String[0]).build();
         PersonCard personCard = new PersonCard(subjectWithNoTags, 1);
         uiPartRule.setUiPart(personCard);
         assertCardDisplay(personCard, subjectWithNoTags, 1);
 
         // with tags
-        Subject subjectWithTags = new PersonBuilder().build();
+        Subject subjectWithTags = new SubjectBuilder().build();
         personCard = new PersonCard(subjectWithTags, 2);
         uiPartRule.setUiPart(personCard);
         assertCardDisplay(personCard, subjectWithTags, 2);
@@ -30,7 +30,7 @@ public class SubjectCardTest extends GuiUnitTest {
 
     @Test
     public void equals() {
-        Subject subject = new PersonBuilder().build();
+        Subject subject = new SubjectBuilder().build();
         PersonCard personCard = new PersonCard(subject, 0);
 
         // same subject, same index -> returns true
@@ -47,7 +47,7 @@ public class SubjectCardTest extends GuiUnitTest {
         assertFalse(personCard.equals(0));
 
         // different subject, same index -> returns false
-        Subject differentSubject = new PersonBuilder().withName("differentName").build();
+        Subject differentSubject = new SubjectBuilder().withName("differentName").build();
         assertFalse(personCard.equals(new PersonCard(differentSubject, 0)));
 
         // same subject, different index -> returns false

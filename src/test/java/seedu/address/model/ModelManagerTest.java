@@ -23,7 +23,7 @@ import seedu.address.model.subject.NameContainsKeywordsPredicate;
 import seedu.address.model.subject.Subject;
 import seedu.address.model.subject.exceptions.PersonNotFoundException;
 import seedu.address.testutil.AddressBookBuilder;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.SubjectBuilder;
 
 public class ModelManagerTest {
     @Rule
@@ -124,7 +124,7 @@ public class ModelManagerTest {
     public void setPerson_personIsSelected_selectedPersonUpdated() {
         modelManager.addPerson(ALICE);
         modelManager.setSelectedPerson(ALICE);
-        Subject updatedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
+        Subject updatedAlice = new SubjectBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         modelManager.setPerson(ALICE, updatedAlice);
         assertEquals(updatedAlice, modelManager.getSelectedPerson());
     }

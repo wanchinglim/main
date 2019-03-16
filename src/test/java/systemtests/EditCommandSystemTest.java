@@ -45,8 +45,8 @@ import seedu.address.model.subject.Name;
 import seedu.address.model.subject.Phone;
 import seedu.address.model.subject.Subject;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.SubjectBuilder;
 
 public class EditCommandSystemTest extends AddressBookSystemTest {
 
@@ -62,7 +62,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         Index index = INDEX_FIRST_PERSON;
         String command = " " + EditCommand.COMMAND_WORD + "  " + index.getOneBased() + "  " + NAME_DESC_BOB + "  "
                 + PHONE_DESC_BOB + " " + EMAIL_DESC_BOB + "  " + ADDRESS_DESC_BOB + " " + TAG_DESC_HUSBAND + " ";
-        Subject editedSubject = new PersonBuilder(BOB).withTags(VALID_TAG_HUSBAND).build();
+        Subject editedSubject = new SubjectBuilder(BOB).withTags(VALID_TAG_HUSBAND).build();
         assertCommandSuccess(command, index, editedSubject);
 
         /* Case: undo editing the last subject in the list -> last subject restored */
@@ -87,7 +87,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         assertNotEquals(getModel().getFilteredPersonList().get(index.getZeroBased()), BOB);
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
-        editedSubject = new PersonBuilder(BOB).withName(VALID_NAME_AMY).build();
+        editedSubject = new SubjectBuilder(BOB).withName(VALID_NAME_AMY).build();
         assertCommandSuccess(command, index, editedSubject);
 
         /* Case: edit a subject with new values same as another subject's values but with different phone and email
@@ -96,14 +96,14 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         index = INDEX_SECOND_PERSON;
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
-        editedSubject = new PersonBuilder(BOB).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).build();
+        editedSubject = new SubjectBuilder(BOB).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).build();
         assertCommandSuccess(command, index, editedSubject);
 
         /* Case: clear tags -> cleared */
         index = INDEX_FIRST_PERSON;
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + PREFIX_TAG.getPrefix();
         Subject subjectToEdit = getModel().getFilteredPersonList().get(index.getZeroBased());
-        editedSubject = new PersonBuilder(subjectToEdit).withTags().build();
+        editedSubject = new SubjectBuilder(subjectToEdit).withTags().build();
         assertCommandSuccess(command, index, editedSubject);
 
         /* ------------------ Performing edit operation while a filtered list is being shown ------------------------ */
@@ -114,7 +114,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         assertTrue(index.getZeroBased() < getModel().getFilteredPersonList().size());
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + NAME_DESC_BOB;
         subjectToEdit = getModel().getFilteredPersonList().get(index.getZeroBased());
-        editedSubject = new PersonBuilder(subjectToEdit).withName(VALID_NAME_BOB).build();
+        editedSubject = new SubjectBuilder(subjectToEdit).withName(VALID_NAME_BOB).build();
         assertCommandSuccess(command, index, editedSubject);
 
         /* Case: filtered subject list, edit index within bounds of address book but out of bounds of subject list

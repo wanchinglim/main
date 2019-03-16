@@ -22,7 +22,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.subject.Deadline;
 import seedu.address.model.subject.Subject;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.SubjectBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for DeadlineCommand.
@@ -38,7 +38,7 @@ public class DeadlineCommandTest {
     @Test
     public void execute_addDeadlineUnfilteredList_success() {
         Subject firstSubject = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Subject editedSubject = new PersonBuilder(firstSubject).withDeadline(DEADLINE_STUB).build();
+        Subject editedSubject = new SubjectBuilder(firstSubject).withDeadline(DEADLINE_STUB).build();
 
         DeadlineCommand deadlineCommand = new DeadlineCommand(INDEX_FIRST_PERSON,
                 new Deadline(editedSubject.getDeadline().value));
@@ -56,7 +56,7 @@ public class DeadlineCommandTest {
     @Test
     public void execute_deleteDeadlineUnfilteredList_success() {
         Subject firstSubject = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Subject editedSubject = new PersonBuilder(firstSubject).withDeadline("").build();
+        Subject editedSubject = new SubjectBuilder(firstSubject).withDeadline("").build();
 
         DeadlineCommand deadlineCommand = new DeadlineCommand(INDEX_FIRST_PERSON,
                 new Deadline(editedSubject.getDeadline().toString()));
@@ -76,7 +76,7 @@ public class DeadlineCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Subject firstSubject = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Subject editedSubject = new PersonBuilder(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
+        Subject editedSubject = new SubjectBuilder(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
                 .withDeadline(DEADLINE_STUB).build();
 
         DeadlineCommand deadlineCommand = new DeadlineCommand(INDEX_FIRST_PERSON,
@@ -119,7 +119,7 @@ public class DeadlineCommandTest {
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Subject subjectToModify = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Subject modifiedSubject = new PersonBuilder(subjectToModify).withDeadline(DEADLINE_STUB).build();
+        Subject modifiedSubject = new SubjectBuilder(subjectToModify).withDeadline(DEADLINE_STUB).build();
         DeadlineCommand deadlineCommand = new DeadlineCommand(INDEX_FIRST_PERSON, new Deadline(DEADLINE_STUB));
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(subjectToModify, modifiedSubject);
@@ -166,7 +166,7 @@ public class DeadlineCommandTest {
 
         showPersonAtIndex(model, INDEX_SECOND_PERSON);
         Subject subjectToModify = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Subject modifiedSubject = new PersonBuilder(subjectToModify).withDeadline(DEADLINE_STUB).build();
+        Subject modifiedSubject = new SubjectBuilder(subjectToModify).withDeadline(DEADLINE_STUB).build();
         expectedModel.setPerson(subjectToModify, modifiedSubject);
         expectedModel.commitAddressBook();
 
