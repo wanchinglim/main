@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.logic.Logic;
 import seedu.address.model.ReadOnlyAddressBook;
 
 
@@ -29,7 +30,6 @@ public class StatusBarFooter extends UiPart<Region> {
 
     private static final Logger logger = LogsCenter.getLogger(StatusBarFooter.class);
 
-
     /**
      * Used to generate time stamps.
      *
@@ -38,9 +38,12 @@ public class StatusBarFooter extends UiPart<Region> {
      * will require passing down the clock reference all the way from MainApp,
      * but it should be easier once we have factories/DI frameworks.
      */
-    private static Clock clock = Clock.systemDefaultZone();
 
     private static final String FXML = "StatusBarFooter.fxml";
+
+    private static Clock clock = Clock.systemDefaultZone();
+
+    private Logic logic;
 
     @FXML
     private Label syncStatus;
@@ -58,18 +61,11 @@ public class StatusBarFooter extends UiPart<Region> {
         syncStatus.setText(SYNC_STATUS_INITIAL);
         setTotalPersons(totalPersons);
         saveLocationStatus.setText(Paths.get(".").resolve(saveLocation).toString());
-    }
-
-    public StatusBarFooter(Path stubSaveLocation, int initialTotalPersons) {
-        super(stubSaveLocation, initialTotalPersons);
+        registerAsAnEventHandler(this);
     }
 
     private void setTotalPersons(int totalPersons) {
         Platform.runLater(() -> totalPersonsStatus.setText(String.format(TOTAL_PERSONS_STATUS, totalPersons)));
-    }
-
-    private void setSyncStatus(String status) {
-        Platform.runLater(() -> syncStatus.setText(status));
     }
 
     /**
@@ -100,10 +96,8 @@ public class StatusBarFooter extends UiPart<Region> {
         long now = clock.millis();
         String lastUpdated = new Date(now).toString();
         logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));
-        setSyncStatus(String.format(SYNC_STATUS_UPDATED, lastUpdated));
+        updateSyncStatus();
         setTotalPersons(abce.data.getPersonList().size());
     }
-
-
 
 }

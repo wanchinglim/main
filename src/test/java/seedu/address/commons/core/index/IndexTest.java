@@ -11,7 +11,7 @@ public class IndexTest {
     @Test
     public void createOneBasedIndex() {
         // invalid index
-        assertCreateOneBasedFailure(0);
+        assertCreateOneBasedFailure(-1);
 
         // check equality using the same base
         assertEquals(1, Index.fromOneBased(1).getOneBased());
@@ -25,7 +25,7 @@ public class IndexTest {
     @Test
     public void createZeroBasedIndex() {
         // invalid index
-        assertCreateZeroBasedFailure(-1);
+        assertCreateZeroBasedFailure(-2);
 
         // check equality using the same base
         assertEquals(0, Index.fromZeroBased(0).getZeroBased());

@@ -38,8 +38,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code oneBasedIndex} into an {@code Index} and returns the next Index number. Leading and trailing whitespaces will be
-     * trimmed.
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns the next Index number.
+     * Leading and trailing whitespaces will be trimmed.
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseNextIndex(String oneBasedIndex) throws ParseException {
@@ -47,13 +47,13 @@ public class ParserUtil {
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
-        NextCommand.getNextInteger(Integer.parseInt(trimmedIndex)+1);
-        return Index.fromOneBased(Integer.parseInt(trimmedIndex)+1);
+        NextCommand.getNextInteger(Integer.parseInt(trimmedIndex) + 1);
+        return Index.fromOneBased(Integer.parseInt(trimmedIndex) + 1);
     }
 
     /**
-     * Parses {@code oneBasedIndex} into an {@code Index} and returns the previous Index number. Leading and trailing whitespaces will be
-     * trimmed.
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns the previous Index number.
+     * Leading and trailing whitespaces will be trimmed.
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parsePreviousIndex(String oneBasedIndex) throws ParseException {
@@ -61,8 +61,8 @@ public class ParserUtil {
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
-        PreviousCommand.getPreviousInteger(Integer.parseInt(trimmedIndex)-1);
-        return Index.fromOneBased(Integer.parseInt(trimmedIndex)-1);
+        PreviousCommand.getPreviousInteger(Integer.parseInt(trimmedIndex) - 1);
+        return Index.fromOneBased(Integer.parseInt(trimmedIndex) - 1);
     }
 
     /**

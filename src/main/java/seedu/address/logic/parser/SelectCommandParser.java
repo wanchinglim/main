@@ -21,10 +21,10 @@ public class SelectCommandParser implements Parser<SelectCommand> {
     public SelectCommand parse(String args) throws ParseException {
         try {
             Index index = ParserUtil.parseIndex(args);
-            Index nextIndex=ParserUtil.parseNextIndex(args);
-            Index previousIndex=ParserUtil.parsePreviousIndex(args);
-            NextCommand.getNextIndex(nextIndex,0);
-            PreviousCommand.getPreviousIndex(previousIndex,0);
+            Index nextIndex = ParserUtil.parseNextIndex(args);
+            Index previousIndex = ParserUtil.parsePreviousIndex(args);
+            NextCommand.getNextIndex(nextIndex, 0);
+            PreviousCommand.getPreviousIndex(previousIndex, 0);
             return new SelectCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(
