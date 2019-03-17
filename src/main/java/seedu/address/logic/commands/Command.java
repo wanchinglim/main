@@ -9,6 +9,8 @@ import seedu.address.model.Model;
  */
 public abstract class Command {
 
+    /** Offset required to convert between 1-indexing and 0-indexing.  */
+
     /**
      * Executes the command and returns the result message.
      *
@@ -18,5 +20,11 @@ public abstract class Command {
      * @throws CommandException If an error occurs during command execution.
      */
     public abstract CommandResult execute(Model model, CommandHistory history) throws CommandException;
+
+    /**
+     * Extracts the the target person in the last shown list from the given arguments.
+     *
+     * @throws IndexOutOfBoundsException if the target index is out of bounds of the last viewed listing
+     */
 
 }

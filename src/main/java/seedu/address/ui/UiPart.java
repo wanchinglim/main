@@ -4,9 +4,11 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Path;
 
 import javafx.fxml.FXMLLoader;
 import seedu.address.MainApp;
+import seedu.address.commons.core.EventsCenter;
 
 /**
  * Represents a distinct part of the UI. e.g. Windows, dialogs, panels, status bars, etc.
@@ -51,11 +53,23 @@ public abstract class UiPart<T> {
         this(getFxmlFileUrl(fxmlFileName), root);
     }
 
+    public UiPart(Comparable<Path> stubSaveLocation, int initialTotalSubjects) {
+
+    }
+
     /**
      * Returns the root object of the scene graph of this UiPart.
      */
     public T getRoot() {
         return fxmlLoader.getRoot();
+    }
+
+    /**
+     * Registers the object as an event handler at the {@link EventsCenter}
+     * @param handler usually {@code this}
+     */
+    protected void registerAsAnEventHandler(Object handler) {
+        EventsCenter.getInstance().registerHandler(handler);
     }
 
     /**

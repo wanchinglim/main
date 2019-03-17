@@ -11,18 +11,22 @@ public class StatusBarFooterHandle extends NodeHandle<Node> {
 
     private static final String SYNC_STATUS_ID = "#syncStatus";
     private static final String SAVE_LOCATION_STATUS_ID = "#saveLocationStatus";
+    private static final String TOTAL_SUBJECTS_STATUS_ID = "#totalSubjectsStatus";
 
     private final Labeled syncStatusNode;
+    private final Labeled totalSubjectsStatusNode;
     private final Labeled saveLocationNode;
 
     private String lastRememberedSyncStatus;
     private String lastRememberedSaveLocation;
+    private String lastRememberedTotalSubjectsStatus;
 
     public StatusBarFooterHandle(Node statusBarFooterNode) {
         super(statusBarFooterNode);
 
         syncStatusNode = getChildNode(SYNC_STATUS_ID);
         saveLocationNode = getChildNode(SAVE_LOCATION_STATUS_ID);
+        totalSubjectsStatusNode = getChildNode(TOTAL_SUBJECTS_STATUS_ID);
     }
 
     /**
@@ -38,6 +42,14 @@ public class StatusBarFooterHandle extends NodeHandle<Node> {
     public String getSaveLocation() {
         return saveLocationNode.getText();
     }
+
+    /**
+     * Returns the text of the 'total subjects' portion of the status bar.
+     */
+    public String getTotalSubjectsStatus() {
+        return totalSubjectsStatusNode.getText();
+    }
+
 
     /**
      * Remembers the content of the sync status portion of the status bar.
@@ -68,4 +80,20 @@ public class StatusBarFooterHandle extends NodeHandle<Node> {
     public boolean isSaveLocationChanged() {
         return !lastRememberedSaveLocation.equals(getSaveLocation());
     }
+
+    /**
+     * Remembers the content of the 'total subjects' portion of the status bar.
+     */
+    public void rememberTotalSubjectsStatus() {
+        lastRememberedTotalSubjectsStatus = getTotalSubjectsStatus();
+    }
+
+    /**
+     * Returns true if the current content of the 'total subjects' is different from the value remembered by the most
+     * recent {@code rememberTotalSubjectsStatus()} call.
+     */
+    public boolean isTotalSubjectsStatusChanged() {
+        return !lastRememberedTotalSubjectsStatus.equals(getTotalSubjectsStatus());
+    }
+
 }
