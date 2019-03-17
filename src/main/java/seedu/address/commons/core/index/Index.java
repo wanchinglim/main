@@ -11,12 +11,12 @@ package seedu.address.commons.core.index;
 public class Index {
     private int zeroBasedIndex;
 
-    /**
+    /*
      * Index can only be created by calling {@link Index#fromZeroBased(int)} or
      * {@link Index#fromOneBased(int)}.
      */
     private Index(int zeroBasedIndex) {
-        if (zeroBasedIndex < 0) {
+        if (zeroBasedIndex < -1) {
             throw new IndexOutOfBoundsException();
         }
 
