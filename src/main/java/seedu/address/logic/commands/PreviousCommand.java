@@ -8,7 +8,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.subject.Subject;
 
 
 
@@ -57,12 +57,12 @@ public class PreviousCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        List<Person> filteredPersonList = model.getFilteredPersonList();
+        List<Subject> filteredSubjectList = model.getFilteredSubjectList();
 
         if (previousInteger <= 0) {
             throw new CommandException(MESSAGE_FIRST_FLASHCARD);
         }
-        model.setSelectedPerson(filteredPersonList.get(previousIndex.getZeroBased()));
+        model.setSelectedSubject(filteredSubjectList.get(previousIndex.getZeroBased()));
         return new CommandResult(String.format(MESSAGE_SUCCESS, previousIndex.getOneBased()));
 
     }

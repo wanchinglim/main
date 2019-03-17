@@ -8,7 +8,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.subject.Subject;
 
 /**
  * Displays next person in the address book to the user.
@@ -53,13 +53,13 @@ public class NextCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        List<Person> filteredPersonList = model.getFilteredPersonList();
+        List<Subject> filteredSubjectList = model.getFilteredSubjectList();
 
-        if (nextInteger >= filteredPersonList.size() + 1) {
+        if (nextInteger >= filteredSubjectList.size() + 1) {
             throw new CommandException(MESSAGE_LAST_FLASHCARD);
         }
         PreviousCommand.setPreviousInteger(nextInteger, flashCardBegin);
-        model.setSelectedPerson(filteredPersonList.get(nextIndex.getZeroBased()));
+        model.setSelectedSubject(filteredSubjectList.get(nextIndex.getZeroBased()));
         return new CommandResult(String.format(MESSAGE_SUCCESS, nextIndex.getOneBased()));
 
     }
