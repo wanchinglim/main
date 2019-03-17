@@ -11,22 +11,22 @@ public class StatusBarFooterHandle extends NodeHandle<Node> {
 
     private static final String SYNC_STATUS_ID = "#syncStatus";
     private static final String SAVE_LOCATION_STATUS_ID = "#saveLocationStatus";
-    private static final String TOTAL_PERSONS_STATUS_ID = "#totalPersonsStatus";
+    private static final String TOTAL_SUBJECTS_STATUS_ID = "#totalSubjectsStatus";
 
     private final Labeled syncStatusNode;
-    private final Labeled totalPersonsStatusNode;
+    private final Labeled totalSubjectsStatusNode;
     private final Labeled saveLocationNode;
 
     private String lastRememberedSyncStatus;
     private String lastRememberedSaveLocation;
-    private String lastRememberedTotalPersonsStatus;
+    private String lastRememberedTotalSubjectsStatus;
 
     public StatusBarFooterHandle(Node statusBarFooterNode) {
         super(statusBarFooterNode);
 
         syncStatusNode = getChildNode(SYNC_STATUS_ID);
         saveLocationNode = getChildNode(SAVE_LOCATION_STATUS_ID);
-        totalPersonsStatusNode = getChildNode(TOTAL_PERSONS_STATUS_ID);
+        totalSubjectsStatusNode = getChildNode(TOTAL_SUBJECTS_STATUS_ID);
     }
 
     /**
@@ -44,10 +44,10 @@ public class StatusBarFooterHandle extends NodeHandle<Node> {
     }
 
     /**
-     * Returns the text of the 'total persons' portion of the status bar.
+     * Returns the text of the 'total subjects' portion of the status bar.
      */
-    public String getTotalPersonsStatus() {
-        return totalPersonsStatusNode.getText();
+    public String getTotalSubjectsStatus() {
+        return totalSubjectsStatusNode.getText();
     }
 
 
@@ -82,18 +82,18 @@ public class StatusBarFooterHandle extends NodeHandle<Node> {
     }
 
     /**
-     * Remembers the content of the 'total persons' portion of the status bar.
+     * Remembers the content of the 'total subjects' portion of the status bar.
      */
-    public void rememberTotalPersonsStatus() {
-        lastRememberedTotalPersonsStatus = getTotalPersonsStatus();
+    public void rememberTotalSubjectsStatus() {
+        lastRememberedTotalSubjectsStatus = getTotalSubjectsStatus();
     }
 
     /**
-     * Returns true if the current content of the 'total persons' is different from the value remembered by the most
-     * recent {@code rememberTotalPersonsStatus()} call.
+     * Returns true if the current content of the 'total subjects' is different from the value remembered by the most
+     * recent {@code rememberTotalSubjectsStatus()} call.
      */
-    public boolean isTotalPersonsStatusChanged() {
-        return !lastRememberedTotalPersonsStatus.equals(getTotalPersonsStatus());
+    public boolean isTotalSubjectsStatusChanged() {
+        return !lastRememberedTotalSubjectsStatus.equals(getTotalSubjectsStatus());
     }
 
 }

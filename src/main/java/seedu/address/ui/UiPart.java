@@ -52,7 +52,7 @@ public abstract class UiPart<T> {
         this(getFxmlFileUrl(fxmlFileName), root);
     }
 
-    public UiPart(Comparable<Path> stubSaveLocation, int initialTotalPersons) {
+    public UiPart(Comparable<Path> stubSaveLocation, int initialTotalSubjects) {
 
     }
 
