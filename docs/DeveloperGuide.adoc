@@ -266,35 +266,32 @@ For each subject the user has, he/she can create flash cards specifically for th
 
 The user can determine how long the flash cards will exist in the database “FlashCards”.
 The following operations are available:
-
 * `FlashCards#clearall()` -- Clears the entire database.
 * `FlashCards#clear()` -- Clears a specific subject when in "Subject" Knowledge Testing Mode.
-* `FlashCards#deadline()` or `FlashCards#exam() -- Adds a deadline/exam for the specified subject.
 
-For easier modes of implementation, the user can also choose to set a date whereby the flash cards would be unavailable thereafter. To activate this function, the user can type in `deadline` or `exam`, followed by the index and the date. For example, in the event where the user knows the specific exam date for the selected subject, he/she can set the exam date under the “Subject Details” and the flash cards will be available for another month after the exam before the auto deletion function is activated.
 
-These operations are exposed in the `Logic` interface as `Logic#clearall()`, `Logic#clear()`, `Logic#deadline()` and `Logic#exam()` respectively.
+For easier modes of implementation, the user can also choose to set a date whereby the flash cards would be unavailable thereafter. For example, in the event where the user knows the specific exam date for the selected subject, he/she can set the exam date under the “Subject Details” and the flash cards will be available for another month after the exam before the auto deletion function is activated.
 
-Given below is an example usage scenario and how the deadline/exam mechanism behaves at each step.
+These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
 
-Step 1. The user launches the application for the first time. The `VersionedFlashCards` will be initialized with the initial flash card state, and the `currentStatePointer` pointing to that single flash card state.
+Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
 image::UndoRedoStartingStateListDiagram.png[width="800"]
 
-Step 2. The user executes `list` command to list all the available subjects in the FlashCards. The `list` command calls `Model#commitAddressBook()`, causing the modified state of the flash card after the `list` command executes to be saved in the `flashCardStateList`, and the `currentStatePointer` is shifted to the newly inserted flash card state.
+Step 2. The user executes `delete 5` command to delete the 5th subject in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
 
-Step 3. The user executes `deadline 1 d/...` or `exam 1 d/...` to add a new deadline or exam date for the specified subject. The `deadline` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David ...` to add a new subject. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
 
 [NOTE]
 If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
 
-Step 4. The user now decides that the deadline/exam is over and do not wish to save the subject in the flash card. By executing the `clear` command, he can delete all the respective flash cards under the specified subject. The `clear` command will call `Logic#Clear()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous flash card state, and clear all the respective flash cards of the specified subject. 
-
-Step 5: Alternatively, the user can execute the `clearall` command which will delete all the flash cards in the FlashCards. The `clearall` command will call `Logic#Clearall()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous flash card state, and clear all the respective flash cards in FlashCards.
+Step 4. The user now decides that adding the subject was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 image::UndoRedoExecuteUndoStateListDiagram.png[width="800"]
 
@@ -324,23 +321,23 @@ image::UndoRedoActivityDiagram.png[width="650"]
 
 ==== Design Considerations
 
-===== Aspect: How deadline/exam executes
+===== Aspect: How undo & redo executes
 
-* **Alternative 1 (current choice):** Auto deletion of the flash cards.
-** Pros: Easy to implement and convenient for the user.
-** Cons: Need to have additional internal calendar for the auto deletion.
-* **Alternative 2:** Manual deletion of the flash cards.
-** Pros: Allow the user to have the choice of keeping the flash cards or removing it.
-** Cons: Might be too troublesome for some users.
+* **Alternative 1 (current choice):** Saves the entire address book.
+** Pros: Easy to implement.
+** Cons: May have performance issues in terms of memory usage.
+* **Alternative 2:** Individual command knows how to undo/redo by itself.
+** Pros: Will use less memory (e.g. for `delete`, just save the subject being deleted).
+** Cons: We must ensure that the implementation of each individual command are correct.
 
-===== Aspect: Data structure to support the deadline/exam commands
+===== Aspect: Data structure to support the undo/redo commands
 
-* **Alternative 1 (current choice):** Implement an internal calendar to calculate the number of days left.
-** Pros: Auto deletion of flash cards.
-** Cons: Need to pay extra caution for Leap years.
-* **Alternative 2:** Use the `clear` or `clearall` functions.
-** Pros: Give the user the choice to keep or delete.
-** Cons: Troublesome for users.
+* **Alternative 1 (current choice):** Use a list to store the history of address book states.
+** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
+** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedAddressBook`.
+* **Alternative 2:** Use `HistoryManager` for undo/redo
+** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
+** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
 // tag::dataencryption[]
