@@ -6,10 +6,10 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEADLINE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.logic.commands.CommandTestUtil.showFlashcardAtIndex;
+import static seedu.address.testutil.TypicalFlashcards.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_FLASHCARD;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_FLASHCARD;
 
 import org.junit.Test;
 
@@ -20,9 +20,9 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Deadline;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.flashcard.Deadline;
+import seedu.address.model.flashcard.Flashcard;
+import seedu.address.testutil.FlashcardBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for DeadlineCommand.
@@ -37,16 +37,16 @@ public class DeadlineCommandTest {
 
     @Test
     public void execute_addDeadlineUnfilteredList_success() {
-        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(firstPerson).withDeadline(DEADLINE_STUB).build();
+        Flashcard firstFlashcard = model.getFilteredFlashcardList().get(INDEX_FIRST_FLASHCARD.getZeroBased());
+        Flashcard editedFlashcard = new FlashcardBuilder(firstFlashcard).withDeadline(DEADLINE_STUB).build();
 
-        DeadlineCommand deadlineCommand = new DeadlineCommand(INDEX_FIRST_PERSON,
-                new Deadline(editedPerson.getDeadline().value));
+        DeadlineCommand deadlineCommand = new DeadlineCommand(INDEX_FIRST_FLASHCARD,
+                new Deadline(editedFlashcard.getDeadline().value));
 
-        String expectedMessage = String.format(DeadlineCommand.MESSAGE_ADD_DEADLINE_SUCCESS, editedPerson);
+        String expectedMessage = String.format(DeadlineCommand.MESSAGE_ADD_DEADLINE_SUCCESS, editedFlashcard);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(firstPerson, editedPerson);
+        expectedModel.setFlashcard(firstFlashcard, editedFlashcard);
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(deadlineCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -55,16 +55,16 @@ public class DeadlineCommandTest {
 
     @Test
     public void execute_deleteDeadlineUnfilteredList_success() {
-        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(firstPerson).withDeadline("").build();
+        Flashcard firstFlashcard = model.getFilteredFlashcardList().get(INDEX_FIRST_FLASHCARD.getZeroBased());
+        Flashcard editedFlashcard = new FlashcardBuilder(firstFlashcard).withDeadline("").build();
 
-        DeadlineCommand deadlineCommand = new DeadlineCommand(INDEX_FIRST_PERSON,
-                new Deadline(editedPerson.getDeadline().toString()));
+        DeadlineCommand deadlineCommand = new DeadlineCommand(INDEX_FIRST_FLASHCARD,
+                new Deadline(editedFlashcard.getDeadline().toString()));
 
-        String expectedMessage = String.format(DeadlineCommand.MESSAGE_DELETE_DEADLINE_SUCCESS, editedPerson);
+        String expectedMessage = String.format(DeadlineCommand.MESSAGE_DELETE_DEADLINE_SUCCESS, editedFlashcard);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(firstPerson, editedPerson);
+        expectedModel.setFlashcard(firstFlashcard, editedFlashcard);
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(deadlineCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -73,30 +73,31 @@ public class DeadlineCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showFlashcardAtIndex(model, INDEX_FIRST_FLASHCARD);
 
-        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
-                .withDeadline(DEADLINE_STUB).build();
+        Flashcard firstFlashcard = model.getFilteredFlashcardList().get(INDEX_FIRST_FLASHCARD.getZeroBased());
+        Flashcard editedFlashcard = new FlashcardBuilder(model.getFilteredFlashcardList()
+                .get(INDEX_FIRST_FLASHCARD.getZeroBased())).withDeadline(DEADLINE_STUB).build();
 
-        DeadlineCommand deadlineCommand = new DeadlineCommand(INDEX_FIRST_PERSON,
-                new Deadline(editedPerson.getDeadline().value));
+        DeadlineCommand deadlineCommand = new DeadlineCommand(INDEX_FIRST_FLASHCARD,
+                new Deadline(editedFlashcard.getDeadline().value));
 
-        String expectedMessage = String.format(DeadlineCommand.MESSAGE_ADD_DEADLINE_SUCCESS, editedPerson);
+        String expectedMessage = String.format(DeadlineCommand.MESSAGE_ADD_DEADLINE_SUCCESS, editedFlashcard);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(firstPerson, editedPerson);
+        expectedModel.setFlashcard(firstFlashcard, editedFlashcard);
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(deadlineCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_invalidPersonIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+    public void execute_invalidFlashcardIndexUnfilteredList_failure() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredFlashcardList().size() + 1);
         DeadlineCommand deadlineCommand = new DeadlineCommand(outOfBoundIndex, VALID_DEADLINE_BOB);
 
-        assertCommandFailure(deadlineCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deadlineCommand, model, commandHistory,
+                Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
     }
 
     /**
@@ -105,34 +106,35 @@ public class DeadlineCommandTest {
      */
 
     @Test
-    public void execute_invalidPersonIndexFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+    public void execute_invalidFlashcardIndexFilteredList_failure() {
+        showFlashcardAtIndex(model, INDEX_FIRST_FLASHCARD);
+        Index outOfBoundIndex = INDEX_SECOND_FLASHCARD;
         //ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getFlashcardList().size());
 
         DeadlineCommand deadlineCommand = new DeadlineCommand(outOfBoundIndex, VALID_DEADLINE_BOB);
 
-        assertCommandFailure(deadlineCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deadlineCommand, model, commandHistory,
+                Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
     }
 
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
-        Person personToModify = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person modifiedPerson = new PersonBuilder(personToModify).withDeadline(DEADLINE_STUB).build();
-        DeadlineCommand deadlineCommand = new DeadlineCommand(INDEX_FIRST_PERSON, new Deadline(DEADLINE_STUB));
+        Flashcard flashcardToModify = model.getFilteredFlashcardList().get(INDEX_FIRST_FLASHCARD.getZeroBased());
+        Flashcard modifiedFlashcard = new FlashcardBuilder(flashcardToModify).withDeadline(DEADLINE_STUB).build();
+        DeadlineCommand deadlineCommand = new DeadlineCommand(INDEX_FIRST_FLASHCARD, new Deadline(DEADLINE_STUB));
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.setPerson(personToModify, modifiedPerson);
+        expectedModel.setFlashcard(flashcardToModify, modifiedFlashcard);
         expectedModel.commitAddressBook();
 
-        //deadline -> first person deadline changed
+        //deadline -> first flashcard deadline changed
         deadlineCommand.execute(model, commandHistory);
 
-        //undo -> reverts address book back to previous state and filtered person list to show all persons
+        //undo -> reverts address book back to previous state and filtered flashcard list to show all subjects
         expectedModel.undoAddressBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
-        //redo -> same first person modified again
+        //redo -> same first flashcard modified again
         expectedModel.redoAddressBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
 
@@ -140,11 +142,12 @@ public class DeadlineCommandTest {
 
     @Test
     public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredFlashcardList().size() + 1);
         DeadlineCommand deadlineCommand = new DeadlineCommand(outOfBoundIndex, new Deadline(""));
 
         //execution failed -> address book state not added into model
-        assertCommandFailure(deadlineCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deadlineCommand, model, commandHistory,
+                Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
 
         //single address book state in model -> undoCommand and redoCommand fail
         assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
@@ -152,32 +155,32 @@ public class DeadlineCommandTest {
     }
 
     /**
-     * 1. Modifies {@code Person#deadline} from a filtered list.
+     * 1. Modifies {@code Flashcard#deadline} from a filtered list.
      * 2. Undo the modification.
-     * The unfiltered lsit should be shown now. Verify that the index of the previously modified person in the
+     * The unfiltered lsit should be shown now. Verify that the index of the previously modified flashcard in the
      * unfiltered list is different from the index at the filtered list.
-     * 4. Redo the modification. This ensures {@code RedoCommand} modifies the person object regardless of indexing.
+     * 4. Redo the modification. This ensures {@code RedoCommand} modifies the flashcard object regardless of indexing.
      */
 
     @Test
-    public void executeUndoRedo_validIndexFilteredList_samePersonDeleted() throws Exception {
-        DeadlineCommand deadlineCommand = new DeadlineCommand(INDEX_FIRST_PERSON, new Deadline(DEADLINE_STUB));
+    public void executeUndoRedo_validIndexFilteredList_sameFlashcardDeleted() throws Exception {
+        DeadlineCommand deadlineCommand = new DeadlineCommand(INDEX_FIRST_FLASHCARD, new Deadline(DEADLINE_STUB));
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
-        showPersonAtIndex(model, INDEX_SECOND_PERSON);
-        Person personToModify = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person modifiedPerson = new PersonBuilder(personToModify).withDeadline(DEADLINE_STUB).build();
-        expectedModel.setPerson(personToModify, modifiedPerson);
+        showFlashcardAtIndex(model, INDEX_SECOND_FLASHCARD);
+        Flashcard flashcardToModify = model.getFilteredFlashcardList().get(INDEX_FIRST_FLASHCARD.getZeroBased());
+        Flashcard modifiedFlashcard = new FlashcardBuilder(flashcardToModify).withDeadline(DEADLINE_STUB).build();
+        expectedModel.setFlashcard(flashcardToModify, modifiedFlashcard);
         expectedModel.commitAddressBook();
 
-        //deadline -> modifies second person in unfiltered person list/first person in filtered person list
+        //deadline -> modifies second flashcard in unfiltered flashcard list/first flashcard in filtered flashcard list
         deadlineCommand.execute(model, commandHistory);
 
-        //undo -> reverts address book back to previous state and filtered person list to show all persons
+        //undo -> reverts address book back to previous state and filtered flashcard list to show all subjects
         expectedModel.undoAddressBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
-        //redo -> modifies same second person in unfiltered person list
+        //redo -> modifies same second flashcard in unfiltered flashcard list
         expectedModel.redoAddressBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
 

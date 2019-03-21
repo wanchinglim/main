@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.logic.Logic;
 import seedu.address.model.ReadOnlyAddressBook;
 
 
@@ -24,11 +25,10 @@ import seedu.address.model.ReadOnlyAddressBook;
 public class StatusBarFooter extends UiPart<Region> {
 
     public static final String SYNC_STATUS_INITIAL = "Not updated yet in this session";
-    public static final String TOTAL_PERSONS_STATUS = "%d person(s) total";
+    public static final String TOTAL_FLASHCARDS_STATUS = "%d flashcard(s) total";
     public static final String SYNC_STATUS_UPDATED = "Last Updated: %s";
 
     private static final Logger logger = LogsCenter.getLogger(StatusBarFooter.class);
-
 
     /**
      * Used to generate time stamps.
@@ -38,9 +38,12 @@ public class StatusBarFooter extends UiPart<Region> {
      * will require passing down the clock reference all the way from MainApp,
      * but it should be easier once we have factories/DI frameworks.
      */
-    private static Clock clock = Clock.systemDefaultZone();
 
     private static final String FXML = "StatusBarFooter.fxml";
+
+    private static Clock clock = Clock.systemDefaultZone();
+
+    private Logic logic;
 
     @FXML
     private Label syncStatus;
@@ -48,28 +51,25 @@ public class StatusBarFooter extends UiPart<Region> {
     private Label saveLocationStatus;
 
     @FXML
-    private Label totalPersonsStatus;
+    private Label totalFlashcardsStatus;
 
 
 
-    public StatusBarFooter(Path saveLocation, ReadOnlyAddressBook addressBook, int totalPersons) {
+    public StatusBarFooter(Path saveLocation, ReadOnlyAddressBook addressBook, int totalFlashcards) {
         super(FXML);
         addressBook.addListener(observable -> updateSyncStatus());
         syncStatus.setText(SYNC_STATUS_INITIAL);
-        setTotalPersons(totalPersons);
+        setTotalFlashcards(totalFlashcards);
         saveLocationStatus.setText(Paths.get(".").resolve(saveLocation).toString());
+        registerAsAnEventHandler(this);
     }
 
-    public StatusBarFooter(Path stubSaveLocation, int initialTotalPersons) {
-        super(stubSaveLocation, initialTotalPersons);
+    public StatusBarFooter(Path stubSaveLocation, int initialTotalFlashcards) {
+        super(stubSaveLocation, initialTotalFlashcards);
     }
 
-    private void setTotalPersons(int totalPersons) {
-        Platform.runLater(() -> totalPersonsStatus.setText(String.format(TOTAL_PERSONS_STATUS, totalPersons)));
-    }
-
-    private void setSyncStatus(String status) {
-        Platform.runLater(() -> syncStatus.setText(status));
+    private void setTotalFlashcards(int totalFlashcards) {
+        Platform.runLater(() -> totalFlashcardsStatus.setText(String.format(TOTAL_FLASHCARDS_STATUS, totalFlashcards)));
     }
 
     /**
@@ -100,10 +100,8 @@ public class StatusBarFooter extends UiPart<Region> {
         long now = clock.millis();
         String lastUpdated = new Date(now).toString();
         logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));
-        setSyncStatus(String.format(SYNC_STATUS_UPDATED, lastUpdated));
-        setTotalPersons(abce.data.getPersonList().size());
+        updateSyncStatus();
+        setTotalFlashcards(abce.data.getFlashcardList().size());
     }
-
-
 
 }

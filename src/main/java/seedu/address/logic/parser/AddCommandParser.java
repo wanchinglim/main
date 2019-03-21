@@ -12,12 +12,12 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Deadline;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.flashcard.Address;
+import seedu.address.model.flashcard.Deadline;
+import seedu.address.model.flashcard.Email;
+import seedu.address.model.flashcard.Flashcard;
+import seedu.address.model.flashcard.Name;
+import seedu.address.model.flashcard.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -46,9 +46,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Deadline deadline = new Deadline(""); //add command does not allow adding deadlines straightaway
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, deadline, tagList);
+        Flashcard flashcard = new Flashcard(name, phone, email, address, deadline, tagList);
 
-        return new AddCommand(person);
+        return new AddCommand(flashcard);
     }
 
     /**

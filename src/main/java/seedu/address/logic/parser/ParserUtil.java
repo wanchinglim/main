@@ -8,11 +8,13 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.NextCommand;
+import seedu.address.logic.commands.PreviousCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.flashcard.Address;
+import seedu.address.model.flashcard.Email;
+import seedu.address.model.flashcard.Name;
+import seedu.address.model.flashcard.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -33,6 +35,34 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns the next Index number.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    public static Index parseNextIndex(String oneBasedIndex) throws ParseException {
+        String trimmedIndex = oneBasedIndex.trim();
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        NextCommand.getNextInteger(Integer.parseInt(trimmedIndex) + 1);
+        return Index.fromOneBased(Integer.parseInt(trimmedIndex) + 1);
+    }
+
+    /**
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns the previous Index number.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    public static Index parsePreviousIndex(String oneBasedIndex) throws ParseException {
+        String trimmedIndex = oneBasedIndex.trim();
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        PreviousCommand.getPreviousInteger(Integer.parseInt(trimmedIndex) - 1);
+        return Index.fromOneBased(Integer.parseInt(trimmedIndex) - 1);
     }
 
     /**

@@ -6,14 +6,15 @@ import java.util.function.Predicate;
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.Person;
+import seedu.address.model.flashcard.Flashcard;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Flashcard> PREDICATE_SHOW_ALL_FLASHCARDS = unused -> true;
+
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -54,37 +55,38 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a flashcard with the same identity as {@code flashcard} exists in the address book.
      */
-    boolean hasPerson(Person person);
+    boolean hasFlashcard(Flashcard flashcard);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given flashcard.
+     * The flashcard must exist in the address book.
      */
-    void deletePerson(Person target);
+    void deleteFlashcard(Flashcard target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given flashcard.
+     * {@code flashcard} must not already exist in the address book.
      */
-    void addPerson(Person person);
+    void addFlashcard(Flashcard flashcard);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
+     * Replaces the given flashcard {@code target} with {@code editedFlashcard}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The flashcard identity of {@code editedFlashcard} must not
+     * be the same as another existing flashcard in the address book.
      */
-    void setPerson(Person target, Person editedPerson);
+    void setFlashcard(Flashcard target, Flashcard editedFlashcard);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered flashcard list */
+    ObservableList<Flashcard> getFilteredFlashcardList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered flashcard list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredFlashcardList(Predicate<Flashcard> predicate);
 
     /**
      * Returns true if the model has previous address book states to restore.
@@ -112,19 +114,19 @@ public interface Model {
     void commitAddressBook();
 
     /**
-     * Selected person in the filtered person list.
-     * null if no person is selected.
+     * Selected flashcard in the filtered flashcard list.
+     * null if no flashcard is selected.
      */
-    ReadOnlyProperty<Person> selectedPersonProperty();
+    ReadOnlyProperty<Flashcard> selectedFlashcardProperty();
 
     /**
-     * Returns the selected person in the filtered person list.
-     * null if no person is selected.
+     * Returns the selected flashcard in the filtered flashcard list.
+     * null if no flashcard is selected.
      */
-    Person getSelectedPerson();
+    Flashcard getSelectedFlashcard();
 
     /**
-     * Sets the selected person in the filtered person list.
+     * Sets the selected flashcard in the filtered flashcard list.
      */
-    void setSelectedPerson(Person person);
+    void setSelectedFlashcard(Flashcard flashcard);
 }
