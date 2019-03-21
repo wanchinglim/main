@@ -10,20 +10,20 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.subject.Address;
-import seedu.address.model.subject.Deadline;
-import seedu.address.model.subject.Email;
-import seedu.address.model.subject.Name;
-import seedu.address.model.subject.Phone;
-import seedu.address.model.subject.Subject;
+import seedu.address.model.flashcard.Address;
+import seedu.address.model.flashcard.Deadline;
+import seedu.address.model.flashcard.Email;
+import seedu.address.model.flashcard.Flashcard;
+import seedu.address.model.flashcard.Name;
+import seedu.address.model.flashcard.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
- * Jackson-friendly version of {@link Subject}.
+ * Jackson-friendly version of {@link Flashcard}.
  */
-class JsonAdaptedSubject {
+class JsonAdaptedFlashcard {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Subject's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Flashcard's %s field is missing!";
 
     private final String name;
     private final String phone;
@@ -33,13 +33,13 @@ class JsonAdaptedSubject {
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedSubject} with the given subject details.
+     * Constructs a {@code JsonAdaptedFlashcard} with the given flashcard details.
      */
     @JsonCreator
-    public JsonAdaptedSubject(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                              @JsonProperty("email") String email, @JsonProperty("address") String address,
-                              @JsonProperty("deadline") String deadline,
-                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+    public JsonAdaptedFlashcard(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+                                @JsonProperty("email") String email, @JsonProperty("address") String address,
+                                @JsonProperty("deadline") String deadline,
+                                @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -51,9 +51,9 @@ class JsonAdaptedSubject {
     }
 
     /**
-     * Converts a given {@code Subject} into this class for Jackson use.
+     * Converts a given {@code Flashcard} into this class for Jackson use.
      */
-    public JsonAdaptedSubject(Subject source) {
+    public JsonAdaptedFlashcard(Flashcard source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
@@ -65,14 +65,14 @@ class JsonAdaptedSubject {
     }
 
     /**
-     * Converts this Jackson-friendly adapted subject object into the model's {@code Subject} object.
+     * Converts this Jackson-friendly adapted flashcard object into the model's {@code Flashcard} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted subject.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted flashcard.
      */
-    public Subject toModelType() throws IllegalValueException {
-        final List<Tag> subjectTags = new ArrayList<>();
+    public Flashcard toModelType() throws IllegalValueException {
+        final List<Tag> flashcardTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
-            subjectTags.add(tag.toModelType());
+            flashcardTags.add(tag.toModelType());
         }
 
         if (name == null) {
@@ -115,8 +115,8 @@ class JsonAdaptedSubject {
         final Deadline modelDeadline = new Deadline(deadline);
 
 
-        final Set<Tag> modelTags = new HashSet<>(subjectTags);
-        return new Subject(modelName, modelPhone, modelEmail, modelAddress, modelDeadline, modelTags);
+        final Set<Tag> modelTags = new HashSet<>(flashcardTags);
+        return new Flashcard(modelName, modelPhone, modelEmail, modelAddress, modelDeadline, modelTags);
     }
 
 }
