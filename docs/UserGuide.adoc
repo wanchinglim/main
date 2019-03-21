@@ -107,6 +107,7 @@ Subject tags will be colour-coded. Same subject tags will have the same colour.
 
 === Editing a flashcard : `edit` `e`
 
+
 Edits the content of a flashcard. +
 Enter the subject that the flashcard belongs to.
 Format: `edit INDEX <subject>`
@@ -174,7 +175,7 @@ Deletes the specified content of index 2.
 `d 1` +
 Deletes the specified content of index 1.
 
-=== Selecting a subject : `select`
+=== Selecting a flashcard : `select`
 
 Selects the flashcard identified by the index number used in the displayed list. +
 Format: `select INDEX`
@@ -335,7 +336,7 @@ e.g. `add t/Pythagoras Theorem c/a^2+b^2=c^2 d/21 March 2019 s/Math`
 * *Clear* : `clear` or `c`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3` or `d 3`
-* *Edit* : `edit INDEX <subject>` +
+* *Edit* : `edit INDEX <flashcard>` +
 e.g. `edit 2 definition` or
 e.g. `e 2 definition`
 * *Find* : `find <KEYWORD> [MORE_KEYWORDS]` +
