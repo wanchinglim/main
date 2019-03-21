@@ -19,7 +19,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.flashcard.Deadline;
 import seedu.address.model.flashcard.Flashcard;
-import seedu.address.model.flashcard.NameContainsKeywordsPredicate;
+import seedu.address.model.flashcard.TopicContainsKeywordsPredicate;
 import seedu.address.testutil.EditFlashcardDescriptorBuilder;
 
 /**
@@ -139,7 +139,7 @@ public class CommandTestUtil {
 
         Flashcard flashcard = model.getFilteredFlashcardList().get(targetIndex.getZeroBased());
         final String[] splitName = flashcard.getName().fullName.split("\\s+");
-        model.updateFilteredFlashcardList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredFlashcardList(new TopicContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredFlashcardList().size());
     }
