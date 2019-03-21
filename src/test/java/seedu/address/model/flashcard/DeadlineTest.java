@@ -1,4 +1,4 @@
-package seedu.address.model.subject;
+package seedu.address.model.flashcard;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -24,7 +24,7 @@ public class DeadlineTest {
         //null -> returns false
         assertFalse(deadline.equals(null));
 
-        //different subject -> returns false
+        //different flashcard -> returns false
         Deadline differentDeadline = new Deadline("31 December 2019");
         assertFalse(deadline.equals(differentDeadline));
     }

@@ -1,4 +1,4 @@
-package seedu.address.model.subject;
+package seedu.address.model.flashcard;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
