@@ -5,14 +5,14 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.subject.Subject;
+import seedu.address.model.flashcard.Flashcard;
 
 /**
- * An UI component that displays information of a {@code Subject}.
+ * An UI component that displays information of a {@code Flashcard}.
  */
-public class SubjectCard extends UiPart<Region> {
+public class FlashcardCard extends UiPart<Region> {
 
-    private static final String FXML = "SubjectListCard.fxml";
+    private static final String FXML = "FlashcardListCard.fxml";
     private static final String[] TAG_COLOURS =
         {"white", "black", "orange", "maroon", "pink", "green", "blue", "purple", "navy", "beige"};
 
@@ -24,7 +24,7 @@ public class SubjectCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Subject subject;
+    public final Flashcard flashcard;
 
     @FXML
     private HBox cardPane;
@@ -43,16 +43,16 @@ public class SubjectCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
-    public SubjectCard(Subject subject, int displayedIndex) {
+    public FlashcardCard(Flashcard flashcard, int displayedIndex) {
         super(FXML);
-        this.subject = subject;
+        this.flashcard = flashcard;
         id.setText(displayedIndex + ". ");
-        name.setText(subject.getName().fullName);
-        phone.setText(subject.getPhone().value);
-        address.setText(subject.getAddress().value);
-        email.setText(subject.getEmail().value);
-        deadline.setText(subject.getDeadline().value);
-        tagger(subject);
+        name.setText(flashcard.getName().fullName);
+        phone.setText(flashcard.getPhone().value);
+        address.setText(flashcard.getAddress().value);
+        email.setText(flashcard.getEmail().value);
+        deadline.setText(flashcard.getDeadline().value);
+        tagger(flashcard);
     }
 
     /**
@@ -63,9 +63,9 @@ public class SubjectCard extends UiPart<Region> {
     }
 
     /**
-     * Creates the tag labels for {@code subject}.
+     * Creates the tag labels for {@code flashcard}.
      */
-    private void tagger(Subject p) {
+    private void tagger(Flashcard p) {
         p.getTags().forEach(tagT -> {
             Label tagLabel = new Label(tagT.tagName);
             tagLabel.getStyleClass().add(getTagColourIndex(tagT.tagName));
@@ -81,13 +81,13 @@ public class SubjectCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof SubjectCard)) {
+        if (!(other instanceof FlashcardCard)) {
             return false;
         }
 
         // state check
-        SubjectCard card = (SubjectCard) other;
+        FlashcardCard card = (FlashcardCard) other;
         return id.getText().equals(card.id.getText())
-                && subject.equals(card.subject);
+                && flashcard.equals(card.flashcard);
     }
 }
