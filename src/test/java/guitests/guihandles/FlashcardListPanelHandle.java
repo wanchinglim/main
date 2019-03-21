@@ -6,38 +6,38 @@ import java.util.Set;
 
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
-import seedu.address.model.subject.Subject;
+import seedu.address.model.flashcard.Flashcard;
 
 /**
- * Provides a handle for {@code SubjectListPanel} containing the list of {@code SubjectCard}.
+ * Provides a handle for {@code FlashcardListPanel} containing the list of {@code FlashcardCard}.
  */
-public class SubjectListPanelHandle extends NodeHandle<ListView<Subject>> {
-    public static final String SUBJECT_LIST_VIEW_ID = "#subjectListView";
+public class FlashcardListPanelHandle extends NodeHandle<ListView<Flashcard>> {
+    public static final String FLASHCARD_LIST_VIEW_ID = "#flashcardListView";
 
     private static final String CARD_PANE_ID = "#cardPane";
 
-    private Optional<Subject> lastRememberedSelectedSubjectCard;
+    private Optional<Flashcard> lastRememberedSelectedFlashcardCard;
 
-    public SubjectListPanelHandle(ListView<Subject> subjectListPanelNode) {
-        super(subjectListPanelNode);
+    public FlashcardListPanelHandle(ListView<Flashcard> flashcardListPanelNode) {
+        super(flashcardListPanelNode);
     }
 
     /**
-     * Returns a handle to the selected {@code SubjectCardHandle}.
+     * Returns a handle to the selected {@code FlashcardCardHandle}.
      * A maximum of 1 item can be selected at any time.
      * @throws AssertionError if no card is selected, or more than 1 card is selected.
      * @throws IllegalStateException if the selected card is currently not in the scene graph.
      */
-    public SubjectCardHandle getHandleToSelectedCard() {
-        List<Subject> selectedSubjectList = getRootNode().getSelectionModel().getSelectedItems();
+    public FlashcardCardHandle getHandleToSelectedCard() {
+        List<Flashcard> selectedFlashcardList = getRootNode().getSelectionModel().getSelectedItems();
 
-        if (selectedSubjectList.size() != 1) {
-            throw new AssertionError("Subject list size expected 1.");
+        if (selectedFlashcardList.size() != 1) {
+            throw new AssertionError("Flashcard list size expected 1.");
         }
 
         return getAllCardNodes().stream()
-                .map(SubjectCardHandle::new)
-                .filter(handle -> handle.equals(selectedSubjectList.get(0)))
+                .map(FlashcardCardHandle::new)
+                .filter(handle -> handle.equals(selectedFlashcardList.get(0)))
                 .findFirst()
                 .orElseThrow(IllegalStateException::new);
     }
@@ -53,7 +53,7 @@ public class SubjectListPanelHandle extends NodeHandle<ListView<Subject>> {
      * Returns true if a card is currently selected.
      */
     public boolean isAnyCardSelected() {
-        List<Subject> selectedCardsList = getRootNode().getSelectionModel().getSelectedItems();
+        List<Flashcard> selectedCardsList = getRootNode().getSelectionModel().getSelectedItems();
 
         if (selectedCardsList.size() > 1) {
             throw new AssertionError("Card list size expected 0 or 1.");
@@ -63,15 +63,15 @@ public class SubjectListPanelHandle extends NodeHandle<ListView<Subject>> {
     }
 
     /**
-     * Navigates the listview to display {@code subject}.
+     * Navigates the listview to display {@code flashcard}.
      */
-    public void navigateToCard(Subject subject) {
-        if (!getRootNode().getItems().contains(subject)) {
-            throw new IllegalArgumentException("Subject does not exist.");
+    public void navigateToCard(Flashcard flashcard) {
+        if (!getRootNode().getItems().contains(flashcard)) {
+            throw new IllegalArgumentException("Flashcard does not exist.");
         }
 
         guiRobot.interact(() -> {
-            getRootNode().scrollTo(subject);
+            getRootNode().scrollTo(flashcard);
         });
         guiRobot.pauseForHuman();
     }
@@ -91,25 +91,25 @@ public class SubjectListPanelHandle extends NodeHandle<ListView<Subject>> {
     }
 
     /**
-     * Selects the {@code SubjectCard} at {@code index} in the list.
+     * Selects the {@code FlashcardCard} at {@code index} in the list.
      */
     public void select(int index) {
         getRootNode().getSelectionModel().select(index);
     }
 
     /**
-     * Returns the subject card handle of a subject associated with the {@code index} in the list.
+     * Returns the flashcard card handle of a flashcard associated with the {@code index} in the list.
      * @throws IllegalStateException if the selected card is currently not in the scene graph.
      */
-    public SubjectCardHandle getSubjectCardHandle(int index) {
+    public FlashcardCardHandle getFlashcardCardHandle(int index) {
         return getAllCardNodes().stream()
-                .map(SubjectCardHandle::new)
-                .filter(handle -> handle.equals(getSubject(index)))
+                .map(FlashcardCardHandle::new)
+                .filter(handle -> handle.equals(getFlashcard(index)))
                 .findFirst()
                 .orElseThrow(IllegalStateException::new);
     }
 
-    private Subject getSubject(int index) {
+    private Flashcard getFlashcard(int index) {
         return getRootNode().getItems().get(index);
     }
 
@@ -123,30 +123,30 @@ public class SubjectListPanelHandle extends NodeHandle<ListView<Subject>> {
     }
 
     /**
-     * Remembers the selected {@code SubjectCard} in the list.
+     * Remembers the selected {@code FlashcardCard} in the list.
      */
-    public void rememberSelectedSubjectCard() {
-        List<Subject> selectedItems = getRootNode().getSelectionModel().getSelectedItems();
+    public void rememberSelectedFlashcardCard() {
+        List<Flashcard> selectedItems = getRootNode().getSelectionModel().getSelectedItems();
 
         if (selectedItems.size() == 0) {
-            lastRememberedSelectedSubjectCard = Optional.empty();
+            lastRememberedSelectedFlashcardCard = Optional.empty();
         } else {
-            lastRememberedSelectedSubjectCard = Optional.of(selectedItems.get(0));
+            lastRememberedSelectedFlashcardCard = Optional.of(selectedItems.get(0));
         }
     }
 
     /**
-     * Returns true if the selected {@code SubjectCard} is different from the value remembered by the most recent
-     * {@code rememberSelectedSubjectCard()} call.
+     * Returns true if the selected {@code FlashcardCard} is different from the value remembered by the most recent
+     * {@code rememberSelectedFlashcardCard()} call.
      */
-    public boolean isSelectedSubjectCardChanged() {
-        List<Subject> selectedItems = getRootNode().getSelectionModel().getSelectedItems();
+    public boolean isSelectedFlashcardCardChanged() {
+        List<Flashcard> selectedItems = getRootNode().getSelectionModel().getSelectedItems();
 
         if (selectedItems.size() == 0) {
-            return lastRememberedSelectedSubjectCard.isPresent();
+            return lastRememberedSelectedFlashcardCard.isPresent();
         } else {
-            return !lastRememberedSelectedSubjectCard.isPresent()
-                    || !lastRememberedSelectedSubjectCard.get().equals(selectedItems.get(0));
+            return !lastRememberedSelectedFlashcardCard.isPresent()
+                    || !lastRememberedSelectedFlashcardCard.get().equals(selectedItems.get(0));
         }
     }
 

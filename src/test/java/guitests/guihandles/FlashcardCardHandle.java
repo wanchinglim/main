@@ -8,12 +8,12 @@ import com.google.common.collect.ImmutableMultiset;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
-import seedu.address.model.subject.Subject;
+import seedu.address.model.flashcard.Flashcard;
 
 /**
- * Provides a handle to a subject card in the subject list panel.
+ * Provides a handle to a flashcard card in the flashcard list panel.
  */
-public class SubjectCardHandle extends NodeHandle<Node> {
+public class FlashcardCardHandle extends NodeHandle<Node> {
     private static final String ID_FIELD_ID = "#id";
     private static final String NAME_FIELD_ID = "#name";
     private static final String ADDRESS_FIELD_ID = "#address";
@@ -30,7 +30,7 @@ public class SubjectCardHandle extends NodeHandle<Node> {
     private final Label deadlineLabel;
     private final List<Label> tagLabels;
 
-    public SubjectCardHandle(Node cardNode) {
+    public FlashcardCardHandle(Node cardNode) {
         super(cardNode);
 
         idLabel = getChildNode(ID_FIELD_ID);
@@ -80,14 +80,14 @@ public class SubjectCardHandle extends NodeHandle<Node> {
     }
 
     /**
-     * Returns true if this handle contains {@code subject}.
+     * Returns true if this handle contains {@code flashcard}.
      */
-    public boolean equals(Subject subject) {
-        return getName().equals(subject.getName().fullName)
-                && getAddress().equals(subject.getAddress().value)
-                && getPhone().equals(subject.getPhone().value)
-                && getEmail().equals(subject.getEmail().value)
-                && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(subject.getTags().stream()
+    public boolean equals(Flashcard flashcard) {
+        return getName().equals(flashcard.getName().fullName)
+                && getAddress().equals(flashcard.getAddress().value)
+                && getPhone().equals(flashcard.getPhone().value)
+                && getEmail().equals(flashcard.getEmail().value)
+                && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(flashcard.getTags().stream()
                         .map(tag -> tag.tagName)
                         .collect(Collectors.toList())));
     }
