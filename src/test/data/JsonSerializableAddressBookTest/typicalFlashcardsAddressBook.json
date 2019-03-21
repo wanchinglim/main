@@ -1,6 +1,6 @@
 {
-  "_comment": "AddressBook save file which contains the same Subject values as in TypicalSubjects#getTypicalAddressBook()",
-  "subjects" : [ {
+  "_comment": "AddressBook save file which contains the same Flashcard values as in TypicalFlashcards#getTypicalAddressBook()",
+  "flashcards": [ {
     "name" : "Alice Pauline",
     "phone" : "94351253",
     "email" : "alice@example.com",
