@@ -24,8 +24,8 @@ import seedu.address.model.flashcard.Address;
 import seedu.address.model.flashcard.Deadline;
 import seedu.address.model.flashcard.Email;
 import seedu.address.model.flashcard.Flashcard;
-import seedu.address.model.flashcard.Name;
 import seedu.address.model.flashcard.Phone;
+import seedu.address.model.flashcard.Topic;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -98,7 +98,7 @@ public class EditCommand extends Command {
                                                    EditFlashcardDescriptor editFlashcardDescriptor) {
         assert flashcardToEdit != null;
 
-        Name updatedName = editFlashcardDescriptor.getName().orElse(flashcardToEdit.getName());
+        Topic updatedName = editFlashcardDescriptor.getName().orElse(flashcardToEdit.getName());
         Phone updatedPhone = editFlashcardDescriptor.getPhone().orElse(flashcardToEdit.getPhone());
         Email updatedEmail = editFlashcardDescriptor.getEmail().orElse(flashcardToEdit.getEmail());
         Address updatedAddress = editFlashcardDescriptor.getAddress().orElse(flashcardToEdit.getAddress());
@@ -131,7 +131,7 @@ public class EditCommand extends Command {
      * corresponding field value of the flashcard.
      */
     public static class EditFlashcardDescriptor {
-        private Name name;
+        private Topic name;
         private Phone phone;
         private Email email;
         private Address address;
@@ -158,11 +158,11 @@ public class EditCommand extends Command {
             return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
         }
 
-        public void setName(Name name) {
+        public void setName(Topic name) {
             this.name = name;
         }
 
-        public Optional<Name> getName() {
+        public Optional<Topic> getName() {
             return Optional.ofNullable(name);
         }
 

@@ -16,7 +16,7 @@ import seedu.address.model.tag.Tag;
 public class Flashcard {
 
     // Identity fields
-    private final Name name;
+    private final Topic name;
     private final Phone phone;
     private final Email email;
 
@@ -28,7 +28,7 @@ public class Flashcard {
     /**
      * Every field must be present and not null.
      */
-    public Flashcard(Name name, Phone phone, Email email, Address address, Deadline deadline, Set<Tag> tags) {
+    public Flashcard(Topic name, Phone phone, Email email, Address address, Deadline deadline, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -38,7 +38,7 @@ public class Flashcard {
         this.tags.addAll(tags);
     }
 
-    public Name getName() {
+    public Topic getName() {
         return name;
     }
 

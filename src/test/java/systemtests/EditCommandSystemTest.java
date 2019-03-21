@@ -42,7 +42,7 @@ import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.flashcard.Address;
 import seedu.address.model.flashcard.Email;
-import seedu.address.model.flashcard.Name;
+import seedu.address.model.flashcard.Topic;
 import seedu.address.model.flashcard.Phone;
 import seedu.address.model.flashcard.Flashcard;
 import seedu.address.model.tag.Tag;
@@ -206,7 +206,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
 /* Case: invalid name -> rejected *//*
 
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_FLASHCARD.getOneBased()
-                + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS);
+                + INVALID_NAME_DESC, Topic.MESSAGE_CONSTRAINTS);
 
         */
 /* Case: invalid phone -> rejected *//*

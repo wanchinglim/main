@@ -7,8 +7,8 @@ import seedu.address.model.flashcard.Address;
 import seedu.address.model.flashcard.Deadline;
 import seedu.address.model.flashcard.Email;
 import seedu.address.model.flashcard.Flashcard;
-import seedu.address.model.flashcard.Name;
 import seedu.address.model.flashcard.Phone;
+import seedu.address.model.flashcard.Topic;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -23,7 +23,7 @@ public class FlashcardBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_DEADLINE = "";
 
-    private Name name;
+    private Topic name;
     private Phone phone;
     private Email email;
     private Address address;
@@ -31,7 +31,7 @@ public class FlashcardBuilder {
     private Set<Tag> tags;
 
     public FlashcardBuilder() {
-        name = new Name(DEFAULT_NAME);
+        name = new Topic(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
@@ -52,10 +52,10 @@ public class FlashcardBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code Flashcard} that we are building.
+     * Sets the {@code Topic} of the {@code Flashcard} that we are building.
      */
     public FlashcardBuilder withName(String name) {
-        this.name = new Name(name);
+        this.name = new Topic(name);
         return this;
     }
 

@@ -21,8 +21,8 @@ import seedu.address.model.flashcard.Address;
 import seedu.address.model.flashcard.Deadline;
 import seedu.address.model.flashcard.Email;
 import seedu.address.model.flashcard.Flashcard;
-import seedu.address.model.flashcard.Name;
 import seedu.address.model.flashcard.Phone;
+import seedu.address.model.flashcard.Topic;
 
 public class FlashcardListPanelTest extends GuiUnitTest {
     private static final ObservableList<Flashcard> TYPICAL_FLASHCARDS =
@@ -81,7 +81,7 @@ public class FlashcardListPanelTest extends GuiUnitTest {
     private ObservableList<Flashcard> createBackingList(int subjectCount) {
         ObservableList<Flashcard> backingList = FXCollections.observableArrayList();
         for (int i = 0; i < subjectCount; i++) {
-            Name name = new Name(i + "a");
+            Topic name = new Topic(i + "a");
             Phone phone = new Phone("000");
             Email email = new Email("a@aa");
             Address address = new Address("a");

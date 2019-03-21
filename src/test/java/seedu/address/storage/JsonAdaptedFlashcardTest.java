@@ -13,8 +13,8 @@ import org.junit.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.flashcard.Address;
 import seedu.address.model.flashcard.Email;
-import seedu.address.model.flashcard.Name;
 import seedu.address.model.flashcard.Phone;
+import seedu.address.model.flashcard.Topic;
 import seedu.address.testutil.Assert;
 
 public class JsonAdaptedFlashcardTest {
@@ -45,7 +45,7 @@ public class JsonAdaptedFlashcardTest {
         JsonAdaptedFlashcard subject =
                 new JsonAdaptedFlashcard(INVALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                         VALID_DEADLINE, VALID_TAGS);
-        String expectedMessage = Name.MESSAGE_CONSTRAINTS;
+        String expectedMessage = Topic.MESSAGE_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, subject::toModelType);
     }
 
@@ -53,7 +53,7 @@ public class JsonAdaptedFlashcardTest {
     public void toModelType_nullName_throwsIllegalValueException() {
         JsonAdaptedFlashcard subject = new JsonAdaptedFlashcard(null, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 VALID_DEADLINE, VALID_TAGS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Topic.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, subject::toModelType);
     }
 
