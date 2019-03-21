@@ -1,10 +1,10 @@
-package seedu.address.model.subject;
+package seedu.address.model.flashcard;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Subject's phone number in the address book.
+ * Represents a Flashcard's phone number in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
  */
 public class Phone {

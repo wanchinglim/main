@@ -1,4 +1,4 @@
-package seedu.address.model.subject;
+package seedu.address.model.flashcard;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -10,10 +10,10 @@ import java.util.Set;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Subject in the address book.
+ * Represents a Flashcard in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Subject {
+public class Flashcard {
 
     // Identity fields
     private final Name name;
@@ -28,7 +28,7 @@ public class Subject {
     /**
      * Every field must be present and not null.
      */
-    public Subject(Name name, Phone phone, Email email, Address address, Deadline deadline, Set<Tag> tags) {
+    public Flashcard(Name name, Phone phone, Email email, Address address, Deadline deadline, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -67,22 +67,22 @@ public class Subject {
     }
 
     /**
-     * Returns true if both subjects of the same name have at least one other identity field that is the same.
-     * This defines a weaker notion of equality between two subjects.
+     * Returns true if both flashcards of the same name have at least one other identity field that is the same.
+     * This defines a weaker notion of equality between two flashcards.
      */
-    public boolean isSameSubject(Subject otherSubject) {
-        if (otherSubject == this) {
+    public boolean isSameFlashcard(Flashcard otherFlashcard) {
+        if (otherFlashcard == this) {
             return true;
         }
 
-        return otherSubject != null
-                && otherSubject.getName().equals(getName())
-                && (otherSubject.getPhone().equals(getPhone()) || otherSubject.getEmail().equals(getEmail()));
+        return otherFlashcard != null
+                && otherFlashcard.getName().equals(getName())
+                && (otherFlashcard.getPhone().equals(getPhone()) || otherFlashcard.getEmail().equals(getEmail()));
     }
 
     /**
-     * Returns true if both subjects have the same identity and data fields.
-     * This defines a stronger notion of equality between two subjects.
+     * Returns true if both flashcards have the same identity and data fields.
+     * This defines a stronger notion of equality between two flashcards.
      */
     @Override
     public boolean equals(Object other) {
@@ -90,16 +90,16 @@ public class Subject {
             return true;
         }
 
-        if (!(other instanceof Subject)) {
+        if (!(other instanceof Flashcard)) {
             return false;
         }
 
-        Subject otherSubject = (Subject) other;
-        return otherSubject.getName().equals(getName())
-                && otherSubject.getPhone().equals(getPhone())
-                && otherSubject.getEmail().equals(getEmail())
-                && otherSubject.getAddress().equals(getAddress())
-                && otherSubject.getTags().equals(getTags());
+        Flashcard otherFlashcard = (Flashcard) other;
+        return otherFlashcard.getName().equals(getName())
+                && otherFlashcard.getPhone().equals(getPhone())
+                && otherFlashcard.getEmail().equals(getEmail())
+                && otherFlashcard.getAddress().equals(getAddress())
+                && otherFlashcard.getTags().equals(getTags());
     }
 
     @Override

@@ -1,16 +1,16 @@
-package seedu.address.model.subject;
+package seedu.address.model.flashcard;
 
 import static java.util.Objects.requireNonNull;
 
 /**
- * Represents a subject's deadline in the address book.
+ * Represents a flashcard's deadline in the address book.
  * Guarantees: immutable; is always valid
  */
 
 public class Deadline {
 
     public static final String MESSAGE_DEADLINE_CONSTRAINTS =
-                                            "Subject deadlines can take any values, can even be blank";
+                                            "Flashcard deadlines can take any values, can even be blank";
 
     public final String value;
 
