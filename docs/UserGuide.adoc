@@ -86,26 +86,26 @@ Format: `help`
 
 //don't need to put examples but maybe can put pictures if necessary.
 
-=== Adding a subject or flash card: `add`
+=== Adding a flashcard or flash card: `add`
 
-Adds a flash card with subject and data field. +
-Format: `add <subject> <data>`
+Adds a flash card with flashcard and data field. +
+Format: `add <flashcard> <data>`
 
 * Lists the flash card that was just added.
 
 [TIP]
-A subject can have any number of tags (including 0)
+A flashcard can have any number of tags (including 0)
 
 Examples:
 
 * `add maths pythagoras' theorem`
-Adds the subject and content of a new flash card to be "maths" and "pythagoras' theorem" respectively.
+Adds the flashcard and content of a new flash card to be "maths" and "pythagoras' theorem" respectively.
 * `add science definition`
-Adds the subject and content of a new flash card to be "science" and "definition" respectively.
+Adds the flashcard and content of a new flash card to be "science" and "definition" respectively.
 
-=== Listing all flash cards categorized by subjects : `list` `l`
+=== Listing all flash cards categorized by flashcards : `list` `l`
 
-Displays an indexed list of flash cards categorized by subjects. +
+Displays an indexed list of flash cards categorized by flashcards. +
 Format: `list` or `l`
 
 Tags will be colour-coded. Same tags will have the same colour.
@@ -113,13 +113,13 @@ Tags will be colour-coded. Same tags will have the same colour.
 === Editing a flash card : `edit` `e`
 
 Edits the content of a flash card. +
-Enter the subject that the flash card belongs to.
-Format: `edit INDEX <subject>`
+Enter the flashcard that the flash card belongs to.
+Format: `edit INDEX <flashcard>`
 
 ****
-* Edits the flash card at the specified `INDEX`. The index refers to the index number shown in the displayed subject list. The index *must be a positive integer* 1, 2, 3, ...
+* Edits the flash card at the specified `INDEX`. The index refers to the index number shown in the displayed flashcard list. The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
-* A list of flash cards belonging to that subject will be displayed.
+* A list of flash cards belonging to that flashcard will be displayed.
 * Select the index of the flash card to edit.
 * Existing values will be updated to the input values.
 * The updated flash card will be displayed.
@@ -154,17 +154,17 @@ Returns `math` and `Mathematics`
 * `f science english math` +
 Returns any flash cards having names `science`, `english`, or `math`
 
-=== Deleting a subject or flash card : `delete` `d`
+=== Deleting a flashcard or flash card : `delete` `d`
 
-Deletes the specified subject or flash card. +
-Enter the subject that the flash card belongs to. +
-Format: `delete INDEX <subject>`
+Deletes the specified flashcard or flash card. +
+Enter the flashcard that the flash card belongs to. +
+Format: `delete INDEX <flashcard>`
 
 ****
-* A list of flash cards belonging to the subject will be displayed.
+* A list of flash cards belonging to the flashcard will be displayed.
 * Select the index of the flash card to delete.
 * Deletes the flash card at the specified `INDEX`.
-* The index refers to the index number shown in the displayed subject list.
+* The index refers to the index number shown in the displayed flashcard list.
 * The index *must be a positive integer* 1, 2, 3, ...
 * The updated list of flash cards will be displayed.
 ****
@@ -179,7 +179,7 @@ Deletes the specified content of index 2.
 `d 1` +
 Deletes the specified content of index 1.
 
-=== Selecting a subject : `select`
+=== Selecting a flashcard : `select`
 
 Selects the flash card identified by the index number used in the displayed list. +
 Format: `select INDEX`
@@ -201,7 +201,7 @@ Selects the 1st flash card in the results of the `find` command.
 
 === Viewing the next flash card : `next` `n`
 
-Views the next flash card that is next in line for the chosen subject.
+Views the next flash card that is next in line for the chosen flashcard.
  +
 Format: `next` or `n`
 
@@ -222,7 +222,7 @@ Displays the 5th flash card in the list.
 
 === Viewing the next flash card : `previous` `p`
 
-Views the previous flash card that is next in line for the chosen subject.
+Views the previous flash card that is next in line for the chosen flashcard.
  +
 Format: `previous` or `p`
 
@@ -335,12 +335,12 @@ _{explain how the user can enable/disable data encryption}_
 
 == Command Summary
 
-* *Add* `add <subject> <data>` +
+* *Add* `add <flashcard> <data>` +
 e.g. `add science definition`
 * *Clear* : `clear` or `c`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3` or `d 3`
-* *Edit* : `edit INDEX <subject>` +
+* *Edit* : `edit INDEX <flashcard>` +
 e.g. `edit 2 definition` or
 e.g. `e 2 definition`
 * *Find* : `find <KEYWORD> [MORE_KEYWORDS]` +
