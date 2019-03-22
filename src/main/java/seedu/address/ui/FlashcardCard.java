@@ -41,7 +41,7 @@ public class FlashcardCard extends UiPart<Region> {
     @FXML
     private Label deadline;
     @FXML
-    private FlowPane tags;
+    private FlowPane subject;
 
     public FlashcardCard(Flashcard flashcard, int displayedIndex) {
         super(FXML);
@@ -69,7 +69,7 @@ public class FlashcardCard extends UiPart<Region> {
         f.getTags().forEach(tagT -> {
             Label tagLabel = new Label(tagT.subjectName);
             tagLabel.getStyleClass().add(getTagColourIndex(tagT.subjectName));
-            tags.getChildren().add(tagLabel);
+            subject.getChildren().add(tagLabel);
         });
     }
 

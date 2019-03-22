@@ -20,7 +20,7 @@ public class FlashcardCardHandle extends NodeHandle<Node> {
     private static final String PHONE_FIELD_ID = "#phone";
     private static final String EMAIL_FIELD_ID = "#email";
     private static final String DEADLINE_FIELD_ID = "#deadline";
-    private static final String TAGS_FIELD_ID = "#tags";
+    private static final String TAGS_FIELD_ID = "#subject";
 
     private final Label idLabel;
     private final Label nameLabel;
@@ -28,7 +28,7 @@ public class FlashcardCardHandle extends NodeHandle<Node> {
     private final Label phoneLabel;
     private final Label emailLabel;
     private final Label deadlineLabel;
-    private final List<Label> tagLabels;
+    private final List<Label> subjectLabel;
 
     public FlashcardCardHandle(Node cardNode) {
         super(cardNode);
@@ -41,7 +41,7 @@ public class FlashcardCardHandle extends NodeHandle<Node> {
         deadlineLabel = getChildNode(DEADLINE_FIELD_ID);
 
         Region tagsContainer = getChildNode(TAGS_FIELD_ID);
-        tagLabels = tagsContainer
+        subjectLabel = tagsContainer
                 .getChildrenUnmodifiable()
                 .stream()
                 .map(Label.class::cast)
@@ -52,7 +52,7 @@ public class FlashcardCardHandle extends NodeHandle<Node> {
         return idLabel.getText();
     }
 
-    public String getName() {
+    public String getTopic() {
         return nameLabel.getText();
     }
 
@@ -72,8 +72,8 @@ public class FlashcardCardHandle extends NodeHandle<Node> {
         return deadlineLabel.getText();
     }
 
-    public List<String> getTags() {
-        return tagLabels
+    public List<String> getSubject() {
+        return subjectLabel
                 .stream()
                 .map(Label::getText)
                 .collect(Collectors.toList());
@@ -83,11 +83,11 @@ public class FlashcardCardHandle extends NodeHandle<Node> {
      * Returns true if this handle contains {@code flashcard}.
      */
     public boolean equals(Flashcard flashcard) {
-        return getName().equals(flashcard.getTopic().fullTopic)
+        return getTopic().equals(flashcard.getTopic().fullTopic)
                 && getAddress().equals(flashcard.getAddress().value)
                 && getPhone().equals(flashcard.getPhone().value)
                 && getEmail().equals(flashcard.getEmail().value)
-                && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(flashcard.getTags().stream()
+                && ImmutableMultiset.copyOf(getSubject()).equals(ImmutableMultiset.copyOf(flashcard.getTags().stream()
                         .map(tag -> tag.subjectName)
                         .collect(Collectors.toList())));
     }
