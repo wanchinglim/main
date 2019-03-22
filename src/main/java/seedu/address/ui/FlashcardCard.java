@@ -29,7 +29,7 @@ public class FlashcardCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private Label name;
+    private Label topic;
     @FXML
     private Label id;
     @FXML
@@ -47,7 +47,7 @@ public class FlashcardCard extends UiPart<Region> {
         super(FXML);
         this.flashcard = flashcard;
         id.setText(displayedIndex + ". ");
-        name.setText(flashcard.getTopic().fullTopic);
+        topic.setText(flashcard.getTopic().fullTopic);
         phone.setText(flashcard.getPhone().value);
         address.setText(flashcard.getAddress().value);
         email.setText(flashcard.getEmail().value);
@@ -65,8 +65,8 @@ public class FlashcardCard extends UiPart<Region> {
     /**
      * Creates the tag labels for {@code flashcard}.
      */
-    private void tagger(Flashcard p) {
-        p.getTags().forEach(tagT -> {
+    private void tagger(Flashcard f) {
+        f.getTags().forEach(tagT -> {
             Label tagLabel = new Label(tagT.subjectName);
             tagLabel.getStyleClass().add(getTagColourIndex(tagT.subjectName));
             tags.getChildren().add(tagLabel);
