@@ -56,7 +56,7 @@ public class FlashcardCard extends UiPart<Region> {
     }
 
     /**
-     * Returns the color style for {@code tagName}'s label.
+     * Returns the color style for {@code subjectName}'s label.
      */
     private String getTagColourIndex(String tagName) {
         return TAG_COLOURS[Math.floorMod(tagName.hashCode(), TAG_COLOURS.length)];
@@ -67,8 +67,8 @@ public class FlashcardCard extends UiPart<Region> {
      */
     private void tagger(Flashcard p) {
         p.getTags().forEach(tagT -> {
-            Label tagLabel = new Label(tagT.tagName);
-            tagLabel.getStyleClass().add(getTagColourIndex(tagT.tagName));
+            Label tagLabel = new Label(tagT.subjectName);
+            tagLabel.getStyleClass().add(getTagColourIndex(tagT.subjectName));
             tags.getChildren().add(tagLabel);
         });
     }

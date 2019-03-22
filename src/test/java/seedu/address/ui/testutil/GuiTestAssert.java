@@ -35,7 +35,7 @@ public class GuiTestAssert {
         assertEquals(expectedFlashcard.getEmail().value, actualCard.getEmail());
         assertEquals(expectedFlashcard.getAddress().value, actualCard.getAddress());
         assertEquals(expectedFlashcard.getDeadline().value, actualCard.getDeadline());
-        assertEquals(expectedFlashcard.getTags().stream().map(tag -> tag.tagName).collect(Collectors.toList()),
+        assertEquals(expectedFlashcard.getTags().stream().map(tag -> tag.subjectName).collect(Collectors.toList()),
                 actualCard.getTags());
     }
 

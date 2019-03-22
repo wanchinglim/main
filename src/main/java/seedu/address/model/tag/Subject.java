@@ -12,17 +12,17 @@ public class Subject {
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
-    public final String tagName;
+    public final String subjectName;
 
     /**
      * Constructs a {@code Subject}.
      *
-     * @param tagName A valid tag name.
+     * @param subjectName A valid tag name.
      */
-    public Subject(String tagName) {
-        requireNonNull(tagName);
-        checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
-        this.tagName = tagName;
+    public Subject(String subjectName) {
+        requireNonNull(subjectName);
+        checkArgument(isValidTagName(subjectName), MESSAGE_CONSTRAINTS);
+        this.subjectName = subjectName;
     }
 
     /**
@@ -36,19 +36,19 @@ public class Subject {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Subject // instanceof handles nulls
-                && tagName.equals(((Subject) other).tagName)); // state check
+                && subjectName.equals(((Subject) other).subjectName)); // state check
     }
 
     @Override
     public int hashCode() {
-        return tagName.hashCode();
+        return subjectName.hashCode();
     }
 
     /**
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + tagName + ']';
+        return '[' + subjectName + ']';
     }
 
 }

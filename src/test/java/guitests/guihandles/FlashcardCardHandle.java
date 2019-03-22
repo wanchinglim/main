@@ -88,7 +88,7 @@ public class FlashcardCardHandle extends NodeHandle<Node> {
                 && getPhone().equals(flashcard.getPhone().value)
                 && getEmail().equals(flashcard.getEmail().value)
                 && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(flashcard.getTags().stream()
-                        .map(tag -> tag.tagName)
+                        .map(tag -> tag.subjectName)
                         .collect(Collectors.toList())));
     }
 }

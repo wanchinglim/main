@@ -35,7 +35,7 @@ public class FlashcardUtil {
         sb.append(PREFIX_EMAIL + flashcard.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + flashcard.getAddress().value + " ");
         flashcard.getTags().stream().forEach(
-            s -> sb.append(PREFIX_SUBJECT + s.tagName + " ")
+            s -> sb.append(PREFIX_SUBJECT + s.subjectName + " ")
         );
         return sb.toString();
     }
@@ -54,7 +54,7 @@ public class FlashcardUtil {
             if (tags.isEmpty()) {
                 sb.append(PREFIX_SUBJECT);
             } else {
-                tags.forEach(s -> sb.append(PREFIX_SUBJECT).append(s.tagName).append(" "));
+                tags.forEach(s -> sb.append(PREFIX_SUBJECT).append(s.subjectName).append(" "));
             }
         }
         return sb.toString();
