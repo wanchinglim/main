@@ -57,7 +57,7 @@ public class SelectCommandSystemTest extends AddressBookSystemTest {
         /* Case: filtered flashcard list, select index within bounds of address book but out of bounds of flashcard list
          * -> rejected
          */
-        showFlashcardsWithName(KEYWORD_MATCHING_MEIER);
+        showFlashcardsWithTopic(KEYWORD_MATCHING_MEIER);
         int invalidIndex = getModel().getAddressBook().getFlashcardList().size();
         assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex,
                 MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);

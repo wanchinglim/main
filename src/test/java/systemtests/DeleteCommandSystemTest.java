@@ -60,7 +60,7 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
         /* ------------------ Performing delete operation while a filtered list is being shown ---------------------- */
 
         /* Case: filtered flashcard list, delete index within bounds of address book and flashcard list -> deleted */
-        showFlashcardsWithName(KEYWORD_MATCHING_MEIER);
+        showFlashcardsWithTopic(KEYWORD_MATCHING_MEIER);
         Index index = INDEX_FIRST_FLASHCARD;
         assertTrue(index.getZeroBased() < getModel().getFilteredFlashcardList().size());
         assertCommandSuccess(index);
@@ -68,7 +68,7 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
         /* Case: filtered flashcard list, delete index within bounds of address book but out of bounds of flashcard list
          * -> rejected
          */
-        showFlashcardsWithName(KEYWORD_MATCHING_MEIER);
+        showFlashcardsWithTopic(KEYWORD_MATCHING_MEIER);
         int invalidIndex = getModel().getAddressBook().getFlashcardList().size();
         command = DeleteCommand.COMMAND_WORD + " " + invalidIndex;
         assertCommandFailure(command, MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);

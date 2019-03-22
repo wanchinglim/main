@@ -147,7 +147,7 @@ public abstract class AddressBookSystemTest {
     /**
      * Displays all flashcards with any parts of their names matching {@code keyword} (case-insensitive).
      */
-    protected void showFlashcardsWithName(String keyword) {
+    protected void showFlashcardsWithTopic(String keyword) {
         executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
         assertTrue(getModel().getFilteredFlashcardList().size()
                 < getModel().getAddressBook().getFlashcardList().size());
@@ -213,7 +213,7 @@ public abstract class AddressBookSystemTest {
      */
     protected void assertSelectedCardChanged(Index expectedSelectedCardIndex) {
         getFlashcardListPanel().navigateToCard(getFlashcardListPanel().getSelectedCardIndex());
-        String selectedCardName = getFlashcardListPanel().getHandleToSelectedCard().getName();
+        String selectedCardName = getFlashcardListPanel().getHandleToSelectedCard().getTopic();
         URL expectedUrl;
         try {
             expectedUrl = new URL(BrowserPanel.SEARCH_PAGE_URL + selectedCardName.replaceAll(" ", "%20"));

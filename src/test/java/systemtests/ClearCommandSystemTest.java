@@ -44,7 +44,7 @@ public class ClearCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: filters the flashcard list before clearing -> entire address book cleared */
         executeCommand(UndoCommand.COMMAND_WORD); // restores the original address book
-        showFlashcardsWithName(KEYWORD_MATCHING_MEIER);
+        showFlashcardsWithTopic(KEYWORD_MATCHING_MEIER);
         assertCommandSuccess(ClearCommand.COMMAND_WORD);
         assertSelectedCardUnchanged();
 
