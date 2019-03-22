@@ -1,6 +1,6 @@
 {
   "flashcards": [ {
-    "name": "Flashcard with invalid name field: Ha!ns Mu@ster",
+    "topic": "Flashcard with invalid topic field: Ha!ns Mu@ster",
     "phone": "9482424",
     "email": "hans@example.com",
     "address": "4th street"
