@@ -63,7 +63,7 @@ public class DeadlineCommand extends Command {
         }
 
         Flashcard flashcardToEdit = lastShownList.get(index.getZeroBased());
-        Flashcard editedFlashcard = new Flashcard(flashcardToEdit.getName(), flashcardToEdit.getPhone(),
+        Flashcard editedFlashcard = new Flashcard(flashcardToEdit.getTopic(), flashcardToEdit.getPhone(),
                 flashcardToEdit.getEmail(),
                 flashcardToEdit.getAddress(), deadline, flashcardToEdit.getTags());
 

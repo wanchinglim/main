@@ -5,10 +5,10 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
-import seedu.address.model.flashcard.NameContainsKeywordsPredicate;
+import seedu.address.model.flashcard.TopicContainsKeywordsPredicate;
 
 /**
- * Finds and lists all flashcards in FlashCards whose name contains any of the argument keywords.
+ * Finds and lists all flashcards in FlashCards whose topic contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
 public class FindCommand extends Command {
@@ -21,9 +21,9 @@ public class FindCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final TopicContainsKeywordsPredicate predicate;
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
+    public FindCommand(TopicContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 

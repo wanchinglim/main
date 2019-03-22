@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TOPIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_FLASHCARDS;
@@ -24,7 +24,7 @@ import seedu.address.model.flashcard.Address;
 import seedu.address.model.flashcard.Deadline;
 import seedu.address.model.flashcard.Email;
 import seedu.address.model.flashcard.Flashcard;
-import seedu.address.model.flashcard.Name;
+import seedu.address.model.flashcard.Topic;
 import seedu.address.model.flashcard.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -40,7 +40,7 @@ public class EditCommand extends Command {
             + "by the index number used in the displayed flashcard list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_TOPIC + "TOPIC] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
@@ -98,14 +98,14 @@ public class EditCommand extends Command {
                                                    EditFlashcardDescriptor editFlashcardDescriptor) {
         assert flashcardToEdit != null;
 
-        Name updatedName = editFlashcardDescriptor.getName().orElse(flashcardToEdit.getName());
+        Topic updatedTopic = editFlashcardDescriptor.getTopic().orElse(flashcardToEdit.getTopic());
         Phone updatedPhone = editFlashcardDescriptor.getPhone().orElse(flashcardToEdit.getPhone());
         Email updatedEmail = editFlashcardDescriptor.getEmail().orElse(flashcardToEdit.getEmail());
         Address updatedAddress = editFlashcardDescriptor.getAddress().orElse(flashcardToEdit.getAddress());
         Deadline updatedDeadline = flashcardToEdit.getDeadline(); //edit command does not allow editing deadlines
         Set<Tag> updatedTags = editFlashcardDescriptor.getTags().orElse(flashcardToEdit.getTags());
 
-        return new Flashcard(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedDeadline, updatedTags);
+        return new Flashcard(updatedTopic, updatedPhone, updatedEmail, updatedAddress, updatedDeadline, updatedTags);
     }
 
     @Override
@@ -131,7 +131,7 @@ public class EditCommand extends Command {
      * corresponding field value of the flashcard.
      */
     public static class EditFlashcardDescriptor {
-        private Name name;
+        private Topic topic;
         private Phone phone;
         private Email email;
         private Address address;
@@ -144,7 +144,7 @@ public class EditCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditFlashcardDescriptor(EditFlashcardDescriptor toCopy) {
-            setName(toCopy.name);
+            setTopic(toCopy.topic);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
@@ -155,15 +155,15 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(topic, phone, email, address, tags);
         }
 
-        public void setName(Name name) {
-            this.name = name;
+        public void setTopic(Topic topic) {
+            this.topic = topic;
         }
 
-        public Optional<Name> getName() {
-            return Optional.ofNullable(name);
+        public Optional<Topic> getTopic() {
+            return Optional.ofNullable(topic);
         }
 
         public void setPhone(Phone phone) {
@@ -222,7 +222,7 @@ public class EditCommand extends Command {
             // state check
             EditFlashcardDescriptor e = (EditFlashcardDescriptor) other;
 
-            return getName().equals(e.getName())
+            return getTopic().equals(e.getTopic())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
