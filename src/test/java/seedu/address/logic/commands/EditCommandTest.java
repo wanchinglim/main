@@ -5,7 +5,7 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -58,10 +58,10 @@ public class EditCommandTest {
         Flashcard lastFlashcard = model.getFilteredFlashcardList().get(indexLastSubject.getZeroBased());
 
         FlashcardBuilder subjectInList = new FlashcardBuilder(lastFlashcard);
-        Flashcard editedFlashcard = subjectInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+        Flashcard editedFlashcard = subjectInList.withTopic(VALID_TOPIC_BOB).withPhone(VALID_PHONE_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
 
-        EditCommand.EditFlashcardDescriptor descriptor = new EditFlashcardDescriptorBuilder().withName(VALID_NAME_BOB)
+        EditCommand.EditFlashcardDescriptor descriptor = new EditFlashcardDescriptorBuilder().withTopic(VALID_TOPIC_BOB)
                 .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
         EditCommand editCommand = new EditCommand(indexLastSubject, descriptor);
 
@@ -92,9 +92,9 @@ public class EditCommandTest {
         showFlashcardAtIndex(model, INDEX_FIRST_FLASHCARD);
 
         Flashcard flashcardInFilteredList = model.getFilteredFlashcardList().get(INDEX_FIRST_FLASHCARD.getZeroBased());
-        Flashcard editedFlashcard = new FlashcardBuilder(flashcardInFilteredList).withName(VALID_NAME_BOB).build();
+        Flashcard editedFlashcard = new FlashcardBuilder(flashcardInFilteredList).withTopic(VALID_TOPIC_BOB).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_FLASHCARD,
-                new EditFlashcardDescriptorBuilder().withName(VALID_NAME_BOB).build());
+                new EditFlashcardDescriptorBuilder().withTopic(VALID_TOPIC_BOB).build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_FLASHCARD_SUCCESS, editedFlashcard);
 
@@ -130,7 +130,7 @@ public class EditCommandTest {
     @Test
     public void execute_invalidFlashcardIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredFlashcardList().size() + 1);
-        EditFlashcardDescriptor descriptor = new EditFlashcardDescriptorBuilder().withName(VALID_NAME_BOB).build();
+        EditFlashcardDescriptor descriptor = new EditFlashcardDescriptorBuilder().withTopic(VALID_TOPIC_BOB).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editCommand, model, commandHistory, Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
@@ -148,7 +148,7 @@ public class EditCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getFlashcardList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
-                new EditFlashcardDescriptorBuilder().withName(VALID_NAME_BOB).build());
+                new EditFlashcardDescriptorBuilder().withTopic(VALID_TOPIC_BOB).build());
 
         assertCommandFailure(editCommand, model, commandHistory, Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
     }
@@ -179,7 +179,7 @@ public class EditCommandTest {
     public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredFlashcardList().size() + 1);
         EditFlashcardDescriptor descriptor = new EditFlashcardDescriptorBuilder()
-                .withName(VALID_NAME_BOB).build();
+                .withTopic(VALID_TOPIC_BOB).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
         // execution failed -> address book state not added into model
