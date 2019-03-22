@@ -9,7 +9,7 @@ import seedu.address.logic.commands.EditCommand.EditFlashcardDescriptor;
 import seedu.address.model.flashcard.Address;
 import seedu.address.model.flashcard.Email;
 import seedu.address.model.flashcard.Flashcard;
-import seedu.address.model.flashcard.Name;
+import seedu.address.model.flashcard.Topic;
 import seedu.address.model.flashcard.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -33,7 +33,7 @@ public class EditFlashcardDescriptorBuilder {
      */
     public EditFlashcardDescriptorBuilder(Flashcard flashcard) {
         descriptor = new EditCommand.EditFlashcardDescriptor();
-        descriptor.setName(flashcard.getName());
+        descriptor.setTopic(flashcard.getTopic());
         descriptor.setPhone(flashcard.getPhone());
         descriptor.setEmail(flashcard.getEmail());
         descriptor.setAddress(flashcard.getAddress());
@@ -41,10 +41,10 @@ public class EditFlashcardDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code EditFlashcardDescriptor} that we are building.
+     * Sets the {@code Topic} of the {@code EditFlashcardDescriptor} that we are building.
      */
-    public EditFlashcardDescriptorBuilder withName(String name) {
-        descriptor.setName(new Name(name));
+    public EditFlashcardDescriptorBuilder withTopic(String topic) {
+        descriptor.setTopic(new Topic(topic));
         return this;
     }
 

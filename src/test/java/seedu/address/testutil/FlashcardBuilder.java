@@ -7,7 +7,7 @@ import seedu.address.model.flashcard.Address;
 import seedu.address.model.flashcard.Deadline;
 import seedu.address.model.flashcard.Email;
 import seedu.address.model.flashcard.Flashcard;
-import seedu.address.model.flashcard.Name;
+import seedu.address.model.flashcard.Topic;
 import seedu.address.model.flashcard.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -17,13 +17,13 @@ import seedu.address.model.util.SampleDataUtil;
  */
 public class FlashcardBuilder {
 
-    public static final String DEFAULT_NAME = "Alice Pauline";
+    public static final String DEFAULT_TOPIC = "Alice Pauline";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_DEADLINE = "";
 
-    private Name name;
+    private Topic topic;
     private Phone phone;
     private Email email;
     private Address address;
@@ -31,7 +31,7 @@ public class FlashcardBuilder {
     private Set<Tag> tags;
 
     public FlashcardBuilder() {
-        name = new Name(DEFAULT_NAME);
+        topic = new Topic(DEFAULT_TOPIC);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
@@ -43,7 +43,7 @@ public class FlashcardBuilder {
      * Initializes the FlashcardBuilder with the data of {@code flashcardToCopy}.
      */
     public FlashcardBuilder(Flashcard flashcardToCopy) {
-        name = flashcardToCopy.getName();
+        topic = flashcardToCopy.getTopic();
         phone = flashcardToCopy.getPhone();
         email = flashcardToCopy.getEmail();
         address = flashcardToCopy.getAddress();
@@ -52,10 +52,10 @@ public class FlashcardBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code Flashcard} that we are building.
+     * Sets the {@code Topic} of the {@code Flashcard} that we are building.
      */
-    public FlashcardBuilder withName(String name) {
-        this.name = new Name(name);
+    public FlashcardBuilder withTopic(String topic) {
+        this.topic = new Topic(topic);
         return this;
     }
 
@@ -101,7 +101,7 @@ public class FlashcardBuilder {
     }
 
     public Flashcard build() {
-        return new Flashcard(name, phone, email, address, deadline, tags);
+        return new Flashcard(topic, phone, email, address, deadline, tags);
     }
 
 }
