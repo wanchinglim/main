@@ -15,7 +15,7 @@ import seedu.address.model.flashcard.Flashcard;
  */
 public class FlashcardCardHandle extends NodeHandle<Node> {
     private static final String ID_FIELD_ID = "#id";
-    private static final String NAME_FIELD_ID = "#name";
+    private static final String TOPIC_FIELD_ID = "#topic";
     private static final String ADDRESS_FIELD_ID = "#address";
     private static final String PHONE_FIELD_ID = "#phone";
     private static final String EMAIL_FIELD_ID = "#email";
@@ -23,7 +23,7 @@ public class FlashcardCardHandle extends NodeHandle<Node> {
     private static final String TAGS_FIELD_ID = "#tags";
 
     private final Label idLabel;
-    private final Label nameLabel;
+    private final Label topicLabel;
     private final Label addressLabel;
     private final Label phoneLabel;
     private final Label emailLabel;
@@ -34,7 +34,7 @@ public class FlashcardCardHandle extends NodeHandle<Node> {
         super(cardNode);
 
         idLabel = getChildNode(ID_FIELD_ID);
-        nameLabel = getChildNode(NAME_FIELD_ID);
+        topicLabel = getChildNode(TOPIC_FIELD_ID);
         addressLabel = getChildNode(ADDRESS_FIELD_ID);
         phoneLabel = getChildNode(PHONE_FIELD_ID);
         emailLabel = getChildNode(EMAIL_FIELD_ID);
@@ -52,8 +52,8 @@ public class FlashcardCardHandle extends NodeHandle<Node> {
         return idLabel.getText();
     }
 
-    public String getName() {
-        return nameLabel.getText();
+    public String getTopic() {
+        return topicLabel.getText();
     }
 
     public String getAddress() {
@@ -83,7 +83,7 @@ public class FlashcardCardHandle extends NodeHandle<Node> {
      * Returns true if this handle contains {@code flashcard}.
      */
     public boolean equals(Flashcard flashcard) {
-        return getName().equals(flashcard.getName().fullName)
+        return getTopic().equals(flashcard.getTopic().fullTopic)
                 && getAddress().equals(flashcard.getAddress().value)
                 && getPhone().equals(flashcard.getPhone().value)
                 && getEmail().equals(flashcard.getEmail().value)
