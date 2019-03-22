@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Flashcard's name in the address book.
+ * Represents a Flashcard's topic in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class Topic {
@@ -18,21 +18,21 @@ public class Topic {
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public final String fullName;
+    public final String fullTopic;
 
     /**
      * Constructs a {@code Topic}.
      *
-     * @param name A valid name.
+     * @param topic A valid topic.
      */
-    public Topic(String name) {
-        requireNonNull(name);
-        checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        fullName = name;
+    public Topic(String topic) {
+        requireNonNull(topic);
+        checkArgument(isValidName(topic), MESSAGE_CONSTRAINTS);
+        fullTopic = topic;
     }
 
     /**
-     * Returns true if a given string is a valid name.
+     * Returns true if a given string is a valid topic.
      */
     public static boolean isValidName(String test) {
         return test.matches(VALIDATION_REGEX);
@@ -41,19 +41,19 @@ public class Topic {
 
     @Override
     public String toString() {
-        return fullName;
+        return fullTopic;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Topic // instanceof handles nulls
-                && fullName.equals(((Topic) other).fullName)); // state check
+                && fullTopic.equals(((Topic) other).fullTopic)); // state check
     }
 
     @Override
     public int hashCode() {
-        return fullName.hashCode();
+        return fullTopic.hashCode();
     }
 
 }

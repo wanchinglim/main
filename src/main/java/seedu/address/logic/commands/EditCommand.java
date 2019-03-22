@@ -98,7 +98,7 @@ public class EditCommand extends Command {
                                                    EditFlashcardDescriptor editFlashcardDescriptor) {
         assert flashcardToEdit != null;
 
-        Topic updatedName = editFlashcardDescriptor.getName().orElse(flashcardToEdit.getName());
+        Topic updatedName = editFlashcardDescriptor.getName().orElse(flashcardToEdit.getTopic());
         Phone updatedPhone = editFlashcardDescriptor.getPhone().orElse(flashcardToEdit.getPhone());
         Email updatedEmail = editFlashcardDescriptor.getEmail().orElse(flashcardToEdit.getEmail());
         Address updatedAddress = editFlashcardDescriptor.getAddress().orElse(flashcardToEdit.getAddress());

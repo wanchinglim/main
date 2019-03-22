@@ -54,7 +54,7 @@ class JsonAdaptedFlashcard {
      * Converts a given {@code Flashcard} into this class for Jackson use.
      */
     public JsonAdaptedFlashcard(Flashcard source) {
-        name = source.getName().fullName;
+        name = source.getTopic().fullTopic;
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;

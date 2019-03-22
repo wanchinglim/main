@@ -33,7 +33,7 @@ public class EditFlashcardDescriptorBuilder {
      */
     public EditFlashcardDescriptorBuilder(Flashcard flashcard) {
         descriptor = new EditCommand.EditFlashcardDescriptor();
-        descriptor.setName(flashcard.getName());
+        descriptor.setName(flashcard.getTopic());
         descriptor.setPhone(flashcard.getPhone());
         descriptor.setEmail(flashcard.getEmail());
         descriptor.setAddress(flashcard.getAddress());

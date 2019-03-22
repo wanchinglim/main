@@ -136,7 +136,7 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
         /* Case: find while a flashcard is selected -> selected card deselected */
         showAllFlashcards();
         selectFlashcard(Index.fromOneBased(1));
-        assertFalse(getFlashcardListPanel().getHandleToSelectedCard().getName().equals(DANIEL.getName().fullName));
+        assertFalse(getFlashcardListPanel().getHandleToSelectedCard().getName().equals(DANIEL.getTopic().fullTopic));
         command = FindCommand.COMMAND_WORD + " Daniel";
         ModelHelper.setFilteredList(expectedModel, DANIEL);
         assertCommandSuccess(command, expectedModel);

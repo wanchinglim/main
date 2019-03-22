@@ -43,7 +43,7 @@ public class FlashcardBuilder {
      * Initializes the FlashcardBuilder with the data of {@code flashcardToCopy}.
      */
     public FlashcardBuilder(Flashcard flashcardToCopy) {
-        name = flashcardToCopy.getName();
+        name = flashcardToCopy.getTopic();
         phone = flashcardToCopy.getPhone();
         email = flashcardToCopy.getEmail();
         address = flashcardToCopy.getAddress();

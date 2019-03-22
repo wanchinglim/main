@@ -66,18 +66,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String name} into a {@code Topic}.
+     * Parses a {@code String topic} into a {@code Topic}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code name} is invalid.
+     * @throws ParseException if the given {@code topic} is invalid.
      */
-    public static Topic parseName(String name) throws ParseException {
-        requireNonNull(name);
-        String trimmedName = name.trim();
-        if (!Topic.isValidName(trimmedName)) {
+    public static Topic parseTopic(String topic) throws ParseException {
+        requireNonNull(topic);
+        String trimmedTopic = topic.trim();
+        if (!Topic.isValidName(trimmedTopic)) {
             throw new ParseException(Topic.MESSAGE_CONSTRAINTS);
         }
-        return new Topic(trimmedName);
+        return new Topic(trimmedTopic);
     }
 
     /**

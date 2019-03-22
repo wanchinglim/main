@@ -30,7 +30,7 @@ public class GuiTestAssert {
      * Asserts that {@code actualCard} displays the details of {@code expectedFlashcard}.
      */
     public static void assertCardDisplaysFlashcard(Flashcard expectedFlashcard, FlashcardCardHandle actualCard) {
-        assertEquals(expectedFlashcard.getName().fullName, actualCard.getName());
+        assertEquals(expectedFlashcard.getTopic().fullTopic, actualCard.getName());
         assertEquals(expectedFlashcard.getPhone().value, actualCard.getPhone());
         assertEquals(expectedFlashcard.getEmail().value, actualCard.getEmail());
         assertEquals(expectedFlashcard.getAddress().value, actualCard.getAddress());

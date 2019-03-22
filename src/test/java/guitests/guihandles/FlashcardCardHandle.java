@@ -83,7 +83,7 @@ public class FlashcardCardHandle extends NodeHandle<Node> {
      * Returns true if this handle contains {@code flashcard}.
      */
     public boolean equals(Flashcard flashcard) {
-        return getName().equals(flashcard.getName().fullName)
+        return getName().equals(flashcard.getTopic().fullTopic)
                 && getAddress().equals(flashcard.getAddress().value)
                 && getPhone().equals(flashcard.getPhone().value)
                 && getEmail().equals(flashcard.getEmail().value)

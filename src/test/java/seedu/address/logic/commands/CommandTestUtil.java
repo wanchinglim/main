@@ -138,7 +138,7 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredFlashcardList().size());
 
         Flashcard flashcard = model.getFilteredFlashcardList().get(targetIndex.getZeroBased());
-        final String[] splitName = flashcard.getName().fullName.split("\\s+");
+        final String[] splitName = flashcard.getTopic().fullTopic.split("\\s+");
         model.updateFilteredFlashcardList(new TopicContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredFlashcardList().size());

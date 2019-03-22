@@ -38,7 +38,7 @@ public class Flashcard {
         this.tags.addAll(tags);
     }
 
-    public Topic getName() {
+    public Topic getTopic() {
         return name;
     }
 
@@ -76,7 +76,7 @@ public class Flashcard {
         }
 
         return otherFlashcard != null
-                && otherFlashcard.getName().equals(getName())
+                && otherFlashcard.getTopic().equals(getTopic())
                 && (otherFlashcard.getPhone().equals(getPhone()) || otherFlashcard.getEmail().equals(getEmail()));
     }
 
@@ -95,7 +95,7 @@ public class Flashcard {
         }
 
         Flashcard otherFlashcard = (Flashcard) other;
-        return otherFlashcard.getName().equals(getName())
+        return otherFlashcard.getTopic().equals(getTopic())
                 && otherFlashcard.getPhone().equals(getPhone())
                 && otherFlashcard.getEmail().equals(getEmail())
                 && otherFlashcard.getAddress().equals(getAddress())
@@ -111,7 +111,7 @@ public class Flashcard {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
+        builder.append(getTopic())
                 .append(" Phone: ")
                 .append(getPhone())
                 .append(" Email: ")
