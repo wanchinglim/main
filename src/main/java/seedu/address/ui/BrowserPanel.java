@@ -50,7 +50,7 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     private void loadFlashcardPage(Flashcard flashcard) {
-        loadPage(SEARCH_PAGE_URL + flashcard.getName().fullName);
+        loadPage(SEARCH_PAGE_URL + flashcard.getTopic().fullTopic);
     }
 
     public void loadPage(String url) {
