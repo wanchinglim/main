@@ -14,7 +14,7 @@ import seedu.address.model.flashcard.Address;
 import seedu.address.model.flashcard.Deadline;
 import seedu.address.model.flashcard.Email;
 import seedu.address.model.flashcard.Flashcard;
-import seedu.address.model.flashcard.Name;
+import seedu.address.model.flashcard.Topic;
 import seedu.address.model.flashcard.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -25,7 +25,7 @@ class JsonAdaptedFlashcard {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Flashcard's %s field is missing!";
 
-    private final String name;
+    private final String topic;
     private final String phone;
     private final String email;
     private final String address;
@@ -36,11 +36,11 @@ class JsonAdaptedFlashcard {
      * Constructs a {@code JsonAdaptedFlashcard} with the given flashcard details.
      */
     @JsonCreator
-    public JsonAdaptedFlashcard(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+    public JsonAdaptedFlashcard(@JsonProperty("topic") String topic, @JsonProperty("phone") String phone,
                                 @JsonProperty("email") String email, @JsonProperty("address") String address,
                                 @JsonProperty("deadline") String deadline,
                                 @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
-        this.name = name;
+        this.topic = topic;
         this.phone = phone;
         this.email = email;
         this.address = address;
@@ -54,7 +54,7 @@ class JsonAdaptedFlashcard {
      * Converts a given {@code Flashcard} into this class for Jackson use.
      */
     public JsonAdaptedFlashcard(Flashcard source) {
-        name = source.getName().fullName;
+        topic = source.getTopic().fullTopic;
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
@@ -75,13 +75,13 @@ class JsonAdaptedFlashcard {
             flashcardTags.add(tag.toModelType());
         }
 
-        if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+        if (topic == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Topic.class.getSimpleName()));
         }
-        if (!Name.isValidName(name)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        if (!Topic.isValidTopic(topic)) {
+            throw new IllegalValueException(Topic.MESSAGE_CONSTRAINTS);
         }
-        final Name modelName = new Name(name);
+        final Topic modelTopic = new Topic(topic);
 
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
@@ -116,7 +116,7 @@ class JsonAdaptedFlashcard {
 
 
         final Set<Tag> modelTags = new HashSet<>(flashcardTags);
-        return new Flashcard(modelName, modelPhone, modelEmail, modelAddress, modelDeadline, modelTags);
+        return new Flashcard(modelTopic, modelPhone, modelEmail, modelAddress, modelDeadline, modelTags);
     }
 
 }
