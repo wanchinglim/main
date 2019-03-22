@@ -11,7 +11,7 @@ import java.util.Set;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditFlashcardDescriptor;
 import seedu.address.model.flashcard.Flashcard;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Subject;
 
 /**
  * A utility class for Flashcard.
@@ -50,7 +50,7 @@ public class FlashcardUtil {
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         if (descriptor.getTags().isPresent()) {
-            Set<Tag> tags = descriptor.getTags().get();
+            Set<Subject> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
                 sb.append(PREFIX_SUBJECT);
             } else {

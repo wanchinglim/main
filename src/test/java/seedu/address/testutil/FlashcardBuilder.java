@@ -9,7 +9,7 @@ import seedu.address.model.flashcard.Email;
 import seedu.address.model.flashcard.Flashcard;
 import seedu.address.model.flashcard.Phone;
 import seedu.address.model.flashcard.Topic;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Subject;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -28,7 +28,7 @@ public class FlashcardBuilder {
     private Email email;
     private Address address;
     private Deadline deadline;
-    private Set<Tag> tags;
+    private Set<Subject> tags;
 
     public FlashcardBuilder() {
         name = new Topic(DEFAULT_NAME);
@@ -60,7 +60,7 @@ public class FlashcardBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Flashcard} that we are building.
+     * Parses the {@code tags} into a {@code Set<Subject>} and set it to the {@code Flashcard} that we are building.
      */
     public FlashcardBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);

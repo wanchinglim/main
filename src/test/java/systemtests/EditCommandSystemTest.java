@@ -45,7 +45,7 @@ import seedu.address.model.flashcard.Email;
 import seedu.address.model.flashcard.Topic;
 import seedu.address.model.flashcard.Phone;
 import seedu.address.model.flashcard.Flashcard;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Subject;
 import seedu.address.testutil.FlashcardBuilder;
 import seedu.address.testutil.FlashcardUtil;
 
@@ -230,7 +230,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
 /* Case: invalid tag -> rejected *//*
 
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_FLASHCARD.getOneBased()
-                + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS);
+                + INVALID_TAG_DESC, Subject.MESSAGE_CONSTRAINTS);
 
         */
 /* Case: edit a flashcard with new values same as another flashcard's values -> rejected *//*

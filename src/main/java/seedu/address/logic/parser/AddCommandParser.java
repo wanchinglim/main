@@ -18,7 +18,7 @@ import seedu.address.model.flashcard.Email;
 import seedu.address.model.flashcard.Flashcard;
 import seedu.address.model.flashcard.Phone;
 import seedu.address.model.flashcard.Topic;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Subject;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -45,7 +45,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Deadline deadline = new Deadline(""); //add command does not allow adding deadlines straightaway
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_SUBJECT));
+        Set<Subject> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_SUBJECT));
 
         Flashcard flashcard = new Flashcard(name, phone, email, address, deadline, tagList);
 

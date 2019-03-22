@@ -42,7 +42,7 @@ import seedu.address.model.flashcard.Email;
 import seedu.address.model.flashcard.Flashcard;
 import seedu.address.model.flashcard.Phone;
 import seedu.address.model.flashcard.Topic;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Subject;
 import seedu.address.testutil.FlashcardBuilder;
 import seedu.address.testutil.FlashcardUtil;
 
@@ -176,7 +176,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         /* Case: invalid tag -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
                 + INVALID_TAG_DESC;
-        assertCommandFailure(command, Tag.MESSAGE_CONSTRAINTS);
+        assertCommandFailure(command, Subject.MESSAGE_CONSTRAINTS);
     }
 
     /**

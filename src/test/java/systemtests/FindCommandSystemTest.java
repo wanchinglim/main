@@ -19,7 +19,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Subject;
 
 public class FindCommandSystemTest extends AddressBookSystemTest {
 
@@ -128,7 +128,7 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
         assertSelectedCardUnchanged();
 
         /* Case: find tags of flashcard in address book -> 0 subjects found */
-        List<Tag> tags = new ArrayList<>(DANIEL.getTags());
+        List<Subject> tags = new ArrayList<>(DANIEL.getTags());
         command = FindCommand.COMMAND_WORD + " " + tags.get(0).tagName;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();

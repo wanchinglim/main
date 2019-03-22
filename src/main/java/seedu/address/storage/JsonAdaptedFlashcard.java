@@ -16,7 +16,7 @@ import seedu.address.model.flashcard.Email;
 import seedu.address.model.flashcard.Flashcard;
 import seedu.address.model.flashcard.Phone;
 import seedu.address.model.flashcard.Topic;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Subject;
 
 /**
  * Jackson-friendly version of {@link Flashcard}.
@@ -70,7 +70,7 @@ class JsonAdaptedFlashcard {
      * @throws IllegalValueException if there were any data constraints violated in the adapted flashcard.
      */
     public Flashcard toModelType() throws IllegalValueException {
-        final List<Tag> flashcardTags = new ArrayList<>();
+        final List<Subject> flashcardTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
             flashcardTags.add(tag.toModelType());
         }
@@ -115,7 +115,7 @@ class JsonAdaptedFlashcard {
         final Deadline modelDeadline = new Deadline(deadline);
 
 
-        final Set<Tag> modelTags = new HashSet<>(flashcardTags);
+        final Set<Subject> modelTags = new HashSet<>(flashcardTags);
         return new Flashcard(modelName, modelPhone, modelEmail, modelAddress, modelDeadline, modelTags);
     }
 

@@ -11,7 +11,7 @@ import seedu.address.model.flashcard.Email;
 import seedu.address.model.flashcard.Flashcard;
 import seedu.address.model.flashcard.Phone;
 import seedu.address.model.flashcard.Topic;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Subject;
 
 /**
  * A utility class to help with building EditFlashcardDescriptor objects.
@@ -73,11 +73,11 @@ public class EditFlashcardDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditFlashcardDescriptor}
+     * Parses the {@code tags} into a {@code Set<Subject>} and set it to the {@code EditFlashcardDescriptor}
      * that we are building.
      */
     public EditFlashcardDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
+        Set<Subject> tagSet = Stream.of(tags).map(Subject::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
         return this;
     }
