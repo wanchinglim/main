@@ -16,7 +16,7 @@ import seedu.address.model.tag.Tag;
 public class Flashcard {
 
     // Identity fields
-    private final Name name;
+    private final Topic topic;
     private final Phone phone;
     private final Email email;
 
@@ -28,9 +28,9 @@ public class Flashcard {
     /**
      * Every field must be present and not null.
      */
-    public Flashcard(Name name, Phone phone, Email email, Address address, Deadline deadline, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
-        this.name = name;
+    public Flashcard(Topic topic, Phone phone, Email email, Address address, Deadline deadline, Set<Tag> tags) {
+        requireAllNonNull(topic, phone, email, address, tags);
+        this.topic = topic;
         this.phone = phone;
         this.email = email;
         this.address = address;
@@ -38,8 +38,8 @@ public class Flashcard {
         this.tags.addAll(tags);
     }
 
-    public Name getName() {
-        return name;
+    public Topic getTopic() {
+        return topic;
     }
 
     public Phone getPhone() {
@@ -67,7 +67,7 @@ public class Flashcard {
     }
 
     /**
-     * Returns true if both flashcards of the same name have at least one other identity field that is the same.
+     * Returns true if both flashcards of the same topic have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two flashcards.
      */
     public boolean isSameFlashcard(Flashcard otherFlashcard) {
@@ -76,7 +76,7 @@ public class Flashcard {
         }
 
         return otherFlashcard != null
-                && otherFlashcard.getName().equals(getName())
+                && otherFlashcard.getTopic().equals(getTopic())
                 && (otherFlashcard.getPhone().equals(getPhone()) || otherFlashcard.getEmail().equals(getEmail()));
     }
 
@@ -95,7 +95,7 @@ public class Flashcard {
         }
 
         Flashcard otherFlashcard = (Flashcard) other;
-        return otherFlashcard.getName().equals(getName())
+        return otherFlashcard.getTopic().equals(getTopic())
                 && otherFlashcard.getPhone().equals(getPhone())
                 && otherFlashcard.getEmail().equals(getEmail())
                 && otherFlashcard.getAddress().equals(getAddress())
@@ -105,13 +105,13 @@ public class Flashcard {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(topic, phone, email, address, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
+        builder.append(getTopic())
                 .append(" Phone: ")
                 .append(getPhone())
                 .append(" Email: ")
