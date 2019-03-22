@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Subject in the address book.
- * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
+ * Guarantees: immutable; name is valid as declared in {@link #isValidSubjectName(String)}
  */
 public class Subject {
 
@@ -21,14 +21,14 @@ public class Subject {
      */
     public Subject(String subjectName) {
         requireNonNull(subjectName);
-        checkArgument(isValidTagName(subjectName), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidSubjectName(subjectName), MESSAGE_CONSTRAINTS);
         this.subjectName = subjectName;
     }
 
     /**
      * Returns true if a given string is a valid tag name.
      */
-    public static boolean isValidTagName(String test) {
+    public static boolean isValidSubjectName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 

@@ -20,7 +20,7 @@ public class SubjectTest {
     @Test
     public void isValidTagName() {
         // null tag name
-        Assert.assertThrows(NullPointerException.class, () -> Subject.isValidTagName(null));
+        Assert.assertThrows(NullPointerException.class, () -> Subject.isValidSubjectName(null));
     }
 
 }

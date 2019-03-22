@@ -16,30 +16,30 @@ import seedu.address.model.tag.Subject;
 public class Flashcard {
 
     // Identity fields
-    private final Topic name;
+    private final Topic topic;
     private final Phone phone;
     private final Email email;
 
     // Data fields
     private final Address address;
     private final Deadline deadline;
-    private final Set<Subject> tags = new HashSet<>();
+    private final Set<Subject> subject = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Flashcard(Topic name, Phone phone, Email email, Address address, Deadline deadline, Set<Subject> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
-        this.name = name;
+    public Flashcard(Topic topic, Phone phone, Email email, Address address, Deadline deadline, Set<Subject> subject) {
+        requireAllNonNull(topic, phone, email, address, subject);
+        this.topic = topic;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.deadline = deadline;
-        this.tags.addAll(tags);
+        this.subject.addAll(subject);
     }
 
     public Topic getTopic() {
-        return name;
+        return topic;
     }
 
     public Phone getPhone() {
@@ -63,11 +63,11 @@ public class Flashcard {
      * if modification is attempted.
      */
     public Set<Subject> getTags() {
-        return Collections.unmodifiableSet(tags);
+        return Collections.unmodifiableSet(subject);
     }
 
     /**
-     * Returns true if both flashcards of the same name have at least one other identity field that is the same.
+     * Returns true if both flashcards of the same topic have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two flashcards.
      */
     public boolean isSameFlashcard(Flashcard otherFlashcard) {
@@ -105,7 +105,7 @@ public class Flashcard {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(topic, phone, email, address, subject);
     }
 
     @Override
@@ -118,7 +118,7 @@ public class Flashcard {
                 .append(getEmail())
                 .append(" Address: ")
                 .append(getAddress())
-                .append(" Tags: ");
+                .append(" Subject: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }
