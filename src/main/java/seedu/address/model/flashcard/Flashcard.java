@@ -17,7 +17,7 @@ public class Flashcard {
 
     // Identity fields
     private final Topic topic;
-    private final Phone phone;
+    private final Difficulty difficulty;
     private final Email email;
 
     // Data fields
@@ -28,10 +28,11 @@ public class Flashcard {
     /**
      * Every field must be present and not null.
      */
-    public Flashcard(Topic topic, Phone phone, Email email, Address address, Deadline deadline, Set<Tag> tags) {
-        requireAllNonNull(topic, phone, email, address, tags);
+    public Flashcard(Topic topic, Difficulty difficulty, Email email,
+                     Address address, Deadline deadline, Set<Tag> tags) {
+        requireAllNonNull(topic, difficulty, email, address, tags);
         this.topic = topic;
-        this.phone = phone;
+        this.difficulty = difficulty;
         this.email = email;
         this.address = address;
         this.deadline = deadline;
@@ -42,8 +43,8 @@ public class Flashcard {
         return topic;
     }
 
-    public Phone getPhone() {
-        return phone;
+    public Difficulty getDifficulty() {
+        return difficulty;
     }
 
     public Email getEmail() {
@@ -77,7 +78,8 @@ public class Flashcard {
 
         return otherFlashcard != null
                 && otherFlashcard.getTopic().equals(getTopic())
-                && (otherFlashcard.getPhone().equals(getPhone()) || otherFlashcard.getEmail().equals(getEmail()));
+                && (otherFlashcard.getDifficulty().equals(getDifficulty())
+                || otherFlashcard.getEmail().equals(getEmail()));
     }
 
     /**
@@ -96,7 +98,7 @@ public class Flashcard {
 
         Flashcard otherFlashcard = (Flashcard) other;
         return otherFlashcard.getTopic().equals(getTopic())
-                && otherFlashcard.getPhone().equals(getPhone())
+                && otherFlashcard.getDifficulty().equals(getDifficulty())
                 && otherFlashcard.getEmail().equals(getEmail())
                 && otherFlashcard.getAddress().equals(getAddress())
                 && otherFlashcard.getTags().equals(getTags());
@@ -105,15 +107,15 @@ public class Flashcard {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(topic, phone, email, address, tags);
+        return Objects.hash(topic, difficulty, email, address, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getTopic())
-                .append(" Phone: ")
-                .append(getPhone())
+                .append(" Difficulty: ")
+                .append(getDifficulty())
                 .append(" Email: ")
                 .append(getEmail())
                 .append(" Address: ")
