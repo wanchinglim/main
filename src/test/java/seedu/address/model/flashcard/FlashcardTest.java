@@ -3,8 +3,8 @@ package seedu.address.model.flashcard;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DIFFICULTY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_BOB;
 import static seedu.address.testutil.TypicalFlashcards.ALICE;
@@ -35,26 +35,26 @@ public class FlashcardTest {
         // null -> returns false
         assertFalse(ALICE.isSameFlashcard(null));
 
-        // different phone and email -> returns false
+        // different difficulty and email -> returns false
         Flashcard editedAlice =
-                new FlashcardBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
+                new FlashcardBuilder(ALICE).withDifficulty(VALID_DIFFICULTY_BOB).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.isSameFlashcard(editedAlice));
 
         // different topic -> returns false
         editedAlice = new FlashcardBuilder(ALICE).withTopic(VALID_TOPIC_BOB).build();
         assertFalse(ALICE.isSameFlashcard(editedAlice));
 
-        // same topic, same phone, different attributes -> returns true
+        // same topic, same difficulty, different attributes -> returns true
         editedAlice = new FlashcardBuilder(ALICE).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameFlashcard(editedAlice));
 
         // same topic, same email, different attributes -> returns true
-        editedAlice = new FlashcardBuilder(ALICE).withPhone(VALID_PHONE_BOB).withAddress(VALID_ADDRESS_BOB)
+        editedAlice = new FlashcardBuilder(ALICE).withDifficulty(VALID_DIFFICULTY_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameFlashcard(editedAlice));
 
-        // same topic, same phone, same email, different attributes -> returns true
+        // same topic, same difficulty, same email, different attributes -> returns true
         editedAlice = new FlashcardBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameFlashcard(editedAlice));
     }
@@ -81,8 +81,8 @@ public class FlashcardTest {
         Flashcard editedAlice = new FlashcardBuilder(ALICE).withTopic(VALID_TOPIC_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different phone -> returns false
-        editedAlice = new FlashcardBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
+        // different difficulty -> returns false
+        editedAlice = new FlashcardBuilder(ALICE).withDifficulty(VALID_DIFFICULTY_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different email -> returns false
