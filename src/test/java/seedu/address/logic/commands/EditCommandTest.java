@@ -5,7 +5,7 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DIFFICULTY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -58,11 +58,11 @@ public class EditCommandTest {
         Flashcard lastFlashcard = model.getFilteredFlashcardList().get(indexLastSubject.getZeroBased());
 
         FlashcardBuilder subjectInList = new FlashcardBuilder(lastFlashcard);
-        Flashcard editedFlashcard = subjectInList.withTopic(VALID_TOPIC_BOB).withPhone(VALID_PHONE_BOB)
+        Flashcard editedFlashcard = subjectInList.withTopic(VALID_TOPIC_BOB).withDifficulty(VALID_DIFFICULTY_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
 
         EditCommand.EditFlashcardDescriptor descriptor = new EditFlashcardDescriptorBuilder().withTopic(VALID_TOPIC_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withDifficulty(VALID_DIFFICULTY_BOB).withTags(VALID_TAG_HUSBAND).build();
         EditCommand editCommand = new EditCommand(indexLastSubject, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_FLASHCARD_SUCCESS, editedFlashcard);
