@@ -7,7 +7,7 @@ public class CliSyntax {
 
     /* Prefix definitions */
     public static final Prefix PREFIX_TOPIC = new Prefix("top/");
-    public static final Prefix PREFIX_PHONE = new Prefix("p/");
+    public static final Prefix PREFIX_DIFFICULTY = new Prefix("diff/");
     public static final Prefix PREFIX_EMAIL = new Prefix("e/");
     public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
     public static final Prefix PREFIX_DEADLINE = new Prefix("d/");
