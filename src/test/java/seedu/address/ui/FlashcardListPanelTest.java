@@ -19,9 +19,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.flashcard.Address;
 import seedu.address.model.flashcard.Deadline;
+import seedu.address.model.flashcard.Difficulty;
 import seedu.address.model.flashcard.Email;
 import seedu.address.model.flashcard.Flashcard;
-import seedu.address.model.flashcard.Phone;
 import seedu.address.model.flashcard.Topic;
 
 public class FlashcardListPanelTest extends GuiUnitTest {
@@ -82,11 +82,11 @@ public class FlashcardListPanelTest extends GuiUnitTest {
         ObservableList<Flashcard> backingList = FXCollections.observableArrayList();
         for (int i = 0; i < subjectCount; i++) {
             Topic topic = new Topic(i + "a");
-            Phone phone = new Phone("000");
+            Difficulty difficulty = new Difficulty("000");
             Email email = new Email("a@aa");
             Address address = new Address("a");
             Deadline deadline = new Deadline("a");
-            Flashcard flashcard = new Flashcard(topic, phone, email, address, deadline, Collections.emptySet());
+            Flashcard flashcard = new Flashcard(topic, difficulty, email, address, deadline, Collections.emptySet());
             backingList.add(flashcard);
         }
         return backingList;
