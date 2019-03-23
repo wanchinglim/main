@@ -33,7 +33,7 @@ public class FlashcardCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private Label difficulty;
     @FXML
     private Label address;
     @FXML
@@ -48,7 +48,7 @@ public class FlashcardCard extends UiPart<Region> {
         this.flashcard = flashcard;
         id.setText(displayedIndex + ". ");
         topic.setText(flashcard.getTopic().fullTopic);
-        phone.setText(flashcard.getPhone().value);
+        difficulty.setText(flashcard.getDifficulty().value);
         address.setText(flashcard.getAddress().value);
         email.setText(flashcard.getEmail().value);
         deadline.setText(flashcard.getDeadline().value);
