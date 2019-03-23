@@ -17,7 +17,7 @@ public class FlashcardCardHandle extends NodeHandle<Node> {
     private static final String ID_FIELD_ID = "#id";
     private static final String TOPIC_FIELD_ID = "#topic";
     private static final String ADDRESS_FIELD_ID = "#address";
-    private static final String PHONE_FIELD_ID = "#phone";
+    private static final String DIFFICULTY_FIELD_ID = "#difficulty";
     private static final String EMAIL_FIELD_ID = "#email";
     private static final String DEADLINE_FIELD_ID = "#deadline";
     private static final String TAGS_FIELD_ID = "#tags";
@@ -25,7 +25,7 @@ public class FlashcardCardHandle extends NodeHandle<Node> {
     private final Label idLabel;
     private final Label topicLabel;
     private final Label addressLabel;
-    private final Label phoneLabel;
+    private final Label difficultyLabel;
     private final Label emailLabel;
     private final Label deadlineLabel;
     private final List<Label> tagLabels;
@@ -36,7 +36,7 @@ public class FlashcardCardHandle extends NodeHandle<Node> {
         idLabel = getChildNode(ID_FIELD_ID);
         topicLabel = getChildNode(TOPIC_FIELD_ID);
         addressLabel = getChildNode(ADDRESS_FIELD_ID);
-        phoneLabel = getChildNode(PHONE_FIELD_ID);
+        difficultyLabel = getChildNode(DIFFICULTY_FIELD_ID);
         emailLabel = getChildNode(EMAIL_FIELD_ID);
         deadlineLabel = getChildNode(DEADLINE_FIELD_ID);
 
@@ -60,8 +60,8 @@ public class FlashcardCardHandle extends NodeHandle<Node> {
         return addressLabel.getText();
     }
 
-    public String getPhone() {
-        return phoneLabel.getText();
+    public String getDifficulty() {
+        return difficultyLabel.getText();
     }
 
     public String getEmail() {
@@ -85,7 +85,7 @@ public class FlashcardCardHandle extends NodeHandle<Node> {
     public boolean equals(Flashcard flashcard) {
         return getTopic().equals(flashcard.getTopic().fullTopic)
                 && getAddress().equals(flashcard.getAddress().value)
-                && getPhone().equals(flashcard.getPhone().value)
+                && getDifficulty().equals(flashcard.getDifficulty().value)
                 && getEmail().equals(flashcard.getEmail().value)
                 && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(flashcard.getTags().stream()
                         .map(tag -> tag.tagName)
