@@ -13,8 +13,8 @@ import seedu.address.logic.commands.PreviousCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.flashcard.Address;
 import seedu.address.model.flashcard.Email;
-import seedu.address.model.flashcard.Topic;
 import seedu.address.model.flashcard.Phone;
+import seedu.address.model.flashcard.Topic;
 import seedu.address.model.tag.Tag;
 
 /**

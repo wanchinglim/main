@@ -89,7 +89,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         */
 /* Case: edit a flashcard with new values same as existing values -> edited *//*
 
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + TOPIC_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+      command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + TOPIC_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandSuccess(command, index, BOB);
 
@@ -99,7 +99,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         assertTrue(getModel().getAddressBook().getFlashcardList().contains(BOB));
         index = INDEX_SECOND_FLASHCARD;
         assertNotEquals(getModel().getFilteredFlashcardList().get(index.getZeroBased()), BOB);
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + TOPIC_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
+      command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + TOPIC_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         editedSubject = new FlashcardBuilder(BOB).withTopic(VALID_TOPIC_AMY).build();
         assertCommandSuccess(command, index, editedSubject);
@@ -110,7 +110,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
          *//*
 
         index = INDEX_SECOND_FLASHCARD;
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + TOPIC_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_AMY
+      command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + TOPIC_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         editedSubject = new FlashcardBuilder(BOB).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).build();
         assertCommandSuccess(command, index, editedSubject);
@@ -161,7 +161,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         showAllFlashcards();
         index = INDEX_FIRST_FLASHCARD;
         selectFlashcard(index);
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + TOPIC_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
+      command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + TOPIC_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + ADDRESS_DESC_AMY + TAG_DESC_FRIEND;
         // this can be misleading: card selection actually remains unchanged but the
         // browser's url is updated to reflect the new flashcard's topic
@@ -239,7 +239,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         assertTrue(getModel().getAddressBook().getFlashcardList().contains(BOB));
         index = INDEX_FIRST_FLASHCARD;
         assertFalse(getModel().getFilteredFlashcardList().get(index.getZeroBased()).equals(BOB));
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + TOPIC_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+      command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + TOPIC_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_FLASHCARD);
 
@@ -247,7 +247,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
 /* Case: edit a flashcard with new values same as another flashcard's values but with different tags
         -> rejected *//*
 
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + TOPIC_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+      command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + TOPIC_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_FLASHCARD);
 
@@ -255,21 +255,21 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
 /* Case: edit a flashcard with new values same as another flashcard's values but with different address
         -> rejected *//*
 
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + TOPIC_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+      command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + TOPIC_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_AMY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_FLASHCARD);
 
         */
 /* Case: edit a flashcard with new values same as another flashcard's values but with different phone -> rejected *//*
 
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + TOPIC_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_BOB
+      command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + TOPIC_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_FLASHCARD);
 
         */
 /* Case: edit a flashcard with new values same as another flashcard's values but with different email -> rejected *//*
 
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + TOPIC_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY
+      command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + TOPIC_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_FLASHCARD);
     }
@@ -288,7 +288,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
 
     */
 /**
-     * Performs the same verification as {@code assertCommandSuccess(String, Model, String, Index)} and in addition,<br>
+ * Performs the same verification as {@code assertCommandSuccess(String, Model, String, Index)} and in addition,<br>
      * 1. Asserts that result display box displays the success message of executing {@code EditCommand}.<br>
      * 2. Asserts that the model related components are updated to reflect the flashcard at index {@code toEdit} being
      * updated to values specified {@code editedSubject}.<br>

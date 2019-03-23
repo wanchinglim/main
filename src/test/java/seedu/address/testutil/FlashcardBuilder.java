@@ -7,8 +7,8 @@ import seedu.address.model.flashcard.Address;
 import seedu.address.model.flashcard.Deadline;
 import seedu.address.model.flashcard.Email;
 import seedu.address.model.flashcard.Flashcard;
-import seedu.address.model.flashcard.Topic;
 import seedu.address.model.flashcard.Phone;
+import seedu.address.model.flashcard.Topic;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 

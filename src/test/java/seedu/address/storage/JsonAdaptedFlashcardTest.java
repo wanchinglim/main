@@ -13,8 +13,8 @@ import org.junit.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.flashcard.Address;
 import seedu.address.model.flashcard.Email;
-import seedu.address.model.flashcard.Topic;
 import seedu.address.model.flashcard.Phone;
+import seedu.address.model.flashcard.Topic;
 import seedu.address.testutil.Assert;
 
 public class JsonAdaptedFlashcardTest {

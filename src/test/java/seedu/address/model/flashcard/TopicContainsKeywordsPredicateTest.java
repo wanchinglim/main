@@ -25,7 +25,8 @@ public class TopicContainsKeywordsPredicateTest {
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        TopicContainsKeywordsPredicate firstPredicateCopy = new TopicContainsKeywordsPredicate(firstPredicateKeywordList);
+        TopicContainsKeywordsPredicate firstPredicateCopy =
+                new TopicContainsKeywordsPredicate(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -41,7 +42,8 @@ public class TopicContainsKeywordsPredicateTest {
     @Test
     public void test_topicContainsKeywords_returnsTrue() {
         // One keyword
-        TopicContainsKeywordsPredicate predicate = new TopicContainsKeywordsPredicate(Collections.singletonList("Alice"));
+        TopicContainsKeywordsPredicate predicate =
+                new TopicContainsKeywordsPredicate(Collections.singletonList("Alice"));
         assertTrue(predicate.test(new FlashcardBuilder().withTopic("Alice Bob").build()));
 
         // Multiple keywords
