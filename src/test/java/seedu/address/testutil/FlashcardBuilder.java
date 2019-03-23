@@ -5,9 +5,9 @@ import java.util.Set;
 
 import seedu.address.model.flashcard.Address;
 import seedu.address.model.flashcard.Deadline;
+import seedu.address.model.flashcard.Difficulty;
 import seedu.address.model.flashcard.Email;
 import seedu.address.model.flashcard.Flashcard;
-import seedu.address.model.flashcard.Phone;
 import seedu.address.model.flashcard.Topic;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -18,13 +18,13 @@ import seedu.address.model.util.SampleDataUtil;
 public class FlashcardBuilder {
 
     public static final String DEFAULT_TOPIC = "Alice Pauline";
-    public static final String DEFAULT_PHONE = "85355255";
+    public static final String DEFAULT_DIFFICULTY = "85355255";
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_DEADLINE = "";
 
     private Topic topic;
-    private Phone phone;
+    private Difficulty difficulty;
     private Email email;
     private Address address;
     private Deadline deadline;
@@ -32,7 +32,7 @@ public class FlashcardBuilder {
 
     public FlashcardBuilder() {
         topic = new Topic(DEFAULT_TOPIC);
-        phone = new Phone(DEFAULT_PHONE);
+        difficulty = new Difficulty(DEFAULT_DIFFICULTY);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         deadline = new Deadline(DEFAULT_DEADLINE);
@@ -44,7 +44,7 @@ public class FlashcardBuilder {
      */
     public FlashcardBuilder(Flashcard flashcardToCopy) {
         topic = flashcardToCopy.getTopic();
-        phone = flashcardToCopy.getPhone();
+        difficulty = flashcardToCopy.getDifficulty();
         email = flashcardToCopy.getEmail();
         address = flashcardToCopy.getAddress();
         deadline = flashcardToCopy.getDeadline();
@@ -76,10 +76,10 @@ public class FlashcardBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code Flashcard} that we are building.
+     * Sets the {@code Difficulty} of the {@code Flashcard} that we are building.
      */
-    public FlashcardBuilder withPhone(String phone) {
-        this.phone = new Phone(phone);
+    public FlashcardBuilder withDifficulty(String difficulty) {
+        this.difficulty = new Difficulty(difficulty);
         return this;
     }
 
@@ -101,7 +101,7 @@ public class FlashcardBuilder {
     }
 
     public Flashcard build() {
-        return new Flashcard(topic, phone, email, address, deadline, tags);
+        return new Flashcard(topic, difficulty, email, address, deadline, tags);
     }
 
 }

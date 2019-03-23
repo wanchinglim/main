@@ -1,8 +1,8 @@
 package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DIFFICULTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TOPIC;
 
@@ -31,7 +31,7 @@ public class FlashcardUtil {
     public static String getFlashcardDetails(Flashcard flashcard) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_TOPIC + flashcard.getTopic().fullTopic + " ");
-        sb.append(PREFIX_PHONE + flashcard.getPhone().value + " ");
+        sb.append(PREFIX_DIFFICULTY + flashcard.getDifficulty().value + " ");
         sb.append(PREFIX_EMAIL + flashcard.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + flashcard.getAddress().value + " ");
         flashcard.getTags().stream().forEach(
@@ -46,7 +46,8 @@ public class FlashcardUtil {
     public static String getEditFlashcardDescriptorDetails(EditFlashcardDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getTopic().ifPresent(topic -> sb.append(PREFIX_TOPIC).append(topic.fullTopic).append(" "));
-        descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
+        descriptor.getDifficulty().ifPresent(difficulty ->
+                sb.append(PREFIX_DIFFICULTY).append(difficulty.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         if (descriptor.getTags().isPresent()) {
