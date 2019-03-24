@@ -8,7 +8,6 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditFlashcardDescriptor;
 import seedu.address.model.flashcard.Content;
 import seedu.address.model.flashcard.Difficulty;
-import seedu.address.model.flashcard.Email;
 import seedu.address.model.flashcard.Flashcard;
 import seedu.address.model.flashcard.Topic;
 import seedu.address.model.tag.Tag;
@@ -35,7 +34,6 @@ public class EditFlashcardDescriptorBuilder {
         descriptor = new EditCommand.EditFlashcardDescriptor();
         descriptor.setTopic(flashcard.getTopic());
         descriptor.setDifficulty(flashcard.getDifficulty());
-        descriptor.setEmail(flashcard.getEmail());
         descriptor.setContent(flashcard.getContent());
         descriptor.setTags(flashcard.getTags());
     }
@@ -53,14 +51,6 @@ public class EditFlashcardDescriptorBuilder {
      */
     public EditFlashcardDescriptorBuilder withDifficulty(String difficulty) {
         descriptor.setDifficulty(new Difficulty(difficulty));
-        return this;
-    }
-
-    /**
-     * Sets the {@code Email} of the {@code EditFlashcardDescriptor} that we are building.
-     */
-    public EditFlashcardDescriptorBuilder withEmail(String email) {
-        descriptor.setEmail(new Email(email));
         return this;
     }
 

@@ -6,7 +6,6 @@ import java.util.Set;
 import seedu.address.model.flashcard.Content;
 import seedu.address.model.flashcard.Deadline;
 import seedu.address.model.flashcard.Difficulty;
-import seedu.address.model.flashcard.Email;
 import seedu.address.model.flashcard.Flashcard;
 import seedu.address.model.flashcard.Topic;
 import seedu.address.model.tag.Tag;
@@ -19,13 +18,11 @@ public class FlashcardBuilder {
 
     public static final String DEFAULT_TOPIC = "Alice Pauline";
     public static final String DEFAULT_DIFFICULTY = "85355255";
-    public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_CONTENT = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_DEADLINE = "";
 
     private Topic topic;
     private Difficulty difficulty;
-    private Email email;
     private Content content;
     private Deadline deadline;
     private Set<Tag> tags;
@@ -33,7 +30,6 @@ public class FlashcardBuilder {
     public FlashcardBuilder() {
         topic = new Topic(DEFAULT_TOPIC);
         difficulty = new Difficulty(DEFAULT_DIFFICULTY);
-        email = new Email(DEFAULT_EMAIL);
         content = new Content(DEFAULT_CONTENT);
         deadline = new Deadline(DEFAULT_DEADLINE);
         tags = new HashSet<>();
@@ -45,7 +41,6 @@ public class FlashcardBuilder {
     public FlashcardBuilder(Flashcard flashcardToCopy) {
         topic = flashcardToCopy.getTopic();
         difficulty = flashcardToCopy.getDifficulty();
-        email = flashcardToCopy.getEmail();
         content = flashcardToCopy.getContent();
         deadline = flashcardToCopy.getDeadline();
         tags = new HashSet<>(flashcardToCopy.getTags());
@@ -84,14 +79,6 @@ public class FlashcardBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code Flashcard} that we are building.
-     */
-    public FlashcardBuilder withEmail(String email) {
-        this.email = new Email(email);
-        return this;
-    }
-
-    /**
      * Sets the {@code Deadline} of the {@code Flashcard} that we are building.
      */
 
@@ -101,7 +88,7 @@ public class FlashcardBuilder {
     }
 
     public Flashcard build() {
-        return new Flashcard(topic, difficulty, email, content, deadline, tags);
+        return new Flashcard(topic, difficulty, content, deadline, tags);
     }
 
 }

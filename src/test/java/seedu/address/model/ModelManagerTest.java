@@ -3,7 +3,6 @@ package seedu.address.model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_FLASHCARDS;
 import static seedu.address.testutil.TypicalFlashcards.ALICE;
 import static seedu.address.testutil.TypicalFlashcards.BENSON;
@@ -124,7 +123,7 @@ public class ModelManagerTest {
     public void setFlashcard_flashcardIsSelected_selectedFlashcardUpdated() {
         modelManager.addFlashcard(ALICE);
         modelManager.setSelectedFlashcard(ALICE);
-        Flashcard updatedAlice = new FlashcardBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
+        Flashcard updatedAlice = new FlashcardBuilder(ALICE).build();
         modelManager.setFlashcard(ALICE, updatedAlice);
         assertEquals(updatedAlice, modelManager.getSelectedFlashcard());
     }

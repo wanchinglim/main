@@ -5,11 +5,8 @@ import static seedu.address.logic.commands.CommandTestUtil.CONTENT_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.CONTENT_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.DIFFICULTY_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DIFFICULTY_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_CONTENT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DIFFICULTY_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TOPIC_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
@@ -19,8 +16,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTENT_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTENT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DIFFICULTY_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DIFFICULTY_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_AMY;
@@ -38,7 +33,6 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditFlashcardDescriptor;
 import seedu.address.model.flashcard.Content;
 import seedu.address.model.flashcard.Difficulty;
-import seedu.address.model.flashcard.Email;
 import seedu.address.model.flashcard.Topic;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditFlashcardDescriptorBuilder;
@@ -84,13 +78,8 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_TOPIC_DESC, Topic.MESSAGE_CONSTRAINTS); // invalid topic
         assertParseFailure(parser, "1" + INVALID_DIFFICULTY_DESC, Difficulty.MESSAGE_CONSTRAINTS);
         // invalid difficulty
-        assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
         assertParseFailure(parser, "1" + INVALID_CONTENT_DESC, Content.MESSAGE_CONSTRAINTS); // invalid content
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
-
-        // invalid difficulty followed by valid email
-        assertParseFailure(parser, "1" + INVALID_DIFFICULTY_DESC + EMAIL_DESC_AMY,
-                Difficulty.MESSAGE_CONSTRAINTS);
 
         // valid difficulty followed by invalid difficulty. The test case for invalid difficulty
         // followed by valid difficulty
@@ -108,7 +97,7 @@ public class EditCommandParserTest {
                 Tag.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_TOPIC_DESC + INVALID_EMAIL_DESC + VALID_CONTENT_AMY
+        assertParseFailure(parser, "1" + INVALID_TOPIC_DESC + VALID_CONTENT_AMY
                         + VALID_DIFFICULTY_AMY,
                 Topic.MESSAGE_CONSTRAINTS);
     }
@@ -117,10 +106,10 @@ public class EditCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_FLASHCARD;
         String userInput = targetIndex.getOneBased() + DIFFICULTY_DESC_BOB + TAG_DESC_HUSBAND
-                + EMAIL_DESC_AMY + CONTENT_DESC_AMY + TOPIC_DESC_AMY + TAG_DESC_FRIEND;
+                + CONTENT_DESC_AMY + TOPIC_DESC_AMY + TAG_DESC_FRIEND;
 
         EditFlashcardDescriptor descriptor = new EditFlashcardDescriptorBuilder().withTopic(VALID_TOPIC_AMY)
-                .withDifficulty(VALID_DIFFICULTY_BOB).withEmail(VALID_EMAIL_AMY).withContent(VALID_CONTENT_AMY)
+                .withDifficulty(VALID_DIFFICULTY_BOB).withContent(VALID_CONTENT_AMY)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -130,11 +119,11 @@ public class EditCommandParserTest {
     @Test
     public void parse_someFieldsSpecified_success() {
         Index targetIndex = INDEX_FIRST_FLASHCARD;
-        String userInput = targetIndex.getOneBased() + DIFFICULTY_DESC_BOB + EMAIL_DESC_AMY;
+        String userInput = targetIndex.getOneBased() + DIFFICULTY_DESC_BOB + CONTENT_DESC_AMY;
 
         EditCommand.EditFlashcardDescriptor descriptor =
                 new EditFlashcardDescriptorBuilder().withDifficulty(VALID_DIFFICULTY_BOB)
-                .withEmail(VALID_EMAIL_AMY).build();
+                .withContent(VALID_CONTENT_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -155,12 +144,6 @@ public class EditCommandParserTest {
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // email
-        userInput = targetIndex.getOneBased() + EMAIL_DESC_AMY;
-        descriptor = new EditFlashcardDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
-
         // content
         userInput = targetIndex.getOneBased() + CONTENT_DESC_AMY;
         descriptor = new EditFlashcardDescriptorBuilder().withContent(VALID_CONTENT_AMY).build();
@@ -177,12 +160,12 @@ public class EditCommandParserTest {
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
         Index targetIndex = INDEX_FIRST_FLASHCARD;
-        String userInput = targetIndex.getOneBased() + DIFFICULTY_DESC_AMY + CONTENT_DESC_AMY + EMAIL_DESC_AMY
-                + TAG_DESC_FRIEND + DIFFICULTY_DESC_AMY + CONTENT_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_FRIEND
-                + DIFFICULTY_DESC_BOB + CONTENT_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_HUSBAND;
+        String userInput = targetIndex.getOneBased() + DIFFICULTY_DESC_AMY + CONTENT_DESC_AMY
+                + TAG_DESC_FRIEND + DIFFICULTY_DESC_AMY + CONTENT_DESC_AMY + TAG_DESC_FRIEND
+                + DIFFICULTY_DESC_BOB + CONTENT_DESC_BOB + TAG_DESC_HUSBAND;
 
         EditFlashcardDescriptor descriptor = new EditFlashcardDescriptorBuilder().withDifficulty(VALID_DIFFICULTY_BOB)
-                .withEmail(VALID_EMAIL_BOB).withContent(VALID_CONTENT_BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+                .withContent(VALID_CONTENT_BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -200,11 +183,11 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // other valid values specified
-        userInput = targetIndex.getOneBased() + EMAIL_DESC_BOB + INVALID_DIFFICULTY_DESC + CONTENT_DESC_BOB
+        userInput = targetIndex.getOneBased() + INVALID_DIFFICULTY_DESC + CONTENT_DESC_BOB
                 + DIFFICULTY_DESC_BOB;
         descriptor =
-                new EditFlashcardDescriptorBuilder().withDifficulty(VALID_DIFFICULTY_BOB).withEmail(VALID_EMAIL_BOB)
-                .withContent(VALID_CONTENT_BOB).build();
+                new EditFlashcardDescriptorBuilder().withDifficulty(VALID_DIFFICULTY_BOB)
+                        .withContent(VALID_CONTENT_BOB).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DIFFICULTY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TOPIC;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_FLASHCARDS;
@@ -23,7 +22,6 @@ import seedu.address.model.Model;
 import seedu.address.model.flashcard.Content;
 import seedu.address.model.flashcard.Deadline;
 import seedu.address.model.flashcard.Difficulty;
-import seedu.address.model.flashcard.Email;
 import seedu.address.model.flashcard.Flashcard;
 import seedu.address.model.flashcard.Topic;
 import seedu.address.model.tag.Tag;
@@ -42,12 +40,10 @@ public class EditCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_TOPIC + "TOPIC] "
             + "[" + PREFIX_DIFFICULTY + "DIFFICULTY] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_CONTENT + "CONTENT] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_DIFFICULTY + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_DIFFICULTY + "91234567 ";
 
     public static final String MESSAGE_EDIT_FLASHCARD_SUCCESS = "Edited Flashcard: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -100,13 +96,11 @@ public class EditCommand extends Command {
 
         Topic updatedTopic = editFlashcardDescriptor.getTopic().orElse(flashcardToEdit.getTopic());
         Difficulty updatedDifficulty = editFlashcardDescriptor.getDifficulty().orElse(flashcardToEdit.getDifficulty());
-        Email updatedEmail = editFlashcardDescriptor.getEmail().orElse(flashcardToEdit.getEmail());
         Content updatedContent = editFlashcardDescriptor.getContent().orElse(flashcardToEdit.getContent());
         Deadline updatedDeadline = flashcardToEdit.getDeadline(); //edit command does not allow editing deadlines
         Set<Tag> updatedTags = editFlashcardDescriptor.getTags().orElse(flashcardToEdit.getTags());
 
-        return new Flashcard(updatedTopic, updatedDifficulty, updatedEmail,
-                updatedContent, updatedDeadline, updatedTags);
+        return new Flashcard(updatedTopic, updatedDifficulty, updatedContent, updatedDeadline, updatedTags);
     }
 
     @Override
@@ -134,7 +128,6 @@ public class EditCommand extends Command {
     public static class EditFlashcardDescriptor {
         private Topic topic;
         private Difficulty difficulty;
-        private Email email;
         private Content content;
         private Set<Tag> tags;
 
@@ -147,7 +140,6 @@ public class EditCommand extends Command {
         public EditFlashcardDescriptor(EditFlashcardDescriptor toCopy) {
             setTopic(toCopy.topic);
             setDifficulty(toCopy.difficulty);
-            setEmail(toCopy.email);
             setContent(toCopy.content);
             setTags(toCopy.tags);
         }
@@ -156,7 +148,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(topic, difficulty, email, content, tags);
+            return CollectionUtil.isAnyNonNull(topic, difficulty, content, tags);
         }
 
         public void setTopic(Topic topic) {
@@ -173,14 +165,6 @@ public class EditCommand extends Command {
 
         public Optional<Difficulty> getDifficulty() {
             return Optional.ofNullable(difficulty);
-        }
-
-        public void setEmail(Email email) {
-            this.email = email;
-        }
-
-        public Optional<Email> getEmail() {
-            return Optional.ofNullable(email);
         }
 
         public void setContent(Content content) {
@@ -225,7 +209,6 @@ public class EditCommand extends Command {
 
             return getTopic().equals(e.getTopic())
                     && getDifficulty().equals(e.getDifficulty())
-                    && getEmail().equals(e.getEmail())
                     && getContent().equals(e.getContent())
                     && getTags().equals(e.getTags());
         }
