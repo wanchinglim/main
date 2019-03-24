@@ -29,7 +29,7 @@ import seedu.address.model.flashcard.Topic;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing flashcard in the address book.
+ * Edits the details of an existing flashcard in the flash book.
  */
 public class EditCommand extends Command {
 
@@ -86,7 +86,7 @@ public class EditCommand extends Command {
 
         model.setFlashcard(flashcardToEdit, editedFlashcard);
         model.updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
-        model.commitAddressBook();
+        model.commitFlashBook();
         return new CommandResult(String.format(MESSAGE_EDIT_FLASHCARD_SUCCESS, editedFlashcard));
     }
 

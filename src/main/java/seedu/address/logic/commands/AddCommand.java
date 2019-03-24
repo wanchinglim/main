@@ -13,13 +13,13 @@ import seedu.address.model.Model;
 import seedu.address.model.flashcard.Flashcard;
 
 /**
- * Adds a flashcard to the address book.
+ * Adds a flashcard to the flash book.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a flashcard to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a flashcard to the flash book. "
             + "Parameters: "
             + PREFIX_TOPIC + "TOPIC "
             + PREFIX_DIFFICULTY + "DIFFICULTY "
@@ -35,7 +35,7 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New flashcard added: %1$s";
-    public static final String MESSAGE_DUPLICATE_FLASHCARD = "This flashcard already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_FLASHCARD = "This flashcard already exists in the flash book";
 
     private final Flashcard toAdd;
 
@@ -56,7 +56,7 @@ public class AddCommand extends Command {
         }
 
         model.addFlashcard(toAdd);
-        model.commitAddressBook();
+        model.commitFlashBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
