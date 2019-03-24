@@ -19,9 +19,9 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.FlashBook;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyFlashBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.flashcard.Flashcard;
 import seedu.address.testutil.FlashcardBuilder;
@@ -66,8 +66,8 @@ public class AddCommandTest {
 
     @Test
     public void equals() {
-        Flashcard alice = new FlashcardBuilder().withName("Alice").build();
-        Flashcard bob = new FlashcardBuilder().withName("Bob").build();
+        Flashcard alice = new FlashcardBuilder().withTopic("Alice").build();
+        Flashcard bob = new FlashcardBuilder().withTopic("Bob").build();
         AddCommand addAliceCommand = new AddCommand(alice);
         AddCommand addBobCommand = new AddCommand(bob);
 
@@ -113,12 +113,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getFlashBookFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setFlashBookFilePath(Path flashBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -128,12 +128,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setFlashBook(ReadOnlyFlashBook newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyFlashBook getFlashBook() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -163,27 +163,27 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean canUndoAddressBook() {
+        public boolean canUndoFlashBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean canRedoAddressBook() {
+        public boolean canRedoFlashBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void undoAddressBook() {
+        public void undoFlashBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void redoAddressBook() {
+        public void redoFlashBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void commitAddressBook() {
+        public void commitFlashBook() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -240,13 +240,13 @@ public class AddCommandTest {
         }
 
         @Override
-        public void commitAddressBook() {
+        public void commitFlashBook() {
             // called by {@code AddCommand#execute()}
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyFlashBook getFlashBook() {
+            return new FlashBook();
         }
     }
 

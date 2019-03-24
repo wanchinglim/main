@@ -2,11 +2,11 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DIFFICULTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TOPIC;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -31,7 +31,8 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_TOPIC, PREFIX_DIFFICULTY,
+                                    PREFIX_EMAIL, PREFIX_CONTENT, PREFIX_TAG);
 
         Index index;
 
@@ -42,17 +43,18 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         EditCommand.EditFlashcardDescriptor editFlashcardDescriptor = new EditCommand.EditFlashcardDescriptor();
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editFlashcardDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+        if (argMultimap.getValue(PREFIX_TOPIC).isPresent()) {
+            editFlashcardDescriptor.setTopic(ParserUtil.parseTopic(argMultimap.getValue(PREFIX_TOPIC).get()));
         }
-        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editFlashcardDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
+        if (argMultimap.getValue(PREFIX_DIFFICULTY).isPresent()) {
+            editFlashcardDescriptor.setDifficulty(ParserUtil
+                    .parseDifficulty(argMultimap.getValue(PREFIX_DIFFICULTY).get()));
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             editFlashcardDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
-        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            editFlashcardDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
+        if (argMultimap.getValue(PREFIX_CONTENT).isPresent()) {
+            editFlashcardDescriptor.setContent(ParserUtil.parseContent(argMultimap.getValue(PREFIX_CONTENT).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editFlashcardDescriptor::setTags);
 

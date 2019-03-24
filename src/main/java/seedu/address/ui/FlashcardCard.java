@@ -21,7 +21,7 @@ public class FlashcardCard extends UiPart<Region> {
      * As a consequence, UI elements' variable names cannot be set to such keywords
      * or an exception will be thrown by JavaFX during runtime.
      *
-     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
+     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on FlashBook level 4</a>
      */
 
     public final Flashcard flashcard;
@@ -29,13 +29,13 @@ public class FlashcardCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private Label name;
+    private Label topic;
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private Label difficulty;
     @FXML
-    private Label address;
+    private Label content;
     @FXML
     private Label email;
     @FXML
@@ -47,9 +47,9 @@ public class FlashcardCard extends UiPart<Region> {
         super(FXML);
         this.flashcard = flashcard;
         id.setText(displayedIndex + ". ");
-        name.setText(flashcard.getName().fullName);
-        phone.setText(flashcard.getPhone().value);
-        address.setText(flashcard.getAddress().value);
+        topic.setText(flashcard.getTopic().fullTopic);
+        difficulty.setText(flashcard.getDifficulty().value);
+        content.setText(flashcard.getContent().value);
         email.setText(flashcard.getEmail().value);
         deadline.setText(flashcard.getDeadline().value);
         tagger(flashcard);

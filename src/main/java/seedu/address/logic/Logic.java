@@ -8,7 +8,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyFlashBook;
 import seedu.address.model.flashcard.Flashcard;
 
 /**
@@ -27,9 +27,9 @@ public interface Logic {
     /**
      * Returns the FlashCards.
      *
-     * @see seedu.address.model.Model#getAddressBook()
+     * @see seedu.address.model.Model#getFlashBook()
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyFlashBook getFlashBook();
 
     /** Returns an unmodifiable view of the filtered list of flashcards */
     ObservableList<Flashcard> getFilteredFlashcardList();
@@ -41,9 +41,9 @@ public interface Logic {
     ObservableList<String> getHistory();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' flash book file path.
      */
-    Path getAddressBookFilePath();
+    Path getFlashBookFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

@@ -31,16 +31,16 @@ import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.flashcard.Deadline;
 import seedu.address.model.flashcard.Flashcard;
-import seedu.address.model.flashcard.NameContainsKeywordsPredicate;
+import seedu.address.model.flashcard.TopicContainsKeywordsPredicate;
 import seedu.address.testutil.EditFlashcardDescriptorBuilder;
 import seedu.address.testutil.FlashcardBuilder;
 import seedu.address.testutil.FlashcardUtil;
 
-public class AddressBookParserTest {
+public class FlashBookParserTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final FlashBookParser parser = new FlashBookParser();
 
     @Test
     public void parseCommand_add() throws Exception {
@@ -115,7 +115,7 @@ public class AddressBookParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        assertEquals(new FindCommand(new TopicContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
@@ -123,7 +123,7 @@ public class AddressBookParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_ALIAS + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        assertEquals(new FindCommand(new TopicContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test

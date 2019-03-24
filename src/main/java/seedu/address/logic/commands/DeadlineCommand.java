@@ -17,7 +17,7 @@ import seedu.address.model.flashcard.exceptions.DuplicateFlashcardException;
 import seedu.address.model.flashcard.exceptions.FlashcardNotFoundException;
 
 /**
- * Adds/Changes the deadline or exam of an existing flashcard in the address book/flashcards.
+ * Adds/Changes the deadline or exam of an existing flashcard in the flash book/flashcards.
  */
 
 public class DeadlineCommand extends Command {
@@ -35,7 +35,7 @@ public class DeadlineCommand extends Command {
 
     public static final String MESSAGE_ADD_DEADLINE_SUCCESS = "Added deadline to Flashcard: %1$s";
     public static final String MESSAGE_DELETE_DEADLINE_SUCCESS = "Removed deadline from Flashcard: %1$s";
-    public static final String MESSAGE_DUPLICATE_FLASHCARD = "This deadline clashes with another in the address book.";
+    public static final String MESSAGE_DUPLICATE_FLASHCARD = "This deadline clashes with another in the flash book.";
 
     private final Index index;
     private final Deadline deadline;
@@ -63,9 +63,9 @@ public class DeadlineCommand extends Command {
         }
 
         Flashcard flashcardToEdit = lastShownList.get(index.getZeroBased());
-        Flashcard editedFlashcard = new Flashcard(flashcardToEdit.getName(), flashcardToEdit.getPhone(),
+        Flashcard editedFlashcard = new Flashcard(flashcardToEdit.getTopic(), flashcardToEdit.getDifficulty(),
                 flashcardToEdit.getEmail(),
-                flashcardToEdit.getAddress(), deadline, flashcardToEdit.getTags());
+                flashcardToEdit.getContent(), deadline, flashcardToEdit.getTags());
 
         try {
             model.setFlashcard(flashcardToEdit, editedFlashcard);
@@ -77,7 +77,7 @@ public class DeadlineCommand extends Command {
 
         //model.updateFlashcard(flashcardToEdit, editedFlashcard);
         model.updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
-        model.commitAddressBook();
+        model.commitFlashBook();
 
         return new CommandResult(generateSuccessMessage(editedFlashcard));
     }

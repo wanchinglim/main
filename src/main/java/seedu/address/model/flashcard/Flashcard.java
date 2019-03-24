@@ -10,48 +10,49 @@ import java.util.Set;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Flashcard in the address book.
+ * Represents a Flashcard in the flash book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Flashcard {
 
     // Identity fields
-    private final Name name;
-    private final Phone phone;
+    private final Topic topic;
+    private final Difficulty difficulty;
     private final Email email;
 
     // Data fields
-    private final Address address;
+    private final Content content;
     private final Deadline deadline;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Flashcard(Name name, Phone phone, Email email, Address address, Deadline deadline, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
-        this.name = name;
-        this.phone = phone;
+    public Flashcard(Topic topic, Difficulty difficulty, Email email,
+                     Content content, Deadline deadline, Set<Tag> tags) {
+        requireAllNonNull(topic, difficulty, email, content, tags);
+        this.topic = topic;
+        this.difficulty = difficulty;
         this.email = email;
-        this.address = address;
+        this.content = content;
         this.deadline = deadline;
         this.tags.addAll(tags);
     }
 
-    public Name getName() {
-        return name;
+    public Topic getTopic() {
+        return topic;
     }
 
-    public Phone getPhone() {
-        return phone;
+    public Difficulty getDifficulty() {
+        return difficulty;
     }
 
     public Email getEmail() {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
+    public Content getContent() {
+        return content;
     }
 
     public Deadline getDeadline() {
@@ -67,7 +68,7 @@ public class Flashcard {
     }
 
     /**
-     * Returns true if both flashcards of the same name have at least one other identity field that is the same.
+     * Returns true if both flashcards of the same topic have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two flashcards.
      */
     public boolean isSameFlashcard(Flashcard otherFlashcard) {
@@ -76,8 +77,9 @@ public class Flashcard {
         }
 
         return otherFlashcard != null
-                && otherFlashcard.getName().equals(getName())
-                && (otherFlashcard.getPhone().equals(getPhone()) || otherFlashcard.getEmail().equals(getEmail()));
+                && otherFlashcard.getTopic().equals(getTopic())
+                && (otherFlashcard.getDifficulty().equals(getDifficulty())
+                || otherFlashcard.getEmail().equals(getEmail()));
     }
 
     /**
@@ -95,29 +97,29 @@ public class Flashcard {
         }
 
         Flashcard otherFlashcard = (Flashcard) other;
-        return otherFlashcard.getName().equals(getName())
-                && otherFlashcard.getPhone().equals(getPhone())
+        return otherFlashcard.getTopic().equals(getTopic())
+                && otherFlashcard.getDifficulty().equals(getDifficulty())
                 && otherFlashcard.getEmail().equals(getEmail())
-                && otherFlashcard.getAddress().equals(getAddress())
+                && otherFlashcard.getContent().equals(getContent())
                 && otherFlashcard.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(topic, difficulty, email, content, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append(" Phone: ")
-                .append(getPhone())
+        builder.append(getTopic())
+                .append(" Difficulty: ")
+                .append(getDifficulty())
                 .append(" Email: ")
                 .append(getEmail())
-                .append(" Address: ")
-                .append(getAddress())
+                .append(" Content: ")
+                .append(getContent())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
