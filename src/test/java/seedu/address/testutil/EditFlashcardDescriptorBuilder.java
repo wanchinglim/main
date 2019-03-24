@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditFlashcardDescriptor;
-import seedu.address.model.flashcard.Address;
+import seedu.address.model.flashcard.Content;
 import seedu.address.model.flashcard.Difficulty;
 import seedu.address.model.flashcard.Email;
 import seedu.address.model.flashcard.Flashcard;
@@ -36,7 +36,7 @@ public class EditFlashcardDescriptorBuilder {
         descriptor.setTopic(flashcard.getTopic());
         descriptor.setDifficulty(flashcard.getDifficulty());
         descriptor.setEmail(flashcard.getEmail());
-        descriptor.setAddress(flashcard.getAddress());
+        descriptor.setContent(flashcard.getContent());
         descriptor.setTags(flashcard.getTags());
     }
 
@@ -65,10 +65,10 @@ public class EditFlashcardDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code EditFlashcardDescriptor} that we are building.
+     * Sets the {@code Content} of the {@code EditFlashcardDescriptor} that we are building.
      */
-    public EditFlashcardDescriptorBuilder withAddress(String address) {
-        descriptor.setAddress(new Address(address));
+    public EditFlashcardDescriptorBuilder withContent(String content) {
+        descriptor.setContent(new Content(content));
         return this;
     }
 
