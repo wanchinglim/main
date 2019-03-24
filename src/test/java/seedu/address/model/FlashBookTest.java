@@ -3,7 +3,7 @@ package seedu.address.model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTENT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.TypicalFlashcards.ALICE;
 import static seedu.address.testutil.TypicalFlashcards.getTypicalFlashBook;
@@ -53,7 +53,7 @@ public class FlashBookTest {
     @Test
     public void resetData_withDuplicateFlashcards_throwsDuplicateFlashcardException() {
         // Two flashcards with the same identity fields
-        Flashcard editedAlice = new FlashcardBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Flashcard editedAlice = new FlashcardBuilder(ALICE).withContent(VALID_CONTENT_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Flashcard> newFlashcards = Arrays.asList(ALICE, editedAlice);
         FlashBookStub newData = new FlashBookStub(newFlashcards);
@@ -82,7 +82,7 @@ public class FlashBookTest {
     @Test
     public void hasFlashcard_flashcardWithSameIdentityFieldsInFlashBook_returnsTrue() {
         flashBook.addFlashcard(ALICE);
-        Flashcard editedAlice = new FlashcardBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Flashcard editedAlice = new FlashcardBuilder(ALICE).withContent(VALID_CONTENT_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(flashBook.hasFlashcard(editedAlice));
     }
