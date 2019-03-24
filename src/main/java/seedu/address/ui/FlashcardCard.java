@@ -35,7 +35,7 @@ public class FlashcardCard extends UiPart<Region> {
     @FXML
     private Label difficulty;
     @FXML
-    private Label address;
+    private Label content;
     @FXML
     private Label email;
     @FXML
@@ -49,7 +49,7 @@ public class FlashcardCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         topic.setText(flashcard.getTopic().fullTopic);
         difficulty.setText(flashcard.getDifficulty().value);
-        address.setText(flashcard.getAddress().value);
+        content.setText(flashcard.getContent().value);
         email.setText(flashcard.getEmail().value);
         deadline.setText(flashcard.getDeadline().value);
         tagger(flashcard);
