@@ -49,7 +49,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.testutil.FlashcardBuilder;
 import seedu.address.testutil.FlashcardUtil;
 
-public class EditCommandSystemTest extends AddressBookSystemTest {
+public class EditCommandSystemTest extends FlashBookSystemTest {
 
     @Test
     public void edit() {
@@ -97,7 +97,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         */
 /* Case: edit a flashcard with new values same as another flashcard's values but with different topic -> edited *//*
 
-        assertTrue(getModel().getAddressBook().getFlashcardList().contains(BOB));
+        assertTrue(getModel().getFlashBook().getFlashcardList().contains(BOB));
         index = INDEX_SECOND_FLASHCARD;
         assertNotEquals(getModel().getFilteredFlashcardList().get(index.getZeroBased()), BOB);
       command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + TOPIC_DESC_AMY + DIFFICULTY_DESC_BOB
@@ -133,7 +133,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
 
 
         */
-/* Case: filtered flashcard list, edit index within bounds of address book and flashcard list -> edited *//*
+/* Case: filtered flashcard list, edit index within bounds of flash book and flashcard list -> edited *//*
 
         showFlashcardsWithTopic(KEYWORD_MATCHING_MEIER);
         index = INDEX_FIRST_FLASHCARD;
@@ -144,12 +144,12 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         assertCommandSuccess(command, index, editedSubject);
 
         */
-/* Case: filtered flashcard list, edit index within bounds of address book but out of bounds of flashcard list
+/* Case: filtered flashcard list, edit index within bounds of flash book but out of bounds of flashcard list
          * -> rejected
          *//*
 
         showFlashcardsWithTopic(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = getModel().getAddressBook().getFlashcardList().size();
+        int invalidIndex = getModel().getFlashBook().getFlashcardList().size();
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + invalidIndex + TOPIC_DESC_BOB,
                 Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
 
@@ -241,7 +241,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
 /* Case: edit a flashcard with new values same as another flashcard's values -> rejected *//*
 
         executeCommand(FlashcardUtil.getAddCommand(BOB));
-        assertTrue(getModel().getAddressBook().getFlashcardList().contains(BOB));
+        assertTrue(getModel().getFlashBook().getFlashcardList().contains(BOB));
         index = INDEX_FIRST_FLASHCARD;
         assertFalse(getModel().getFilteredFlashcardList().get(index.getZeroBased()).equals(BOB));
       command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + TOPIC_DESC_BOB + DIFFICULTY_DESC_BOB
@@ -339,7 +339,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
      * 4. Asserts that the status bar's sync status changes.<br>
      * 5. Asserts that the command box has the default style class.<br>
      * Verifications 1 and 2 are performed by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * {@code FlashBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      * @see AddressBookSystemTest#assertSelectedCardChanged(Index)
      *//*
@@ -366,7 +366,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
      * 3. Asserts that the browser url, selected card and status bar remain unchanged.<br>
      * 4. Asserts that the command box has the error style.<br>
      * Verifications 1 and 2 are performed by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * {@code FlashBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      *//*
 
