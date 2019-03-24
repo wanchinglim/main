@@ -15,7 +15,7 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.FlashBook;
 import seedu.address.model.Model;
 import seedu.address.model.flashcard.Deadline;
 import seedu.address.model.flashcard.Flashcard;
@@ -105,14 +105,14 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the address book, filtered flashcard list and selected flashcard in {@code actualModel} remain unchanged <br>
+     * - the flash book, filtered flashcard list and selected flashcard in {@code actualModel} remain unchanged <br>
      * - {@code actualCommandHistory} remains unchanged.
      */
     public static void assertCommandFailure(Command command, Model actualModel, CommandHistory actualCommandHistory,
             String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        FlashBook expectedFlashBook = new FlashBook(actualModel.getFlashBook());
         List<Flashcard> expectedFilteredList = new ArrayList<>(actualModel.getFilteredFlashcardList());
         Flashcard expectedSelectedFlashcard = actualModel.getSelectedFlashcard();
 
@@ -123,7 +123,7 @@ public class CommandTestUtil {
             throw new AssertionError("The expected CommandException was not thrown.");
         } catch (CommandException e) {
             assertEquals(expectedMessage, e.getMessage());
-            assertEquals(expectedAddressBook, actualModel.getAddressBook());
+            assertEquals(expectedFlashBook, actualModel.getFlashBook());
             assertEquals(expectedFilteredList, actualModel.getFilteredFlashcardList());
             assertEquals(expectedSelectedFlashcard, actualModel.getSelectedFlashcard());
             assertEquals(expectedCommandHistory, actualCommandHistory);
@@ -132,7 +132,7 @@ public class CommandTestUtil {
 
     /**
      * Updates {@code model}'s filtered list to show only the flashcard at the given {@code targetIndex} in the
-     * {@code model}'s address book.
+     * {@code model}'s flash book.
      */
     public static void showFlashcardAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredFlashcardList().size());
@@ -145,12 +145,12 @@ public class CommandTestUtil {
     }
 
     /**
-     * Deletes the first flashcard in {@code model}'s filtered list from {@code model}'s address book.
+     * Deletes the first flashcard in {@code model}'s filtered list from {@code model}'s flash book.
      */
     public static void deleteFirstFlashcard(Model model) {
         Flashcard firstFlashcard = model.getFilteredFlashcardList().get(0);
         model.deleteFlashcard(firstFlashcard);
-        model.commitAddressBook();
+        model.commitFlashBook();
     }
 
 }
