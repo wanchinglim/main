@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.TypicalFlashcards.ALICE;
-import static seedu.address.testutil.TypicalFlashcards.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalFlashcards.getTypicalFlashBook;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -25,29 +25,29 @@ import seedu.address.model.flashcard.Flashcard;
 import seedu.address.model.flashcard.exceptions.DuplicateFlashcardException;
 import seedu.address.testutil.FlashcardBuilder;
 
-public class AddressBookTest {
+public class FlashBookTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final AddressBook addressBook = new AddressBook();
+    private final FlashBook flashBook = new FlashBook();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getFlashcardList());
+        assertEquals(Collections.emptyList(), flashBook.getFlashcardList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        addressBook.resetData(null);
+        flashBook.resetData(null);
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+    public void resetData_withValidReadOnlyFlashBook_replacesData() {
+        FlashBook newData = getTypicalFlashBook();
+        flashBook.resetData(newData);
+        assertEquals(newData, flashBook);
     }
 
     @Test
@@ -56,49 +56,49 @@ public class AddressBookTest {
         Flashcard editedAlice = new FlashcardBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Flashcard> newFlashcards = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newFlashcards);
+        FlashBookStub newData = new FlashBookStub(newFlashcards);
 
         thrown.expect(DuplicateFlashcardException.class);
-        addressBook.resetData(newData);
+        flashBook.resetData(newData);
     }
 
     @Test
     public void hasFlashcard_nullFlashcard_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        addressBook.hasFlashcard(null);
+        flashBook.hasFlashcard(null);
     }
 
     @Test
-    public void hasFlashcard_flashcardNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasFlashcard(ALICE));
+    public void hasFlashcard_flashcardNotInFlashBook_returnsFalse() {
+        assertFalse(flashBook.hasFlashcard(ALICE));
     }
 
     @Test
-    public void hasFlashcard_flashcardInAddressBook_returnsTrue() {
-        addressBook.addFlashcard(ALICE);
-        assertTrue(addressBook.hasFlashcard(ALICE));
+    public void hasFlashcard_flashcardInFlashBook_returnsTrue() {
+        flashBook.addFlashcard(ALICE);
+        assertTrue(flashBook.hasFlashcard(ALICE));
     }
 
     @Test
-    public void hasFlashcard_flashcardWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addFlashcard(ALICE);
+    public void hasFlashcard_flashcardWithSameIdentityFieldsInFlashBook_returnsTrue() {
+        flashBook.addFlashcard(ALICE);
         Flashcard editedAlice = new FlashcardBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasFlashcard(editedAlice));
+        assertTrue(flashBook.hasFlashcard(editedAlice));
     }
 
     @Test
     public void getFlashcardList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        addressBook.getFlashcardList().remove(0);
+        flashBook.getFlashcardList().remove(0);
     }
 
     @Test
     public void addListener_withInvalidationListener_listenerAdded() {
         SimpleIntegerProperty counter = new SimpleIntegerProperty();
         InvalidationListener listener = observable -> counter.set(counter.get() + 1);
-        addressBook.addListener(listener);
-        addressBook.addFlashcard(ALICE);
+        flashBook.addListener(listener);
+        flashBook.addFlashcard(ALICE);
         assertEquals(1, counter.get());
     }
 
@@ -106,19 +106,19 @@ public class AddressBookTest {
     public void removeListener_withInvalidationListener_listenerRemoved() {
         SimpleIntegerProperty counter = new SimpleIntegerProperty();
         InvalidationListener listener = observable -> counter.set(counter.get() + 1);
-        addressBook.addListener(listener);
-        addressBook.removeListener(listener);
-        addressBook.addFlashcard(ALICE);
+        flashBook.addListener(listener);
+        flashBook.removeListener(listener);
+        flashBook.addFlashcard(ALICE);
         assertEquals(0, counter.get());
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose flashcards list can violate interface constraints.
+     * A stub ReadOnlyFlashBook whose flashcards list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class FlashBookStub implements ReadOnlyFlashBook {
         private final ObservableList<Flashcard> flashcards = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Flashcard> flashcards) {
+        FlashBookStub(Collection<Flashcard> flashcards) {
             this.flashcards.setAll(flashcards);
         }
 
