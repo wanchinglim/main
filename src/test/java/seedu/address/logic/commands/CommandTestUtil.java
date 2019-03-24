@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DIFFICULTY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TOPIC;
 
@@ -31,8 +30,6 @@ public class CommandTestUtil {
     public static final String VALID_TOPIC_BOB = "Bob Choo";
     public static final String VALID_DIFFICULTY_AMY = "11111111";
     public static final String VALID_DIFFICULTY_BOB = "22222222";
-    public static final String VALID_EMAIL_AMY = "amy@example.com";
-    public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_CONTENT_AMY = "Block 312, Amy Street 1";
     public static final String VALID_CONTENT_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
@@ -44,8 +41,6 @@ public class CommandTestUtil {
     public static final String TOPIC_DESC_BOB = " " + PREFIX_TOPIC + VALID_TOPIC_BOB;
     public static final String DIFFICULTY_DESC_AMY = " " + PREFIX_DIFFICULTY + VALID_DIFFICULTY_AMY;
     public static final String DIFFICULTY_DESC_BOB = " " + PREFIX_DIFFICULTY + VALID_DIFFICULTY_BOB;
-    public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
-    public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String CONTENT_DESC_AMY = " " + PREFIX_CONTENT + VALID_CONTENT_AMY;
     public static final String CONTENT_DESC_BOB = " " + PREFIX_CONTENT + VALID_CONTENT_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
@@ -53,7 +48,6 @@ public class CommandTestUtil {
 
     public static final String INVALID_TOPIC_DESC = " " + PREFIX_TOPIC + "James&"; // '&' not allowed in names
     public static final String INVALID_DIFFICULTY_DESC = " " + PREFIX_DIFFICULTY + "911a"; // 'a' not allowed in phones
-    public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_CONTENT_DESC = " " + PREFIX_CONTENT; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
@@ -65,10 +59,10 @@ public class CommandTestUtil {
 
     static {
         DESC_AMY = new EditFlashcardDescriptorBuilder().withTopic(VALID_TOPIC_AMY)
-                .withDifficulty(VALID_DIFFICULTY_AMY).withEmail(VALID_EMAIL_AMY).withContent(VALID_CONTENT_AMY)
+                .withDifficulty(VALID_DIFFICULTY_AMY).withContent(VALID_CONTENT_AMY)
                 .withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditFlashcardDescriptorBuilder().withTopic(VALID_TOPIC_BOB)
-                .withDifficulty(VALID_DIFFICULTY_BOB).withEmail(VALID_EMAIL_BOB).withContent(VALID_CONTENT_BOB)
+                .withDifficulty(VALID_DIFFICULTY_BOB).withContent(VALID_CONTENT_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 

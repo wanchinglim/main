@@ -37,8 +37,6 @@ public class FlashcardCard extends UiPart<Region> {
     @FXML
     private Label content;
     @FXML
-    private Label email;
-    @FXML
     private Label deadline;
     @FXML
     private FlowPane tags;
@@ -50,7 +48,6 @@ public class FlashcardCard extends UiPart<Region> {
         topic.setText(flashcard.getTopic().fullTopic);
         difficulty.setText(flashcard.getDifficulty().value);
         content.setText(flashcard.getContent().value);
-        email.setText(flashcard.getEmail().value);
         deadline.setText(flashcard.getDeadline().value);
         tagger(flashcard);
     }
