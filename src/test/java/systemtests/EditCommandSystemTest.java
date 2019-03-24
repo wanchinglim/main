@@ -4,11 +4,11 @@ package systemtests;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.CONTENT_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.CONTENT_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_CONTENT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TOPIC_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DIFFICULTY_DESC;
@@ -40,7 +40,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
-import seedu.address.model.flashcard.Address;
+import seedu.address.model.flashcard.Content;
 import seedu.address.model.flashcard.Difficulty;
 import seedu.address.model.flashcard.Email;
 import seedu.address.model.flashcard.Topic;
@@ -66,7 +66,7 @@ public class EditCommandSystemTest extends FlashBookSystemTest {
 
         Index index = INDEX_FIRST_FLASHCARD;
         String command = " " + EditCommand.COMMAND_WORD + "  " + index.getOneBased() + "  " + TOPIC_DESC_BOB + "  "
-                + DIFFICULTY_DESC_BOB + " " + EMAIL_DESC_BOB + "  " + ADDRESS_DESC_BOB + " " + TAG_DESC_HUSBAND + " ";
+                + DIFFICULTY_DESC_BOB + " " + EMAIL_DESC_BOB + "  " + CONTENT_DESC_BOB + " " + TAG_DESC_HUSBAND + " ";
         Flashcard editedSubject = new FlashcardBuilder(BOB).withTags(VALID_TAG_HUSBAND).build();
         assertCommandSuccess(command, index, editedSubject);
 
@@ -91,7 +91,7 @@ public class EditCommandSystemTest extends FlashBookSystemTest {
 
       command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + TOPIC_DESC_BOB + DIFFICULTY_DESC_BOB
       + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
+                + CONTENT_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandSuccess(command, index, BOB);
 
         */
@@ -102,7 +102,7 @@ public class EditCommandSystemTest extends FlashBookSystemTest {
         assertNotEquals(getModel().getFilteredFlashcardList().get(index.getZeroBased()), BOB);
       command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + TOPIC_DESC_AMY + DIFFICULTY_DESC_BOB
       + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
+                + CONTENT_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         editedSubject = new FlashcardBuilder(BOB).withTopic(VALID_TOPIC_AMY).build();
         assertCommandSuccess(command, index, editedSubject);
 
@@ -114,7 +114,7 @@ public class EditCommandSystemTest extends FlashBookSystemTest {
         index = INDEX_SECOND_FLASHCARD;
       command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + TOPIC_DESC_BOB + DIFFICULTY_DESC_AMY
       + EMAIL_DESC_AMY
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
+                + CONTENT_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         editedSubject =
         new FlashcardBuilder(BOB).withDifficulty(VALID_DIFFICULTY_AMY).withEmail(VALID_EMAIL_AMY).build();
         assertCommandSuccess(command, index, editedSubject);
@@ -167,7 +167,7 @@ public class EditCommandSystemTest extends FlashBookSystemTest {
         selectFlashcard(index);
       command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + TOPIC_DESC_AMY + DIFFICULTY_DESC_AMY
       + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY + TAG_DESC_FRIEND;
+                + CONTENT_DESC_AMY + TAG_DESC_FRIEND;
         // this can be misleading: card selection actually remains unchanged but the
         // browser's url is updated to reflect the new flashcard's topic
         assertCommandSuccess(command, index, AMY, index);
@@ -226,10 +226,10 @@ public class EditCommandSystemTest extends FlashBookSystemTest {
                 + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS);
 
         */
-/* Case: invalid address -> rejected *//*
+/* Case: invalid content -> rejected *//*
 
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_FLASHCARD.getOneBased()
-                + INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS);
+                + INVALID_CONTENT_DESC, Content.MESSAGE_CONSTRAINTS);
 
         */
 /* Case: invalid tag -> rejected *//*
@@ -246,7 +246,7 @@ public class EditCommandSystemTest extends FlashBookSystemTest {
         assertFalse(getModel().getFilteredFlashcardList().get(index.getZeroBased()).equals(BOB));
       command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + TOPIC_DESC_BOB + DIFFICULTY_DESC_BOB
       + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
+                + CONTENT_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_FLASHCARD);
 
         */
@@ -255,16 +255,16 @@ public class EditCommandSystemTest extends FlashBookSystemTest {
 
       command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + TOPIC_DESC_BOB + DIFFICULTY_DESC_BOB
       + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND;
+                + CONTENT_DESC_BOB + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_FLASHCARD);
 
         */
-/* Case: edit a flashcard with new values same as another flashcard's values but with different address
+/* Case: edit a flashcard with new values same as another flashcard's values but with different content
         -> rejected *//*
 
       command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + TOPIC_DESC_BOB + DIFFICULTY_DESC_BOB
       + EMAIL_DESC_BOB
-                + ADDRESS_DESC_AMY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
+                + CONTENT_DESC_AMY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_FLASHCARD);
 
         */
@@ -273,7 +273,7 @@ public class EditCommandSystemTest extends FlashBookSystemTest {
 
       command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + TOPIC_DESC_BOB + DIFFICULTY_DESC_AMY
       + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
+                + CONTENT_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_FLASHCARD);
 
         */
@@ -282,7 +282,7 @@ public class EditCommandSystemTest extends FlashBookSystemTest {
 
       command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + TOPIC_DESC_BOB + DIFFICULTY_DESC_BOB
       + EMAIL_DESC_AMY
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
+                + CONTENT_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_FLASHCARD);
     }
 

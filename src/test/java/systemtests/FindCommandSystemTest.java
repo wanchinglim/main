@@ -117,8 +117,8 @@ public class FindCommandSystemTest extends FlashBookSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find address of flashcard in flash book -> 0 subjects found */
-        command = FindCommand.COMMAND_WORD + " " + DANIEL.getAddress().value;
+        /* Case: find content of flashcard in flash book -> 0 subjects found */
+        command = FindCommand.COMMAND_WORD + " " + DANIEL.getContent().value;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 

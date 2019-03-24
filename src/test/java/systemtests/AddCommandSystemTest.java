@@ -1,13 +1,13 @@
 package systemtests;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.CONTENT_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.CONTENT_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.DIFFICULTY_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DIFFICULTY_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_CONTENT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DIFFICULTY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
@@ -16,7 +16,7 @@ import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.TOPIC_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.TOPIC_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTENT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DIFFICULTY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_BOB;
@@ -37,7 +37,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
-import seedu.address.model.flashcard.Address;
+import seedu.address.model.flashcard.Content;
 import seedu.address.model.flashcard.Difficulty;
 import seedu.address.model.flashcard.Email;
 import seedu.address.model.flashcard.Flashcard;
@@ -60,7 +60,7 @@ public class AddCommandSystemTest extends FlashBookSystemTest {
          */
         Flashcard toAdd = AMY;
         String command = "   " + AddCommand.COMMAND_WORD + "  " + TOPIC_DESC_AMY + "  " + DIFFICULTY_DESC_AMY + " "
-                + EMAIL_DESC_AMY + "   " + ADDRESS_DESC_AMY + "   " + TAG_DESC_FRIEND + " ";
+                + EMAIL_DESC_AMY + "   " + CONTENT_DESC_AMY + "   " + TAG_DESC_FRIEND + " ";
         assertCommandSuccess(command, toAdd);
 
         /* Case: undo adding Amy to the list -> Amy deleted */
@@ -76,7 +76,7 @@ public class AddCommandSystemTest extends FlashBookSystemTest {
 
         /* Case: add a flashcard with all fields same as another flashcard in the flash book except topic -> added */
         toAdd = new FlashcardBuilder(AMY).withTopic(VALID_TOPIC_BOB).build();
-        command = AddCommand.COMMAND_WORD + TOPIC_DESC_BOB + DIFFICULTY_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+        command = AddCommand.COMMAND_WORD + TOPIC_DESC_BOB + DIFFICULTY_DESC_AMY + EMAIL_DESC_AMY + CONTENT_DESC_AMY
                 + TAG_DESC_FRIEND;
         assertCommandSuccess(command, toAdd);
 
@@ -94,7 +94,7 @@ public class AddCommandSystemTest extends FlashBookSystemTest {
 
         /* Case: add a flashcard with tags, command with parameters in random order -> added */
         toAdd = BOB;
-        command = AddCommand.COMMAND_WORD + TAG_DESC_FRIEND + DIFFICULTY_DESC_BOB + ADDRESS_DESC_BOB + TOPIC_DESC_BOB
+        command = AddCommand.COMMAND_WORD + TAG_DESC_FRIEND + DIFFICULTY_DESC_BOB + CONTENT_DESC_BOB + TOPIC_DESC_BOB
                 + TAG_DESC_HUSBAND + EMAIL_DESC_BOB;
         assertCommandSuccess(command, toAdd);
 
@@ -129,8 +129,8 @@ public class AddCommandSystemTest extends FlashBookSystemTest {
         command = FlashcardUtil.getAddCommand(toAdd);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_FLASHCARD);
 
-        /* Case: add a duplicate flashcard except with different address -> rejected */
-        toAdd = new FlashcardBuilder(HOON).withAddress(VALID_ADDRESS_BOB).build();
+        /* Case: add a duplicate flashcard except with different content -> rejected */
+        toAdd = new FlashcardBuilder(HOON).withContent(VALID_CONTENT_BOB).build();
         command = FlashcardUtil.getAddCommand(toAdd);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_FLASHCARD);
 
@@ -139,18 +139,18 @@ public class AddCommandSystemTest extends FlashBookSystemTest {
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_FLASHCARD);
 
         /* Case: missing topic -> rejected */
-        command = AddCommand.COMMAND_WORD + DIFFICULTY_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
+        command = AddCommand.COMMAND_WORD + DIFFICULTY_DESC_AMY + EMAIL_DESC_AMY + CONTENT_DESC_AMY;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         /* Case: missing difficulty -> rejected */
-        command = AddCommand.COMMAND_WORD + TOPIC_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
+        command = AddCommand.COMMAND_WORD + TOPIC_DESC_AMY + EMAIL_DESC_AMY + CONTENT_DESC_AMY;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         /* Case: missing email -> rejected */
-        command = AddCommand.COMMAND_WORD + TOPIC_DESC_AMY + DIFFICULTY_DESC_AMY + ADDRESS_DESC_AMY;
+        command = AddCommand.COMMAND_WORD + TOPIC_DESC_AMY + DIFFICULTY_DESC_AMY + CONTENT_DESC_AMY;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
-        /* Case: missing address -> rejected */
+        /* Case: missing content -> rejected */
         command = AddCommand.COMMAND_WORD + TOPIC_DESC_AMY + DIFFICULTY_DESC_AMY + EMAIL_DESC_AMY;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
@@ -160,26 +160,26 @@ public class AddCommandSystemTest extends FlashBookSystemTest {
 
         /* Case: invalid topic -> rejected */
         command = AddCommand.COMMAND_WORD + INVALID_TOPIC_DESC + DIFFICULTY_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY;
+                + CONTENT_DESC_AMY;
         assertCommandFailure(command, Topic.MESSAGE_CONSTRAINTS);
 
         /* Case: invalid difficulty -> rejected */
         command = AddCommand.COMMAND_WORD + TOPIC_DESC_AMY + INVALID_DIFFICULTY_DESC + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY;
+                + CONTENT_DESC_AMY;
         assertCommandFailure(command, Difficulty.MESSAGE_CONSTRAINTS);
 
         /* Case: invalid email -> rejected */
         command = AddCommand.COMMAND_WORD + TOPIC_DESC_AMY + DIFFICULTY_DESC_AMY + INVALID_EMAIL_DESC
-                + ADDRESS_DESC_AMY;
+                + CONTENT_DESC_AMY;
         assertCommandFailure(command, Email.MESSAGE_CONSTRAINTS);
 
-        /* Case: invalid address -> rejected */
+        /* Case: invalid content -> rejected */
         command = AddCommand.COMMAND_WORD + TOPIC_DESC_AMY + DIFFICULTY_DESC_AMY + EMAIL_DESC_AMY
-                + INVALID_ADDRESS_DESC;
-        assertCommandFailure(command, Address.MESSAGE_CONSTRAINTS);
+                + INVALID_CONTENT_DESC;
+        assertCommandFailure(command, Content.MESSAGE_CONSTRAINTS);
 
         /* Case: invalid tag -> rejected */
-        command = AddCommand.COMMAND_WORD + TOPIC_DESC_AMY + DIFFICULTY_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+        command = AddCommand.COMMAND_WORD + TOPIC_DESC_AMY + DIFFICULTY_DESC_AMY + EMAIL_DESC_AMY + CONTENT_DESC_AMY
                 + INVALID_TAG_DESC;
         assertCommandFailure(command, Tag.MESSAGE_CONSTRAINTS);
     }
