@@ -11,10 +11,10 @@ import seedu.address.model.flashcard.Flashcard;
 import seedu.address.model.flashcard.UniqueFlashcardList;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the flash-book level
  * Duplicates are not allowed (by .isSameFlashcard comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class FlashBook implements ReadOnlyFlashBook {
 
     private final UniqueFlashcardList flashcards;
     private final InvalidationListenerManager invalidationListenerManager = new InvalidationListenerManager();
@@ -30,12 +30,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         flashcards = new UniqueFlashcardList();
     }
 
-    public AddressBook() {}
+    public FlashBook() {}
 
     /**
-     * Creates an AddressBook using the Flashcards in the {@code toBeCopied}
+     * Creates an FlashBook using the Flashcards in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public FlashBook(ReadOnlyFlashBook toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -52,9 +52,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code FlashBook} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyFlashBook newData) {
         requireNonNull(newData);
 
         setFlashcards(newData.getFlashcardList());
@@ -63,7 +63,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// flashcard-level operations
 
     /**
-     * Returns true if a flashcard with the same identity as {@code flashcard} exists in the address book.
+     * Returns true if a flashcard with the same identity as {@code flashcard} exists in the flash book.
      */
     public boolean hasFlashcard(Flashcard flashcard) {
         requireNonNull(flashcard);
@@ -71,8 +71,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a flashcard to the address book.
-     * The flashcard must not already exist in the address book.
+     * Adds a flashcard to the flash book.
+     * The flashcard must not already exist in the flash book.
      */
     public void addFlashcard(Flashcard p) {
         flashcards.add(p);
@@ -81,9 +81,9 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the given flashcard {@code target} in the list with {@code editedFlashcard}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in the flash book.
      * The flashcard identity of {@code editedFlashcard} must not be the same as another
-     * existing flashcard in the address book.
+     * existing flashcard in the flash book.
      */
     public void setFlashcard(Flashcard target, Flashcard editedFlashcard) {
         requireNonNull(editedFlashcard);
@@ -93,8 +93,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code FlashBook}.
+     * {@code key} must exist in the flash book.
      */
     public void removeFlashcard(Flashcard key) {
         flashcards.remove(key);
@@ -112,7 +112,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Notifies listeners that the address book has been modified.
+     * Notifies listeners that the flash book has been modified.
      */
     protected void indicateModified() {
         invalidationListenerManager.callListeners(this);
@@ -134,8 +134,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && flashcards.equals(((AddressBook) other).flashcards));
+                || (other instanceof FlashBook // instanceof handles nulls
+                && flashcards.equals(((FlashBook) other).flashcards));
     }
 
     @Override

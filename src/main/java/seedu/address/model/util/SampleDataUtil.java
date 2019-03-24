@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.FlashBook;
+import seedu.address.model.ReadOnlyFlashBook;
 import seedu.address.model.flashcard.Address;
 import seedu.address.model.flashcard.Deadline;
 import seedu.address.model.flashcard.Difficulty;
@@ -16,7 +16,7 @@ import seedu.address.model.flashcard.Topic;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code FlashBook} with sample data.
  */
 public class SampleDataUtil {
     public static final Deadline EMPTY_DEADLINE = new Deadline("");
@@ -43,8 +43,8 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+    public static ReadOnlyFlashBook getSampleFlashBook() {
+        FlashBook sampleAb = new FlashBook();
         for (Flashcard sampleFlashcard : getSampleFlashcards()) {
             sampleAb.addFlashcard(sampleFlashcard);
         }

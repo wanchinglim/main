@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Flashcard's difficulty level in the address book.
+ * Represents a Flashcard's difficulty level in the flash book.
  * Guarantees: immutable; is valid as declared in {@link #isValidDifficulty(String)}
  */
 public class Difficulty {
