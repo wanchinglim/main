@@ -6,10 +6,7 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.CONTENT_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.CONTENT_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_CONTENT_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TOPIC_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DIFFICULTY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
@@ -19,7 +16,6 @@ import static seedu.address.logic.commands.CommandTestUtil.DIFFICULTY_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DIFFICULTY_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DIFFICULTY_AMY;
@@ -42,7 +38,6 @@ import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.flashcard.Content;
 import seedu.address.model.flashcard.Difficulty;
-import seedu.address.model.flashcard.Email;
 import seedu.address.model.flashcard.Topic;
 import seedu.address.model.flashcard.Flashcard;
 import seedu.address.model.tag.Tag;
@@ -107,7 +102,7 @@ public class EditCommandSystemTest extends FlashBookSystemTest {
         assertCommandSuccess(command, index, editedSubject);
 
         */
-/* Case: edit a flashcard with new values same as another flashcard's values but with different difficulty and email
+/* Case: edit a flashcard with new values same as another flashcard's values but with different difficulty
          * -> edited
          *//*
 
@@ -220,12 +215,6 @@ public class EditCommandSystemTest extends FlashBookSystemTest {
                 + INVALID_DIFFICULTY_DESC, Difficulty.MESSAGE_CONSTRAINTS);
 
         */
-/* Case: invalid email -> rejected *//*
-
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_FLASHCARD.getOneBased()
-                + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS);
-
-        */
 /* Case: invalid content -> rejected *//*
 
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_FLASHCARD.getOneBased()
@@ -277,17 +266,7 @@ public class EditCommandSystemTest extends FlashBookSystemTest {
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_FLASHCARD);
 
         */
-/* Case: edit a flashcard with new values same as another flashcard's values but with different email
--> rejected *//*
-
-      command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + TOPIC_DESC_BOB + DIFFICULTY_DESC_BOB
-      + EMAIL_DESC_AMY
-                + CONTENT_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
-        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_FLASHCARD);
-    }
-
-    */
-/**
+/*
      * Performs the same verification as {@code assertCommandSuccess(String, Index, Flashcard, Index)} except that
      * the browser url and selected card remain unchanged.
      * @param toEdit the index of the current model's filtered list
@@ -299,7 +278,7 @@ public class EditCommandSystemTest extends FlashBookSystemTest {
     }
 
     */
-/**
+/*
  * Performs the same verification as {@code assertCommandSuccess(String, Model, String, Index)} and in addition,<br>
      * 1. Asserts that result display box displays the success message of executing {@code EditCommand}.<br>
      * 2. Asserts that the model related components are updated to reflect the flashcard at index {@code toEdit} being
@@ -319,7 +298,7 @@ public class EditCommandSystemTest extends FlashBookSystemTest {
     }
 
     */
-/**
+/*
      * Performs the same verification as {@code assertCommandSuccess(String, Model, String, Index)} except that the
      * browser url and selected card remain unchanged.
      * @see EditCommandSystemTest#assertCommandSuccess(String, Model, String, Index)
@@ -330,7 +309,7 @@ public class EditCommandSystemTest extends FlashBookSystemTest {
     }
 
     */
-/**
+/*
      * Executes {@code command} and in addition,<br>
      * 1. Asserts that the command box displays an empty string.<br>
      * 2. Asserts that the result display box displays {@code expectedResultMessage}.<br>
@@ -359,7 +338,7 @@ public class EditCommandSystemTest extends FlashBookSystemTest {
     }
 
     */
-/**
+/*
      * Executes {@code command} and in addition,<br>
      * 1. Asserts that the command box displays {@code command}.<br>
      * 2. Asserts that result display box displays {@code expectedResultMessage}.<br>

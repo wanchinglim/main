@@ -13,7 +13,6 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.flashcard.Content;
 import seedu.address.model.flashcard.Deadline;
 import seedu.address.model.flashcard.Difficulty;
-import seedu.address.model.flashcard.Email;
 import seedu.address.model.flashcard.Flashcard;
 import seedu.address.model.flashcard.Topic;
 import seedu.address.model.tag.Tag;
@@ -27,7 +26,6 @@ class JsonAdaptedFlashcard {
 
     private final String topic;
     private final String difficulty;
-    private final String email;
     private final String content;
     private final String deadline;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
@@ -37,12 +35,11 @@ class JsonAdaptedFlashcard {
      */
     @JsonCreator
     public JsonAdaptedFlashcard(@JsonProperty("topic") String topic, @JsonProperty("difficulty") String difficulty,
-                                @JsonProperty("email") String email, @JsonProperty("content") String content,
+                                @JsonProperty("content") String content,
                                 @JsonProperty("deadline") String deadline,
                                 @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.topic = topic;
         this.difficulty = difficulty;
-        this.email = email;
         this.content = content;
         this.deadline = deadline;
         if (tagged != null) {
@@ -56,7 +53,6 @@ class JsonAdaptedFlashcard {
     public JsonAdaptedFlashcard(Flashcard source) {
         topic = source.getTopic().fullTopic;
         difficulty = source.getDifficulty().value;
-        email = source.getEmail().value;
         content = source.getContent().value;
         deadline = source.getDeadline().value;
         tagged.addAll(source.getTags().stream()
@@ -92,14 +88,6 @@ class JsonAdaptedFlashcard {
         }
         final Difficulty modelDifficulty = new Difficulty(difficulty);
 
-        if (email == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
-        }
-        if (!Email.isValidEmail(email)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
-        }
-        final Email modelEmail = new Email(email);
-
         if (content == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Content.class.getSimpleName()));
         }
@@ -117,7 +105,7 @@ class JsonAdaptedFlashcard {
 
 
         final Set<Tag> modelTags = new HashSet<>(flashcardTags);
-        return new Flashcard(modelTopic, modelDifficulty, modelEmail, modelContent, modelDeadline, modelTags);
+        return new Flashcard(modelTopic, modelDifficulty, modelContent, modelDeadline, modelTags);
     }
 
 }
