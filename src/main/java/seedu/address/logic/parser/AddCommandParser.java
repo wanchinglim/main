@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DIFFICULTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.flashcard.Address;
+import seedu.address.model.flashcard.Content;
 import seedu.address.model.flashcard.Deadline;
 import seedu.address.model.flashcard.Difficulty;
 import seedu.address.model.flashcard.Email;
@@ -33,9 +33,9 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_TOPIC, PREFIX_DIFFICULTY,
-                                    PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                                    PREFIX_EMAIL, PREFIX_CONTENT, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_TOPIC, PREFIX_ADDRESS, PREFIX_DIFFICULTY, PREFIX_EMAIL)
+        if (!arePrefixesPresent(argMultimap, PREFIX_TOPIC, PREFIX_CONTENT, PREFIX_DIFFICULTY, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -43,11 +43,11 @@ public class AddCommandParser implements Parser<AddCommand> {
         Topic topic = ParserUtil.parseTopic(argMultimap.getValue(PREFIX_TOPIC).get());
         Difficulty difficulty = ParserUtil.parseDifficulty(argMultimap.getValue(PREFIX_DIFFICULTY).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+        Content content = ParserUtil.parseContent(argMultimap.getValue(PREFIX_CONTENT).get());
         Deadline deadline = new Deadline(""); //add command does not allow adding deadlines straightaway
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Flashcard flashcard = new Flashcard(topic, difficulty, email, address, deadline, tagList);
+        Flashcard flashcard = new Flashcard(topic, difficulty, email, content, deadline, tagList);
 
         return new AddCommand(flashcard);
     }

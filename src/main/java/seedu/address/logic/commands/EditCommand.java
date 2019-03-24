@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DIFFICULTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -20,7 +20,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.flashcard.Address;
+import seedu.address.model.flashcard.Content;
 import seedu.address.model.flashcard.Deadline;
 import seedu.address.model.flashcard.Difficulty;
 import seedu.address.model.flashcard.Email;
@@ -43,7 +43,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_TOPIC + "TOPIC] "
             + "[" + PREFIX_DIFFICULTY + "DIFFICULTY] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_CONTENT + "CONTENT] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_DIFFICULTY + "91234567 "
@@ -51,7 +51,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_FLASHCARD_SUCCESS = "Edited Flashcard: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_FLASHCARD = "This flashcard already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_FLASHCARD = "This flashcard already exists in the content book.";
 
     private final Index index;
     private final EditFlashcardDescriptor editFlashcardDescriptor;
@@ -101,12 +101,12 @@ public class EditCommand extends Command {
         Topic updatedTopic = editFlashcardDescriptor.getTopic().orElse(flashcardToEdit.getTopic());
         Difficulty updatedDifficulty = editFlashcardDescriptor.getDifficulty().orElse(flashcardToEdit.getDifficulty());
         Email updatedEmail = editFlashcardDescriptor.getEmail().orElse(flashcardToEdit.getEmail());
-        Address updatedAddress = editFlashcardDescriptor.getAddress().orElse(flashcardToEdit.getAddress());
+        Content updatedContent = editFlashcardDescriptor.getContent().orElse(flashcardToEdit.getContent());
         Deadline updatedDeadline = flashcardToEdit.getDeadline(); //edit command does not allow editing deadlines
         Set<Tag> updatedTags = editFlashcardDescriptor.getTags().orElse(flashcardToEdit.getTags());
 
         return new Flashcard(updatedTopic, updatedDifficulty, updatedEmail,
-                    updatedAddress, updatedDeadline, updatedTags);
+                updatedContent, updatedDeadline, updatedTags);
     }
 
     @Override
@@ -135,7 +135,7 @@ public class EditCommand extends Command {
         private Topic topic;
         private Difficulty difficulty;
         private Email email;
-        private Address address;
+        private Content content;
         private Set<Tag> tags;
 
         public EditFlashcardDescriptor() {}
@@ -148,7 +148,7 @@ public class EditCommand extends Command {
             setTopic(toCopy.topic);
             setDifficulty(toCopy.difficulty);
             setEmail(toCopy.email);
-            setAddress(toCopy.address);
+            setContent(toCopy.content);
             setTags(toCopy.tags);
         }
 
@@ -156,7 +156,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(topic, difficulty, email, address, tags);
+            return CollectionUtil.isAnyNonNull(topic, difficulty, email, content, tags);
         }
 
         public void setTopic(Topic topic) {
@@ -183,12 +183,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setAddress(Address address) {
-            this.address = address;
+        public void setContent(Content content) {
+            this.content = content;
         }
 
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
+        public Optional<Content> getContent() {
+            return Optional.ofNullable(content);
         }
 
         /**
@@ -226,7 +226,7 @@ public class EditCommand extends Command {
             return getTopic().equals(e.getTopic())
                     && getDifficulty().equals(e.getDifficulty())
                     && getEmail().equals(e.getEmail())
-                    && getAddress().equals(e.getAddress())
+                    && getContent().equals(e.getContent())
                     && getTags().equals(e.getTags());
         }
     }
