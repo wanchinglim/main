@@ -87,16 +87,16 @@ Format: `help`
 === Adding a subject or flashcard: `add`
 
 Adds a flashcard with subject and data field. +
-Format: `add <topic> <content> <deadline> <subject>`
-
-* Lists the flashcard that was just added.
+Format: `add t/TOPIC c/CONTENT d/DEADLINE s/SUBJECT`
 
 Examples:
 
-* `add t/Pythagoras Theorem c/a^2+b^2=c^2 d/21 March 2019 s/Math`
-Adds the flashcard named "Pythagoras Theorem" with content "a^2+b^2=c^2" and tagged under the subject "Math". Assigns an expiry deadline "21 March 2019".
+* `add t/Pythagoras Theorem c/a^2 + b^2 = c^2 d/21 March 2019 s/Math`
+Adds the flashcard named "Pythagoras Theorem" with content "a^2 + b^2 = c^2" and tagged under the subject "Math". Assigns an expiry deadline "21 March 2019".
 * `add t/Photosynthesis c/A chemical reaction that takes place inside a plant, producing food for the plant to survive d/22 March 2019 s/Science`
 Adds the flashcard named "Photosynthesis" with the content "A chemical reaction that takes place inside a plant, producing food for the plant to survive" and tagged under the subject "Science". Assigns an expiry deadline "22 March 2019".
+
+Lists the flashcard that was just added.
 
 === Listing all flashcards categorized by subjects : `list` `l`
 
@@ -107,10 +107,9 @@ Subject tags will be colour-coded. Same subject tags will have the same colour.
 
 === Editing a flashcard : `edit` `e`
 
-
 Edits the content of a flashcard. +
 Enter the subject that the flashcard belongs to.
-Format: `edit INDEX <subject>`
+Format: `edit INDEX SUBJECT`
 
 ****
 * Edits the flashcard at the specified `INDEX`. The index refers to the index number shown in the displayed subject list. The index *must be a positive integer* 1, 2, 3, ...
@@ -120,7 +119,6 @@ Format: `edit INDEX <subject>`
 * Existing values will be updated to the input values.
 * The updated flashcard will be displayed.
 * When editing flashcards, the existing tags of the flashcard will be removed i.e adding of tags is not cumulative.
-* You can remove all the flashcard's tags by typing `t/` without specifying any tags after it.
 ****
 
 Examples:
@@ -342,12 +340,12 @@ e.g. `e 2 definition`
 * *Find* : `find <KEYWORD> [MORE_KEYWORDS]` +
 e.g. `find math` or
 e.g. `f science english math`
+* *Help* : `help`
+* *History* : `history`
 * *List* : `list` or `l`
 * *Next* : `next` or `n`
 * *Previous* : `previous` or `p`
-* *Help* : `help`
+* *Redo* : `redo`
 * *Select* : `select INDEX` +
 e.g.`select 2`
-* *History* : `history`
 * *Undo* : `undo`
-* *Redo* : `redo`
