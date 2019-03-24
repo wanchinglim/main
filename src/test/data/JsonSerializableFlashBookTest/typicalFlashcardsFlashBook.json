@@ -1,5 +1,5 @@
 {
-  "_comment": "AddressBook save file which contains the same Flashcard values as in TypicalFlashcards#getTypicalAddressBook()",
+  "_comment": "FlashBook save file which contains the same Flashcard values as in TypicalFlashcards#getTypicalFlashBook()",
   "flashcards": [ {
     "topic" : "Alice Pauline",
     "difficulty" : "94351253",
