@@ -19,10 +19,10 @@ public class GuiTestAssert {
      */
     public static void assertCardEquals(FlashcardCardHandle expectedCard, FlashcardCardHandle actualCard) {
         assertEquals(expectedCard.getId(), actualCard.getId());
-        assertEquals(expectedCard.getAddress(), actualCard.getAddress());
+        assertEquals(expectedCard.getContent(), actualCard.getContent());
         assertEquals(expectedCard.getEmail(), actualCard.getEmail());
-        assertEquals(expectedCard.getName(), actualCard.getName());
-        assertEquals(expectedCard.getPhone(), actualCard.getPhone());
+        assertEquals(expectedCard.getTopic(), actualCard.getTopic());
+        assertEquals(expectedCard.getDifficulty(), actualCard.getDifficulty());
         assertEquals(expectedCard.getTags(), actualCard.getTags());
     }
 
@@ -30,10 +30,10 @@ public class GuiTestAssert {
      * Asserts that {@code actualCard} displays the details of {@code expectedFlashcard}.
      */
     public static void assertCardDisplaysFlashcard(Flashcard expectedFlashcard, FlashcardCardHandle actualCard) {
-        assertEquals(expectedFlashcard.getName().fullName, actualCard.getName());
-        assertEquals(expectedFlashcard.getPhone().value, actualCard.getPhone());
+        assertEquals(expectedFlashcard.getTopic().fullTopic, actualCard.getTopic());
+        assertEquals(expectedFlashcard.getDifficulty().value, actualCard.getDifficulty());
         assertEquals(expectedFlashcard.getEmail().value, actualCard.getEmail());
-        assertEquals(expectedFlashcard.getAddress().value, actualCard.getAddress());
+        assertEquals(expectedFlashcard.getContent().value, actualCard.getContent());
         assertEquals(expectedFlashcard.getDeadline().value, actualCard.getDeadline());
         assertEquals(expectedFlashcard.getTags().stream().map(tag -> tag.tagName).collect(Collectors.toList()),
                 actualCard.getTags());

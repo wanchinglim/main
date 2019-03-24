@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.flashcard.Flashcard;
 
 /**
- * Deletes a flashcard identified using it's displayed index from the address book.
+ * Deletes a flashcard identified using it's displayed index from the flash book.
  */
 public class DeleteCommand extends Command {
 
@@ -43,7 +43,7 @@ public class DeleteCommand extends Command {
 
         Flashcard flashcardToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteFlashcard(flashcardToDelete);
-        model.commitAddressBook();
+        model.commitFlashBook();
         return new CommandResult(String.format(MESSAGE_DELETE_FLASHCARD_SUCCESS, flashcardToDelete));
     }
 

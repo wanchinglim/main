@@ -37,45 +37,45 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' flash book file path.
      */
-    Path getAddressBookFilePath();
+    Path getFlashBookFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' flash book file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setFlashBookFilePath(Path flashBookFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces flash book data with the data in {@code flashBook}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setFlashBook(ReadOnlyFlashBook flashBook);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the FlashBook */
+    ReadOnlyFlashBook getFlashBook();
 
     /**
-     * Returns true if a flashcard with the same identity as {@code flashcard} exists in the address book.
+     * Returns true if a flashcard with the same identity as {@code flashcard} exists in the flash book.
      */
     boolean hasFlashcard(Flashcard flashcard);
 
     /**
      * Deletes the given flashcard.
-     * The flashcard must exist in the address book.
+     * The flashcard must exist in the flash book.
      */
     void deleteFlashcard(Flashcard target);
 
     /**
      * Adds the given flashcard.
-     * {@code flashcard} must not already exist in the address book.
+     * {@code flashcard} must not already exist in the flash book.
      */
     void addFlashcard(Flashcard flashcard);
 
     /**
      * Replaces the given flashcard {@code target} with {@code editedFlashcard}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in the flash book.
      * The flashcard identity of {@code editedFlashcard} must not
-     * be the same as another existing flashcard in the address book.
+     * be the same as another existing flashcard in the flash book.
      */
     void setFlashcard(Flashcard target, Flashcard editedFlashcard);
 
@@ -89,29 +89,29 @@ public interface Model {
     void updateFilteredFlashcardList(Predicate<Flashcard> predicate);
 
     /**
-     * Returns true if the model has previous address book states to restore.
+     * Returns true if the model has previous flash book states to restore.
      */
-    boolean canUndoAddressBook();
+    boolean canUndoFlashBook();
 
     /**
-     * Returns true if the model has undone address book states to restore.
+     * Returns true if the model has undone flash book states to restore.
      */
-    boolean canRedoAddressBook();
+    boolean canRedoFlashBook();
 
     /**
-     * Restores the model's address book to its previous state.
+     * Restores the model's flash book to its previous state.
      */
-    void undoAddressBook();
+    void undoFlashBook();
 
     /**
-     * Restores the model's address book to its previously undone state.
+     * Restores the model's flash book to its previously undone state.
      */
-    void redoAddressBook();
+    void redoFlashBook();
 
     /**
-     * Saves the current address book state for undo/redo.
+     * Saves the current flash book state for undo/redo.
      */
-    void commitAddressBook();
+    void commitFlashBook();
 
     /**
      * Selected flashcard in the filtered flashcard list.

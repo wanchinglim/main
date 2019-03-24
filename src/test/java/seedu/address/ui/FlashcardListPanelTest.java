@@ -17,12 +17,12 @@ import guitests.guihandles.FlashcardListPanelHandle;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.flashcard.Address;
+import seedu.address.model.flashcard.Content;
 import seedu.address.model.flashcard.Deadline;
+import seedu.address.model.flashcard.Difficulty;
 import seedu.address.model.flashcard.Email;
 import seedu.address.model.flashcard.Flashcard;
-import seedu.address.model.flashcard.Name;
-import seedu.address.model.flashcard.Phone;
+import seedu.address.model.flashcard.Topic;
 
 public class FlashcardListPanelTest extends GuiUnitTest {
     private static final ObservableList<Flashcard> TYPICAL_FLASHCARDS =
@@ -81,12 +81,12 @@ public class FlashcardListPanelTest extends GuiUnitTest {
     private ObservableList<Flashcard> createBackingList(int subjectCount) {
         ObservableList<Flashcard> backingList = FXCollections.observableArrayList();
         for (int i = 0; i < subjectCount; i++) {
-            Name name = new Name(i + "a");
-            Phone phone = new Phone("000");
+            Topic topic = new Topic(i + "a");
+            Difficulty difficulty = new Difficulty("000");
             Email email = new Email("a@aa");
-            Address address = new Address("a");
+            Content content = new Content("a");
             Deadline deadline = new Deadline("a");
-            Flashcard flashcard = new Flashcard(name, phone, email, address, deadline, Collections.emptySet());
+            Flashcard flashcard = new Flashcard(topic, difficulty, email, content, deadline, Collections.emptySet());
             backingList.add(flashcard);
         }
         return backingList;

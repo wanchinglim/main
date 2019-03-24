@@ -1,0 +1,8 @@
+{
+  "flashcards": [ {
+    "topic": "Flashcard with invalid topic field: Ha!ns Mu@ster",
+    "difficulty": "9482424",
+    "email": "hans@example.com",
+    "content": "4th street"
+  } ]
+}

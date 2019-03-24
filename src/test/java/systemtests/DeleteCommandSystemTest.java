@@ -20,7 +20,7 @@ import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.flashcard.Flashcard;
 
-public class DeleteCommandSystemTest extends AddressBookSystemTest {
+public class DeleteCommandSystemTest extends FlashBookSystemTest {
 
     private static final String MESSAGE_INVALID_DELETE_COMMAND_FORMAT =
             String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
@@ -54,22 +54,22 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
         assertCommandSuccess(command, modelBeforeDeletingLast, expectedResultMessage);
 
         /* Case: delete the middle flashcard in the list -> deleted */
-        Index middleSubjectIndex = getMidIndex(getModel());
-        assertCommandSuccess(middleSubjectIndex);
+        Index middleFlashcardIndex = getMidIndex(getModel());
+        assertCommandSuccess(middleFlashcardIndex);
 
         /* ------------------ Performing delete operation while a filtered list is being shown ---------------------- */
 
-        /* Case: filtered flashcard list, delete index within bounds of address book and flashcard list -> deleted */
-        showFlashcardsWithName(KEYWORD_MATCHING_MEIER);
+        /* Case: filtered flashcard list, delete index within bounds of flash book and flashcard list -> deleted */
+        showFlashcardsWithTopic(KEYWORD_MATCHING_MEIER);
         Index index = INDEX_FIRST_FLASHCARD;
         assertTrue(index.getZeroBased() < getModel().getFilteredFlashcardList().size());
         assertCommandSuccess(index);
 
-        /* Case: filtered flashcard list, delete index within bounds of address book but out of bounds of flashcard list
+        /* Case: filtered flashcard list, delete index within bounds of flash book but out of bounds of flashcard list
          * -> rejected
          */
-        showFlashcardsWithName(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = getModel().getAddressBook().getFlashcardList().size();
+        showFlashcardsWithTopic(KEYWORD_MATCHING_MEIER);
+        int invalidIndex = getModel().getFlashBook().getFlashcardList().size();
         command = DeleteCommand.COMMAND_WORD + " " + invalidIndex;
         assertCommandFailure(command, MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
 
@@ -99,7 +99,7 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: invalid index (size + 1) -> rejected */
         Index outOfBoundsIndex = Index.fromOneBased(
-                getModel().getAddressBook().getFlashcardList().size() + 1);
+                getModel().getFlashBook().getFlashcardList().size() + 1);
         command = DeleteCommand.COMMAND_WORD + " " + outOfBoundsIndex.getOneBased();
         assertCommandFailure(command, MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
 
@@ -114,7 +114,7 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
     }
 
     /**
-     * Removes the {@code Flashcard} at the specified {@code index} in {@code model}'s address book.
+     * Removes the {@code Flashcard} at the specified {@code index} in {@code model}'s flash book.
      * @return the removed flashcard
      */
     private Flashcard removeFlashcard(Model model, Index index) {
@@ -145,8 +145,8 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
      * 4. Asserts that the status bar's sync status changes.<br>
      * 5. Asserts that the command box has the default style class.<br>
      * Verifications 1 and 2 are performed by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.
-     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * {@code FlashBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.
+     * @see FlashBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {
         assertCommandSuccess(command, expectedModel, expectedResultMessage, null);
@@ -156,7 +156,7 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
      * Performs the same verification as {@code assertCommandSuccess(String, Model, String)} except that the browser url
      * and selected card are expected to update accordingly depending on the card at {@code expectedSelectedCardIndex}.
      * @see DeleteCommandSystemTest#assertCommandSuccess(String, Model, String)
-     * @see AddressBookSystemTest#assertSelectedCardChanged(Index)
+     * @see FlashBookSystemTest#assertSelectedCardChanged(Index)
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage,
             Index expectedSelectedCardIndex) {
@@ -180,8 +180,8 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
      * 3. Asserts that the browser url, selected card and status bar remain unchanged.<br>
      * 4. Asserts that the command box has the error style.<br>
      * Verifications 1 and 2 are performed by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
-     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * {@code FlashBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * @see FlashBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandFailure(String command, String expectedResultMessage) {
         Model expectedModel = getModel();

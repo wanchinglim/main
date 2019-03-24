@@ -20,9 +20,9 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.flashcard.Flashcard;
-import seedu.address.model.flashcard.NameContainsKeywordsPredicate;
+import seedu.address.model.flashcard.TopicContainsKeywordsPredicate;
 import seedu.address.model.flashcard.exceptions.FlashcardNotFoundException;
-import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.FlashBookBuilder;
 import seedu.address.testutil.FlashcardBuilder;
 
 public class ModelManagerTest {
@@ -35,7 +35,7 @@ public class ModelManagerTest {
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
+        assertEquals(new FlashBook(), new FlashBook(modelManager.getFlashBook()));
         assertEquals(null, modelManager.getSelectedFlashcard());
     }
 
@@ -48,14 +48,14 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAddressBookFilePath(Paths.get("address/book/file/path"));
+        userPrefs.setFlashBookFilePath(Paths.get("address/book/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setAddressBookFilePath(Paths.get("new/address/book/file/path"));
+        userPrefs.setFlashBookFilePath(Paths.get("new/address/book/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -73,16 +73,16 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
+    public void setFlashBookFilePath_nullPath_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        modelManager.setAddressBookFilePath(null);
+        modelManager.setFlashBookFilePath(null);
     }
 
     @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
+    public void setFlashBookFilePath_validPath_setsFlashBookFilePath() {
         Path path = Paths.get("address/book/file/path");
-        modelManager.setAddressBookFilePath(path);
-        assertEquals(path, modelManager.getAddressBookFilePath());
+        modelManager.setFlashBookFilePath(path);
+        assertEquals(path, modelManager.getFlashBookFilePath());
     }
 
     @Test
@@ -92,12 +92,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasFlashcard_flashcardNotInAddressBook_returnsFalse() {
+    public void hasFlashcard_flashcardNotInFlashBook_returnsFalse() {
         assertFalse(modelManager.hasFlashcard(ALICE));
     }
 
     @Test
-    public void hasFlashcard_flashcardInAddressBook_returnsTrue() {
+    public void hasFlashcard_flashcardInFlashBook_returnsTrue() {
         modelManager.addFlashcard(ALICE);
         assertTrue(modelManager.hasFlashcard(ALICE));
     }
@@ -151,13 +151,13 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withFlashcard(ALICE).withFlashcard(BENSON).build();
-        AddressBook differentAddressBook = new AddressBook();
+        FlashBook flashBook = new FlashBookBuilder().withFlashcard(ALICE).withFlashcard(BENSON).build();
+        FlashBook differentFlashBook = new FlashBook();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        modelManager = new ModelManager(flashBook, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(flashBook, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -169,20 +169,20 @@ public class ModelManagerTest {
         // different types -> returns false
         assertFalse(modelManager.equals(5));
 
-        // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
+        // different flashBook -> returns false
+        assertFalse(modelManager.equals(new ModelManager(differentFlashBook, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredFlashcardList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        String[] keywords = ALICE.getTopic().fullTopic.split("\\s+");
+        modelManager.updateFilteredFlashcardList(new TopicContainsKeywordsPredicate(Arrays.asList(keywords)));
+        assertFalse(modelManager.equals(new ModelManager(flashBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+        differentUserPrefs.setFlashBookFilePath(Paths.get("differentFilePath"));
+        assertFalse(modelManager.equals(new ModelManager(flashBook, differentUserPrefs)));
     }
 }
