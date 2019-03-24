@@ -21,7 +21,7 @@ public class Flashcard {
     private final Email email;
 
     // Data fields
-    private final Address address;
+    private final Content content;
     private final Deadline deadline;
     private final Set<Tag> tags = new HashSet<>();
 
@@ -29,12 +29,12 @@ public class Flashcard {
      * Every field must be present and not null.
      */
     public Flashcard(Topic topic, Difficulty difficulty, Email email,
-                     Address address, Deadline deadline, Set<Tag> tags) {
-        requireAllNonNull(topic, difficulty, email, address, tags);
+                     Content content, Deadline deadline, Set<Tag> tags) {
+        requireAllNonNull(topic, difficulty, email, content, tags);
         this.topic = topic;
         this.difficulty = difficulty;
         this.email = email;
-        this.address = address;
+        this.content = content;
         this.deadline = deadline;
         this.tags.addAll(tags);
     }
@@ -51,8 +51,8 @@ public class Flashcard {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
+    public Content getContent() {
+        return content;
     }
 
     public Deadline getDeadline() {
@@ -100,14 +100,14 @@ public class Flashcard {
         return otherFlashcard.getTopic().equals(getTopic())
                 && otherFlashcard.getDifficulty().equals(getDifficulty())
                 && otherFlashcard.getEmail().equals(getEmail())
-                && otherFlashcard.getAddress().equals(getAddress())
+                && otherFlashcard.getContent().equals(getContent())
                 && otherFlashcard.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(topic, difficulty, email, address, tags);
+        return Objects.hash(topic, difficulty, email, content, tags);
     }
 
     @Override
@@ -118,8 +118,8 @@ public class Flashcard {
                 .append(getDifficulty())
                 .append(" Email: ")
                 .append(getEmail())
-                .append(" Address: ")
-                .append(getAddress())
+                .append(" Content: ")
+                .append(getContent())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
