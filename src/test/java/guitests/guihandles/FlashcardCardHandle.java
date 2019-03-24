@@ -16,7 +16,7 @@ import seedu.address.model.flashcard.Flashcard;
 public class FlashcardCardHandle extends NodeHandle<Node> {
     private static final String ID_FIELD_ID = "#id";
     private static final String TOPIC_FIELD_ID = "#topic";
-    private static final String ADDRESS_FIELD_ID = "#address";
+    private static final String CONTENT_FIELD_ID = "#content";
     private static final String DIFFICULTY_FIELD_ID = "#difficulty";
     private static final String EMAIL_FIELD_ID = "#email";
     private static final String DEADLINE_FIELD_ID = "#deadline";
@@ -24,7 +24,7 @@ public class FlashcardCardHandle extends NodeHandle<Node> {
 
     private final Label idLabel;
     private final Label topicLabel;
-    private final Label addressLabel;
+    private final Label contentLabel;
     private final Label difficultyLabel;
     private final Label emailLabel;
     private final Label deadlineLabel;
@@ -35,7 +35,7 @@ public class FlashcardCardHandle extends NodeHandle<Node> {
 
         idLabel = getChildNode(ID_FIELD_ID);
         topicLabel = getChildNode(TOPIC_FIELD_ID);
-        addressLabel = getChildNode(ADDRESS_FIELD_ID);
+        contentLabel = getChildNode(CONTENT_FIELD_ID);
         difficultyLabel = getChildNode(DIFFICULTY_FIELD_ID);
         emailLabel = getChildNode(EMAIL_FIELD_ID);
         deadlineLabel = getChildNode(DEADLINE_FIELD_ID);
@@ -56,8 +56,8 @@ public class FlashcardCardHandle extends NodeHandle<Node> {
         return topicLabel.getText();
     }
 
-    public String getAddress() {
-        return addressLabel.getText();
+    public String getContent() {
+        return contentLabel.getText();
     }
 
     public String getDifficulty() {
@@ -84,7 +84,7 @@ public class FlashcardCardHandle extends NodeHandle<Node> {
      */
     public boolean equals(Flashcard flashcard) {
         return getTopic().equals(flashcard.getTopic().fullTopic)
-                && getAddress().equals(flashcard.getAddress().value)
+                && getContent().equals(flashcard.getContent().value)
                 && getDifficulty().equals(flashcard.getDifficulty().value)
                 && getEmail().equals(flashcard.getEmail().value)
                 && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(flashcard.getTags().stream()
