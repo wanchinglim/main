@@ -17,7 +17,7 @@ import guitests.guihandles.FlashcardListPanelHandle;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.flashcard.Address;
+import seedu.address.model.flashcard.Content;
 import seedu.address.model.flashcard.Deadline;
 import seedu.address.model.flashcard.Difficulty;
 import seedu.address.model.flashcard.Email;
@@ -84,9 +84,9 @@ public class FlashcardListPanelTest extends GuiUnitTest {
             Topic topic = new Topic(i + "a");
             Difficulty difficulty = new Difficulty("000");
             Email email = new Email("a@aa");
-            Address address = new Address("a");
+            Content content = new Content("a");
             Deadline deadline = new Deadline("a");
-            Flashcard flashcard = new Flashcard(topic, difficulty, email, address, deadline, Collections.emptySet());
+            Flashcard flashcard = new Flashcard(topic, difficulty, email, content, deadline, Collections.emptySet());
             backingList.add(flashcard);
         }
         return backingList;
