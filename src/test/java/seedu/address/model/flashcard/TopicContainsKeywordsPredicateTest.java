@@ -69,8 +69,8 @@ public class TopicContainsKeywordsPredicateTest {
         predicate = new TopicContainsKeywordsPredicate(Arrays.asList("Carol"));
         assertFalse(predicate.test(new FlashcardBuilder().withTopic("Alice Bob").build()));
 
-        // Keywords match difficulty and content, but does not match topic
-        predicate = new TopicContainsKeywordsPredicate(Arrays.asList("12345", "Main", "Street"));
+        // Keywords match phone and address, but does not match name
+        predicate = new TopicContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com", "Main", "Street"));
         assertFalse(predicate.test(new FlashcardBuilder().withTopic("Alice").withDifficulty("12345")
                 .withContent("Main Street").build()));
     }

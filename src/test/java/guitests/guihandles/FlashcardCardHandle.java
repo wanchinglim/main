@@ -19,14 +19,14 @@ public class FlashcardCardHandle extends NodeHandle<Node> {
     private static final String CONTENT_FIELD_ID = "#content";
     private static final String DIFFICULTY_FIELD_ID = "#difficulty";
     private static final String DEADLINE_FIELD_ID = "#deadline";
-    private static final String TAGS_FIELD_ID = "#tags";
+    private static final String TAGS_FIELD_ID = "#subject";
 
     private final Label idLabel;
     private final Label topicLabel;
     private final Label contentLabel;
     private final Label difficultyLabel;
     private final Label deadlineLabel;
-    private final List<Label> tagLabels;
+    private final List<Label> subjectLabel;
 
     public FlashcardCardHandle(Node cardNode) {
         super(cardNode);
@@ -38,7 +38,7 @@ public class FlashcardCardHandle extends NodeHandle<Node> {
         deadlineLabel = getChildNode(DEADLINE_FIELD_ID);
 
         Region tagsContainer = getChildNode(TAGS_FIELD_ID);
-        tagLabels = tagsContainer
+        subjectLabel = tagsContainer
                 .getChildrenUnmodifiable()
                 .stream()
                 .map(Label.class::cast)
@@ -65,8 +65,8 @@ public class FlashcardCardHandle extends NodeHandle<Node> {
         return deadlineLabel.getText();
     }
 
-    public List<String> getTags() {
-        return tagLabels
+    public List<String> getSubject() {
+        return subjectLabel
                 .stream()
                 .map(Label::getText)
                 .collect(Collectors.toList());
@@ -79,8 +79,8 @@ public class FlashcardCardHandle extends NodeHandle<Node> {
         return getTopic().equals(flashcard.getTopic().fullTopic)
                 && getContent().equals(flashcard.getContent().value)
                 && getDifficulty().equals(flashcard.getDifficulty().value)
-                && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(flashcard.getTags().stream()
-                        .map(tag -> tag.tagName)
+                && ImmutableMultiset.copyOf(getSubject()).equals(ImmutableMultiset.copyOf(flashcard.getTags().stream()
+                        .map(tag -> tag.subjectName)
                         .collect(Collectors.toList())));
     }
 }

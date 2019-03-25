@@ -20,7 +20,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DIFFICULTY_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_FLASHCARDS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_FLASHCARD;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_FLASHCARD;
@@ -36,11 +36,18 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
+<<<<<<< HEAD
+import seedu.address.model.flashcard.Address;
+import seedu.address.model.flashcard.Email;
+import seedu.address.model.flashcard.Topic;
+import seedu.address.model.flashcard.Phone;
+=======
 import seedu.address.model.flashcard.Content;
 import seedu.address.model.flashcard.Difficulty;
 import seedu.address.model.flashcard.Topic;
+>>>>>>> a43dedf4b0c227525d0fc6ec76c8d584d3c3ba60
 import seedu.address.model.flashcard.Flashcard;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Subject;
 import seedu.address.testutil.FlashcardBuilder;
 import seedu.address.testutil.FlashcardUtil;
 
@@ -118,7 +125,7 @@ public class EditCommandSystemTest extends FlashBookSystemTest {
 /* Case: clear tags -> cleared *//*
 
         index = INDEX_FIRST_FLASHCARD;
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + PREFIX_TAG.getPrefix();
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + PREFIX_SUBJECT.getPrefix();
         Flashcard subjectToEdit = getModel().getFilteredFlashcardList().get(index.getZeroBased());
         editedSubject = new FlashcardBuilder(subjectToEdit).withTags().build();
         assertCommandSuccess(command, index, editedSubject);
@@ -206,7 +213,11 @@ public class EditCommandSystemTest extends FlashBookSystemTest {
 /* Case: invalid topic -> rejected *//*
 
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_FLASHCARD.getOneBased()
+<<<<<<< HEAD
+                + INVALID_NAME_DESC, Topic.MESSAGE_CONSTRAINTS);
+=======
                 + INVALID_TOPIC_DESC, Topic.MESSAGE_CONSTRAINTS);
+>>>>>>> a43dedf4b0c227525d0fc6ec76c8d584d3c3ba60
 
         */
 /* Case: invalid difficulty -> rejected *//*
@@ -224,7 +235,7 @@ public class EditCommandSystemTest extends FlashBookSystemTest {
 /* Case: invalid tag -> rejected *//*
 
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_FLASHCARD.getOneBased()
-                + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS);
+                + INVALID_TAG_DESC, Subject.MESSAGE_CONSTRAINTS);
 
         */
 /* Case: edit a flashcard with new values same as another flashcard's values -> rejected *//*

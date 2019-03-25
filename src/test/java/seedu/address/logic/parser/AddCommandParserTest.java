@@ -32,7 +32,7 @@ import seedu.address.model.flashcard.Content;
 import seedu.address.model.flashcard.Difficulty;
 import seedu.address.model.flashcard.Flashcard;
 import seedu.address.model.flashcard.Topic;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Subject;
 import seedu.address.testutil.FlashcardBuilder;
 
 public class AddCommandParserTest {
@@ -111,7 +111,7 @@ public class AddCommandParserTest {
 
         // invalid tag
         assertParseFailure(parser, TOPIC_DESC_BOB + DIFFICULTY_DESC_BOB + CONTENT_DESC_BOB
-                + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
+                + INVALID_TAG_DESC + VALID_TAG_FRIEND, Subject.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_TOPIC_DESC + DIFFICULTY_DESC_BOB + INVALID_CONTENT_DESC,

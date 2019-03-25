@@ -1,9 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DIFFICULTY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TOPIC;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_FLASHCARDS;
 
@@ -24,7 +25,7 @@ import seedu.address.model.flashcard.Deadline;
 import seedu.address.model.flashcard.Difficulty;
 import seedu.address.model.flashcard.Flashcard;
 import seedu.address.model.flashcard.Topic;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Subject;
 
 /**
  * Edits the details of an existing flashcard in the flash book.
@@ -41,7 +42,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_TOPIC + "TOPIC] "
             + "[" + PREFIX_DIFFICULTY + "DIFFICULTY] "
             + "[" + PREFIX_CONTENT + "CONTENT] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_SUBJECT + "SUBJECT]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_DIFFICULTY + "91234567 ";
 
@@ -98,7 +99,7 @@ public class EditCommand extends Command {
         Difficulty updatedDifficulty = editFlashcardDescriptor.getDifficulty().orElse(flashcardToEdit.getDifficulty());
         Content updatedContent = editFlashcardDescriptor.getContent().orElse(flashcardToEdit.getContent());
         Deadline updatedDeadline = flashcardToEdit.getDeadline(); //edit command does not allow editing deadlines
-        Set<Tag> updatedTags = editFlashcardDescriptor.getTags().orElse(flashcardToEdit.getTags());
+        Set<Subject> updatedTags = editFlashcardDescriptor.getTags().orElse(flashcardToEdit.getTags());
 
         return new Flashcard(updatedTopic, updatedDifficulty, updatedContent, updatedDeadline, updatedTags);
     }
@@ -126,10 +127,11 @@ public class EditCommand extends Command {
      * corresponding field value of the flashcard.
      */
     public static class EditFlashcardDescriptor {
+
         private Topic topic;
         private Difficulty difficulty;
         private Content content;
-        private Set<Tag> tags;
+        private Set<Subject> tags;
 
         public EditFlashcardDescriptor() {}
 
@@ -179,7 +181,7 @@ public class EditCommand extends Command {
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
          */
-        public void setTags(Set<Tag> tags) {
+        public void setTags(Set<Subject> tags) {
             this.tags = (tags != null) ? new HashSet<>(tags) : null;
         }
 
@@ -188,7 +190,7 @@ public class EditCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
-        public Optional<Set<Tag>> getTags() {
+        public Optional<Set<Subject>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 

@@ -4,16 +4,16 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Flashcard's topic in the flash book.
+ * Represents a Flashcard's topic in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidTopic(String)}
  */
 public class Topic {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Topics should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
-     * The first character of the topic must not be a whitespace,
+     * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
