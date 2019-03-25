@@ -4,10 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Subject in the flash book.
+ * Represents a SubjectTag in the flash book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidSubjectName(String)}
  */
-public class Subject {
+public class SubjectTag {
 
     public static final String MESSAGE_CONSTRAINTS = "Subjects names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
@@ -15,11 +15,11 @@ public class Subject {
     public final String subjectName;
 
     /**
-     * Constructs a {@code Subject}.
+     * Constructs a {@code SubjectTag}.
      *
      * @param subjectName A valid subject name.
      */
-    public Subject(String subjectName) {
+    public SubjectTag(String subjectName) {
         requireNonNull(subjectName);
         checkArgument(isValidSubjectName(subjectName), MESSAGE_CONSTRAINTS);
         this.subjectName = subjectName;
@@ -35,8 +35,8 @@ public class Subject {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Subject // instanceof handles nulls
-                && subjectName.equals(((Subject) other).subjectName)); // state check
+                || (other instanceof SubjectTag // instanceof handles nulls
+                && subjectName.equals(((SubjectTag) other).subjectName)); // state check
     }
 
     @Override

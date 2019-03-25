@@ -10,7 +10,7 @@ import java.util.Set;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditFlashcardDescriptor;
 import seedu.address.model.flashcard.Flashcard;
-import seedu.address.model.tag.Subject;
+import seedu.address.model.tag.SubjectTag;
 
 /**
  * A utility class for Flashcard.
@@ -48,7 +48,7 @@ public class FlashcardUtil {
                 sb.append(PREFIX_DIFFICULTY).append(difficulty.value).append(" "));
         descriptor.getContent().ifPresent(content -> sb.append(PREFIX_CONTENT).append(content.value).append(" "));
         if (descriptor.getTags().isPresent()) {
-            Set<Subject> tags = descriptor.getTags().get();
+            Set<SubjectTag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
                 sb.append(PREFIX_SUBJECT);
             } else {

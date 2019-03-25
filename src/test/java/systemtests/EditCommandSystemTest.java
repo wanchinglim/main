@@ -47,7 +47,7 @@ import seedu.address.model.flashcard.Difficulty;
 import seedu.address.model.flashcard.Topic;
 >>>>>>> a43dedf4b0c227525d0fc6ec76c8d584d3c3ba60
 import seedu.address.model.flashcard.Flashcard;
-import seedu.address.model.tag.Subject;
+import seedu.address.model.tag.SubjectTag;
 import seedu.address.testutil.FlashcardBuilder;
 import seedu.address.testutil.FlashcardUtil;
 
@@ -235,7 +235,7 @@ public class EditCommandSystemTest extends FlashBookSystemTest {
 /* Case: invalid tag -> rejected *//*
 
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_FLASHCARD.getOneBased()
-                + INVALID_TAG_DESC, Subject.MESSAGE_CONSTRAINTS);
+                + INVALID_TAG_DESC, SubjectTag.MESSAGE_CONSTRAINTS);
 
         */
 /* Case: edit a flashcard with new values same as another flashcard's values -> rejected *//*
@@ -281,7 +281,7 @@ public class EditCommandSystemTest extends FlashBookSystemTest {
      * Performs the same verification as {@code assertCommandSuccess(String, Index, Flashcard, Index)} except that
      * the browser url and selected card remain unchanged.
      * @param toEdit the index of the current model's filtered list
-     * @see EditCommandSystemTest#assertCommandSuccess(String, Index, Subject, Index)
+     * @see EditCommandSystemTest#assertCommandSuccess(String, Index, SubjectTag, Index)
      *//*
 
     private void assertCommandSuccess(String command, Index toEdit, Flashcard editedSubject) {

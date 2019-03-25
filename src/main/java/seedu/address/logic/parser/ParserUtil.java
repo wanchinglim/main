@@ -15,7 +15,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.flashcard.Content;
 import seedu.address.model.flashcard.Difficulty;
 import seedu.address.model.flashcard.Topic;
-import seedu.address.model.tag.Subject;
+import seedu.address.model.tag.SubjectTag;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -112,26 +112,26 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Subject}.
+     * Parses a {@code String tag} into a {@code SubjectTag}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code tag} is invalid.
      */
-    public static Subject parseTag(String tag) throws ParseException {
+    public static SubjectTag parseTag(String tag) throws ParseException {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
-        if (!Subject.isValidSubjectName(trimmedTag)) {
-            throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
+        if (!SubjectTag.isValidSubjectName(trimmedTag)) {
+            throw new ParseException(SubjectTag.MESSAGE_CONSTRAINTS);
         }
-        return new Subject(trimmedTag);
+        return new SubjectTag(trimmedTag);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Subject>}.
+     * Parses {@code Collection<String> tags} into a {@code Set<SubjectTag>}.
      */
-    public static Set<Subject> parseTags(Collection<String> tags) throws ParseException {
+    public static Set<SubjectTag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
-        final Set<Subject> tagSet = new HashSet<>();
+        final Set<SubjectTag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(parseTag(tagName));
         }

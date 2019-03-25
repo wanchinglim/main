@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.tag.Subject;
+import seedu.address.model.tag.SubjectTag;
 
 /**
  * Represents a Flashcard in the flash book.
@@ -22,12 +22,12 @@ public class Flashcard {
     // Data fields
     private final Content content;
     private final Deadline deadline;
-    private final Set<Subject> subject = new HashSet<>();
+    private final Set<SubjectTag> subject = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Flashcard(Topic topic, Difficulty difficulty, Content content, Deadline deadline, Set<Subject> subject) {
+    public Flashcard(Topic topic, Difficulty difficulty, Content content, Deadline deadline, Set<SubjectTag> subject) {
         requireAllNonNull(topic, difficulty, content, subject);
         this.topic = topic;
         this.difficulty = difficulty;
@@ -56,7 +56,7 @@ public class Flashcard {
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Subject> getTags() {
+    public Set<SubjectTag> getTags() {
         return Collections.unmodifiableSet(subject);
     }
 
@@ -109,7 +109,7 @@ public class Flashcard {
                 .append(getDifficulty())
                 .append(" Content: ")
                 .append(getContent())
-                .append(" Subject: ");
+                .append(" SubjectTag: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }
