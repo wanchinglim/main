@@ -35,7 +35,7 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SelectCommand;
-import seedu.address.model.AddressBook;
+import seedu.address.model.FlashBook;
 import seedu.address.model.Model;
 import seedu.address.testutil.TypicalFlashcards;
 import seedu.address.ui.BrowserPanel;
@@ -43,10 +43,10 @@ import seedu.address.ui.CommandBox;
 
 
 /**
- * A system test class for AddressBook, which provides access to handles of GUI components and helper methods
+ * A system test class for FlashBook, which provides access to handles of GUI components and helper methods
  * for test verification.
  */
-public abstract class AddressBookSystemTest {
+public abstract class FlashBookSystemTest {
     @ClassRule
     public static ClockRule clockRule = new ClockRule();
 
@@ -81,8 +81,8 @@ public abstract class AddressBookSystemTest {
     /**
      * Returns the data to be loaded into the file in {@link #getDataFileLocation()}.
      */
-    protected AddressBook getInitialData() {
-        return TypicalFlashcards.getTypicalAddressBook();
+    protected FlashBook getInitialData() {
+        return TypicalFlashcards.getTypicalFlashBook();
     }
 
     /**
@@ -136,21 +136,21 @@ public abstract class AddressBookSystemTest {
     }
 
     /**
-     * Displays all flashcards in the address book.
+     * Displays all flashcards in the flash book.
      */
     protected void showAllFlashcards() {
         executeCommand(ListCommand.COMMAND_WORD);
-        assertEquals(getModel().getAddressBook().getFlashcardList().size(),
+        assertEquals(getModel().getFlashBook().getFlashcardList().size(),
                 getModel().getFilteredFlashcardList().size());
     }
 
     /**
      * Displays all flashcards with any parts of their names matching {@code keyword} (case-insensitive).
      */
-    protected void showFlashcardsWithName(String keyword) {
+    protected void showFlashcardsWithTopic(String keyword) {
         executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
         assertTrue(getModel().getFilteredFlashcardList().size()
-                < getModel().getAddressBook().getFlashcardList().size());
+                < getModel().getFlashBook().getFlashcardList().size());
     }
 
     /**
@@ -162,11 +162,11 @@ public abstract class AddressBookSystemTest {
     }
 
     /**
-     * Deletes all flashcards in the address book.
+     * Deletes all flashcards in the flash book.
      */
     protected void deleteAllFlashcards() {
         executeCommand(ClearCommand.COMMAND_WORD);
-        assertEquals(0, getModel().getAddressBook().getFlashcardList().size());
+        assertEquals(0, getModel().getFlashBook().getFlashcardList().size());
     }
 
     /**
@@ -178,7 +178,7 @@ public abstract class AddressBookSystemTest {
             Model expectedModel) {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
         assertEquals(expectedResultMessage, getResultDisplay().getText());
-        assertEquals(new AddressBook(expectedModel.getAddressBook()), testApp.readStorageAddressBook());
+        assertEquals(new FlashBook(expectedModel.getFlashBook()), testApp.readStorageFlashBook());
         assertListMatching(getFlashcardListPanel(), expectedModel.getFilteredFlashcardList());
     }
 
@@ -277,7 +277,7 @@ public abstract class AddressBookSystemTest {
     /**
      * Asserts that the sync status in the status bar was changed to the timing of
      * {@code ClockRule#getInjectedClock()}, and total subjects was changed to match the total
-     * number of subjects in the address book, while the save location remains the same.
+     * number of subjects in the flash book, while the save location remains the same.
      */
     protected void assertStatusBarChangedExceptSaveLocation() {
         StatusBarFooterHandle handle = getStatusBarFooter();
@@ -286,7 +286,7 @@ public abstract class AddressBookSystemTest {
         String expectedSyncStatus = String.format(SYNC_STATUS_UPDATED, timestamp);
         assertEquals(expectedSyncStatus, handle.getSyncStatus());
 
-        final int totalSubjects = testApp.getModel().getAddressBook().getFlashcardList().size();
+        final int totalSubjects = testApp.getModel().getFlashBook().getFlashcardList().size();
         assertEquals(String.format(TOTAL_FLASHCARDS_STATUS, totalSubjects), handle.getTotalFlashcardsStatus());
 
         assertFalse(handle.isSaveLocationChanged());
@@ -303,7 +303,7 @@ public abstract class AddressBookSystemTest {
         assertEquals(Paths.get(".").resolve(testApp.getStorageSaveLocation()).toString(),
                 getStatusBarFooter().getSaveLocation());
         assertEquals(SYNC_STATUS_INITIAL, getStatusBarFooter().getSyncStatus());
-        assertEquals(String.format(TOTAL_FLASHCARDS_STATUS, getModel().getAddressBook().getFlashcardList().size()),
+        assertEquals(String.format(TOTAL_FLASHCARDS_STATUS, getModel().getFlashBook().getFlashcardList().size()),
                 getStatusBarFooter().getTotalFlashcardsStatus());
     }
 

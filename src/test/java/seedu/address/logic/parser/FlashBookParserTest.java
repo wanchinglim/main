@@ -36,11 +36,11 @@ import seedu.address.testutil.EditFlashcardDescriptorBuilder;
 import seedu.address.testutil.FlashcardBuilder;
 import seedu.address.testutil.FlashcardUtil;
 
-public class AddressBookParserTest {
+public class FlashBookParserTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final FlashBookParser parser = new FlashBookParser();
 
     @Test
     public void parseCommand_add() throws Exception {

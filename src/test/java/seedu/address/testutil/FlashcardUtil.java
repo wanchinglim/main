@@ -1,8 +1,7 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DIFFICULTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TOPIC;
 
@@ -31,9 +30,8 @@ public class FlashcardUtil {
     public static String getFlashcardDetails(Flashcard flashcard) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_TOPIC + flashcard.getTopic().fullTopic + " ");
-        sb.append(PREFIX_PHONE + flashcard.getPhone().value + " ");
-        sb.append(PREFIX_EMAIL + flashcard.getEmail().value + " ");
-        sb.append(PREFIX_ADDRESS + flashcard.getAddress().value + " ");
+        sb.append(PREFIX_DIFFICULTY + flashcard.getDifficulty().value + " ");
+        sb.append(PREFIX_CONTENT + flashcard.getContent().value + " ");
         flashcard.getTags().stream().forEach(
             s -> sb.append(PREFIX_SUBJECT + s.subjectName + " ")
         );
@@ -45,10 +43,10 @@ public class FlashcardUtil {
      */
     public static String getEditFlashcardDescriptorDetails(EditFlashcardDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
-        descriptor.getName().ifPresent(name -> sb.append(PREFIX_TOPIC).append(name.fullTopic).append(" "));
-        descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
-        descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
-        descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
+        descriptor.getTopic().ifPresent(topic -> sb.append(PREFIX_TOPIC).append(topic.fullTopic).append(" "));
+        descriptor.getDifficulty().ifPresent(difficulty ->
+                sb.append(PREFIX_DIFFICULTY).append(difficulty.value).append(" "));
+        descriptor.getContent().ifPresent(content -> sb.append(PREFIX_CONTENT).append(content.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Subject> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

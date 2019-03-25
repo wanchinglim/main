@@ -8,7 +8,7 @@ import seedu.address.model.Model;
 import seedu.address.model.flashcard.TopicContainsKeywordsPredicate;
 
 /**
- * Finds and lists all flashcards in FlashCards whose name contains any of the argument keywords.
+ * Finds and lists all flashcards in FlashCards whose topic contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
 public class FindCommand extends Command {

@@ -1,0 +1,14 @@
+{
+  "flashcards": [ {
+    "topic": "Alice Pauline",
+    "difficulty": "94351253",
+    "content": "123, Jurong West Ave 6, #08-111",
+    "tagged": [ "friends" ],
+    "deadline": "15 October 2021"
+  }, {
+    "topic": "Alice Pauline",
+    "difficulty": "94351253",
+    "content": "4th street",
+    "deadline": "18 May 2021"
+  } ]
+}

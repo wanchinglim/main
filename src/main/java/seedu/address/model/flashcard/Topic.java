@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Flashcard's topic in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidTopic(String)}
  */
 public class Topic {
 
@@ -27,14 +27,14 @@ public class Topic {
      */
     public Topic(String topic) {
         requireNonNull(topic);
-        checkArgument(isValidName(topic), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidTopic(topic), MESSAGE_CONSTRAINTS);
         fullTopic = topic;
     }
 
     /**
      * Returns true if a given string is a valid topic.
      */
-    public static boolean isValidName(String test) {
+    public static boolean isValidTopic(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 

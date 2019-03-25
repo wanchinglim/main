@@ -6,10 +6,9 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditFlashcardDescriptor;
-import seedu.address.model.flashcard.Address;
-import seedu.address.model.flashcard.Email;
+import seedu.address.model.flashcard.Content;
+import seedu.address.model.flashcard.Difficulty;
 import seedu.address.model.flashcard.Flashcard;
-import seedu.address.model.flashcard.Phone;
 import seedu.address.model.flashcard.Topic;
 import seedu.address.model.tag.Subject;
 
@@ -33,42 +32,33 @@ public class EditFlashcardDescriptorBuilder {
      */
     public EditFlashcardDescriptorBuilder(Flashcard flashcard) {
         descriptor = new EditCommand.EditFlashcardDescriptor();
-        descriptor.setName(flashcard.getTopic());
-        descriptor.setPhone(flashcard.getPhone());
-        descriptor.setEmail(flashcard.getEmail());
-        descriptor.setAddress(flashcard.getAddress());
+        descriptor.setTopic(flashcard.getTopic());
+        descriptor.setDifficulty(flashcard.getDifficulty());
+        descriptor.setContent(flashcard.getContent());
         descriptor.setTags(flashcard.getTags());
     }
 
     /**
      * Sets the {@code Topic} of the {@code EditFlashcardDescriptor} that we are building.
      */
-    public EditFlashcardDescriptorBuilder withName(String name) {
-        descriptor.setName(new Topic(name));
+    public EditFlashcardDescriptorBuilder withTopic(String topic) {
+        descriptor.setTopic(new Topic(topic));
         return this;
     }
 
     /**
-     * Sets the {@code Phone} of the {@code EditFlashcardDescriptor} that we are building.
+     * Sets the {@code Difficulty} of the {@code EditFlashcardDescriptor} that we are building.
      */
-    public EditFlashcardDescriptorBuilder withPhone(String phone) {
-        descriptor.setPhone(new Phone(phone));
+    public EditFlashcardDescriptorBuilder withDifficulty(String difficulty) {
+        descriptor.setDifficulty(new Difficulty(difficulty));
         return this;
     }
 
     /**
-     * Sets the {@code Email} of the {@code EditFlashcardDescriptor} that we are building.
+     * Sets the {@code Content} of the {@code EditFlashcardDescriptor} that we are building.
      */
-    public EditFlashcardDescriptorBuilder withEmail(String email) {
-        descriptor.setEmail(new Email(email));
-        return this;
-    }
-
-    /**
-     * Sets the {@code Address} of the {@code EditFlashcardDescriptor} that we are building.
-     */
-    public EditFlashcardDescriptorBuilder withAddress(String address) {
-        descriptor.setAddress(new Address(address));
+    public EditFlashcardDescriptorBuilder withContent(String content) {
+        descriptor.setContent(new Content(content));
         return this;
     }
 

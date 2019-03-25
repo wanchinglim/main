@@ -4,12 +4,12 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Subject in the address book.
+ * Represents a Subject in the flash book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidSubjectName(String)}
  */
 public class Subject {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS = "Subjects names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String subjectName;
@@ -17,7 +17,7 @@ public class Subject {
     /**
      * Constructs a {@code Subject}.
      *
-     * @param subjectName A valid tag name.
+     * @param subjectName A valid subject name.
      */
     public Subject(String subjectName) {
         requireNonNull(subjectName);

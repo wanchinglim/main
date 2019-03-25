@@ -2,7 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static seedu.address.testutil.TypicalFlashcards.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalFlashcards.getTypicalFlashBook;
 
 import java.nio.file.Path;
 
@@ -12,8 +12,8 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.FlashBook;
+import seedu.address.model.ReadOnlyFlashBook;
 import seedu.address.model.UserPrefs;
 
 public class StorageManagerTest {
@@ -25,9 +25,9 @@ public class StorageManagerTest {
 
     @Before
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(getTempFilePath("ab"));
+        JsonFlashBookStorage flashBookStorage = new JsonFlashBookStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+        storageManager = new StorageManager(flashBookStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -50,21 +50,21 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void addressBookReadSave() throws Exception {
+    public void flashBookReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link JsonAddressBookStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
+         * {@link JsonFlashBookStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link JsonFlashBookStorageTest} class.
          */
-        AddressBook original = getTypicalAddressBook();
-        storageManager.saveAddressBook(original);
-        ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
-        assertEquals(original, new AddressBook(retrieved));
+        FlashBook original = getTypicalFlashBook();
+        storageManager.saveFlashBook(original);
+        ReadOnlyFlashBook retrieved = storageManager.readFlashBook().get();
+        assertEquals(original, new FlashBook(retrieved));
     }
 
     @Test
-    public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+    public void getFlashBookFilePath() {
+        assertNotNull(storageManager.getFlashBookFilePath());
     }
 
 }

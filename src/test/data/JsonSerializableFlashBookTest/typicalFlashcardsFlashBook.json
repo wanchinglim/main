@@ -1,0 +1,46 @@
+{
+  "_comment": "FlashBook save file which contains the same Flashcard values as in TypicalFlashcards#getTypicalFlashBook()",
+  "flashcards": [ {
+    "topic" : "Alice Pauline",
+    "difficulty" : "94351253",
+    "content" : "123, Jurong West Ave 6, #08-111",
+    "tagged" : [ "friends" ],
+    "deadline": "12 November 2020"
+  }, {
+    "topic" : "Benson Meier",
+    "difficulty" : "98765432",
+    "content" : "311, Clementi Ave 2, #02-25",
+    "tagged" : [ "owesMoney", "friends" ],
+    "deadline": "12 November 2020"
+  }, {
+    "topic" : "Carl Kurz",
+    "difficulty" : "95352563",
+    "content" : "wall street",
+    "tagged" : [ ],
+    "deadline": "12 November 2020"
+  }, {
+    "topic" : "Daniel Meier",
+    "difficulty" : "87652533",
+    "content" : "10th street",
+    "tagged" : [ "friends" ],
+    "deadline": "12 November 2020"
+  }, {
+    "topic" : "Elle Meyer",
+    "difficulty" : "9482224",
+    "content" : "michegan ave",
+    "tagged" : [ ],
+    "deadline": "12 November 2020"
+  }, {
+    "topic" : "Fiona Kunz",
+    "difficulty" : "9482427",
+    "content" : "little tokyo",
+    "tagged" : [ ],
+    "deadline": "12 November 2020"
+  }, {
+    "topic" : "George Best",
+    "difficulty" : "9482442",
+    "content" : "4th street",
+    "tagged" : [ ],
+    "deadline": "12 November 2020"
+  } ]
+}

@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.flashcard.Flashcard;
 
 /**
- * Selects a flashcard identified using it's displayed index from the address book.
+ * Selects a flashcard identified using it's displayed index from the flash book.
  */
 public class SelectCommand extends Command {
 

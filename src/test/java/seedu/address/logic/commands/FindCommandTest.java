@@ -8,7 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalFlashcards.CARL;
 import static seedu.address.testutil.TypicalFlashcards.ELLE;
 import static seedu.address.testutil.TypicalFlashcards.FIONA;
-import static seedu.address.testutil.TypicalFlashcards.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalFlashcards.getTypicalFlashBook;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -25,8 +25,8 @@ import seedu.address.model.flashcard.TopicContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalFlashBook(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalFlashBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test

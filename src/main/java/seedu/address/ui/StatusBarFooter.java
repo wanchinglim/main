@@ -13,9 +13,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.FlashBookChangedEvent;
 import seedu.address.logic.Logic;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyFlashBook;
 
 
 
@@ -55,9 +55,9 @@ public class StatusBarFooter extends UiPart<Region> {
 
 
 
-    public StatusBarFooter(Path saveLocation, ReadOnlyAddressBook addressBook, int totalFlashcards) {
+    public StatusBarFooter(Path saveLocation, ReadOnlyFlashBook flashBook, int totalFlashcards) {
         super(FXML);
-        addressBook.addListener(observable -> updateSyncStatus());
+        flashBook.addListener(observable -> updateSyncStatus());
         syncStatus.setText(SYNC_STATUS_INITIAL);
         setTotalFlashcards(totalFlashcards);
         saveLocationStatus.setText(Paths.get(".").resolve(saveLocation).toString());
@@ -96,7 +96,7 @@ public class StatusBarFooter extends UiPart<Region> {
     }
 
     @Subscribe
-    public void handleAddressBookChangedEvent(AddressBookChangedEvent abce) {
+    public void handleFlashBookChangedEvent(FlashBookChangedEvent abce) {
         long now = clock.millis();
         String lastUpdated = new Date(now).toString();
         logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));

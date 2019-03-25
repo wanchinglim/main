@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showFlashcardAtIndex;
-import static seedu.address.testutil.TypicalFlashcards.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalFlashcards.getTypicalFlashBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_FLASHCARD;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_FLASHCARD;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_FLASHCARD;
@@ -23,8 +23,8 @@ import seedu.address.model.UserPrefs;
  * Contains integration tests (interaction with the Model) for {@code SelectCommand}.
  */
 public class SelectCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalFlashBook(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalFlashBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
@@ -57,8 +57,8 @@ public class SelectCommandTest {
         showFlashcardAtIndex(expectedModel, INDEX_FIRST_FLASHCARD);
 
         Index outOfBoundsIndex = INDEX_SECOND_FLASHCARD;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundsIndex.getZeroBased() < model.getAddressBook().getFlashcardList().size());
+        // ensures that outOfBoundIndex is still in bounds of flash book list
+        assertTrue(outOfBoundsIndex.getZeroBased() < model.getFlashBook().getFlashcardList().size());
 
         assertExecutionFailure(outOfBoundsIndex, Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
     }

@@ -3,7 +3,7 @@ package seedu.address.model.flashcard;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTENT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.TypicalFlashcards.ALICE;
 import static seedu.address.testutil.TypicalFlashcards.BOB;
@@ -46,7 +46,7 @@ public class UniqueFlashcardListTest {
     @Test
     public void contains_flashcardWithSameIdentityFieldsInList_returnsTrue() {
         uniqueFlashcardList.add(ALICE);
-        Flashcard editedAlice = new FlashcardBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Flashcard editedAlice = new FlashcardBuilder(ALICE).withContent(VALID_CONTENT_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(uniqueFlashcardList.contains(editedAlice));
     }
@@ -94,7 +94,7 @@ public class UniqueFlashcardListTest {
     @Test
     public void setFlashcard_editedFlashcardHasSameIdentity_success() {
         uniqueFlashcardList.add(ALICE);
-        Flashcard editedAlice = new FlashcardBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Flashcard editedAlice = new FlashcardBuilder(ALICE).withContent(VALID_CONTENT_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         uniqueFlashcardList.setFlashcard(ALICE, editedAlice);
         UniqueFlashcardList expectedUniqueFlashcardList = new UniqueFlashcardList();

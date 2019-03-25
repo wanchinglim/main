@@ -10,30 +10,28 @@ import java.util.Set;
 import seedu.address.model.tag.Subject;
 
 /**
- * Represents a Flashcard in the address book.
+ * Represents a Flashcard in the flash book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Flashcard {
 
     // Identity fields
     private final Topic topic;
-    private final Phone phone;
-    private final Email email;
+    private final Difficulty difficulty;
 
     // Data fields
-    private final Address address;
+    private final Content content;
     private final Deadline deadline;
     private final Set<Subject> subject = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Flashcard(Topic topic, Phone phone, Email email, Address address, Deadline deadline, Set<Subject> subject) {
-        requireAllNonNull(topic, phone, email, address, subject);
+    public Flashcard(Topic topic, Difficulty difficulty, Content content, Deadline deadline, Set<Subject> subject) {
+        requireAllNonNull(topic, difficulty, content, subject);
         this.topic = topic;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
+        this.difficulty = difficulty;
+        this.content = content;
         this.deadline = deadline;
         this.subject.addAll(subject);
     }
@@ -42,16 +40,12 @@ public class Flashcard {
         return topic;
     }
 
-    public Phone getPhone() {
-        return phone;
+    public Difficulty getDifficulty() {
+        return difficulty;
     }
 
-    public Email getEmail() {
-        return email;
-    }
-
-    public Address getAddress() {
-        return address;
+    public Content getContent() {
+        return content;
     }
 
     public Deadline getDeadline() {
@@ -77,7 +71,7 @@ public class Flashcard {
 
         return otherFlashcard != null
                 && otherFlashcard.getTopic().equals(getTopic())
-                && (otherFlashcard.getPhone().equals(getPhone()) || otherFlashcard.getEmail().equals(getEmail()));
+                && otherFlashcard.getDifficulty().equals(getDifficulty());
     }
 
     /**
@@ -96,28 +90,25 @@ public class Flashcard {
 
         Flashcard otherFlashcard = (Flashcard) other;
         return otherFlashcard.getTopic().equals(getTopic())
-                && otherFlashcard.getPhone().equals(getPhone())
-                && otherFlashcard.getEmail().equals(getEmail())
-                && otherFlashcard.getAddress().equals(getAddress())
+                && otherFlashcard.getDifficulty().equals(getDifficulty())
+                && otherFlashcard.getContent().equals(getContent())
                 && otherFlashcard.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(topic, phone, email, address, subject);
+        return Objects.hash(topic, difficulty, content, subject);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getTopic())
-                .append(" Phone: ")
-                .append(getPhone())
-                .append(" Email: ")
-                .append(getEmail())
-                .append(" Address: ")
-                .append(getAddress())
+                .append(" Difficulty: ")
+                .append(getDifficulty())
+                .append(" Content: ")
+                .append(getContent())
                 .append(" Subject: ");
         getTags().forEach(builder::append);
         return builder.toString();

@@ -15,27 +15,27 @@ public class TopicTest {
     }
 
     @Test
-    public void constructor_invalidName_throwsIllegalArgumentException() {
-        String invalidName = "";
-        Assert.assertThrows(IllegalArgumentException.class, () -> new Topic(invalidName));
+    public void constructor_invalidTopic_throwsIllegalArgumentException() {
+        String invalidTopic = "";
+        Assert.assertThrows(IllegalArgumentException.class, () -> new Topic(invalidTopic));
     }
 
     @Test
-    public void isValidName() {
-        // null name
-        Assert.assertThrows(NullPointerException.class, () -> Topic.isValidName(null));
+    public void isValidTopic() {
+        // null topic
+        Assert.assertThrows(NullPointerException.class, () -> Topic.isValidTopic(null));
 
-        // invalid name
-        assertFalse(Topic.isValidName("")); // empty string
-        assertFalse(Topic.isValidName(" ")); // spaces only
-        assertFalse(Topic.isValidName("^")); // only non-alphanumeric characters
-        assertFalse(Topic.isValidName("peter*")); // contains non-alphanumeric characters
+        // invalid topic
+        assertFalse(Topic.isValidTopic("")); // empty string
+        assertFalse(Topic.isValidTopic(" ")); // spaces only
+        assertFalse(Topic.isValidTopic("^")); // only non-alphanumeric characters
+        assertFalse(Topic.isValidTopic("peter*")); // contains non-alphanumeric characters
 
-        // valid name
-        assertTrue(Topic.isValidName("peter jack")); // alphabets only
-        assertTrue(Topic.isValidName("12345")); // numbers only
-        assertTrue(Topic.isValidName("peter the 2nd")); // alphanumeric characters
-        assertTrue(Topic.isValidName("Capital Tan")); // with capital letters
-        assertTrue(Topic.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+        // valid topic
+        assertTrue(Topic.isValidTopic("peter jack")); // alphabets only
+        assertTrue(Topic.isValidTopic("12345")); // numbers only
+        assertTrue(Topic.isValidTopic("peter the 2nd")); // alphanumeric characters
+        assertTrue(Topic.isValidTopic("Capital Tan")); // with capital letters
+        assertTrue(Topic.isValidTopic("David Roger Jackson Ray Jr 2nd")); // long names
     }
 }
