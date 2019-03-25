@@ -11,12 +11,20 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TOPIC_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+<<<<<<< HEAD
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
+=======
 import static seedu.address.logic.commands.CommandTestUtil.TOPIC_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.TOPIC_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTENT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DIFFICULTY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_BOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+>>>>>>> a43dedf4b0c227525d0fc6ec76c8d584d3c3ba60
 import static seedu.address.testutil.TypicalFlashcards.ALICE;
 import static seedu.address.testutil.TypicalFlashcards.AMY;
 import static seedu.address.testutil.TypicalFlashcards.BOB;
@@ -36,8 +44,14 @@ import seedu.address.model.Model;
 import seedu.address.model.flashcard.Content;
 import seedu.address.model.flashcard.Difficulty;
 import seedu.address.model.flashcard.Flashcard;
+<<<<<<< HEAD
+import seedu.address.model.flashcard.Phone;
+import seedu.address.model.flashcard.Topic;
+import seedu.address.model.tag.Subject;
+=======
 import seedu.address.model.flashcard.Topic;
 import seedu.address.model.tag.Tag;
+>>>>>>> a43dedf4b0c227525d0fc6ec76c8d584d3c3ba60
 import seedu.address.testutil.FlashcardBuilder;
 import seedu.address.testutil.FlashcardUtil;
 */
@@ -125,7 +139,7 @@ public class AddCommandSystemTest extends FlashBookSystemTest {
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_FLASHCARD);*/
 
         /* Case: add a duplicate flashcard except with different tags -> rejected
-        command = FlashcardUtil.getAddCommand(HOON) + " " + PREFIX_TAG.getPrefix() + "friends";
+        command = FlashcardUtil.getAddCommand(HOON) + " " + PREFIX_SUBJECT.getPrefix() + "friends";
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_FLASHCARD);*/
 
         /* Case: missing topic -> rejected
@@ -142,7 +156,7 @@ public class AddCommandSystemTest extends FlashBookSystemTest {
 
         /* Case: invalid keyword -> rejected
         command = "adds " + FlashcardUtil.getFlashcardDetails(toAdd);
-        assertCommandFailure(command, Messages.MESSAGE_UNKNOWN_COMMAND);*/
+        assertCommandFailure(command, Messages.MESSAGE_UNKNOWN_COMMAND);
 
         /* Case: invalid topic -> rejected
         command = AddCommand.COMMAND_WORD + INVALID_TOPIC_DESC + DIFFICULTY_DESC_AMY
@@ -162,8 +176,8 @@ public class AddCommandSystemTest extends FlashBookSystemTest {
         /* Case: invalid tag -> rejected
         command = AddCommand.COMMAND_WORD + TOPIC_DESC_AMY + DIFFICULTY_DESC_AMY + CONTENT_DESC_AMY
                 + INVALID_TAG_DESC;
-        assertCommandFailure(command, Tag.MESSAGE_CONSTRAINTS);
-    } */
+        assertCommandFailure(command, Subject.MESSAGE_CONSTRAINTS);
+    }
 
     /*
      * Executes the {@code AddCommand} that adds {@code toAdd} to the model and asserts that the,<br>

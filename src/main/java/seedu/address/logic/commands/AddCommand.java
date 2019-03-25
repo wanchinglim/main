@@ -1,9 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DIFFICULTY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TOPIC;
 
 import seedu.address.logic.CommandHistory;
@@ -23,13 +24,12 @@ public class AddCommand extends Command {
             + PREFIX_TOPIC + "TOPIC "
             + PREFIX_DIFFICULTY + "DIFFICULTY "
             + PREFIX_CONTENT + "CONTENT "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_SUBJECT + "SUBJECT]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TOPIC + "John Doe "
+            + PREFIX_TOPIC + "pythagoras theorem"
             + PREFIX_DIFFICULTY + "98765432 "
             + PREFIX_CONTENT + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_SUBJECT + "math";
 
     public static final String MESSAGE_SUCCESS = "New flashcard added: %1$s";
     public static final String MESSAGE_DUPLICATE_FLASHCARD = "This flashcard already exists in the flash book";

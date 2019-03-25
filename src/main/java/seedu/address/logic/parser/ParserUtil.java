@@ -11,10 +11,11 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.NextCommand;
 import seedu.address.logic.commands.PreviousCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+
 import seedu.address.model.flashcard.Content;
 import seedu.address.model.flashcard.Difficulty;
 import seedu.address.model.flashcard.Topic;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Subject;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -73,6 +74,7 @@ public class ParserUtil {
     public static Topic parseTopic(String topic) throws ParseException {
         requireNonNull(topic);
         String trimmedTopic = topic.trim();
+
         if (!Topic.isValidTopic(trimmedTopic)) {
             throw new ParseException(Topic.MESSAGE_CONSTRAINTS);
         }
@@ -110,26 +112,26 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String tag} into a {@code Subject}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code tag} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
+    public static Subject parseTag(String tag) throws ParseException {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+        if (!Subject.isValidSubjectName(trimmedTag)) {
+            throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return new Subject(trimmedTag);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses {@code Collection<String> tags} into a {@code Set<Subject>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
+    public static Set<Subject> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
+        final Set<Subject> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(parseTag(tagName));
         }

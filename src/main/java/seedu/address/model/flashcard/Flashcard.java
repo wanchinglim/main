@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Subject;
 
 /**
  * Represents a Flashcard in the flash book.
@@ -22,18 +22,18 @@ public class Flashcard {
     // Data fields
     private final Content content;
     private final Deadline deadline;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Set<Subject> subject = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Flashcard(Topic topic, Difficulty difficulty, Content content, Deadline deadline, Set<Tag> tags) {
-        requireAllNonNull(topic, difficulty, content, tags);
+    public Flashcard(Topic topic, Difficulty difficulty, Content content, Deadline deadline, Set<Subject> subject) {
+        requireAllNonNull(topic, difficulty, content, subject);
         this.topic = topic;
         this.difficulty = difficulty;
         this.content = content;
         this.deadline = deadline;
-        this.tags.addAll(tags);
+        this.subject.addAll(subject);
     }
 
     public Topic getTopic() {
@@ -56,8 +56,8 @@ public class Flashcard {
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<Subject> getTags() {
+        return Collections.unmodifiableSet(subject);
     }
 
     /**
@@ -98,7 +98,7 @@ public class Flashcard {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(topic, difficulty, content, tags);
+        return Objects.hash(topic, difficulty, content, subject);
     }
 
     @Override
@@ -109,7 +109,7 @@ public class Flashcard {
                 .append(getDifficulty())
                 .append(" Content: ")
                 .append(getContent())
-                .append(" Tags: ");
+                .append(" Subject: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }

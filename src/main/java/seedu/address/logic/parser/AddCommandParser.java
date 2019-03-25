@@ -1,9 +1,10 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DIFFICULTY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TOPIC;
 
 import java.util.Set;
@@ -16,7 +17,7 @@ import seedu.address.model.flashcard.Deadline;
 import seedu.address.model.flashcard.Difficulty;
 import seedu.address.model.flashcard.Flashcard;
 import seedu.address.model.flashcard.Topic;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Subject;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -30,7 +31,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_TOPIC, PREFIX_DIFFICULTY, PREFIX_CONTENT, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_TOPIC, PREFIX_DIFFICULTY, PREFIX_CONTENT, PREFIX_SUBJECT);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_TOPIC, PREFIX_CONTENT, PREFIX_DIFFICULTY)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -41,7 +42,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Difficulty difficulty = ParserUtil.parseDifficulty(argMultimap.getValue(PREFIX_DIFFICULTY).get());
         Content content = ParserUtil.parseContent(argMultimap.getValue(PREFIX_CONTENT).get());
         Deadline deadline = new Deadline(""); //add command does not allow adding deadlines straightaway
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Set<Subject> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_SUBJECT));
 
         Flashcard flashcard = new Flashcard(topic, difficulty, content, deadline, tagList);
 

@@ -11,8 +11,7 @@ import seedu.address.model.flashcard.Deadline;
 import seedu.address.model.flashcard.Difficulty;
 import seedu.address.model.flashcard.Flashcard;
 import seedu.address.model.flashcard.Topic;
-
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Subject;
 
 /**
  * Contains utility methods for populating {@code FlashBook} with sample data.
@@ -53,9 +52,9 @@ public class SampleDataUtil {
     /**
      * Returns a tag set containing the list of strings given.
      */
-    public static Set<Tag> getTagSet(String... strings) {
+    public static Set<Subject> getTagSet(String... strings) {
         return Arrays.stream(strings)
-                .map(Tag::new)
+                .map(Subject::new)
                 .collect(Collectors.toSet());
     }
 

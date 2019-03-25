@@ -39,7 +39,7 @@ public class FlashcardCard extends UiPart<Region> {
     @FXML
     private Label deadline;
     @FXML
-    private FlowPane tags;
+    private FlowPane subject;
 
     public FlashcardCard(Flashcard flashcard, int displayedIndex) {
         super(FXML);
@@ -53,7 +53,7 @@ public class FlashcardCard extends UiPart<Region> {
     }
 
     /**
-     * Returns the color style for {@code tagName}'s label.
+     * Returns the color style for {@code subjectName}'s label.
      */
     private String getTagColourIndex(String tagName) {
         return TAG_COLOURS[Math.floorMod(tagName.hashCode(), TAG_COLOURS.length)];
@@ -62,11 +62,11 @@ public class FlashcardCard extends UiPart<Region> {
     /**
      * Creates the tag labels for {@code flashcard}.
      */
-    private void tagger(Flashcard p) {
-        p.getTags().forEach(tagT -> {
-            Label tagLabel = new Label(tagT.tagName);
-            tagLabel.getStyleClass().add(getTagColourIndex(tagT.tagName));
-            tags.getChildren().add(tagLabel);
+    private void tagger(Flashcard f) {
+        f.getTags().forEach(tagT -> {
+            Label tagLabel = new Label(tagT.subjectName);
+            tagLabel.getStyleClass().add(getTagColourIndex(tagT.subjectName));
+            subject.getChildren().add(tagLabel);
         });
     }
 

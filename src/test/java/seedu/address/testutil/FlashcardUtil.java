@@ -2,7 +2,7 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DIFFICULTY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TOPIC;
 
 import java.util.Set;
@@ -10,7 +10,7 @@ import java.util.Set;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditFlashcardDescriptor;
 import seedu.address.model.flashcard.Flashcard;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Subject;
 
 /**
  * A utility class for Flashcard.
@@ -33,7 +33,7 @@ public class FlashcardUtil {
         sb.append(PREFIX_DIFFICULTY + flashcard.getDifficulty().value + " ");
         sb.append(PREFIX_CONTENT + flashcard.getContent().value + " ");
         flashcard.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.tagName + " ")
+            s -> sb.append(PREFIX_SUBJECT + s.subjectName + " ")
         );
         return sb.toString();
     }
@@ -48,11 +48,11 @@ public class FlashcardUtil {
                 sb.append(PREFIX_DIFFICULTY).append(difficulty.value).append(" "));
         descriptor.getContent().ifPresent(content -> sb.append(PREFIX_CONTENT).append(content.value).append(" "));
         if (descriptor.getTags().isPresent()) {
-            Set<Tag> tags = descriptor.getTags().get();
+            Set<Subject> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
-                sb.append(PREFIX_TAG);
+                sb.append(PREFIX_SUBJECT);
             } else {
-                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
+                tags.forEach(s -> sb.append(PREFIX_SUBJECT).append(s.subjectName).append(" "));
             }
         }
         return sb.toString();
