@@ -337,12 +337,12 @@
     -fx-background-radius: 0;
 }
 
-#tags {
+#subject {
     -fx-hgap: 7;
     -fx-vgap: 3;
 }
 
-#tags .label {
+#subject .label {
     -fx-text-fill: white;
     -fx-background-color: #3e7b91;
     -fx-padding: 1 3 1 3;
@@ -351,52 +351,52 @@
     -fx-font-size: 11;
 }
 
-#tags .white {
+#subject .white {
     -fx-text-fill: #000;
     -fx-background-color: #fff;
 }
 
-#tags .black {
+#subject .black {
     -fx-text-fill: #fff;
     -fx-background-color: #000;
 }
 
-#tags .maroon {
+#subject .maroon {
     -fx-text-fill: #fff;
     -fx-background-color: #933d33;
 }
 
-#tags .orange {
+#subject .orange {
     -fx-text-fill: #000;
     -fx-background-color: orange;
 }
 
-#tags .blue {
+#subject .blue {
     -fx-text-fill: #000;
     -fx-background-color: #87CEFA;
 }
 
-#tags .pink {
+#subject .pink {
     -fx-text-fill: #000;
     -fx-background-color: #FFB6C1;
 }
 
-#tags .purple {
+#subject .purple {
     -fx-text-fill: #fff;
     -fx-background-color: #663399;
 }
 
-#tags .green {
+#subject .green {
     -fx-text-fill: #000;
     -fx-background-color: #66CDAA;
 }
 
-#tags .navy {
+#subject .navy {
     -fx-text-fill: #fff;
     -fx-background-color: #000080;
 }
 
-#tags .beige {
+#subject .beige {
     -fx-text-fill: #000;
     -fx-background-color: #FFE4C4;
 }

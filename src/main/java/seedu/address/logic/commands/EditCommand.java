@@ -1,11 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DIFFICULTY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TOPIC;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_FLASHCARDS;
 
 import java.util.Collections;
@@ -20,16 +20,15 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.flashcard.Address;
+import seedu.address.model.flashcard.Content;
 import seedu.address.model.flashcard.Deadline;
-import seedu.address.model.flashcard.Email;
+import seedu.address.model.flashcard.Difficulty;
 import seedu.address.model.flashcard.Flashcard;
-import seedu.address.model.flashcard.Name;
-import seedu.address.model.flashcard.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.flashcard.Topic;
+import seedu.address.model.tag.Subject;
 
 /**
- * Edits the details of an existing flashcard in the address book.
+ * Edits the details of an existing flashcard in the flash book.
  */
 public class EditCommand extends Command {
 
@@ -40,18 +39,16 @@ public class EditCommand extends Command {
             + "by the index number used in the displayed flashcard list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TOPIC + "TOPIC] "
+            + "[" + PREFIX_DIFFICULTY + "DIFFICULTY] "
+            + "[" + PREFIX_CONTENT + "CONTENT] "
+            + "[" + PREFIX_SUBJECT + "SUBJECT]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_DIFFICULTY + "91234567 ";
 
     public static final String MESSAGE_EDIT_FLASHCARD_SUCCESS = "Edited Flashcard: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_FLASHCARD = "This flashcard already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_FLASHCARD = "This flashcard already exists in the content book.";
 
     private final Index index;
     private final EditFlashcardDescriptor editFlashcardDescriptor;
@@ -86,7 +83,7 @@ public class EditCommand extends Command {
 
         model.setFlashcard(flashcardToEdit, editedFlashcard);
         model.updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
-        model.commitAddressBook();
+        model.commitFlashBook();
         return new CommandResult(String.format(MESSAGE_EDIT_FLASHCARD_SUCCESS, editedFlashcard));
     }
 
@@ -98,14 +95,13 @@ public class EditCommand extends Command {
                                                    EditFlashcardDescriptor editFlashcardDescriptor) {
         assert flashcardToEdit != null;
 
-        Name updatedName = editFlashcardDescriptor.getName().orElse(flashcardToEdit.getName());
-        Phone updatedPhone = editFlashcardDescriptor.getPhone().orElse(flashcardToEdit.getPhone());
-        Email updatedEmail = editFlashcardDescriptor.getEmail().orElse(flashcardToEdit.getEmail());
-        Address updatedAddress = editFlashcardDescriptor.getAddress().orElse(flashcardToEdit.getAddress());
+        Topic updatedTopic = editFlashcardDescriptor.getTopic().orElse(flashcardToEdit.getTopic());
+        Difficulty updatedDifficulty = editFlashcardDescriptor.getDifficulty().orElse(flashcardToEdit.getDifficulty());
+        Content updatedContent = editFlashcardDescriptor.getContent().orElse(flashcardToEdit.getContent());
         Deadline updatedDeadline = flashcardToEdit.getDeadline(); //edit command does not allow editing deadlines
-        Set<Tag> updatedTags = editFlashcardDescriptor.getTags().orElse(flashcardToEdit.getTags());
+        Set<Subject> updatedTags = editFlashcardDescriptor.getTags().orElse(flashcardToEdit.getTags());
 
-        return new Flashcard(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedDeadline, updatedTags);
+        return new Flashcard(updatedTopic, updatedDifficulty, updatedContent, updatedDeadline, updatedTags);
     }
 
     @Override
@@ -131,11 +127,11 @@ public class EditCommand extends Command {
      * corresponding field value of the flashcard.
      */
     public static class EditFlashcardDescriptor {
-        private Name name;
-        private Phone phone;
-        private Email email;
-        private Address address;
-        private Set<Tag> tags;
+
+        private Topic topic;
+        private Difficulty difficulty;
+        private Content content;
+        private Set<Subject> tags;
 
         public EditFlashcardDescriptor() {}
 
@@ -144,10 +140,9 @@ public class EditCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditFlashcardDescriptor(EditFlashcardDescriptor toCopy) {
-            setName(toCopy.name);
-            setPhone(toCopy.phone);
-            setEmail(toCopy.email);
-            setAddress(toCopy.address);
+            setTopic(toCopy.topic);
+            setDifficulty(toCopy.difficulty);
+            setContent(toCopy.content);
             setTags(toCopy.tags);
         }
 
@@ -155,46 +150,38 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(topic, difficulty, content, tags);
         }
 
-        public void setName(Name name) {
-            this.name = name;
+        public void setTopic(Topic topic) {
+            this.topic = topic;
         }
 
-        public Optional<Name> getName() {
-            return Optional.ofNullable(name);
+        public Optional<Topic> getTopic() {
+            return Optional.ofNullable(topic);
         }
 
-        public void setPhone(Phone phone) {
-            this.phone = phone;
+        public void setDifficulty(Difficulty difficulty) {
+            this.difficulty = difficulty;
         }
 
-        public Optional<Phone> getPhone() {
-            return Optional.ofNullable(phone);
+        public Optional<Difficulty> getDifficulty() {
+            return Optional.ofNullable(difficulty);
         }
 
-        public void setEmail(Email email) {
-            this.email = email;
+        public void setContent(Content content) {
+            this.content = content;
         }
 
-        public Optional<Email> getEmail() {
-            return Optional.ofNullable(email);
-        }
-
-        public void setAddress(Address address) {
-            this.address = address;
-        }
-
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
+        public Optional<Content> getContent() {
+            return Optional.ofNullable(content);
         }
 
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
          */
-        public void setTags(Set<Tag> tags) {
+        public void setTags(Set<Subject> tags) {
             this.tags = (tags != null) ? new HashSet<>(tags) : null;
         }
 
@@ -203,7 +190,7 @@ public class EditCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
-        public Optional<Set<Tag>> getTags() {
+        public Optional<Set<Subject>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
@@ -222,10 +209,9 @@ public class EditCommand extends Command {
             // state check
             EditFlashcardDescriptor e = (EditFlashcardDescriptor) other;
 
-            return getName().equals(e.getName())
-                    && getPhone().equals(e.getPhone())
-                    && getEmail().equals(e.getEmail())
-                    && getAddress().equals(e.getAddress())
+            return getTopic().equals(e.getTopic())
+                    && getDifficulty().equals(e.getDifficulty())
+                    && getContent().equals(e.getContent())
                     && getTags().equals(e.getTags());
         }
     }

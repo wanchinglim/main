@@ -19,33 +19,33 @@ import seedu.address.model.flashcard.Flashcard;
 import seedu.address.model.flashcard.exceptions.FlashcardNotFoundException;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the flash book data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final VersionedAddressBook versionedAddressBook;
+    private final VersionedFlashBook versionedFlashBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Flashcard> filteredFlashcards;
     private final SimpleObjectProperty<Flashcard> selectedFlashcard = new SimpleObjectProperty<>();
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given flashBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyFlashBook flashBook, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(flashBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with flash book: " + flashBook + " and user prefs " + userPrefs);
 
-        versionedAddressBook = new VersionedAddressBook(addressBook);
+        versionedFlashBook = new VersionedFlashBook(flashBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredFlashcards = new FilteredList<>(versionedAddressBook.getFlashcardList());
+        filteredFlashcards = new FilteredList<>(versionedFlashBook.getFlashcardList());
         filteredFlashcards.addListener(this::ensureSelectedFlashcardIsValid);
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new FlashBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -73,42 +73,42 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getFlashBookFilePath() {
+        return userPrefs.getFlashBookFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setFlashBookFilePath(Path flashBookFilePath) {
+        requireNonNull(flashBookFilePath);
+        userPrefs.setFlashBookFilePath(flashBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== FlashBook ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        versionedAddressBook.resetData(addressBook);
+    public void setFlashBook(ReadOnlyFlashBook flashBook) {
+        versionedFlashBook.resetData(flashBook);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return versionedAddressBook;
+    public ReadOnlyFlashBook getFlashBook() {
+        return versionedFlashBook;
     }
 
     @Override
     public boolean hasFlashcard(Flashcard flashcard) {
         requireNonNull(flashcard);
-        return versionedAddressBook.hasFlashcard(flashcard);
+        return versionedFlashBook.hasFlashcard(flashcard);
     }
 
     @Override
     public void deleteFlashcard(Flashcard target) {
-        versionedAddressBook.removeFlashcard(target);
+        versionedFlashBook.removeFlashcard(target);
     }
 
     @Override
     public void addFlashcard(Flashcard flashcard) {
-        versionedAddressBook.addFlashcard(flashcard);
+        versionedFlashBook.addFlashcard(flashcard);
         updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
     }
 
@@ -116,14 +116,14 @@ public class ModelManager implements Model {
     public void setFlashcard(Flashcard target, Flashcard editedFlashcard) {
         requireAllNonNull(target, editedFlashcard);
 
-        versionedAddressBook.setFlashcard(target, editedFlashcard);
+        versionedFlashBook.setFlashcard(target, editedFlashcard);
     }
 
     //=========== Filtered Flashcard List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Flashcard} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedFlashBook}
      */
     @Override
     public ObservableList<Flashcard> getFilteredFlashcardList() {
@@ -139,28 +139,28 @@ public class ModelManager implements Model {
     //=========== Undo/Redo =================================================================================
 
     @Override
-    public boolean canUndoAddressBook() {
-        return versionedAddressBook.canUndo();
+    public boolean canUndoFlashBook() {
+        return versionedFlashBook.canUndo();
     }
 
     @Override
-    public boolean canRedoAddressBook() {
-        return versionedAddressBook.canRedo();
+    public boolean canRedoFlashBook() {
+        return versionedFlashBook.canRedo();
     }
 
     @Override
-    public void undoAddressBook() {
-        versionedAddressBook.undo();
+    public void undoFlashBook() {
+        versionedFlashBook.undo();
     }
 
     @Override
-    public void redoAddressBook() {
-        versionedAddressBook.redo();
+    public void redoFlashBook() {
+        versionedFlashBook.redo();
     }
 
     @Override
-    public void commitAddressBook() {
-        versionedAddressBook.commit();
+    public void commitFlashBook() {
+        versionedFlashBook.commit();
     }
 
     //=========== Selected flashcard ===========================================================================
@@ -227,7 +227,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return versionedAddressBook.equals(other.versionedAddressBook)
+        return versionedFlashBook.equals(other.versionedFlashBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredFlashcards.equals(other.filteredFlashcards)
                 && Objects.equals(selectedFlashcard.get(), other.selectedFlashcard.get());

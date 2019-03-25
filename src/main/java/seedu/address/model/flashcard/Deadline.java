@@ -3,7 +3,7 @@ package seedu.address.model.flashcard;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Represents a flashcard's deadline in the address book.
+ * Represents a flashcard's deadline in the flash book.
  * Guarantees: immutable; is always valid
  */
 

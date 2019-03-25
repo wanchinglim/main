@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalFlashcards.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalFlashcards.getTypicalFlashBook;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -24,16 +24,16 @@ public class AddCommandIntegrationTest {
 
     @Before
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalFlashBook(), new UserPrefs());
     }
 
     @Test
     public void execute_newFlashcard_success() {
         Flashcard validFlashcard = new FlashcardBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getFlashBook(), new UserPrefs());
         expectedModel.addFlashcard(validFlashcard);
-        expectedModel.commitAddressBook();
+        expectedModel.commitFlashBook();
 
         assertCommandSuccess(new AddCommand(validFlashcard), model, commandHistory,
                 String.format(AddCommand.MESSAGE_SUCCESS, validFlashcard), expectedModel);
@@ -41,7 +41,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_duplicateFlashcard_throwsCommandException() {
-        Flashcard flashcardInList = model.getAddressBook().getFlashcardList().get(0);
+        Flashcard flashcardInList = model.getFlashBook().getFlashcardList().get(0);
         assertCommandFailure(new AddCommand(flashcardInList), model, commandHistory,
                 AddCommand.MESSAGE_DUPLICATE_FLASHCARD);
     }

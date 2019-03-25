@@ -1,0 +1,13 @@
+{
+  "flashcards": [ {
+    "topic": "Valid Flashcard",
+    "difficulty": "9482424",
+    "content": "4th street",
+    "deadline": "21 July 2022"
+  }, {
+    "topic": "Flashcard With Invalid Phone Field",
+    "difficulty": "948asdf2424",
+    "content": "4th street",
+    "deadline": "23 August 2023"
+  } ]
+}
