@@ -124,7 +124,7 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath(), logic.getAddressBook(),
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getFlashBookFilePath(), logic.getFlashBook(),
                 logic.getFilteredFlashcardList().size());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 

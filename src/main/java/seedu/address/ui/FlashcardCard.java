@@ -21,7 +21,7 @@ public class FlashcardCard extends UiPart<Region> {
      * As a consequence, UI elements' variable names cannot be set to such keywords
      * or an exception will be thrown by JavaFX during runtime.
      *
-     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
+     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on FlashBook level 4</a>
      */
 
     public final Flashcard flashcard;
@@ -29,34 +29,31 @@ public class FlashcardCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private Label name;
+    private Label topic;
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private Label difficulty;
     @FXML
-    private Label address;
-    @FXML
-    private Label email;
+    private Label content;
     @FXML
     private Label deadline;
     @FXML
-    private FlowPane tags;
+    private FlowPane subject;
 
     public FlashcardCard(Flashcard flashcard, int displayedIndex) {
         super(FXML);
         this.flashcard = flashcard;
         id.setText(displayedIndex + ". ");
-        name.setText(flashcard.getName().fullName);
-        phone.setText(flashcard.getPhone().value);
-        address.setText(flashcard.getAddress().value);
-        email.setText(flashcard.getEmail().value);
+        topic.setText(flashcard.getTopic().fullTopic);
+        difficulty.setText(flashcard.getDifficulty().value);
+        content.setText(flashcard.getContent().value);
         deadline.setText(flashcard.getDeadline().value);
         tagger(flashcard);
     }
 
     /**
-     * Returns the color style for {@code tagName}'s label.
+     * Returns the color style for {@code subjectName}'s label.
      */
     private String getTagColourIndex(String tagName) {
         return TAG_COLOURS[Math.floorMod(tagName.hashCode(), TAG_COLOURS.length)];
@@ -65,11 +62,11 @@ public class FlashcardCard extends UiPart<Region> {
     /**
      * Creates the tag labels for {@code flashcard}.
      */
-    private void tagger(Flashcard p) {
-        p.getTags().forEach(tagT -> {
-            Label tagLabel = new Label(tagT.tagName);
-            tagLabel.getStyleClass().add(getTagColourIndex(tagT.tagName));
-            tags.getChildren().add(tagLabel);
+    private void tagger(Flashcard f) {
+        f.getTags().forEach(tagT -> {
+            Label tagLabel = new Label(tagT.subjectName);
+            tagLabel.getStyleClass().add(getTagColourIndex(tagT.subjectName));
+            subject.getChildren().add(tagLabel);
         });
     }
 
