@@ -10,6 +10,9 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyFlashBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.subject.ReadOnlySubjectBook;
+
+import javax.security.auth.Subject;
 
 /**
  * Manages storage of FlashBook data in local storage.
@@ -19,9 +22,11 @@ public class StorageManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private FlashBookStorage flashBookStorage;
     private UserPrefsStorage userPrefsStorage;
+    private SubjectBookStorage subjectBookStorage;
 
 
-    public StorageManager(FlashBookStorage flashBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(FlashBookStorage flashBookStorage,
+                            UserPrefsStorage userPrefsStorage) {
         super();
         this.flashBookStorage = flashBookStorage;
         this.userPrefsStorage = userPrefsStorage;
@@ -66,6 +71,52 @@ public class StorageManager implements Storage {
     @Override
     public void saveFlashBook(ReadOnlyFlashBook flashBook) throws IOException {
         saveFlashBook(flashBook, flashBookStorage.getFlashBookFilePath());
+    }
+
+
+    // ================ SubjectBook methods ==============================
+    /**
+     * Returns the file path of the data file.
+     */
+    @Override
+    public Path getSubjectBookFilePath() {
+        return subjectBookStorage.getSubjectBookFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlySubjectBook> readSubjectBook() throws DataConversionException, IOException {
+        return readSubjectBook(subjectBookStorage.getSubjectBookFilePath());
+    }
+
+    /**
+     * @param filePath
+     * @see #getSubjectBookFilePath()
+     */
+    @Override
+    public Optional<ReadOnlySubjectBook> readSubjectBook(Path filePath) throws DataConversionException, IOException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return subjectBookStorage.readSubjectBook(filePath);
+    }
+
+    /**
+     * Saves the given {@link ReadOnlySubjectBook} to the storage.
+     *
+     * @param subjectBook cannot be null.
+     * @throws IOException if there was any problem writing to the file.
+     */
+    @Override
+    public void saveSubjectBook(ReadOnlySubjectBook subjectBook) throws IOException {
+        saveSubjectBook(subjectBook, subjectBookStorage.getSubjectBookFilePath());
+    }
+
+    /**
+     * @param subjectBook
+     * @param filePath
+     * @see #saveSubjectBook(ReadOnlySubjectBook)
+     */
+    @Override
+    public void saveSubjectBook(ReadOnlySubjectBook subjectBook, Path filePath) throws IOException {
+
     }
 
     @Override

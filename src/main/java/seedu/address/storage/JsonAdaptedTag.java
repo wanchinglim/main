@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.subject.SubjectBook;
 import seedu.address.model.tag.SubjectTag;
 
 /**
@@ -26,6 +27,13 @@ class JsonAdaptedTag {
      */
     public JsonAdaptedTag(SubjectTag source) {
         tagName = source.subjectName;
+    }
+
+    /**
+     * Converts a given {@code SubjectTag} into this class for Jackson use.
+     */
+    public JsonAdaptedTag(SubjectBook source) {
+        tagName = source.getSubject();
     }
 
     @JsonValue

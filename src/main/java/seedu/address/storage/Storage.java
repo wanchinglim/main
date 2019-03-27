@@ -8,11 +8,12 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyFlashBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.subject.ReadOnlySubjectBook;
 
 /**
  * API of the Storage component
  */
-public interface Storage extends FlashBookStorage, UserPrefsStorage {
+public interface Storage extends SubjectBookStorage, FlashBookStorage, UserPrefsStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
@@ -29,4 +30,6 @@ public interface Storage extends FlashBookStorage, UserPrefsStorage {
     @Override
     void saveFlashBook(ReadOnlyFlashBook flashBook) throws IOException;
 
+    @Override
+    Optional<ReadOnlySubjectBook> readSubjectBook() throws DataConversionException, IOException;
 }
