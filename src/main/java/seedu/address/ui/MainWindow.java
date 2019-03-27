@@ -32,6 +32,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
+    private SubjectListPanel subjectListPanel;
     private FlashcardListPanel flashcardListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -117,9 +118,15 @@ public class MainWindow extends UiPart<Stage> {
         browserPanel = new BrowserPanel(logic.selectedFlashcardProperty());
         browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
+        // left panel - subject
+        subjectListPanel = new SubjectListPanel(logic.getFilteredSubjectList(), logic.selectedSubjectProperty(),
+                logic::setSelectedSubject);
+        flashcardListPanelPlaceholder.getChildren().add(subjectListPanel.getRoot());
+
+        // right panel - flashcards
         flashcardListPanel = new FlashcardListPanel(logic.getFilteredFlashcardList(), logic.selectedFlashcardProperty(),
                 logic::setSelectedFlashcard);
-        flashcardListPanelPlaceholder.getChildren().add(flashcardListPanel.getRoot());
+        cardPlaceholder.getChildren().add(flashcardListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
