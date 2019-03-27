@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
+import javafx.beans.Observable;
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
@@ -16,6 +18,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyFlashBook;
 import seedu.address.model.flashcard.Flashcard;
+import seedu.address.model.subject.ReadOnlySubjectBook;
+import seedu.address.model.subject.SubjectBook;
+import seedu.address.model.tag.SubjectTag;
 import seedu.address.storage.Storage;
 
 /**
@@ -66,6 +71,29 @@ public class LogicManager implements Logic {
         return commandResult;
     }
 
+    // =============== SUBJECTS ===============
+    public FilteredList<SubjectTag> getSubjectBook() {
+        return model.getSubjectBook();
+    }
+
+    @Override
+    public ObservableList<SubjectTag> getFilteredSubjectList() {
+        return model.getFilteredSubjectList();
+    }
+
+    @Override
+    public ReadOnlyProperty<SubjectTag> selectedSubjectProperty() {
+        return model.selectedSubjectProperty();
+    }
+
+    @Override
+    public void setSelectedSubject(SubjectTag subjectBook) {
+        model.setSelectedSubject(subjectBook);
+    }
+
+
+
+    // =============== FLASHCARDS ===============
     @Override
     public ReadOnlyFlashBook getFlashBook() {
         return model.getFlashBook();
