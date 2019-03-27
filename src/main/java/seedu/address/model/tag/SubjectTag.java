@@ -48,7 +48,18 @@ public class SubjectTag {
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + subjectName + ']';
+        return subjectName;
     }
 
+    /**
+     * Returns true if both subjects have the same field.
+     * This defines a stronger notion of equality between two subjects.
+     */
+    public boolean isSameSubject(SubjectTag otherSubject) {
+        if (otherSubject == this) {
+            return true;
+        }
+        return otherSubject != null
+                && otherSubject.toString().equals(subjectName);
+    }
 }

@@ -22,18 +22,26 @@ public class Flashcard {
     // Data fields
     private final Content content;
     private final Deadline deadline;
-    private final Set<SubjectTag> subject = new HashSet<>();
+    private final Set<SubjectTag> subjectTag = new HashSet<>();
+
+    private SubjectTag subject;
+
 
     /**
      * Every field must be present and not null.
      */
-    public Flashcard(Topic topic, Difficulty difficulty, Content content, Deadline deadline, Set<SubjectTag> subject) {
-        requireAllNonNull(topic, difficulty, content, subject);
+    public Flashcard(Topic topic, Difficulty difficulty, Content content,
+                     Deadline deadline, Set<SubjectTag> subjectTag) {
+        requireAllNonNull(topic, difficulty, content, subjectTag);
         this.topic = topic;
         this.difficulty = difficulty;
         this.content = content;
         this.deadline = deadline;
-        this.subject.addAll(subject);
+        this.subjectTag.addAll(subjectTag);
+        for (SubjectTag s : subjectTag) {
+            this.subject = s;
+            break;
+        }
     }
 
     public Topic getTopic() {
@@ -52,12 +60,16 @@ public class Flashcard {
         return deadline;
     }
 
+    public SubjectTag getSubject() {
+        return subject;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<SubjectTag> getTags() {
-        return Collections.unmodifiableSet(subject);
+        return Collections.unmodifiableSet(subjectTag);
     }
 
     /**
@@ -98,7 +110,7 @@ public class Flashcard {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(topic, difficulty, content, subject);
+        return Objects.hash(topic, difficulty, content, subjectTag);
     }
 
     @Override
