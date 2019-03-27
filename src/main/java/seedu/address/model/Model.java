@@ -5,8 +5,11 @@ import java.util.function.Predicate;
 
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.flashcard.Flashcard;
+import seedu.address.model.tag.SubjectTag;
+
 
 /**
  * The API of the Model component.
@@ -14,8 +17,40 @@ import seedu.address.model.flashcard.Flashcard;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Flashcard> PREDICATE_SHOW_ALL_FLASHCARDS = unused -> true;
+    Predicate<SubjectTag> PREDICATE_SHOW_ALL_SUBJECTS = unused -> true;
 
 
+    // ================= SUBJECT BOOK ================= //
+    /** Returns the SubjectBook */
+    FilteredList<SubjectTag> getSubjectBook();
+
+    /** Returns an unmodifiable view of the filtered subject list */
+    ObservableList<SubjectTag> getFilteredSubjectList();
+
+    /**
+     * Selected subject in the filtered subject list.
+     * null if no subject is selected.
+     */
+    ReadOnlyProperty<SubjectTag> selectedSubjectProperty();
+
+    /**
+     * Adds the given flashcard.
+     * {@code flashcard} must not already exist in the flash book.
+     */
+    void addSubject(SubjectTag subject);
+
+    /**
+     * Sets the selected subject in the filtered subject list.
+     */
+    void setSelectedSubject(SubjectTag subject);
+
+    /**
+     * Updates the filter of the filtered flashcard list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredSubjectList(Predicate<SubjectTag> predicate);
+
+    // ================ GENERIC ================= //
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -36,6 +71,7 @@ public interface Model {
      */
     void setGuiSettings(GuiSettings guiSettings);
 
+    // ================= FLASH BOOK ================= //
     /**
      * Returns the user prefs' flash book file path.
      */
@@ -129,4 +165,5 @@ public interface Model {
      * Sets the selected flashcard in the filtered flashcard list.
      */
     void setSelectedFlashcard(Flashcard flashcard);
+
 }
