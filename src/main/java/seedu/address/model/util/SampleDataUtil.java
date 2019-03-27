@@ -20,26 +20,30 @@ public class SampleDataUtil {
     public static final Deadline EMPTY_DEADLINE = new Deadline("");
     public static Flashcard[] getSampleFlashcards() {
         return new Flashcard[] {
-            new Flashcard(new Topic("Math"), new Difficulty("87438807"),
-                new Content("Blk 30 Geylang Street 29, #06-40"), EMPTY_DEADLINE,
-                getTagSet("friends")),
-            new Flashcard(new Topic("Science"), new Difficulty("99272758"),
-                new Content("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), EMPTY_DEADLINE,
-                getTagSet("colleagues", "friends")),
-            new Flashcard(new Topic("Chinese"), new Difficulty("93210283"),
-                new Content("Blk 11 Ang Mo Kio Street 74, #11-04"), EMPTY_DEADLINE,
-                getTagSet("neighbours")),
-            new Flashcard(new Topic("Geography"), new Difficulty("91031282"),
-                new Content("Blk 436 Serangoon Gardens Street 26, #16-43"), EMPTY_DEADLINE,
-                getTagSet("family")),
-            new Flashcard(new Topic("Chemistry"), new Difficulty("92492021"),
-                new Content("Blk 47 Tampines Street 20, #17-35"), EMPTY_DEADLINE,
-                getTagSet("classmates")),
-            new Flashcard(new Topic("Physics"), new Difficulty("92624417"),
-                new Content("Blk 45 Aljunied Street 85, #11-31"), EMPTY_DEADLINE,
-                getTagSet("colleagues"))
+            new Flashcard(new Topic("Pythagoras Theorem"), new Difficulty("123"),
+                new Content("a^2 + b^2 = c^2"), EMPTY_DEADLINE,
+                getTagSet("math")),
+            new Flashcard(new Topic("Photosynthesis"), new Difficulty("123"),
+                new Content("Happens in plants"), EMPTY_DEADLINE,
+                getTagSet("science"))
         };
     }
+
+    /* public static SubjectBook[] getSampleSubjects() {
+        return new SubjectBook[] {
+                new SubjectBook(new SubjectTag("math")),
+                new SubjectBook(new SubjectTag("science")),
+                new SubjectBook(new SubjectTag("english"))
+        };
+    }
+
+    public static ReadOnlySubjectBook getSampleSubjectBook() {
+        SubjectBook sampleSB = new SubjectBook();
+        for (SubjectBook sampleSubject : getSampleSubjects()) {
+            sampleSB.addSubject(sampleSubject);
+        }
+        return sampleSB;
+    }*/
 
     public static ReadOnlyFlashBook getSampleFlashBook() {
         FlashBook sampleAb = new FlashBook();
