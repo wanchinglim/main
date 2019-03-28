@@ -210,7 +210,6 @@ public class ModelManager implements Model {
     @Override
     public void addFlashcard(Flashcard flashcard) {
         versionedFlashBook.addFlashcard(flashcard);
-        subjectBook.addSubject(flashcard.getSubject());
         updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
         //updateFilteredSubjectList(PREDICATE_SHOW_ALL_SUBJECTS);
     }

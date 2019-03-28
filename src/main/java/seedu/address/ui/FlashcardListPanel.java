@@ -40,27 +40,16 @@ public class FlashcardListPanel extends UiPart<Region> {
                               Consumer<Flashcard> onSelectedFlashcardChange) {
         super(FXML);
 
-        s = selectedSubject;
-        f = selectedFlashcard;
-        subjectListView = subjectList;
-
         flashcardListView.setItems(flashcardList);
         flashcardListView.setCellFactory(listView -> new FlashcardListViewCell());
 
-        //newFlashcardList = updateFlashcardList(selectedSubject, flashcardList);
 
         selectedSubject.addListener((observable, oldValue, newValue) -> {
             if(newValue == null) {
                 flashcardListView.getSelectionModel().clearSelection();
             } else {
-                newFlashcardList.clear();
-                //this.newFlashcardList = updateFlashcardList(selectedSubject, flashcardList);
-                //Collections.copy(newFlashcardList, updateFlashcardList(newValue, flashcardList));
-                for (Flashcard f : flashcardList) {
-                    if (newValue.equals(f.getSubject())) {
-                        newFlashcardList.add(f);
-                    }
-                }
+                this.newFlashcardList.clear();
+                this.newFlashcardList = updateFlashcardList(newValue, flashcardList);
                 flashcardListView.setItems(newFlashcardList);
                 flashcardListView.setCellFactory(listView -> new FlashcardListViewCell());
             }
