@@ -31,6 +31,8 @@ public class UniqueSubjectList implements Iterable<SubjectTag> {
     private final ObservableList<SubjectTag> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
+    public boolean EXISTS = false;
+
     /**
      * Returns true if the list contains an equivalent subject as the given argument.
      */
@@ -45,10 +47,23 @@ public class UniqueSubjectList implements Iterable<SubjectTag> {
      */
     public void add(SubjectTag toAdd) {
         requireNonNull(toAdd);
-        if (contains(toAdd)) {
-            throw new DuplicateFlashcardException();
+
+        if(!internalList.contains(toAdd)) {
+            internalList.add(toAdd);
         }
-        internalList.add(toAdd);
+
+
+        /*for (SubjectTag t : internalList) {
+            if (t.equals(toAdd)) {
+                EXISTS = true;
+            }
+        }
+
+        if (!EXISTS) {
+            internalList.add(toAdd);
+        } else if (contains(toAdd)) {
+
+        }*/
     }
 
     /**

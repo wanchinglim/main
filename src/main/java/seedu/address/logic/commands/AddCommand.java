@@ -62,7 +62,7 @@ public class AddCommand extends Command {
 //            model.addSubject(new SubjectBook(toAdd.getSubject()));
 //        }
 
-        for (SubjectTag s : model.getSubjectBook()) {
+        /*for (SubjectTag s : model.getSubjectBook()) {
             if (s.toString().equalsIgnoreCase(toAdd.getSubject().toString())) {
                 EXISTS = true;
             }
@@ -70,9 +70,10 @@ public class AddCommand extends Command {
 
         if (!EXISTS) {
             model.addSubject(toAdd.getSubject());
-        }
+        }*/
 
         model.addFlashcard(toAdd);
+        model.addSubject(toAdd.getSubject());
         model.commitFlashBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
