@@ -12,6 +12,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.FlashBook;
 import seedu.address.model.ReadOnlyFlashBook;
 import seedu.address.model.flashcard.Flashcard;
+import seedu.address.model.subject.SubjectBook;
 
 /**
  * An Immutable FlashBook that is serializable to JSON format.
@@ -48,12 +49,14 @@ class JsonSerializableFlashBook {
      */
     public FlashBook toModelType() throws IllegalValueException {
         FlashBook flashBook = new FlashBook();
+        SubjectBook subjectBook = new SubjectBook();
         for (JsonAdaptedFlashcard jsonAdaptedFlashcard : flashcards) {
             Flashcard flashcard = jsonAdaptedFlashcard.toModelType();
             if (flashBook.hasFlashcard(flashcard)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_FLASHCARD);
             }
             flashBook.addFlashcard(flashcard);
+            subjectBook.addSubject(flashcard.getSubject());
         }
         return flashBook;
     }

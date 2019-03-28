@@ -6,6 +6,8 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.application.Application;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.LogsCenter;
@@ -21,8 +23,11 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyFlashBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.flashcard.Flashcard;
 import seedu.address.model.subject.ReadOnlySubjectBook;
 import seedu.address.model.subject.SubjectBook;
+import seedu.address.model.subject.UniqueSubjectList;
+import seedu.address.model.tag.SubjectTag;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.*;
 import seedu.address.ui.Ui;
@@ -55,6 +60,7 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         FlashBookStorage flashBookStorage = new JsonFlashBookStorage(userPrefs.getFlashBookFilePath());
+        SubjectBookStorage subjectBookStorage = new JsonSubjectBookStorage(userPrefs.getSubjectBookFilePath());
         storage = new StorageManager(flashBookStorage, userPrefsStorage);
 
         initLogging(config);
@@ -75,6 +81,8 @@ public class MainApp extends Application {
         Optional<ReadOnlyFlashBook> flashBookOptional;
         ReadOnlyFlashBook initialFlashBook;
         ReadOnlySubjectBook initialSubjectBook;
+        SubjectBook s = new SubjectBook();
+
 
         try {
             flashBookOptional = storage.readFlashBook();
@@ -82,7 +90,13 @@ public class MainApp extends Application {
                 logger.info("Data file not found. Will be starting with a sample FlashBook");
             }
             initialFlashBook = flashBookOptional.orElseGet(SampleDataUtil::getSampleFlashBook);
-            initialSubjectBook = new SubjectBook();
+
+            for (Flashcard f : initialFlashBook.getFlashcardList()) {
+                s.addSubject(f.getSubject());
+            }
+            initialSubjectBook = s;
+            //initialSubjectBook = initialFlashBook.getFlashcardList();
+            //initialSubjectBook = new SubjectBook();
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty FlashBook");
             initialFlashBook = new FlashBook();

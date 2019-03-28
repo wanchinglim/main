@@ -33,7 +33,7 @@ public class ModelManager implements Model {
     private final FilteredList<Flashcard> filteredFlashcards;
     private final SimpleObjectProperty<Flashcard> selectedFlashcard = new SimpleObjectProperty<>();
     private final SimpleObjectProperty<SubjectTag> selectedSubject = new SimpleObjectProperty<>();
-    private FilteredList<SubjectTag> filteredSubjects;
+    private final FilteredList<SubjectTag> filteredSubjects;
 
     /**
      * Initializes a ModelManager with the given flashBook and userPrefs.
@@ -49,7 +49,9 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredFlashcards = new FilteredList<>(versionedFlashBook.getFlashcardList());
         filteredFlashcards.addListener(this::ensureSelectedFlashcardIsValid);
-        filteredSubjects = new FilteredList<>(this.subjectBook.getSubjectList());
+        filteredSubjects = new FilteredList<>(subjectBook.getSubjectList());
+        // this.subjectBook.getSubjectList() adds subject to filteredSubjects automatically after adding flashcard
+        //filteredSubjects = new FilteredList<>(this.subjectBook.getSubjectList());
         filteredSubjects.addListener(this::ensureSelectedSubjectIsValid);
 
     }
@@ -150,6 +152,16 @@ public class ModelManager implements Model {
     public void updateFilteredSubjectList(Predicate<SubjectTag> predicate) {
         requireNonNull(predicate);
         filteredSubjects.setPredicate(predicate);
+    }
+
+    /**
+     * Replaces flash book data with the data in {@code flashBook}.
+     *
+     * @param subjectBook
+     */
+    @Override
+    public void setSubjectBook(SubjectBook subjectBook) {
+        subjectBook.resetData(subjectBook);
     }
 
 
