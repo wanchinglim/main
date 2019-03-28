@@ -133,7 +133,7 @@ public class ModelManager implements Model {
      */
     @Override
     public void setSelectedSubject(SubjectTag subject) {
-        if (subject != null && !filteredFlashcards.contains(subject)) {
+        if (subject != null && !filteredSubjects.contains(subject)) {
             throw new FlashcardNotFoundException();
         }
 

@@ -1,10 +1,12 @@
 package seedu.address.ui;
 
+import java.util.Collections;
 import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.logging.Logger;
 
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -12,6 +14,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.flashcard.Flashcard;
+import seedu.address.model.tag.SubjectTag;
 
 /**
  * Panel containing the list of flashcards.
@@ -23,16 +26,53 @@ public class FlashcardListPanel extends UiPart<Region> {
     @FXML
     private ListView<Flashcard> flashcardListView;
 
-    public FlashcardListPanel(ObservableList<Flashcard> flashcardList, ObservableValue<Flashcard> selectedFlashcard,
+    private ObservableList<SubjectTag> subjectListView;
+
+    private ObservableValue<SubjectTag> s;
+    private ObservableValue<Flashcard> f;
+    private ObservableList<Flashcard> list = FXCollections.observableArrayList();
+    private ObservableList<Flashcard> newFlashcardList = FXCollections.observableArrayList();
+
+    public FlashcardListPanel(ObservableList<SubjectTag> subjectList,
+                              ObservableList<Flashcard> flashcardList,
+                              ObservableValue<SubjectTag> selectedSubject,
+                              ObservableValue<Flashcard> selectedFlashcard,
                               Consumer<Flashcard> onSelectedFlashcardChange) {
         super(FXML);
 
+        s = selectedSubject;
+        f = selectedFlashcard;
+        subjectListView = subjectList;
+
         flashcardListView.setItems(flashcardList);
         flashcardListView.setCellFactory(listView -> new FlashcardListViewCell());
+
+        //newFlashcardList = updateFlashcardList(selectedSubject, flashcardList);
+
+        selectedSubject.addListener((observable, oldValue, newValue) -> {
+            if(newValue == null) {
+                flashcardListView.getSelectionModel().clearSelection();
+            } else {
+                newFlashcardList.clear();
+                //this.newFlashcardList = updateFlashcardList(selectedSubject, flashcardList);
+                //Collections.copy(newFlashcardList, updateFlashcardList(newValue, flashcardList));
+                for (Flashcard f : flashcardList) {
+                    if (newValue.equals(f.getSubject())) {
+                        newFlashcardList.add(f);
+                    }
+                }
+                flashcardListView.setItems(newFlashcardList);
+                flashcardListView.setCellFactory(listView -> new FlashcardListViewCell());
+            }
+
+        });
+
+
         flashcardListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             logger.fine("Selection in flashcard list panel changed to : '" + newValue + "'");
             onSelectedFlashcardChange.accept(newValue);
         });
+
         selectedFlashcard.addListener((observable, oldValue, newValue) -> {
             logger.fine("Selected flashcard changed to: " + newValue);
 
@@ -50,6 +90,17 @@ public class FlashcardListPanel extends UiPart<Region> {
                 flashcardListView.getSelectionModel().clearAndSelect(index);
             }
         });
+    }
+
+
+    private ObservableList<Flashcard> updateFlashcardList(SubjectTag subject,
+                                                          ObservableList<Flashcard> flashcardList) {
+        for (Flashcard f : flashcardList) {
+            if (subject.equals(f.getSubject())) {
+                list.add(f);
+            }
+        }
+        return list;
     }
 
     /**

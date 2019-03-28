@@ -25,9 +25,13 @@ public class SubjectListPanel extends UiPart<Region> {
     @FXML
     private ListView<SubjectTag> subjectListView;
 
+    private ObservableValue<SubjectTag> s;
+
     public SubjectListPanel(ObservableList<SubjectTag> subjectList, ObservableValue<SubjectTag> selectedSubject,
                               Consumer<SubjectTag> onSelectedSubjectBookChange) {
         super(FXML);
+
+        s = selectedSubject;
 
         subjectListView.setItems(subjectList);
         subjectListView.setCellFactory(listView -> new SubjectTagListViewCell());

@@ -31,14 +31,14 @@ public class BrowserPanel extends UiPart<Region> {
     @FXML
     private WebView browser;
 
-    public BrowserPanel(ObservableValue<Flashcard> selectedSubject) {
+    public BrowserPanel(ObservableValue<Flashcard> selectedFlashcard) {
         super(FXML);
 
         // To prevent triggering events for typing inside the loaded Web page.
         getRoot().setOnKeyPressed(Event::consume);
 
         // Load flashcard page when selected flashcard changes.
-        selectedSubject.addListener((observable, oldValue, newValue) -> {
+        selectedFlashcard.addListener((observable, oldValue, newValue) -> {
             if (newValue == null) {
                 loadDefaultPage();
                 return;
