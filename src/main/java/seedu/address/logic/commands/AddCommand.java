@@ -26,7 +26,7 @@ public class AddCommand extends Command {
             + PREFIX_CONTENT + "CONTENT "
             + "[" + PREFIX_SUBJECT + "SUBJECT]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TOPIC + "pythagoras theorem"
+            + PREFIX_TOPIC + "pythagoras theorem "
             + PREFIX_DIFFICULTY + "98765432 "
             + PREFIX_CONTENT + "311, Clementi Ave 2, #02-25 "
             + PREFIX_SUBJECT + "math";

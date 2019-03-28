@@ -881,6 +881,14 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |User |Retrieve a recently deleted flash card |Retrieve the flash card which I might have accidentally deleted
 
+|`* *` |User |Locate the next flash card |Easily navigate to next flashcard
+
+|`* *` |User |Locate the previous flash card |Easily go back to the previous flashcard
+
+|`*` |User |View flashcards based on difficulty |View flashcards that are difficult or easy first
+
+|`*` |User |View flashcards in a random manner |View flashcards that have a mixture of difficulty level
+
 |=======================================================================
 
 _{More to be added in future versions of the developer guide}_
