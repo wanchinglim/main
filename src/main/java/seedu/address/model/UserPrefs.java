@@ -15,7 +15,6 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path flashBookFilePath = Paths.get("data" , "flashbook.json");
-    private Path subjectBookFilePath = Paths.get("data", "subjectbook.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -87,7 +86,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
 
     public Path getSubjectBookFilePath() {
-        return subjectBookFilePath;
+        return flashBookFilePath;
     }
 
 }
