@@ -81,7 +81,7 @@ public class FlashcardListPanelTest extends GuiUnitTest {
         ObservableList<Flashcard> backingList = FXCollections.observableArrayList();
         for (int i = 0; i < flashcardCount; i++) {
             Topic topic = new Topic(i + "a");
-            Difficulty difficulty = new Difficulty("1");
+            Difficulty difficulty = new Difficulty("000");
             Content content = new Content("a");
             Deadline deadline = new Deadline("a");
             Flashcard flashcard = new Flashcard(topic, difficulty, content, deadline, Collections.emptySet());

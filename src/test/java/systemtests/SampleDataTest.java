@@ -1,11 +1,17 @@
 /*
 package systemtests;
 
+import static seedu.address.ui.testutil.GuiTestAssert.assertListMatching;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import org.junit.Test;
+
 import seedu.address.model.FlashBook;
+import seedu.address.model.flashcard.Flashcard;
+import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.TestUtil;
 
 public class SampleDataTest extends FlashBookSystemTest {
@@ -44,13 +50,10 @@ public class SampleDataTest extends FlashBookSystemTest {
         }
     }
 
-    /**
-     *  @Test
-     *     public void flashBook_dataFileDoesNotExist_loadSampleData() {
-     *         Flashcard[] expectedList = SampleDataUtil.getSampleFlashcards();
-     *         assertListMatching(getFlashcardListPanel(), expectedList);
-     *     }
-     */
-
+    @Test
+    public void flashBook_dataFileDoesNotExist_loadSampleData() {
+        Flashcard[] expectedList = SampleDataUtil.getSampleFlashcards();
+        assertListMatching(getFlashcardListPanel(), expectedList);
+    }
 }
 */

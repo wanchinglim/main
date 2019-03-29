@@ -92,7 +92,7 @@ public class StatusBarFooter extends UiPart<Region> {
     private void updateSyncStatus() {
         long now = clock.millis();
         String lastUpdated = new Date(now).toString();
-        Platform.runLater(() -> syncStatus.setText(String.format(SYNC_STATUS_UPDATED, lastUpdated)));
+        syncStatus.setText(String.format(SYNC_STATUS_UPDATED, lastUpdated));
     }
 
     @Subscribe

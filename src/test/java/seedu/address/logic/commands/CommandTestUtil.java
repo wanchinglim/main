@@ -29,8 +29,8 @@ public class CommandTestUtil {
 
     public static final String VALID_TOPIC_AMY = "Amy Bee";
     public static final String VALID_TOPIC_BOB = "Bob Choo";
-    public static final String VALID_DIFFICULTY_AMY = "2";
-    public static final String VALID_DIFFICULTY_BOB = "3";
+    public static final String VALID_DIFFICULTY_AMY = "11111111";
+    public static final String VALID_DIFFICULTY_BOB = "22222222";
     public static final String VALID_CONTENT_AMY = "Block 312, Amy Street 1";
     public static final String VALID_CONTENT_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";

@@ -34,8 +34,8 @@ public class DifficultyTest {
         assertFalse(Difficulty.isValidDifficulty("9312 1534")); // spaces within digits
 
         // valid difficulty levels
-        assertTrue(Difficulty.isValidDifficulty("1")); // exactly 3 numbers
-        assertTrue(Difficulty.isValidDifficulty("2"));
-        assertTrue(Difficulty.isValidDifficulty("3")); // long phone numbers
+        assertTrue(Difficulty.isValidDifficulty("911")); // exactly 3 numbers
+        assertTrue(Difficulty.isValidDifficulty("93121534"));
+        assertTrue(Difficulty.isValidDifficulty("124293842033123")); // long phone numbers
     }
 }
