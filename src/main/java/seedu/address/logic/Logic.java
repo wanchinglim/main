@@ -10,6 +10,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyFlashBook;
 import seedu.address.model.flashcard.Flashcard;
+import seedu.address.model.subject.ReadOnlySubjectBook;
 import seedu.address.model.subject.SubjectBook;
 import seedu.address.model.tag.SubjectTag;
 
@@ -28,9 +29,15 @@ public interface Logic {
 
     // =============== SUBJECTS ===============
 
+    /**
+     * Returns the SubjectBook.
+     *
+     * @see seedu.address.model.Model#getFlashBook()
+     */
+    ReadOnlySubjectBook getSubjectBook();
+
     /** Returns an unmodifiable view of the filtered list of flashcards */
     ObservableList<SubjectTag> getFilteredSubjectList();
-
 
     /**
      * Selected flashcard in the filtered flashcard list.

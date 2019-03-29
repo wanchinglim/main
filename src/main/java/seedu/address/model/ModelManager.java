@@ -49,7 +49,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredFlashcards = new FilteredList<>(versionedFlashBook.getFlashcardList());
         filteredFlashcards.addListener(this::ensureSelectedFlashcardIsValid);
-        filteredSubjects = new FilteredList<>(subjectBook.getSubjectList());
+        filteredSubjects = new FilteredList<>(this.subjectBook.getSubjectList());
         // this.subjectBook.getSubjectList() adds subject to filteredSubjects automatically after adding flashcard
         //filteredSubjects = new FilteredList<>(this.subjectBook.getSubjectList());
         filteredSubjects.addListener(this::ensureSelectedSubjectIsValid);
@@ -101,8 +101,8 @@ public class ModelManager implements Model {
      * Returns the SubjectBook
      */
     @Override
-    public FilteredList<SubjectTag> getSubjectBook() {
-        return filteredSubjects;
+    public ReadOnlySubjectBook getSubjectBook() {
+        return subjectBook;
     }
 
     /**

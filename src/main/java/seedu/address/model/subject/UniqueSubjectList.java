@@ -31,8 +31,6 @@ public class UniqueSubjectList implements Iterable<SubjectTag> {
     private final ObservableList<SubjectTag> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
-    public boolean EXISTS = false;
-
     /**
      * Returns true if the list contains an equivalent subject as the given argument.
      */
@@ -52,18 +50,6 @@ public class UniqueSubjectList implements Iterable<SubjectTag> {
             internalList.add(toAdd);
         }
 
-
-        /*for (SubjectTag t : internalList) {
-            if (t.equals(toAdd)) {
-                EXISTS = true;
-            }
-        }
-
-        if (!EXISTS) {
-            internalList.add(toAdd);
-        } else if (contains(toAdd)) {
-
-        }*/
     }
 
     /**
@@ -71,7 +57,7 @@ public class UniqueSubjectList implements Iterable<SubjectTag> {
      * {@code target} must exist in the list.
      * The subject identity of {@code editedFlashcard} must not be the same as another existing subject in the list.
      */
-    public void setFlashcard(SubjectTag target, SubjectTag editedFlashcard) {
+    public void setSubject(SubjectTag target, SubjectTag editedFlashcard) {
         requireAllNonNull(target, editedFlashcard);
 
         int index = internalList.indexOf(target);
@@ -97,7 +83,7 @@ public class UniqueSubjectList implements Iterable<SubjectTag> {
         }
     }
 
-    public void setFlashcards(UniqueSubjectList replacement) {
+    public void setSubjects(UniqueSubjectList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
@@ -106,7 +92,7 @@ public class UniqueSubjectList implements Iterable<SubjectTag> {
      * Replaces the contents of this list with {@code subjects}.
      * {@code subjects} must not contain duplicate subjects.
      */
-    public void setFlashcards(List<SubjectTag> subjects) {
+    public void setSubjects(List<SubjectTag> subjects) {
         requireAllNonNull(subjects);
         if (!subjectsAreUnique(subjects)) {
             throw new DuplicateFlashcardException();

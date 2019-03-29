@@ -55,23 +55,6 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_FLASHCARD);
         }
 
-//        if(!model.getSubjectBook().hasSubject(toAdd.getSubject())
-//            model.addSubjectBook(subject);
-
-//        if (model.getSubjectBook().hasSubject(toAdd.getSubject()) ) {
-//            model.addSubject(new SubjectBook(toAdd.getSubject()));
-//        }
-
-        /*for (SubjectTag s : model.getSubjectBook()) {
-            if (s.toString().equalsIgnoreCase(toAdd.getSubject().toString())) {
-                EXISTS = true;
-            }
-        }
-
-        if (!EXISTS) {
-            model.addSubject(toAdd.getSubject());
-        }*/
-
         model.addFlashcard(toAdd);
         model.addSubject(toAdd.getSubject());
         model.commitFlashBook();

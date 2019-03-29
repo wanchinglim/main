@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 import javafx.beans.Observable;
 import javafx.beans.property.ReadOnlyProperty;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
@@ -72,7 +73,7 @@ public class LogicManager implements Logic {
     }
 
     // =============== SUBJECTS ===============
-    public FilteredList<SubjectTag> getSubjectBook() {
+    public ReadOnlySubjectBook getSubjectBook() {
         return model.getSubjectBook();
     }
 

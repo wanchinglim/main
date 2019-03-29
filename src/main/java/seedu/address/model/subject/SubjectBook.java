@@ -5,12 +5,7 @@ import static java.util.Objects.requireNonNull;
 import javafx.beans.InvalidationListener;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.InvalidationListenerManager;
-import seedu.address.model.FlashBook;
-import seedu.address.model.subject.ReadOnlySubjectBook;
 import seedu.address.model.tag.SubjectTag;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Wraps all data at the subject-book level
@@ -32,8 +27,6 @@ public class SubjectBook implements ReadOnlySubjectBook {
      */
     {
         subjects = new UniqueSubjectList();
-        //subjectName = new SubjectTag();
-
     }
 
     public SubjectBook() {}
@@ -87,21 +80,7 @@ public class SubjectBook implements ReadOnlySubjectBook {
      * {@code flashcards} must not contain duplicate flashcards.
      */
     private void setSubjects(ObservableList<SubjectTag> subjectList) {
-        this.subjects.setFlashcards(subjects);
-        indicateModified();
-    }
-
-
-    /**
-     * Replaces the given subject {@code target} in the list with {@code editedSubject}.
-     * {@code target} must exist in the subject book.
-     * The subject identity of {@code editedSubject} must not be the same as another
-     * existing subject in the subject book.
-     */
-    public void setSubjects(SubjectTag target, SubjectTag editedSubject) {
-        requireNonNull(editedSubject);
-
-        subjects.setFlashcard(target, editedSubject);
+        this.subjects.setSubjects(subjectList);
         indicateModified();
     }
 

@@ -8,6 +8,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.flashcard.Flashcard;
+import seedu.address.model.subject.ReadOnlySubjectBook;
+import seedu.address.model.subject.SubjectBook;
 import seedu.address.model.tag.SubjectTag;
 
 
@@ -22,7 +24,7 @@ public interface Model {
 
     // ================= SUBJECT BOOK ================= //
     /** Returns the SubjectBook */
-    FilteredList<SubjectTag> getSubjectBook();
+    ReadOnlySubjectBook getSubjectBook();
 
     /** Returns an unmodifiable view of the filtered subject list */
     ObservableList<SubjectTag> getFilteredSubjectList();
@@ -49,6 +51,11 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredSubjectList(Predicate<SubjectTag> predicate);
+
+    /**
+     * Replaces flash book data with the data in {@code flashBook}.
+     */
+    void setSubjectBook(SubjectBook subjectBook);
 
     // ================ GENERIC ================= //
     /**
@@ -165,5 +172,4 @@ public interface Model {
      * Sets the selected flashcard in the filtered flashcard list.
      */
     void setSelectedFlashcard(Flashcard flashcard);
-
 }
