@@ -14,7 +14,6 @@ public class Difficulty {
             "Difficulty levels should only contain numbers, and it should be at least 3 digits long";
     public static final String VALIDATION_REGEX = "[1-3]";
     public final String value;
-    public final Integer difficultyLevel;
 
     /**
      * Constructs a {@code Difficulty}.
@@ -25,7 +24,6 @@ public class Difficulty {
         requireNonNull(difficulty);
         checkArgument(isValidDifficulty(difficulty), MESSAGE_CONSTRAINTS);
         value = difficulty;
-        difficultyLevel = Integer.parseInt(difficulty);
     }
 
     /**

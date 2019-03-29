@@ -32,7 +32,7 @@ image::Ui.png[width="790"]
 +
 .  Try typing some command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
-.  Some example commands you can try:
+.  Try these example commands you can try:
 
 * *`list`* : lists all flashcards
 * **`add`**`t/Pythagoras Theorem c/a^2+b^2=c^2 d/21 March 2019 s/Math` : adds a flashcard named `Pythagoras Theorem` under the subject `Math` to the FlashCards Book.
@@ -55,14 +55,14 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 Create an account for the user. +
 Supports multiple users. +
-Format: `create <username>`
+Format: `create <username> <password>`
 
 * Subsequent adding of flashcards will be tagged to the same user account.
 
 Examples:
 
-* `create John Doe`
-A new user account called "John Doe" is created.
+* `create John Doe johndoe123`
+A new user account called "John Doe" is created with password "johndoe123".
 
 === Logging in: `login`
 
@@ -73,7 +73,7 @@ Format: `login <username> <password>`
 
 Examples:
 
-* `login John Doe john123`
+* `login John Doe johndoe123`
 The user can login using the username and password to be "John Doe" and "john123" respectively.
 
 === Viewing help : `help`
@@ -97,8 +97,8 @@ Examples:
 
 * `add t/Pythagoras Theorem c/a^2 + b^2 = c^2 diff/1 d/21 March 2019 s/Math`
 Adds the flashcard named "Pythagoras Theorem" with content "a^2 + b^2 = c^2", set at difficulty "1" and tagged under the subject "Math". Assigns an expiry deadline "21 March 2019".
-* `add t/Photosynthesis c/A chemical reaction that takes place inside a plant, producing food for the plant to survive d/22 March 2019 s/Science`
-Adds the flashcard named "Photosynthesis" with the content "A chemical reaction that takes place inside a plant, producing food for the plant to survive" and tagged under the subject "Science". Assigns an expiry deadline "22 March 2019".
+* `add t/Photosynthesis c/A chemical reaction that takes place inside a plant, producing food for the plant to survive diff/3 d/22 March 2019 s/Science`
+Adds the flashcard named "Photosynthesis" with the content "A chemical reaction that takes place inside a plant, producing food for the plant to survive", set at difficulty "3" and tagged under the subject "Science". Assigns an expiry deadline "22 March 2019".
 
 Lists the flashcard that was just added.
 
@@ -116,21 +116,18 @@ Enter the subject that the flashcard belongs to.
 Format: `edit INDEX SUBJECT`
 
 ****
-* Edits the flashcard at the specified `INDEX`. The index refers to the index number shown in the displayed subject list. The index *must be a positive integer* 1, 2, 3, ...
-* At least one of the optional fields must be provided.
-* A list of flashcards belonging to that subject will be displayed.
-* Select the index of the flashcard to edit.
+* Edits the flashcard with its respective `INDEX`. The index refers to the number shown in the displayed subject list. The index *must be a positive integer* 1, 2, 3, ...
+* At least one of the optional fields must be provided for edit.
 * Existing values will be updated to the input values.
 * The updated flashcard will be displayed.
-* When editing flashcards, the existing tags of the flashcard will be removed i.e adding of tags is not cumulative.
 ****
 
 Examples:
 
-* `edit 1 definition` +
-Edits the content of flashcard.
-* `e 2 definition` +
-Edits the content of flashcard.
+* `edit 1 t/algebra` +
+Edits the topic of flashcard 3 to "algebra".
+* `e 2 t/fibonacci numbers diff/3` +
+Edits the topic and difficulty level of flashcard 2 to "fibonacci numbers" with difficulty "3".
 
 === Finding a flashcard: `find` / `f`
 
@@ -138,11 +135,11 @@ Find flashcards based on the given keyword. +
 Format: `find <KEYWORD> [MORE_KEYWORDS]`
 
 ****
-* The search is case insensitive. e.g `hans` will not match `Hans`
+* The search is case insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Pythagoras Theorem` will match `Theorem Pythagoras`
-* The search is based on the flashcard's content.
+* The search is based on the flashcard's topic.
 * Only full words will be matched e.g. `Theorem` will not match `Theorems`
-* Flashcards containing the keyword will be displayed (i.e. `OR` search). e.g. `Photosynthesis Theorem` will return `Photosynthesis`, `Pythagoras Theorem`
+* Flashcards containing any of the keywords will be displayed. e.g. `Photosynthesis Theorem` will return `Photosynthesis`, `Pythagoras Theorem`
 ****
 
 Examples:
@@ -152,7 +149,7 @@ Returns `math` and `Mathematics`
 * `f science english math` +
 Returns any flashcards having names `science`, `english`, or `math`
 
-=== Deleting a subject or flashcard : `delete` / `d`
+=== Deleting a flashcard : `delete` / `d`
 
 Deletes the specified subject or flashcard. +
 Enter the subject that the flashcard belongs to. +
@@ -161,7 +158,7 @@ Format: `delete INDEX <subject>`
 ****
 * A list of flashcards belonging to the subject will be displayed.
 * Select the index of the flashcard to delete.
-* Deletes the flashcard at the specified `INDEX`.
+* Deletes the flashcard with respective `INDEX`.
 * The index refers to the index number shown in the displayed subject list.
 * The index *must be a positive integer* 1, 2, 3, ...
 * The updated list of flashcards will be displayed.
@@ -199,12 +196,11 @@ Selects the 1st flashcard in the results of the `find` command.
 
 === Viewing the next flashcard : `next` / `n`
 
-Views the next flashcard that is next in line for the chosen subject.
- +
+Views the next flashcard that is next in line for the chosen subject. +
 Format: `next` or `n`
 
 ****
-* Displays the next flashcard and loads the content of the flashcard of the next index.
+* Displays the content of the flashcard with the next index.
 * The index refers to the index number shown in the displayed list.
 * The index *must be a positive integer* `1, 2, 3, ...`
 ****
@@ -225,7 +221,7 @@ Views the previous flashcard that is next in line for the chosen subject.
 Format: `previous` or `p`
 
 ****
-* Displays the previous flashcard and loads the content of the flashcard of the next index.
+* Displays the content of the flashcard of the previous index.
 * The index refers to the index number shown in the displayed list.
 * The index *must be a positive integer* `1, 2, 3, ...`
 ****
@@ -246,7 +242,7 @@ Format: `sort DIFFICULTY`
 
 ****
 * Sorts the flashcard and loads all the flashcard with specified `DIFFICULTY`.
-* The difficulty refers to the difficulty level input when adding flashcard.
+* The difficulty refers to the difficulty level of flashcard.
 * The difficulty *must be a positive integer* `1, 2, 3`
 ****
 

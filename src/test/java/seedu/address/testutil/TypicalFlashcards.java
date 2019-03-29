@@ -27,7 +27,7 @@ public class TypicalFlashcards {
             .withTags("friends").build();
     public static final Flashcard BENSON = new FlashcardBuilder().withTopic("Benson Meier")
             .withContent("311, Clementi Ave 2, #02-25")
-            .withDifficulty("2")
+            .withDifficulty("3")
             .withTags("owesMoney", "friends").build();
     public static final Flashcard CARL = new FlashcardBuilder().withTopic("Carl Kurz").withDifficulty("3")
             .withContent("wall street").build();
