@@ -11,8 +11,6 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.flashcard.Flashcard;
-import seedu.address.model.subject.SubjectBook;
-import seedu.address.model.tag.SubjectTag;
 
 /**
  * Adds a flashcard to the flash book.
@@ -20,7 +18,6 @@ import seedu.address.model.tag.SubjectTag;
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
-    public static boolean EXISTS = false;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a flashcard to the flash book. "
             + "Parameters: "

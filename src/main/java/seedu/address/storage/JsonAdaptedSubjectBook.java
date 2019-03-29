@@ -10,15 +10,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.flashcard.Content;
-import seedu.address.model.flashcard.Deadline;
-import seedu.address.model.flashcard.Difficulty;
-import seedu.address.model.flashcard.Flashcard;
-import seedu.address.model.flashcard.Topic;
 import seedu.address.model.subject.SubjectBook;
 import seedu.address.model.tag.SubjectTag;
-
-import javax.security.auth.Subject;
 
 /**
  * Jackson-friendly version of {@link SubjectBook}.

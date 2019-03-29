@@ -50,8 +50,6 @@ public class ModelManager implements Model {
         filteredFlashcards = new FilteredList<>(versionedFlashBook.getFlashcardList());
         filteredFlashcards.addListener(this::ensureSelectedFlashcardIsValid);
         filteredSubjects = new FilteredList<>(this.subjectBook.getSubjectList());
-        // this.subjectBook.getSubjectList() adds subject to filteredSubjects automatically after adding flashcard
-        //filteredSubjects = new FilteredList<>(this.subjectBook.getSubjectList());
         filteredSubjects.addListener(this::ensureSelectedSubjectIsValid);
 
     }

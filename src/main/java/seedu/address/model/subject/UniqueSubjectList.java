@@ -46,7 +46,7 @@ public class UniqueSubjectList implements Iterable<SubjectTag> {
     public void add(SubjectTag toAdd) {
         requireNonNull(toAdd);
 
-        if(!internalList.contains(toAdd)) {
+        if (!internalList.contains(toAdd)) {
             internalList.add(toAdd);
         }
 

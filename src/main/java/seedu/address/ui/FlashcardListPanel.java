@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.util.Collections;
 import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.logging.Logger;
@@ -45,7 +44,7 @@ public class FlashcardListPanel extends UiPart<Region> {
 
 
         selectedSubject.addListener((observable, oldValue, newValue) -> {
-            if(newValue == null) {
+            if (newValue == null) {
                 flashcardListView.getSelectionModel().clearSelection();
             } else {
                 this.newFlashcardList.clear();
@@ -81,7 +80,9 @@ public class FlashcardListPanel extends UiPart<Region> {
         });
     }
 
-
+    /**
+     * Updates list of flashcards to be displayed in FlashcardListPanel based on selected subject
+     */
     private ObservableList<Flashcard> updateFlashcardList(SubjectTag subject,
                                                           ObservableList<Flashcard> flashcardList) {
         for (Flashcard f : flashcardList) {

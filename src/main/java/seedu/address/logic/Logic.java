@@ -11,7 +11,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyFlashBook;
 import seedu.address.model.flashcard.Flashcard;
 import seedu.address.model.subject.ReadOnlySubjectBook;
-import seedu.address.model.subject.SubjectBook;
 import seedu.address.model.tag.SubjectTag;
 
 /**

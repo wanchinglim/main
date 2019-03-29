@@ -6,8 +6,6 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.application.Application;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.LogsCenter;
@@ -26,10 +24,15 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.flashcard.Flashcard;
 import seedu.address.model.subject.ReadOnlySubjectBook;
 import seedu.address.model.subject.SubjectBook;
-import seedu.address.model.subject.UniqueSubjectList;
-import seedu.address.model.tag.SubjectTag;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.*;
+import seedu.address.storage.FlashBookStorage;
+import seedu.address.storage.JsonFlashBookStorage;
+import seedu.address.storage.JsonSubjectBookStorage;
+import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.Storage;
+import seedu.address.storage.StorageManager;
+import seedu.address.storage.SubjectBookStorage;
+import seedu.address.storage.UserPrefsStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 

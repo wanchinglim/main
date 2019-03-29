@@ -12,8 +12,6 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.subject.ReadOnlySubjectBook;
 
-import javax.security.auth.Subject;
-
 /**
  * Manages storage of FlashBook data in local storage.
  */
@@ -73,6 +71,11 @@ public class StorageManager implements Storage {
         saveFlashBook(flashBook, flashBookStorage.getFlashBookFilePath());
     }
 
+    @Override
+    public void saveFlashBook(ReadOnlyFlashBook flashBook, Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        flashBookStorage.saveFlashBook(flashBook, filePath);
+    }
 
     // ================ SubjectBook methods ==============================
     /**
@@ -117,12 +120,6 @@ public class StorageManager implements Storage {
     @Override
     public void saveSubjectBook(ReadOnlySubjectBook subjectBook, Path filePath) throws IOException {
 
-    }
-
-    @Override
-    public void saveFlashBook(ReadOnlyFlashBook flashBook, Path filePath) throws IOException {
-        logger.fine("Attempting to write to data file: " + filePath);
-        flashBookStorage.saveFlashBook(flashBook, filePath);
     }
 
 }

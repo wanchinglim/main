@@ -4,11 +4,8 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
-import javafx.beans.Observable;
 import javafx.beans.property.ReadOnlyProperty;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
@@ -20,7 +17,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyFlashBook;
 import seedu.address.model.flashcard.Flashcard;
 import seedu.address.model.subject.ReadOnlySubjectBook;
-import seedu.address.model.subject.SubjectBook;
 import seedu.address.model.tag.SubjectTag;
 import seedu.address.storage.Storage;
 
