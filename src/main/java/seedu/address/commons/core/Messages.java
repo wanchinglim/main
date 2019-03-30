@@ -7,7 +7,8 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX = "The flashcard index provided is invalid";
+    public static final String MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX = "The flashcard index provided is invalid!";
+    public static final String MESSAGE_INVALID_SUBJECT = "The subject provided is not found!";
     public static final String MESSAGE_FLASHCARDS_LISTED_OVERVIEW = "%1$d subjects listed!";
 
 }
