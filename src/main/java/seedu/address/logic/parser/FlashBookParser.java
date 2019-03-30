@@ -21,6 +21,7 @@ import seedu.address.logic.commands.NextCommand;
 import seedu.address.logic.commands.PreviousCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.SelectSubjectCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -126,6 +127,9 @@ public class FlashBookParser {
 
         case SortCommand.COMMAND_ALIAS:
             return new SortCommandParser().parse(arguments);
+
+        case SelectSubjectCommand.COMMAND_WORD:
+            return new SelectSubjectCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
