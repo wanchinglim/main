@@ -17,6 +17,9 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.flashcard.Flashcard;
 import seedu.address.model.flashcard.exceptions.FlashcardNotFoundException;
+import seedu.address.model.subject.ReadOnlySubjectBook;
+import seedu.address.model.subject.SubjectBook;
+import seedu.address.model.tag.SubjectTag;
 
 /**
  * Represents the in-memory model of the flash book data.
@@ -25,27 +28,34 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final VersionedFlashBook versionedFlashBook;
+    private final SubjectBook subjectBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Flashcard> filteredFlashcards;
     private final SimpleObjectProperty<Flashcard> selectedFlashcard = new SimpleObjectProperty<>();
+    private final SimpleObjectProperty<SubjectTag> selectedSubject = new SimpleObjectProperty<>();
+    private final FilteredList<SubjectTag> filteredSubjects;
 
     /**
      * Initializes a ModelManager with the given flashBook and userPrefs.
      */
-    public ModelManager(ReadOnlyFlashBook flashBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlySubjectBook subjectBook, ReadOnlyFlashBook flashBook, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(flashBook, userPrefs);
+        requireAllNonNull(subjectBook, flashBook, userPrefs);
 
         logger.fine("Initializing with flash book: " + flashBook + " and user prefs " + userPrefs);
 
         versionedFlashBook = new VersionedFlashBook(flashBook);
+        this.subjectBook = new SubjectBook(subjectBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredFlashcards = new FilteredList<>(versionedFlashBook.getFlashcardList());
         filteredFlashcards.addListener(this::ensureSelectedFlashcardIsValid);
+        filteredSubjects = new FilteredList<>(this.subjectBook.getSubjectList());
+        filteredSubjects.addListener(this::ensureSelectedSubjectIsValid);
+
     }
 
     public ModelManager() {
-        this(new FlashBook(), new UserPrefs());
+        this(new SubjectBook(), new FlashBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -83,6 +93,107 @@ public class ModelManager implements Model {
         userPrefs.setFlashBookFilePath(flashBookFilePath);
     }
 
+    //=========== Subject Book ==================================================================================
+
+    /**
+     * Returns the SubjectBook
+     */
+    @Override
+    public ReadOnlySubjectBook getSubjectBook() {
+        return subjectBook;
+    }
+
+    /**
+     * Returns an unmodifiable view of the filtered subject list
+     */
+    @Override
+    public ObservableList<SubjectTag> getFilteredSubjectList() {
+        return filteredSubjects;
+    }
+
+    @Override
+    public void addSubject(SubjectTag subject) {
+        subjectBook.addSubject(subject);
+        updateFilteredSubjectList(PREDICATE_SHOW_ALL_SUBJECTS);
+    }
+
+    /**
+     * Selected subject in the filtered subject list.
+     * null if no subject is selected.
+     */
+    @Override
+    public ReadOnlyProperty<SubjectTag> selectedSubjectProperty() {
+        return selectedSubject;
+    }
+
+    /**
+     * Sets the selected subject in the filtered subject list.
+     *
+     * @param subject
+     */
+    @Override
+    public void setSelectedSubject(SubjectTag subject) {
+        if (subject != null && !filteredSubjects.contains(subject)) {
+            throw new FlashcardNotFoundException();
+        }
+
+        selectedSubject.setValue(subject);
+    }
+
+    /**
+     * Updates the filter of the filtered flashcard list to filter by the given {@code predicate}.
+     *
+     * @param predicate
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    @Override
+    public void updateFilteredSubjectList(Predicate<SubjectTag> predicate) {
+        requireNonNull(predicate);
+        filteredSubjects.setPredicate(predicate);
+    }
+
+    /**
+     * Replaces flash book data with the data in {@code flashBook}.
+     *
+     * @param subjectBook
+     */
+    @Override
+    public void setSubjectBook(SubjectBook subjectBook) {
+        subjectBook.resetData(subjectBook);
+    }
+
+
+    /**
+     * Ensures {@code selectedFlashcard} is a valid flashcard in {@code filteredFlashcards}.
+     */
+    private void ensureSelectedSubjectIsValid(ListChangeListener.Change<? extends SubjectTag> change) {
+        while (change.next()) {
+            if (selectedSubject.getValue() == null) {
+                // null is always a valid selected flashcard, so we do not need to check that it is valid anymore.
+                return;
+            }
+
+            boolean wasSelectedSubjectReplaced = change.wasReplaced()
+                    && change.getAddedSize() == change.getRemovedSize()
+                    && change.getRemoved().contains(selectedSubject.getValue());
+            if (wasSelectedSubjectReplaced) {
+                // Update selectedFlashcard to its new value.
+                int index = change.getRemoved().indexOf(selectedSubject.getValue());
+                selectedSubject.setValue(change.getAddedSubList().get(index));
+                continue;
+            }
+
+            boolean wasSelectedSubjectRemoved = change.getRemoved().stream()
+                    .anyMatch(removedSubject -> selectedSubject.getValue().isSameSubject(removedSubject));
+            if (wasSelectedSubjectRemoved) {
+                // Select the flashcard that came before it in the list,
+                // or clear the selection if there is no such flashcard.
+                selectedSubject.setValue(change.getFrom() > 0 ? change.getList().get(change.getFrom() - 1) : null);
+            }
+        }
+    }
+
+
     //=========== FlashBook ================================================================================
 
     @Override
@@ -110,6 +221,7 @@ public class ModelManager implements Model {
     public void addFlashcard(Flashcard flashcard) {
         versionedFlashBook.addFlashcard(flashcard);
         updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
+        //updateFilteredSubjectList(PREDICATE_SHOW_ALL_SUBJECTS);
     }
 
     @Override

@@ -24,11 +24,11 @@ public class AddCommand extends Command {
             + PREFIX_TOPIC + "TOPIC "
             + PREFIX_DIFFICULTY + "DIFFICULTY "
             + PREFIX_CONTENT + "CONTENT "
-            + "[" + PREFIX_SUBJECT + "SUBJECT]...\n"
+            + PREFIX_SUBJECT + "SUBJECT\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TOPIC + "pythagoras theorem"
-            + PREFIX_DIFFICULTY + "98765432 "
-            + PREFIX_CONTENT + "311, Clementi Ave 2, #02-25 "
+            + PREFIX_TOPIC + "pythagoras theorem "
+            + PREFIX_DIFFICULTY + "123 "
+            + PREFIX_CONTENT + "a^2 + b^2 = c^2 "
             + PREFIX_SUBJECT + "math";
 
     public static final String MESSAGE_SUCCESS = "New flashcard added: %1$s";
@@ -53,6 +53,7 @@ public class AddCommand extends Command {
         }
 
         model.addFlashcard(toAdd);
+        model.addSubject(toAdd.getSubject());
         model.commitFlashBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
