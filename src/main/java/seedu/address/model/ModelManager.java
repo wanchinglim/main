@@ -13,8 +13,10 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.model.FlashBookChangedEvent;
 import seedu.address.model.flashcard.Flashcard;
 import seedu.address.model.flashcard.exceptions.FlashcardNotFoundException;
 import seedu.address.model.subject.ReadOnlySubjectBook;
@@ -24,7 +26,7 @@ import seedu.address.model.tag.SubjectTag;
 /**
  * Represents the in-memory model of the flash book data.
  */
-public class ModelManager implements Model {
+public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final VersionedFlashBook versionedFlashBook;
@@ -206,6 +208,10 @@ public class ModelManager implements Model {
         return versionedFlashBook;
     }
 
+    private void indicateFlashBookChanged() {
+        raise(new FlashBookChangedEvent(versionedFlashBook));
+    }
+
     @Override
     public boolean hasFlashcard(Flashcard flashcard) {
         requireNonNull(flashcard);
@@ -215,13 +221,14 @@ public class ModelManager implements Model {
     @Override
     public void deleteFlashcard(Flashcard target) {
         versionedFlashBook.removeFlashcard(target);
+        indicateFlashBookChanged();
     }
 
     @Override
     public void addFlashcard(Flashcard flashcard) {
         versionedFlashBook.addFlashcard(flashcard);
         updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
-        //updateFilteredSubjectList(PREDICATE_SHOW_ALL_SUBJECTS);
+        indicateFlashBookChanged();
     }
 
     @Override
@@ -263,11 +270,13 @@ public class ModelManager implements Model {
     @Override
     public void undoFlashBook() {
         versionedFlashBook.undo();
+        indicateFlashBookChanged();
     }
 
     @Override
     public void redoFlashBook() {
         versionedFlashBook.redo();
+        indicateFlashBookChanged();
     }
 
     @Override

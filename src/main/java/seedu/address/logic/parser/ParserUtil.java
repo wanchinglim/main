@@ -127,6 +127,20 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String tag} into a {@code SubjectTag}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code tag} is invalid.
+     */
+    public static SubjectTag parseSubject(String subject) throws ParseException {
+        requireNonNull(subject);
+        String trimmedSubject = subject.trim();
+        SubjectTag subjectTag = new SubjectTag(trimmedSubject);
+
+        return subjectTag;
+    }
+
+    /**
      * Parses {@code Collection<String> tags} into a {@code Set<SubjectTag>}.
      */
     public static Set<SubjectTag> parseTags(Collection<String> tags) throws ParseException {
