@@ -23,27 +23,27 @@ public class TypicalFlashcards {
 
     public static final Flashcard ALICE = new FlashcardBuilder().withTopic("Alice Pauline")
             .withContent("123, Jurong West Ave 6, #08-111")
-            .withDifficulty("94351253")
+            .withDifficulty("2")
             .withTags("friends").build();
     public static final Flashcard BENSON = new FlashcardBuilder().withTopic("Benson Meier")
             .withContent("311, Clementi Ave 2, #02-25")
-            .withDifficulty("98765432")
+            .withDifficulty("3")
             .withTags("owesMoney", "friends").build();
-    public static final Flashcard CARL = new FlashcardBuilder().withTopic("Carl Kurz").withDifficulty("95352563")
+    public static final Flashcard CARL = new FlashcardBuilder().withTopic("Carl Kurz").withDifficulty("3")
             .withContent("wall street").build();
-    public static final Flashcard DANIEL = new FlashcardBuilder().withTopic("Daniel Meier").withDifficulty("87652533")
+    public static final Flashcard DANIEL = new FlashcardBuilder().withTopic("Daniel Meier").withDifficulty("1")
             .withContent("10th street").withTags("friends").build();
-    public static final Flashcard ELLE = new FlashcardBuilder().withTopic("Elle Meyer").withDifficulty("9482224")
+    public static final Flashcard ELLE = new FlashcardBuilder().withTopic("Elle Meyer").withDifficulty("2")
             .withContent("michegan ave").build();
-    public static final Flashcard FIONA = new FlashcardBuilder().withTopic("Fiona Kunz").withDifficulty("9482427")
+    public static final Flashcard FIONA = new FlashcardBuilder().withTopic("Fiona Kunz").withDifficulty("3")
             .withContent("little tokyo").build();
-    public static final Flashcard GEORGE = new FlashcardBuilder().withTopic("George Best").withDifficulty("9482442")
+    public static final Flashcard GEORGE = new FlashcardBuilder().withTopic("George Best").withDifficulty("3")
             .withContent("4th street").withDeadline("21 August 2022").build();
 
     // Manually added
-    public static final Flashcard HOON = new FlashcardBuilder().withTopic("Hoon Meier").withDifficulty("8482424")
+    public static final Flashcard HOON = new FlashcardBuilder().withTopic("Hoon Meier").withDifficulty("3")
             .withContent("little india").build();
-    public static final Flashcard IDA = new FlashcardBuilder().withTopic("Ida Mueller").withDifficulty("8482131")
+    public static final Flashcard IDA = new FlashcardBuilder().withTopic("Ida Mueller").withDifficulty("1")
             .withContent("chicago ave").build();
 
     // Manually added - Flashcard's details found in {@code CommandTestUtil}

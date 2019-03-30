@@ -11,8 +11,9 @@ public class Difficulty {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Difficulty levels should only contain numbers, and it should be at least 3 digits long";
-    public static final String VALIDATION_REGEX = "\\d{3,}";
+            "Difficulty levels should only contain number 1 (easy), 2 (medium) or 3 (difficult)!";
+    public static final String VALIDATION_REGEX = "[1-3]";
+
     public final String value;
 
     /**
