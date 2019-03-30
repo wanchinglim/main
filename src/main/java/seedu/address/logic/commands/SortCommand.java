@@ -43,3 +43,4 @@ public class SortCommand extends Command {
                 && predicate.equals(((SortCommand) other).predicate)); // state check
     }
 }
+

@@ -19,7 +19,7 @@ By: `Team M11-3`      Since: `Jan 2019`      Licence: `MIT`
 == Introduction
 
 FlashCards is for those who *prefer to use a desktop app for managing their notes*.
-More importantly, FlashCards is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, FlashCards can let you retrieve and access your notes for various subjects faster than sieving through your hardcopied notes. Interested? Jump to the Quick Start to get started. Enjoy!
+More importantly, FlashCards is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, FlashCards can let you retrieve and access your notes for various subjects faster than sieving through your hardcopied notes. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
@@ -30,7 +30,7 @@ More importantly, FlashCards is *optimized for those who prefer to work with a C
 +
 image::Ui.png[width="790"]
 +
-.  Try typing some command in the command box and press kbd:[Enter] to execute it. +
+.  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
@@ -39,7 +39,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * **`delete`**`3` : deletes the 3rd flashcard shown in the current list
 * *`exit`* : exits the app
 
-.  Refer to Features for details of each command.
+.  Refer to <<Features>> for details of each command.
 
 [[Features]]
 == Features
@@ -87,29 +87,25 @@ Format: `help`
 === Adding a subject or flashcard: `add`
 
 Adds a flashcard with subject and data field. +
-Format: `add t/TOPIC c/CONTENT diff/DIFFICULTY d/DEADLINE s/SUBJECT`
-
-****
-* DIFFICULTY should be either 1 (easy), 2 (medium), 3 (difficult)
-****
+Format: `add t/TOPIC c/CONTENT d/DEADLINE s/SUBJECT`
 
 Examples:
 
-* `add t/Pythagoras Theorem c/a^2 + b^2 = c^2 diff/1 d/21 March 2019 s/Math`
-Adds the flashcard named "Pythagoras Theorem" with content "a^2 + b^2 = c^2", set at difficulty "1" and tagged under the subject "Math". Assigns an expiry deadline "21 March 2019".
+* `add t/Pythagoras Theorem c/a^2 + b^2 = c^2 d/21 March 2019 s/Math`
+Adds the flashcard named "Pythagoras Theorem" with content "a^2 + b^2 = c^2" and tagged under the subject "Math". Assigns an expiry deadline "21 March 2019".
 * `add t/Photosynthesis c/A chemical reaction that takes place inside a plant, producing food for the plant to survive d/22 March 2019 s/Science`
 Adds the flashcard named "Photosynthesis" with the content "A chemical reaction that takes place inside a plant, producing food for the plant to survive" and tagged under the subject "Science". Assigns an expiry deadline "22 March 2019".
 
 Lists the flashcard that was just added.
 
-=== Listing all flashcards categorized by subjects : `list` / `l`
+=== Listing all flashcards categorized by subjects : `list` `l`
 
 Displays an indexed list of flashcards categorized by subjects. +
 Format: `list` or `l`
 
 Subject tags will be colour-coded. Same subject tags will have the same colour.
 
-=== Editing a flashcard : `edit` / `e`
+=== Editing a flashcard : `edit` `e`
 
 Edits the content of a flashcard. +
 Enter the subject that the flashcard belongs to.
@@ -132,7 +128,7 @@ Edits the content of flashcard.
 * `e 2 definition` +
 Edits the content of flashcard.
 
-=== Finding a flashcard: `find` / `f`
+=== Finding a flashcard: `find` `f`
 
 Find flashcards based on the given keyword. +
 Format: `find <KEYWORD> [MORE_KEYWORDS]`
@@ -152,7 +148,7 @@ Returns `math` and `Mathematics`
 * `f science english math` +
 Returns any flashcards having names `science`, `english`, or `math`
 
-=== Deleting a subject or flashcard : `delete` / `d`
+=== Deleting a subject or flashcard : `delete` `d`
 
 Deletes the specified subject or flashcard. +
 Enter the subject that the flashcard belongs to. +
@@ -197,7 +193,7 @@ Selects the 2nd flashcard in the list.
 `select 1` +
 Selects the 1st flashcard in the results of the `find` command.
 
-=== Viewing the next flashcard : `next` / `n`
+=== Viewing the next flashcard : `next` `n`
 
 Views the next flashcard that is next in line for the chosen subject.
  +
@@ -218,7 +214,7 @@ Displays the 3rd flashcard in the list.
 `n` +
 Displays the 5th flashcard in the list.
 
-=== Viewing the next flashcard : `previous` / `p`
+=== Viewing the next flashcard : `previous` `p`
 
 Views the previous flashcard that is next in line for the chosen subject.
  +
@@ -238,24 +234,6 @@ Displays the 1st flashcard in the list.
 * `select 5` +
 `p` +
 Displays the 4th flashcard in the list.
-
-=== Selecting a flashcard : `sort` / `s`
-
-Sorts the flashcard identified by the difficulty level. +
-Format: `sort DIFFICULTY`
-
-****
-* Sorts the flashcard and loads all the flashcard with specified `DIFFICULTY`.
-* The difficulty refers to the difficulty level input when adding flashcard.
-* The difficulty *must be a positive integer* `1, 2, 3`
-****
-
-Examples:
-
-* `sort 1` +
-Lists all flashcards with difficulty level 1.
-* `select 2` +
-List all flashcards with difficulty level 2.
 
 
 === Listing entered commands : `history`
@@ -370,7 +348,4 @@ e.g. `f science english math`
 * *Redo* : `redo`
 * *Select* : `select INDEX` +
 e.g.`select 2`
-* *Sort* : `sort DIFFICULTY` or `s DIFFICULTY` +
-e.g.`sort 2` or
-e.g. `s 2`
 * *Undo* : `undo`

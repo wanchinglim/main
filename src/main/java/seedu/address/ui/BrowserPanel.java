@@ -22,7 +22,7 @@ public class BrowserPanel extends UiPart<Region> {
 
     public static final URL DEFAULT_PAGE =
             requireNonNull(MainApp.class.getResource(FXML_FILE_FOLDER + "default.html"));
-    public static final String SEARCH_PAGE_URL = "https://www.google.com/search?=/";
+    public static final String SEARCH_PAGE_URL = "https://se-education.org/dummy-search-page/?name=";
 
     private static final String FXML = "BrowserPanel.fxml";
 
@@ -31,14 +31,14 @@ public class BrowserPanel extends UiPart<Region> {
     @FXML
     private WebView browser;
 
-    public BrowserPanel(ObservableValue<Flashcard> selectedSubject) {
+    public BrowserPanel(ObservableValue<Flashcard> selectedFlashcard) {
         super(FXML);
 
         // To prevent triggering events for typing inside the loaded Web page.
         getRoot().setOnKeyPressed(Event::consume);
 
         // Load flashcard page when selected flashcard changes.
-        selectedSubject.addListener((observable, oldValue, newValue) -> {
+        selectedFlashcard.addListener((observable, oldValue, newValue) -> {
             if (newValue == null) {
                 loadDefaultPage();
                 return;

@@ -19,7 +19,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.flashcard.Content;
 import seedu.address.model.flashcard.Difficulty;
 import seedu.address.model.flashcard.Topic;
-import seedu.address.model.tag.Subject;
+import seedu.address.model.tag.SubjectTag;
 import seedu.address.testutil.Assert;
 
 public class ParserUtilTest {
@@ -29,7 +29,7 @@ public class ParserUtilTest {
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_TOPIC = "Rachel Walker";
-    private static final String VALID_DIFFICULTY = "123456";
+    private static final String VALID_DIFFICULTY = "1";
     private static final String VALID_CONTENT = "123 Main Street #0505";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
@@ -144,14 +144,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
-        Subject expectedTag = new Subject(VALID_TAG_1);
+        SubjectTag expectedTag = new SubjectTag(VALID_TAG_1);
         assertEquals(expectedTag, ParserUtil.parseTag(VALID_TAG_1));
     }
 
     @Test
     public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
         String tagWithWhitespace = WHITESPACE + VALID_TAG_1 + WHITESPACE;
-        Subject expectedTag = new Subject(VALID_TAG_1);
+        SubjectTag expectedTag = new SubjectTag(VALID_TAG_1);
         assertEquals(expectedTag, ParserUtil.parseTag(tagWithWhitespace));
     }
 
@@ -174,9 +174,9 @@ public class ParserUtilTest {
 
     @Test
     public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<Subject> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
-        Set<Subject> expectedTagSet = new HashSet<Subject>(Arrays.asList(new Subject(VALID_TAG_1),
-            new Subject(VALID_TAG_2)));
+        Set<SubjectTag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
+        Set<SubjectTag> expectedTagSet = new HashSet<SubjectTag>(Arrays.asList(new SubjectTag(VALID_TAG_1),
+            new SubjectTag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
     }

@@ -32,6 +32,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
+    private SubjectListPanel subjectListPanel;
     private FlashcardListPanel flashcardListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -114,12 +115,20 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-      /*  browserPanel = new BrowserPanel(logic.selectedFlashcardProperty());
-        browserPlaceholder.getChildren().add(browserPanel.getRoot()); */
+        // right panel
+        browserPanel = new BrowserPanel(logic.selectedFlashcardProperty());
+        browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
-        flashcardListPanel = new FlashcardListPanel(logic.getFilteredFlashcardList(), logic.selectedFlashcardProperty(),
-                logic::setSelectedFlashcard);
-        flashcardListPanelPlaceholder.getChildren().add(flashcardListPanel.getRoot());
+        // left panel - subject
+        subjectListPanel = new SubjectListPanel(logic.getFilteredSubjectList(), logic.selectedSubjectProperty(),
+                logic::setSelectedSubject);
+        flashcardListPanelPlaceholder.getChildren().add(subjectListPanel.getRoot());
+
+        // middle panel - flashcards
+        flashcardListPanel = new FlashcardListPanel(logic.getFilteredSubjectList(),
+                logic.getFilteredFlashcardList(), logic.selectedSubjectProperty(),
+                logic.selectedFlashcardProperty(), logic::setSelectedFlashcard);
+        cardPlaceholder.getChildren().add(flashcardListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
