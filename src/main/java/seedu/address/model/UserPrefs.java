@@ -84,4 +84,9 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         return sb.toString();
     }
 
+
+    public Path getSubjectBookFilePath() {
+        return flashBookFilePath;
+    }
+
 }

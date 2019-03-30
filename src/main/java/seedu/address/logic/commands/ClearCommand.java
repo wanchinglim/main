@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.FlashBook;
 import seedu.address.model.Model;
+import seedu.address.model.subject.SubjectBook;
 
 /**
  * Clears the flash book.
@@ -21,6 +22,7 @@ public class ClearCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.setFlashBook(new FlashBook());
+        model.setSubjectBook(new SubjectBook());
         model.commitFlashBook();
         return new CommandResult(MESSAGE_SUCCESS);
     }

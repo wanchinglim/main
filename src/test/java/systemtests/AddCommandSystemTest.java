@@ -47,7 +47,7 @@ import seedu.address.model.flashcard.Flashcard;
 <<<<<<< HEAD
 import seedu.address.model.flashcard.Phone;
 import seedu.address.model.flashcard.Topic;
-import seedu.address.model.tag.Subject;
+import seedu.address.model.tag.SubjectTag;
 =======
 import seedu.address.model.flashcard.Topic;
 import seedu.address.model.tag.Tag;
@@ -176,7 +176,7 @@ public class AddCommandSystemTest extends FlashBookSystemTest {
         /* Case: invalid tag -> rejected
         command = AddCommand.COMMAND_WORD + TOPIC_DESC_AMY + DIFFICULTY_DESC_AMY + CONTENT_DESC_AMY
                 + INVALID_TAG_DESC;
-        assertCommandFailure(command, Subject.MESSAGE_CONSTRAINTS);
+        assertCommandFailure(command, SubjectTag.MESSAGE_CONSTRAINTS);
     }
 
     /*

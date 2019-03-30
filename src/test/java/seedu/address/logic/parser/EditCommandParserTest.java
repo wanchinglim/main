@@ -35,7 +35,7 @@ import seedu.address.logic.commands.EditCommand.EditFlashcardDescriptor;
 import seedu.address.model.flashcard.Content;
 import seedu.address.model.flashcard.Difficulty;
 import seedu.address.model.flashcard.Topic;
-import seedu.address.model.tag.Subject;
+import seedu.address.model.tag.SubjectTag;
 
 import seedu.address.testutil.EditFlashcardDescriptorBuilder;
 
@@ -81,7 +81,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_DIFFICULTY_DESC, Difficulty.MESSAGE_CONSTRAINTS);
         // invalid difficulty
         assertParseFailure(parser, "1" + INVALID_CONTENT_DESC, Content.MESSAGE_CONSTRAINTS); // invalid content
-        assertParseFailure(parser, "1" + INVALID_TAG_DESC, Subject.MESSAGE_CONSTRAINTS); // invalid tag
+        assertParseFailure(parser, "1" + INVALID_TAG_DESC, SubjectTag.MESSAGE_CONSTRAINTS); // invalid tag
 
         // valid difficulty followed by invalid difficulty. The test case for invalid difficulty
         // followed by valid difficulty
@@ -92,11 +92,11 @@ public class EditCommandParserTest {
         // while parsing {@code PREFIX_SUBJECT} alone will reset the tags of the {@code Flashcard} being edited,
         // parsing it together with a valid tag results in error
         assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + TAG_EMPTY,
-                Subject.MESSAGE_CONSTRAINTS);
+                SubjectTag.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_EMPTY + TAG_DESC_HUSBAND,
-                Subject.MESSAGE_CONSTRAINTS);
+                SubjectTag.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND,
-                Subject.MESSAGE_CONSTRAINTS);
+                SubjectTag.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_TOPIC_DESC + VALID_CONTENT_AMY
