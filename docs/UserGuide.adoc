@@ -95,17 +95,14 @@ Format: `help`
 Adds a flashcard with subject and data field. +
 Format: `add t/TOPIC diff/DIFFICULTY c/CONTENT d/DEADLINE s/SUBJECT`
 
-****
-*Summary of Fields:*
-
 * `TOPIC`: Title of the flashcard.
 * `DIFFICULTY`: Difficulty level of the flashcard's content indicated by a positive integer 1, 2, or 3 only.
 * `CONTENT`: Content of the flashcard.
 * `DEADLINE`: Date of when the flashcard should be memorised by in the format (dd-mm-yyyy).
 * `SUBJECT`: Subject of the flashcard.
-****
 
-Examples:
+
+*Examples:*
 
 * `add t/Pythagoras Theorem diff/1 c/a^2 + b^2 = c^2 d/30-03-2019 s/Math` +
 Adds a flashcard named "Pythagoras Theorem" under the subject "Math" to the list of flashcards.
@@ -129,19 +126,16 @@ Subject tags will be colour-coded. Same subject tags will have the same colour.
 
 Edits the content of a flashcard. +
 Enter the index of the flashcard to edit. +
-Format: `edit INDEX [t/TOPIC] [diff/DIFFICULTY] [c/CONTENT] [d/DEADLINE] [s/SUBJECT]`
+Format: `edit INDEX [t/TOPIC] [diff/DIFFICULTY] [c/CONTENT] [d/DEADLINE] [s/SUBJECT]` +
 
-****
-*Summary of Fields:*
 
 * `INDEX`: Index number of the flashcard to be edited. This index number will be shown in the displayed list of flashcards.
-*Must be a positive integer* such as 1, 2, 3, ...
+*Must be a positive integer* such as 1, 2, 3, ... +
 * `[t/TOPIC] [diff/DIFFICULTY] [c/CONTENT] [d/DEADLINE] [s/SUBJECT]`: *At least one* of these fields enclosed in [ ]
-must be present.
-****
+must be present. +
 
 
-Examples:
+*Examples:* +
 
 * `edit 1 s/Science` +
 Edits flashcard with index "1" and replaces its existing subject with "Science".
@@ -153,15 +147,13 @@ The edited flashcard will be updated and displayed in the list of flashcards.
 === Finding a flashcard based on topic: `find` or `f`
 
 Find flashcards based on the given keyword. +
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find KEYWORD [MORE_KEYWORDS]` +
 
-****
-*Summary of Fields:*
 
-* `KEYWORD`: The keyword to find flashcards with
-* `[MORE_KEYWORDS]`: More than one keyword is accepted but *at least one* keyword is needed.
-****
+* `KEYWORD`: The keyword to find flashcards with +
+* `[MORE_KEYWORDS]`: More than one keyword is accepted but *at least one* keyword is needed. +
 
+*Things to note:* +
 
 * The search is case insensitive. e.g `fox` will match `Fox`.
 * The order of the keywords does not matter. e.g. `Pythagoras Theorem` will match `Theorem Pythagoras`.
@@ -170,7 +162,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Flashcards containing the keyword will be displayed (i.e. `OR` search). e.g. `Photosynthesis Theorem` will return `Photosynthesis` and `Pythagoras Theorem` flashcards.
 
 
-Examples:
+*Examples:* +
 
 * `find Theorem` +
 Returns "Pythagoras Theorem" and "Bayes Theorem" flashcards and any flashcards whose topic contains `Theorem`.
@@ -184,21 +176,19 @@ The flashcard(s) whose topic matches any of the keywords given will be displayed
 
 Deletes the specified flashcard. +
 Enter the index of a flashcard to be deleted. +
-Format: `delete INDEX`
-
-****
-*Summary of Field:*
+Format: `delete INDEX` +
 
 * `INDEX`: Index number of the flashcard to be deleted. This index number will be shown in the displayed list of flashcards.
-           *Must be a positive integer* such as 1, 2, 3, ...
-****
+           *Must be a positive integer* such as 1, 2, 3, ... +
 
-* Use the `list` command (see section 3.5) to display the list of all flashcards; or
-* Use the `find` command (see section 3.7) to find a flashcard based on its topic.
-* Select the index of the flashcard to delete.
+*Steps to delete a flashcard:* +
+
+* Use the `list` command (see section 3.5) to display the list of all flashcards; or +
+* Use the `find` command (see section 3.7) to find a flashcard based on its topic. +
+* Select the index of the flashcard to delete. +
 
 
-Examples:
+*Examples:* +
 
 * `list` +
 Lists all flashcards. +
@@ -215,21 +205,20 @@ The updated list of flashcards will be displayed.
 === Selecting a flashcard : `select`
 
 Selects the flashcard identified by the index number used in the displayed flashcards list. +
-Format: `select INDEX`
-
-****
-*Summary of Field:*
+Format: `select INDEX` +
 
 * `INDEX`: Index number of the flashcard to be selected. This index number will be shown in the displayed list of flashcards.
-*Must be a positive integer* such as 1, 2, 3, ...
-****
-
-* Use the `list` command (see Section 3.5) to display the list of all flashcards; or
-* Use the `find` command (see Section 3.7) to find a flashcard based on its topic.
-* Select the index of the flashcard.
+*Must be a positive integer* such as 1, 2, 3, ... +
 
 
-Examples:
+*Steps to select a flashcard:* +
+
+* Use the `list` command (see Section 3.5) to display the list of all flashcards; or +
+* Use the `find` command (see Section 3.7) to find a flashcard based on its topic. +
+* Select the index of the flashcard. +
+
+
+*Examples:* +
 
 * `list` +
 Lists all flashcards. +
@@ -243,15 +232,17 @@ Selects the 1st flashcard in the displayed results of the `find` command.
 
 === Viewing the next flashcard : `next` or `n`
 
-Views the next flashcard in line.
- +
-Format: `next` or `n`
+Views the next flashcard in line. +
+Format: `next` or `n` +
 
-* Selects the next flashcard and displays its content
-* Use the `select` command (see Section 3.9) to select a flashcard first.
-* Use this `next` / `n` command to go to the next flashcard.
+* Selects the next flashcard and displays its content +
 
-Examples:
+*Steps to view next flashcard:* +
+
+* Use the `select` command (see Section 3.9) to select a flashcard first. +
+* Use this `next` / `n` command to go to the next flashcard. +
+
+*Examples:* +
 
 * `select 2` +
 Selects the 2nd flashcard in the list. +
@@ -269,13 +260,16 @@ The next flashcard in line will be selected and its content will be displayed.
 === Viewing the next flashcard : `previous` or `p`
 
 Views the previous flashcard in line. +
-Format: `previous` or `p`
+Format: `previous` or `p` +
 
-* Selects the previous flashcard and displays its content
-* Use the `select` command (see Section 3.9) to select a flashcard first.
-* Use this `previous` / `p` command to go to the previous flashcard.
+* Selects the previous flashcard and displays its content +
 
-Examples:
+*Steps to view previous flashcard:* +
+
+* Use the `select` command (see Section 3.9) to select a flashcard first. +
+* Use this `previous` / `p` command to go to the previous flashcard. +
+
+*Examples: +
 
 * `select 2` +
 Selects the 2nd flashcard in the list. +
