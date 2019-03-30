@@ -16,7 +16,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.tag.Subject;
+import seedu.address.model.tag.SubjectTag;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -62,11 +62,11 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Subject>} if {@code tags} is non-empty.
+     * Parses {@code Collection<String> tags} into a {@code Set<SubjectTag>} if {@code tags} is non-empty.
      * If {@code tags} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Subject>} containing zero tags.
+     * {@code Set<SubjectTag>} containing zero tags.
      */
-    private Optional<Set<Subject>> parseTagsForEdit(Collection<String> tags) throws ParseException {
+    private Optional<Set<SubjectTag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
         assert tags != null;
 
         if (tags.isEmpty()) {

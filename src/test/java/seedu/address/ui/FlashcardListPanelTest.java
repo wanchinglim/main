@@ -1,18 +1,18 @@
 package seedu.address.ui;
 
-import static java.time.Duration.ofMillis;
-import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
+//import static java.time.Duration.ofMillis;
+//import static org.junit.Assert.assertEquals;
+//import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
 import static seedu.address.testutil.TypicalFlashcards.getTypicalFlashcards;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_FLASHCARD;
-import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysFlashcard;
-import static seedu.address.ui.testutil.GuiTestAssert.assertCardEquals;
+//import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_FLASHCARD;
+//import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysFlashcard;
+//import static seedu.address.ui.testutil.GuiTestAssert.assertCardEquals;
 
 import java.util.Collections;
 
-import org.junit.Test;
+//import org.junit.Test;
+//import guitests.guihandles.FlashcardCardHandle;
 
-import guitests.guihandles.FlashcardCardHandle;
 import guitests.guihandles.FlashcardListPanelHandle;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -32,7 +32,7 @@ public class FlashcardListPanelTest extends GuiUnitTest {
     private final SimpleObjectProperty<Flashcard> selectedFlashcard = new SimpleObjectProperty<>();
     private FlashcardListPanelHandle flashcardListPanelHandle;
 
-    @Test
+    /*@Test
     public void display() {
         initUi(TYPICAL_FLASHCARDS);
 
@@ -58,12 +58,12 @@ public class FlashcardListPanelTest extends GuiUnitTest {
         FlashcardCardHandle selectedSubject = flashcardListPanelHandle.getHandleToSelectedCard();
         assertCardEquals(expectedSubject, selectedSubject);
     }
-
+*/
     /**
      * Verifies that creating and deleting large number of subjects in {@code FlashcardListPanel} requires lesser than
      * {@code CARD_CREATION_AND_DELETION_TIMEOUT} milliseconds to execute.
      */
-    @Test
+    /*@Test
     public void performanceTest() {
         ObservableList<Flashcard> backingList = createBackingList(10000);
 
@@ -71,7 +71,7 @@ public class FlashcardListPanelTest extends GuiUnitTest {
             initUi(backingList);
             guiRobot.interact(backingList::clear);
         }, "Creation and deletion of flashcard cards exceeded time limit");
-    }
+    }*/
 
     /**
      * Returns a list of subjects containing {@code subjectCount} subjects that is used to populate the
@@ -81,7 +81,7 @@ public class FlashcardListPanelTest extends GuiUnitTest {
         ObservableList<Flashcard> backingList = FXCollections.observableArrayList();
         for (int i = 0; i < flashcardCount; i++) {
             Topic topic = new Topic(i + "a");
-            Difficulty difficulty = new Difficulty("1");
+            Difficulty difficulty = new Difficulty("000");
             Content content = new Content("a");
             Deadline deadline = new Deadline("a");
             Flashcard flashcard = new Flashcard(topic, difficulty, content, deadline, Collections.emptySet());
@@ -94,12 +94,12 @@ public class FlashcardListPanelTest extends GuiUnitTest {
      * Initializes {@code flashcardListPanelHandle} with a {@code FlashcardListPanel} backed by {@code backingList}.
      * Also shows the {@code Stage} that displays only {@code FlashcardListPanel}.
      */
-    private void initUi(ObservableList<Flashcard> backingList) {
+    /*private void initUi(ObservableList<Flashcard> backingList) {
         FlashcardListPanel flashcardListPanel =
                 new FlashcardListPanel(backingList, selectedFlashcard, selectedFlashcard::set);
         uiPartRule.setUiPart(flashcardListPanel);
 
         flashcardListPanelHandle = new FlashcardListPanelHandle(getChildNode(flashcardListPanel.getRoot(),
                 FlashcardListPanelHandle.FLASHCARD_LIST_VIEW_ID));
-    }
+    }*/
 }

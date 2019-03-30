@@ -21,12 +21,17 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyFlashBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.flashcard.Flashcard;
+import seedu.address.model.subject.ReadOnlySubjectBook;
+import seedu.address.model.subject.SubjectBook;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.FlashBookStorage;
 import seedu.address.storage.JsonFlashBookStorage;
+import seedu.address.storage.JsonSubjectBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
+import seedu.address.storage.SubjectBookStorage;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
@@ -58,6 +63,7 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         FlashBookStorage flashBookStorage = new JsonFlashBookStorage(userPrefs.getFlashBookFilePath());
+        SubjectBookStorage subjectBookStorage = new JsonSubjectBookStorage(userPrefs.getSubjectBookFilePath());
         storage = new StorageManager(flashBookStorage, userPrefsStorage);
 
         initLogging(config);
@@ -76,22 +82,35 @@ public class MainApp extends Application {
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyFlashBook> flashBookOptional;
-        ReadOnlyFlashBook initialData;
+        ReadOnlyFlashBook initialFlashBook;
+        ReadOnlySubjectBook initialSubjectBook;
+        SubjectBook s = new SubjectBook();
+
+
         try {
             flashBookOptional = storage.readFlashBook();
             if (!flashBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample FlashBook");
             }
-            initialData = flashBookOptional.orElseGet(SampleDataUtil::getSampleFlashBook);
+            initialFlashBook = flashBookOptional.orElseGet(SampleDataUtil::getSampleFlashBook);
+
+            for (Flashcard f : initialFlashBook.getFlashcardList()) {
+                s.addSubject(f.getSubject());
+            }
+            initialSubjectBook = s;
+            //initialSubjectBook = initialFlashBook.getFlashcardList();
+            //initialSubjectBook = new SubjectBook();
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty FlashBook");
-            initialData = new FlashBook();
+            initialFlashBook = new FlashBook();
+            initialSubjectBook = new SubjectBook();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty FlashBook");
-            initialData = new FlashBook();
+            initialFlashBook = new FlashBook();
+            initialSubjectBook = new SubjectBook();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        return new ModelManager(initialSubjectBook, initialFlashBook, userPrefs);
     }
 
     private void initLogging(Config config) {
