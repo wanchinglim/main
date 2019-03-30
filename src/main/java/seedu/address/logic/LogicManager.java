@@ -16,6 +16,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyFlashBook;
 import seedu.address.model.flashcard.Flashcard;
+import seedu.address.model.subject.ReadOnlySubjectBook;
+import seedu.address.model.tag.SubjectTag;
 import seedu.address.storage.Storage;
 
 /**
@@ -66,6 +68,29 @@ public class LogicManager implements Logic {
         return commandResult;
     }
 
+    // =============== SUBJECTS ===============
+    public ReadOnlySubjectBook getSubjectBook() {
+        return model.getSubjectBook();
+    }
+
+    @Override
+    public ObservableList<SubjectTag> getFilteredSubjectList() {
+        return model.getFilteredSubjectList();
+    }
+
+    @Override
+    public ReadOnlyProperty<SubjectTag> selectedSubjectProperty() {
+        return model.selectedSubjectProperty();
+    }
+
+    @Override
+    public void setSelectedSubject(SubjectTag subjectBook) {
+        model.setSelectedSubject(subjectBook);
+    }
+
+
+
+    // =============== FLASHCARDS ===============
     @Override
     public ReadOnlyFlashBook getFlashBook() {
         return model.getFlashBook();

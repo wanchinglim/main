@@ -10,6 +10,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyFlashBook;
 import seedu.address.model.flashcard.Flashcard;
+import seedu.address.model.subject.ReadOnlySubjectBook;
+import seedu.address.model.tag.SubjectTag;
 
 /**
  * API of the Logic component
@@ -23,6 +25,36 @@ public interface Logic {
      * @throws ParseException If an error occurs during parsing.
      */
     CommandResult execute(String commandText) throws CommandException, ParseException;
+
+    // =============== SUBJECTS ===============
+
+    /**
+     * Returns the SubjectBook.
+     *
+     * @see seedu.address.model.Model#getFlashBook()
+     */
+    ReadOnlySubjectBook getSubjectBook();
+
+    /** Returns an unmodifiable view of the filtered list of flashcards */
+    ObservableList<SubjectTag> getFilteredSubjectList();
+
+    /**
+     * Selected flashcard in the filtered flashcard list.
+     * null if no flashcard is selected.
+     *
+     * @see seedu.address.model.Model#selectedFlashcardProperty()
+     */
+    ReadOnlyProperty<SubjectTag> selectedSubjectProperty();
+
+    /**
+     * Sets the selected flashcard in the filtered flashcard list.
+     *
+     * @see seedu.address.model.Model#setSelectedSubject(SubjectTag)
+     */
+    void setSelectedSubject(SubjectTag subject);
+
+
+    // =============== FLASHCARDS ===============
 
     /**
      * Returns the FlashCards.
@@ -69,4 +101,5 @@ public interface Logic {
      * @see seedu.address.model.Model#setSelectedFlashcard(Flashcard)
      */
     void setSelectedFlashcard (Flashcard flashcard);
+
 }

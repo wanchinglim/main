@@ -8,7 +8,7 @@ import seedu.address.model.flashcard.Deadline;
 import seedu.address.model.flashcard.Difficulty;
 import seedu.address.model.flashcard.Flashcard;
 import seedu.address.model.flashcard.Topic;
-import seedu.address.model.tag.Subject;
+import seedu.address.model.tag.SubjectTag;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -17,7 +17,7 @@ import seedu.address.model.util.SampleDataUtil;
 public class FlashcardBuilder {
 
     public static final String DEFAULT_TOPIC = "Alice Pauline";
-    public static final String DEFAULT_DIFFICULTY = "1";
+    public static final String DEFAULT_DIFFICULTY = "85355255";
     public static final String DEFAULT_CONTENT = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_DEADLINE = "";
 
@@ -25,7 +25,7 @@ public class FlashcardBuilder {
     private Difficulty difficulty;
     private Content content;
     private Deadline deadline;
-    private Set<Subject> tags;
+    private Set<SubjectTag> tags;
 
     public FlashcardBuilder() {
         topic = new Topic(DEFAULT_TOPIC);
@@ -55,7 +55,7 @@ public class FlashcardBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Subject>} and set it to the {@code Flashcard} that we are building.
+     * Parses the {@code tags} into a {@code Set<SubjectTag>} and set it to the {@code Flashcard} that we are building.
      */
     public FlashcardBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);

@@ -20,6 +20,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DIFFICULTY_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_FLASHCARDS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_FLASHCARD;
@@ -32,6 +33,7 @@ import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
@@ -47,7 +49,7 @@ import seedu.address.model.flashcard.Difficulty;
 import seedu.address.model.flashcard.Topic;
 >>>>>>> a43dedf4b0c227525d0fc6ec76c8d584d3c3ba60
 import seedu.address.model.flashcard.Flashcard;
-import seedu.address.model.tag.Subject;
+import seedu.address.model.tag.SubjectTag;
 import seedu.address.testutil.FlashcardBuilder;
 import seedu.address.testutil.FlashcardUtil;
 
@@ -235,7 +237,7 @@ public class EditCommandSystemTest extends FlashBookSystemTest {
 /* Case: invalid tag -> rejected *//*
 
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_FLASHCARD.getOneBased()
-                + INVALID_TAG_DESC, Subject.MESSAGE_CONSTRAINTS);
+                + INVALID_TAG_DESC, SubjectTag.MESSAGE_CONSTRAINTS);
 
         */
 /* Case: edit a flashcard with new values same as another flashcard's values -> rejected *//*
@@ -281,7 +283,7 @@ public class EditCommandSystemTest extends FlashBookSystemTest {
      * Performs the same verification as {@code assertCommandSuccess(String, Index, Flashcard, Index)} except that
      * the browser url and selected card remain unchanged.
      * @param toEdit the index of the current model's filtered list
-     * @see EditCommandSystemTest#assertCommandSuccess(String, Index, Subject, Index)
+     * @see EditCommandSystemTest#assertCommandSuccess(String, Index, SubjectTag, Index)
      *//*
 
     private void assertCommandSuccess(String command, Index toEdit, Flashcard editedSubject) {
