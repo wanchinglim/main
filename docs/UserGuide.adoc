@@ -25,17 +25,22 @@ More importantly, FlashCards is *optimized for those who prefer to work with a C
 
 .  Ensure you have Java version `9` or later installed in your Computer.
 .  Download the latest `flashcard.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your FlashCardBook.
+.  Copy the file to the folder you want to use as the home folder for this FlashCard application.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
 image::Ui.png[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
-.  Some example commands you can try:
+
+Other example commands you can try:
 
 * *`list`* : lists all flashcards
-* **`add`**`t/Pythagoras Theorem c/a^2+b^2=c^2 d/21 March 2019 s/Math` : adds a flashcard named `Pythagoras Theorem` under the subject `Math` to the FlashCards Book.
+* **`add`**`t/Pythagoras Theorem diff/1 c/a^2 + b^2 = c^2 d/30-03-2019 s/Math`
+
+Adds a flashcard named `Pythagoras Theorem` under the subject `Math` to the list of flashcards.
+It has a difficulty level of `1` with the content `a^2 + b^2 = c^2` and should be memorised by `30-03-2019`.
+
 * **`delete`**`3` : deletes the 3rd flashcard shown in the current list
 * *`exit`* : exits the app
 
@@ -47,7 +52,8 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add t/TOPIC`, `TOPIC` is a parameter which can be used as `add t/Pythagoras Theorem`.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user
+e.g. in `add t/TOPIC`, `TOPIC` is a parameter which can be used as `add t/Pythagoras Theorem`.
 * Parameters can be in any order e.g. if the command specifies `t/TOPIC c/CONTENT`, `c/CONTENT t/TOPIC` is also acceptable.
 ====
 
@@ -87,154 +93,202 @@ Format: `help`
 === Adding a subject or flashcard: `add`
 
 Adds a flashcard with subject and data field. +
-Format: `add t/TOPIC c/CONTENT d/DEADLINE s/SUBJECT`
+Format: `add t/TOPIC diff/DIFFICULTY c/CONTENT d/DEADLINE s/SUBJECT`
+
+****
+*Summary of Fields:*
+
+* `TOPIC`: Title of the flashcard.
+* `DIFFICULTY`: Difficulty level of the flashcard's content indicated by a positive integer 1, 2, or 3 only.
+* `CONTENT`: Content of the flashcard.
+* `DEADLINE`: Date of when the flashcard should be memorised by in the format (dd-mm-yyyy).
+* `SUBJECT`: Subject of the flashcard.
+****
 
 Examples:
 
-* `add t/Pythagoras Theorem c/a^2 + b^2 = c^2 d/21 March 2019 s/Math`
-Adds the flashcard named "Pythagoras Theorem" with content "a^2 + b^2 = c^2" and tagged under the subject "Math". Assigns an expiry deadline "21 March 2019".
-* `add t/Photosynthesis c/A chemical reaction that takes place inside a plant, producing food for the plant to survive d/22 March 2019 s/Science`
-Adds the flashcard named "Photosynthesis" with the content "A chemical reaction that takes place inside a plant, producing food for the plant to survive" and tagged under the subject "Science". Assigns an expiry deadline "22 March 2019".
+* `add t/Pythagoras Theorem diff/1 c/a^2 + b^2 = c^2 d/30-03-2019 s/Math` +
+Adds a flashcard named "Pythagoras Theorem" under the subject "Math" to the list of flashcards.
+It has a difficulty level of "1" with the content "a^2 + b^2 = c^2" and should be memorised by "30-03-2019".
 
-Lists the flashcard that was just added.
+* `add t/Photosynthesis diff/1 c/A chemical reaction that takes place inside a plant, producing food for the plant to survive d/01-04-2019 s/Science` +
+Adds a flashcard named "Photosynthesis" under the subject "Science" to the list of flashcards.
+It has a difficulty level of "1" with the content "A chemical reaction that takes place inside a plant, producing food for the plant to survive" and should be memorised by "01-04-2019".
 
-=== Listing all flashcards categorized by subjects : `list` `l`
+
+The flashcard that was just added will be displayed.
+
+=== Listing all flashcards categorized by subjects : `list` or `l`
 
 Displays an indexed list of flashcards categorized by subjects. +
 Format: `list` or `l`
 
 Subject tags will be colour-coded. Same subject tags will have the same colour.
 
-=== Editing a flashcard : `edit` `e`
+=== Editing a flashcard : `edit` or `e`
 
 Edits the content of a flashcard. +
-Enter the subject that the flashcard belongs to.
-Format: `edit INDEX SUBJECT`
+Enter the index of the flashcard to edit. +
+Format: `edit INDEX [t/TOPIC] [diff/DIFFICULTY] [c/CONTENT] [d/DEADLINE] [s/SUBJECT]`
 
 ****
-* Edits the flashcard at the specified `INDEX`. The index refers to the index number shown in the displayed subject list. The index *must be a positive integer* 1, 2, 3, ...
-* At least one of the optional fields must be provided.
-* A list of flashcards belonging to that subject will be displayed.
-* Select the index of the flashcard to edit.
-* Existing values will be updated to the input values.
-* The updated flashcard will be displayed.
-* When editing flashcards, the existing tags of the flashcard will be removed i.e adding of tags is not cumulative.
+*Summary of Fields:*
+
+* `INDEX`: Index number of the flashcard to be edited. This index number will be shown in the displayed list of flashcards.
+*Must be a positive integer* such as 1, 2, 3, ...
+* `[t/TOPIC] [diff/DIFFICULTY] [c/CONTENT] [d/DEADLINE] [s/SUBJECT]`: *At least one* of these fields enclosed in [ ]
+must be present.
 ****
+
 
 Examples:
 
-* `edit 1 definition` +
-Edits the content of flashcard.
-* `e 2 definition` +
-Edits the content of flashcard.
+* `edit 1 s/Science` +
+Edits flashcard with index "1" and replaces its existing subject with "Science".
+* `e 2 c/The quick brown fox` +
+Edits flashcard with index "2" and replaces its existing content with "The quick brown fox".
 
-=== Finding a flashcard: `find` `f`
+The edited flashcard will be updated and displayed in the list of flashcards.
+
+=== Finding a flashcard based on topic: `find` or `f`
 
 Find flashcards based on the given keyword. +
-Format: `find <KEYWORD> [MORE_KEYWORDS]`
+Format: `find KEYWORD [MORE_KEYWORDS]`
 
 ****
-* The search is case insensitive. e.g `hans` will not match `Hans`
-* The order of the keywords does not matter. e.g. `Pythagoras Theorem` will match `Theorem Pythagoras`
-* The search is based on the flashcard's content.
-* Only full words will be matched e.g. `Theorem` will not match `Theorems`
-* Flashcards containing the keyword will be displayed (i.e. `OR` search). e.g. `Photosynthesis Theorem` will return `Photosynthesis`, `Pythagoras Theorem`
+*Summary of Fields:*
+
+* `KEYWORD`: The keyword to find flashcards with
+* `[MORE_KEYWORDS]`: More than one keyword is accepted but *at least one* keyword is needed.
 ****
+
+
+* The search is case insensitive. e.g `fox` will match `Fox`.
+* The order of the keywords does not matter. e.g. `Pythagoras Theorem` will match `Theorem Pythagoras`.
+* The search is based on the flashcard's topic.
+* Only full words will be matched e.g. `Theorem` will not match `Theorems`.
+* Flashcards containing the keyword will be displayed (i.e. `OR` search). e.g. `Photosynthesis Theorem` will return `Photosynthesis` and `Pythagoras Theorem` flashcards.
+
 
 Examples:
 
-* `find math` +
-Returns `math` and `Mathematics`
-* `f science english math` +
-Returns any flashcards having names `science`, `english`, or `math`
+* `find Theorem` +
+Returns "Pythagoras Theorem" and "Bayes Theorem" flashcards and any flashcards whose topic contains `Theorem`.
+* `f sun fox` +
+Returns any flashcards whose topic contains `sun` or `fox` such as "Brown fox" and "Rising sun" flashcards.
 
-=== Deleting a subject or flashcard : `delete` `d`
 
-Deletes the specified subject or flashcard. +
-Enter the subject that the flashcard belongs to. +
-Format: `delete INDEX <subject>`
+The flashcard(s) whose topic matches any of the keywords given will be displayed in the list of flashcards.
+
+=== Deleting a flashcard : `delete` or `d`
+
+Deletes the specified flashcard. +
+Enter the index of a flashcard to be deleted. +
+Format: `delete INDEX`
 
 ****
-* A list of flashcards belonging to the subject will be displayed.
+*Summary of Field:*
+
+* `INDEX`: Index number of the flashcard to be deleted. This index number will be shown in the displayed list of flashcards.
+           *Must be a positive integer* such as 1, 2, 3, ...
+****
+
+* Use the `list` command (see section 3.5) to display the list of all flashcards; or
+* Use the `find` command (see section 3.7) to find a flashcard based on its topic.
 * Select the index of the flashcard to delete.
-* Deletes the flashcard at the specified `INDEX`.
-* The index refers to the index number shown in the displayed subject list.
-* The index *must be a positive integer* 1, 2, 3, ...
-* The updated list of flashcards will be displayed.
-****
+
 
 Examples:
 
 * `list` +
+Lists all flashcards. +
 `delete 2` +
-Deletes the specified content of index 2.
+Deletes the specified flashcard at index 2.
 
 * `f Pythagoras Theorem` +
+Find flashcards with keywords "Pythagoras" and "Theorem". +
 `d 1` +
-Deletes the specified content of index 1.
+Deletes the specified flashcard at index 1.
+
+The updated list of flashcards will be displayed.
 
 === Selecting a flashcard : `select`
 
-Selects the flashcard identified by the index number used in the displayed list. +
+Selects the flashcard identified by the index number used in the displayed flashcards list. +
 Format: `select INDEX`
 
 ****
-* Selects the flashcard and loads the content of the flashcard at the specified `INDEX`.
-* The index refers to the index number shown in the displayed list.
-* The index *must be a positive integer* `1, 2, 3, ...`
+*Summary of Field:*
+
+* `INDEX`: Index number of the flashcard to be selected. This index number will be shown in the displayed list of flashcards.
+*Must be a positive integer* such as 1, 2, 3, ...
 ****
+
+* Use the `list` command (see Section 3.5) to display the list of all flashcards; or
+* Use the `find` command (see Section 3.7) to find a flashcard based on its topic.
+* Select the index of the flashcard.
+
 
 Examples:
 
 * `list` +
+Lists all flashcards. +
 `select 2` +
 Selects the 2nd flashcard in the list.
+
 * `find definition` +
+Find flashcards with the keyword "definition". +
 `select 1` +
-Selects the 1st flashcard in the results of the `find` command.
+Selects the 1st flashcard in the displayed results of the `find` command.
 
-=== Viewing the next flashcard : `next` `n`
+=== Viewing the next flashcard : `next` or `n`
 
-Views the next flashcard that is next in line for the chosen subject.
+Views the next flashcard in line.
  +
 Format: `next` or `n`
 
-****
-* Displays the next flashcard and loads the content of the flashcard of the next index.
-* The index refers to the index number shown in the displayed list.
-* The index *must be a positive integer* `1, 2, 3, ...`
-****
+* Selects the next flashcard and displays its content
+* Use the `select` command (see Section 3.9) to select a flashcard first.
+* Use this `next` / `n` command to go to the next flashcard.
 
 Examples:
 
 * `select 2` +
+Selects the 2nd flashcard in the list. +
 `next` +
-Displays the 3rd flashcard in the list.
+Selects the next flashcard in the list (i.e. the 3rd flashcard); and +
+Displays the content of this flashcard.
 * `select 5` +
+Selects the 5th flashcard in the list. +
 `n` +
-Displays the 5th flashcard in the list.
+Displays the next flashcard in the list (i.e. the 6th flashcard); and +
+Displays the content of this flashcard.
 
-=== Viewing the next flashcard : `previous` `p`
+The next flashcard in line will be selected and its content will be displayed.
 
-Views the previous flashcard that is next in line for the chosen subject.
- +
+=== Viewing the next flashcard : `previous` or `p`
+
+Views the previous flashcard in line. +
 Format: `previous` or `p`
 
-****
-* Displays the previous flashcard and loads the content of the flashcard of the next index.
-* The index refers to the index number shown in the displayed list.
-* The index *must be a positive integer* `1, 2, 3, ...`
-****
+* Selects the previous flashcard and displays its content
+* Use the `select` command (see Section 3.9) to select a flashcard first.
+* Use this `previous` / `p` command to go to the previous flashcard.
 
 Examples:
 
 * `select 2` +
+Selects the 2nd flashcard in the list. +
 `previous` +
-Displays the 1st flashcard in the list.
+Selects the previous flashcard in the list (i.e. the 1st flashcard); and +
+Displays the content of this flashcard.
 * `select 5` +
+Selects the 5th flashcard in the list. +
 `p` +
-Displays the 4th flashcard in the list.
+Selects the previous flashcard in the list (i.e. the 4th flashcard); and +
+Displays the content of this flashcard.
 
+The previous flashcard in line will be selected and its content will be displayed.
 
 === Listing entered commands : `history`
 
@@ -260,21 +314,29 @@ Undoable commands: those commands that modify the flashcard's content (`add`, `d
 Examples:
 
 * `delete 1` +
+Deletes the 1st flashcard in the list. +
 `list` +
+Lists all flashcards. +
 `undo` +
-Reverses the `delete 1` command with the 'undo' command.
+Reverses the `delete 1` command.
 
 
 * `select 1` +
+Selects the 1st flashcard in the list. +
 `list` +
+Lists all flashcards. +
 `undo` +
 The `undo` command fails as there are no undoable commands executed previously.
 
 * `delete 1` +
+Deletes the 1st flashcard in the list. +
 `clear` +
-`undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
-Reverses both the 'clear' and 'delete 1' command.
+Clear all flashcards. +
+`undo` +
+Reverses the `clear` command +
+`undo` +
+Reverses the `delete 1` command +
+
 
 === Redoing the previously undone command : `redo`
 
@@ -284,26 +346,35 @@ Format: `redo`
 Examples:
 
 * `delete 1` +
-`undo` (reverses the `delete 1` command) +
-`redo` (reapplies the `delete 1` command) +
-Reverses and reapplies the 'delete 1' command.
+Deletes the 1st flashcard in the list. +
+`undo` +
+Reverses the `delete 1` command +
+`redo` +
+Reapplies the `delete 1` command +
 
 * `delete 1` +
+Deletes the 1st flashcard in the list. +
 `redo` +
 The `redo` command fails as there are no `undo` commands executed previously.
 
 * `delete 1` +
+Deletes the 1st flashcard in the list. +
 `clear` +
-`undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
-`redo` (reapplies the `delete 1` command) +
-`redo` (reapplies the `clear` command) +
-Reverses the 'clear' and 'delete 1' commands and reapplies both commands.
+Clears all flashcards. +
+`undo` +
+Reverses the `clear` command +
+`undo` +
+Reverses the `delete 1` command +
+`redo` +
+Reapplies the `delete 1` command +
+`redo` +
+Reapplies the `clear` command +
+
 // end::undoredo[]
 
-=== Clearing all flashcards : `clear` `c`
+=== Clearing all flashcards : `clear` or `c`
 
-Clears all flashcards belonging to user. +
+Clears all flashcards. +
 Format: `clear` or `c`
 
 === Exiting the program : `exit`
@@ -329,17 +400,16 @@ _{explain how the user can enable/disable data encryption}_
 
 == Command Summary
 
-* *Add* `add <topic> <content> <deadline> <subject>` +
-e.g. `add t/Pythagoras Theorem c/a^2+b^2=c^2 d/21 March 2019 s/Math`
+* *Add* :
+`add t/TOPIC diff/DIFFICULTY c/CONTENT d/DEADLINE s/SUBJECT` +
+e.g. `add t/Pythagoras Theorem diff/1 c/a^2 + b^2 = c^2 d/30-03-2019 s/Math`
 * *Clear* : `clear` or `c`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3` or `d 3`
-* *Edit* : `edit INDEX <flashcard>` +
-e.g. `edit 2 definition` or
-e.g. `e 2 definition`
-* *Find* : `find <KEYWORD> [MORE_KEYWORDS]` +
-e.g. `find math` or
-e.g. `f science english math`
+* *Edit* : `edit INDEX [t/TOPIC] [diff/DIFFICULTY] [c/CONTENT] [d/DEADLINE] [s/SUBJECT]` +
+e.g. `edit 2 s/Science` or `e 2 c/The quick brown fox`
+* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
+e.g. `find Theorem` or `f sun fox`
 * *Help* : `help`
 * *History* : `history`
 * *List* : `list` or `l`
