@@ -1,5 +1,8 @@
 package seedu.address.ui;
 
+import static java.util.Objects.requireNonNull;
+
+import java.net.URL;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -10,6 +13,7 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import seedu.address.MainApp;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
@@ -25,6 +29,9 @@ public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
 
+    public static final URL DEFAULT_PAGE =
+            requireNonNull(MainApp.class.getResource(FXML_FILE_FOLDER + "default.html"));
+
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
@@ -32,7 +39,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     //private BrowserPanel browserPanel;
-    private RightPage rightPage;
+    private RightPanel rightPanel;
     private SubjectListPanel subjectListPanel;
     private FlashcardListPanel flashcardListPanel;
     private ResultDisplay resultDisplay;
@@ -122,13 +129,13 @@ public class MainWindow extends UiPart<Stage> {
         // right panel
         //browserPanel = new BrowserPanel(logic.selectedFlashcardProperty());
         //browserPlaceholder.getChildren().add(browserPanel.getRoot());
-        //rightPage = new RightPage(logic.selectedFlashcardProperty());
-        //rightPage = new RightPage(logic::setSelectedFlashcard);
-        //contentPanelPlaceholder.getChildren().add(rightPage.getRoot());
+        //rightPanel = new RightPanel(logic.selectedFlashcardProperty());
+        //rightPanel = new RightPanel(logic::setSelectedFlashcard);
+        //contentPanelPlaceholder.getChildren().add(rightPanel.getRoot());
 
         // right panel - topic & content
-        rightPage = new RightPage(logic.getFilteredFlashcardList());
-        rightMostPlaceholder.getChildren().add(rightPage.getRoot());
+        rightPanel = new RightPanel(logic.selectedFlashcardProperty());
+        rightMostPlaceholder.getChildren().add(rightPanel.getRoot());
 
         // left panel - subject
         subjectListPanel = new SubjectListPanel(logic.getFilteredSubjectList(), logic.selectedSubjectProperty(),
@@ -155,8 +162,8 @@ public class MainWindow extends UiPart<Stage> {
 //    @Subscribe
 //    private void handleFlashcardPanelSelectionChangedEvent(FlashcardPanelSelectionChangedEvent event) {
 //        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-//        rightPage = new RightPage(event.getNewSelection());
-//        contentPanePlaceholder.getChildren().add(rightPage.getRoot());
+//        rightPanel = new RightPanel(event.getNewSelection());
+//        contentPanePlaceholder.getChildren().add(rightPanel.getRoot());
 //    }
 
     /**

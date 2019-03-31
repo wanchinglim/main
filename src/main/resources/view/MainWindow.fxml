@@ -83,7 +83,6 @@
                 </padding>
                 <StackPane fx:id="rightMostPanelPlaceholder" VBox.vgrow="ALWAYS" minWidth="340" maxWidth="340"/>
               </StackPane>
-          <!--</VBox>-->
           </VBox>
         </SplitPane>
 
