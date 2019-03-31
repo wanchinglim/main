@@ -248,8 +248,8 @@ It ia stored internally and implements the following operations:
 
 * `FlashCards#n()` -- (next) Opens the next flash card in line.
 * `FlashCards#p()` -- (previous) Restore the previous flash card.
-* `FlashCards#s()` -- (skip) Skip the current flash card and move on to the next. The flash card skipped will move to the back of the line.
-* `FlashCards#c()` -- (change) Closes the flash cards in the current flashcard and move on to the next flashcard selected/in line.
+* `FlashCards#s()` -- (skip) Skip the current flash card and move on to the next. The flash card skipped will move to the back of the line. [Coming in v2.0]
+* `FlashCards#c()` -- (change) Closes the flash cards in the current flashcard and move on to the next flashcard selected/in line. [Coming in v2.0]
 
 
 === Modes of Quizzing feature
@@ -261,10 +261,10 @@ For each flashcard the user has, he/she can create flash cards specifically for 
 * `"Subject" Knowledge Testing Mode`
 -- From the pool of flash cards under the selected flashcard, the user will choose the number of flash cards and there will be a mixture of frequency levels from the flashcard pool. This mode will focus on a specific flashcard and can be used for revision before mini quizzes held in school.
 
-* `"Focus" Subject Testing Mode`
+* `"Focus" Subject Testing Mode` [Coming in v2.0]
 -- This mode will be largely focused on weaker concepts and cards with higher frequency of being chosen from the database “FlashCards”. The frequency level can be toggled in this mode for the user to focus more on weaker concepts or strengthen their concepts. This mode is encouraged when exam dates are drawing near.
 
-* `"Random" Mass Testing Mode`
+* `"Random" Mass Testing Mode` [Coming in v1.4]
 -- After selecting the number of cards to be tested, random flash cards will be chosen from the database “FlashCards” with varying frequency for the user to quiz himself/herself. This mode is encouraged if the user has free time or to pass time when travelling.
 
 === Shelf-Life of FlashCards
@@ -272,6 +272,7 @@ For each flashcard the user has, he/she can create flash cards specifically for 
 
 The user can determine how long the flash cards will exist in the database “FlashCards”.
 The following operations are available:
+
 * `FlashCards#clearall()` -- Clears the entire database.
 * `FlashCards#clear()` -- Clears a specific flashcard when in "Subject" Knowledge Testing Mode.
 * `FlashCards#deadline()` or `FlashCards#exam()` -- Adds a deadline/exam for the specified flashcard.
