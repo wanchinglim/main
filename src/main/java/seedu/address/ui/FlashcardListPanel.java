@@ -70,7 +70,7 @@ public class FlashcardListPanel extends UiPart<Region> {
 
             // Don't modify selection if we are already selecting the selected flashcard,
             // otherwise we would have an infinite loop.
-            if ( currentSubject == null ) {
+            if (currentSubject == null) {
                 if (Objects.equals(flashcardListView.getSelectionModel().getSelectedItem(), newValue)) {
                     return;
                 }
@@ -85,7 +85,7 @@ public class FlashcardListPanel extends UiPart<Region> {
 
             } else {
 
-                if  (Objects.equals(flashcardListView.getSelectionModel().getSelectedItem(), newValue)) {
+                if (Objects.equals(flashcardListView.getSelectionModel().getSelectedItem(), newValue)) {
                     return;
                 }
 
