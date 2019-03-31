@@ -3,29 +3,18 @@ package seedu.address.ui;
 import static java.util.Objects.requireNonNull;
 
 import java.net.URL;
-import java.util.Objects;
-import java.util.function.Consumer;
-
-import com.sun.tools.javac.Main;
 
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
-import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
-import javafx.scene.web.WebView;
+import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
+import javafx.scene.web.WebView;
 import seedu.address.MainApp;
 import seedu.address.model.flashcard.Flashcard;
-import seedu.address.logic.Logic;
-import javafx.scene.control.Label;
 
 /**
  * Panel containing the topic and content of flashcards.
@@ -59,18 +48,18 @@ public class RightPanel extends UiPart<Region> {
     private Label selectedFlashcardContent;
 
     public RightPanel(ObservableValue<Flashcard> selectedFlashcard) {
-         super(FXML);
+        super(FXML);
 
-         // Load flashcard page when selected flashcard changes.
-         selectedFlashcard.addListener((observable, oldValue, newValue) -> {
-             if (newValue == null) {
-                 loadDefaultPage();
-                 return;
-             }
-             loadFlashcardPage(newValue);
-         });
+        // Load flashcard page when selected flashcard changes.
+        selectedFlashcard.addListener((observable, oldValue, newValue) -> {
+            if (newValue == null) {
+                loadDefaultPage();
+                return;
+            }
+            loadFlashcardPage(newValue);
+        });
 
-         loadDefaultPage();
+        loadDefaultPage();
     }
 
     private void loadFlashcardPage(Flashcard flashcard) {
@@ -83,6 +72,6 @@ public class RightPanel extends UiPart<Region> {
         Platform.runLater(() -> browser.getEngine().load(url));
     }
     private void loadDefaultPage() {
-            loadPage(DEFAULT_PAGE.toExternalForm());
+        loadPage(DEFAULT_PAGE.toExternalForm());
     }
 }
