@@ -1,5 +1,8 @@
 package seedu.address.model.tag;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -14,6 +17,8 @@ public class SubjectTag {
 
     public final String subjectName;
 
+    public static String subjectNameTag=null;
+
     /**
      * Constructs a {@code SubjectTag}.
      *
@@ -23,6 +28,12 @@ public class SubjectTag {
         requireNonNull(subjectName);
         checkArgument(isValidSubjectName(subjectName), MESSAGE_CONSTRAINTS);
         this.subjectName = subjectName;
+        this.subjectNameTag = subjectName;
+    }
+
+    public static List<String> getSubjectName() {
+        String[] nameKeywords = subjectNameTag.split("\\s+");
+        return Arrays.asList(nameKeywords);
     }
 
     /**

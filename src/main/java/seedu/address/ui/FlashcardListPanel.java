@@ -32,6 +32,9 @@ public class FlashcardListPanel extends UiPart<Region> {
     private ObservableList<Flashcard> list = FXCollections.observableArrayList();
     private ObservableList<Flashcard> newFlashcardList = FXCollections.observableArrayList();
 
+    private SubjectTag currentSubject = null;
+    private SubjectTag previousSubject = null;
+
     public FlashcardListPanel(ObservableList<SubjectTag> subjectList,
                               ObservableList<Flashcard> flashcardList,
                               ObservableValue<SubjectTag> selectedSubject,
@@ -47,6 +50,7 @@ public class FlashcardListPanel extends UiPart<Region> {
             if (newValue == null) {
                 flashcardListView.getSelectionModel().clearSelection();
             } else {
+                currentSubject = newValue;
                 this.newFlashcardList.clear();
                 this.newFlashcardList = updateFlashcardList(newValue, flashcardList);
                 flashcardListView.setItems(newFlashcardList);
@@ -66,16 +70,35 @@ public class FlashcardListPanel extends UiPart<Region> {
 
             // Don't modify selection if we are already selecting the selected flashcard,
             // otherwise we would have an infinite loop.
-            if (Objects.equals(flashcardListView.getSelectionModel().getSelectedItem(), newValue)) {
-                return;
-            }
+            if ( currentSubject == null ) {
+                if (Objects.equals(flashcardListView.getSelectionModel().getSelectedItem(), newValue)) {
+                    return;
+                }
 
-            if (newValue == null) {
-                flashcardListView.getSelectionModel().clearSelection();
+                if (newValue == null) {
+                    flashcardListView.getSelectionModel().clearSelection();
+                } else {
+                    int index = flashcardListView.getItems().indexOf(newValue);
+                    flashcardListView.scrollTo(index);
+                    flashcardListView.getSelectionModel().clearAndSelect(index);
+                }
+
             } else {
-                int index = flashcardListView.getItems().indexOf(newValue);
-                flashcardListView.scrollTo(index);
-                flashcardListView.getSelectionModel().clearAndSelect(index);
+
+                if  (Objects.equals(flashcardListView.getSelectionModel().getSelectedItem(), newValue)) {
+                    return;
+                }
+
+                if (newValue == null) {
+                    flashcardListView.getSelectionModel().clearSelection();
+                } else {
+                    int index = flashcardListView.getItems().indexOf(newValue);
+                    flashcardListView.scrollTo(index);
+                    flashcardListView.getSelectionModel().clearAndSelect(index);
+                }
+
+                previousSubject = currentSubject;
+
             }
         });
     }
