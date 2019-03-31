@@ -26,8 +26,19 @@ public class SelectSubjectCommand extends Command {
 
     private static SubjectTag targetSubject;
 
+    private static boolean isSelectSubjectCommandCalled = false;
+
     public SelectSubjectCommand(SubjectTag targetSubject) {
         this.targetSubject = targetSubject;
+        isSelectSubjectCommandCalled = true;
+    }
+
+    public static SubjectTag getTargetSubject() {
+        return targetSubject;
+    }
+
+    public static boolean isIsSelectSubjectCommandCalled() {
+        return isSelectSubjectCommandCalled;
     }
 
     @Override

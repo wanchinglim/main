@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.tag.SubjectTag;
 
 /**
@@ -25,6 +26,7 @@ public class Flashcard {
     private final Set<SubjectTag> subjectTag = new HashSet<>();
 
     private SubjectTag subject;
+    private Index index;
 
 
     /**

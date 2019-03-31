@@ -39,6 +39,8 @@ public class FlashcardCard extends UiPart<Region> {
     @FXML
     private Label deadline;
     @FXML
+    private Label index;
+    @FXML
     private FlowPane subject;
 
     public FlashcardCard(Flashcard flashcard, int displayedIndex) {
