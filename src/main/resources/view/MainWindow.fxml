@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.layout.FlowPane?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
          title="FlashCards" minWidth="1200" minHeight="800" onCloseRequest="#handleExit">
   <icons>
@@ -47,24 +48,43 @@
         </StackPane>
 
         <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.25, 0.5" VBox.vgrow="ALWAYS">
-          <VBox fx:id="SubjectTagList" minWidth="240" prefWidth="240" SplitPane.resizableWithParent="false">
+          <VBox fx:id="subjectPlaceholder" minWidth="240" maxWidth="240" SplitPane.resizableWithParent="false">
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
-            <StackPane fx:id="flashcardListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+            <StackPane fx:id="flashcardListPanelPlaceholder" VBox.vgrow="ALWAYS" minWidth="140" maxWidth="240"/>
           </VBox>
 
-          <StackPane fx:id="cardPlaceholder" prefWidth="340" >
+          <VBox>
+          <StackPane fx:id="cardPlaceholder" minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
+            <StackPane fx:id="subjectListPanelPlaceholder" VBox.vgrow="ALWAYS" minWidth="340" prefWidth="340"/>
           </StackPane>
-
-          <StackPane fx:id="browserPlaceholder" prefWidth="340" >
-            <padding>
-              <Insets top="10" right="10" bottom="10" left="10" />
-            </padding>
-          </StackPane>
+          </VBox>
+          <!--<StackPane fx:id="browserPlaceholder" prefWidth="340" >-->
+            <!--<padding>-->
+              <!--<Insets top="10" right="10" bottom="10" left="10" />-->
+            <!--</padding>-->
+          <!--</StackPane>-->
+          <!--<VBox>-->
+              <!--<StackPane fx:id="ButtonPanePlaceholder" prefWidth="340" VBox.vgrow="NEVER"-->
+                       <!--SplitPane.resizableWithParent="true">-->
+                <!--<padding>-->
+                  <!--<Insets top="10" right="10" bottom="10" left="10" />-->
+                <!--</padding>-->
+              <!--</StackPane>-->
+          <VBox>
+              <StackPane fx:id="rightMostPlaceholder" VBox.vgrow="ALWAYS" minWidth="600" prefWidth="600"
+                       SplitPane.resizableWithParent="false">
+                <padding>
+                  <Insets top="10" right="10" bottom="10" left="10" />
+                </padding>
+                <StackPane fx:id="rightMostPanelPlaceholder" VBox.vgrow="ALWAYS" minWidth="340" maxWidth="340"/>
+              </StackPane>
+          <!--</VBox>-->
+          </VBox>
         </SplitPane>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />

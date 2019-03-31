@@ -31,14 +31,18 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
+    //private BrowserPanel browserPanel;
+    private RightPage rightPage;
     private SubjectListPanel subjectListPanel;
     private FlashcardListPanel flashcardListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
+    //@FXML
+    //private StackPane browserPlaceholder;
+
     @FXML
-    private StackPane browserPlaceholder;
+    private StackPane rightMostPlaceholder;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -116,8 +120,15 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         // right panel
-        browserPanel = new BrowserPanel(logic.selectedFlashcardProperty());
-        browserPlaceholder.getChildren().add(browserPanel.getRoot());
+        //browserPanel = new BrowserPanel(logic.selectedFlashcardProperty());
+        //browserPlaceholder.getChildren().add(browserPanel.getRoot());
+        //rightPage = new RightPage(logic.selectedFlashcardProperty());
+        //rightPage = new RightPage(logic::setSelectedFlashcard);
+        //contentPanelPlaceholder.getChildren().add(rightPage.getRoot());
+
+        // right panel - topic & content
+        rightPage = new RightPage(logic.getFilteredFlashcardList());
+        rightMostPlaceholder.getChildren().add(rightPage.getRoot());
 
         // left panel - subject
         subjectListPanel = new SubjectListPanel(logic.getFilteredSubjectList(), logic.selectedSubjectProperty(),
@@ -140,6 +151,13 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand, logic.getHistory());
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
+
+//    @Subscribe
+//    private void handleFlashcardPanelSelectionChangedEvent(FlashcardPanelSelectionChangedEvent event) {
+//        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+//        rightPage = new RightPage(event.getNewSelection());
+//        contentPanePlaceholder.getChildren().add(rightPage.getRoot());
+//    }
 
     /**
      * Sets the default size based on {@code guiSettings}.

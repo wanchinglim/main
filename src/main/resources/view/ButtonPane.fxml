@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Button?>
+
+
+<?import javafx.scene.control.Label?>
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <HBox spacing="10" alignment="BASELINE_CENTER" layoutX="20.0" layoutY="20.0" prefHeight="50.0">
+            <children>
+                <ButtonBar>
+                    <buttons>
+                        <!--<Button mnemonicParsing="false" text="Topic" onAction="#handleChangeToTopic"/>-->
+                        <!--<Button mnemonicParsing="false" text="Content" onAction="#handleChangeToContent"/>-->
+                       <Button mnemonicParsing="false" text="Topic"/>
+                       <Button mnemonicParsing="false" text="Content" />
+                    </buttons>
+                </ButtonBar>
+            </children>
+        </HBox>
+    </children>
+</VBox>
+
