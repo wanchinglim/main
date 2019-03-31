@@ -31,14 +31,18 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
+    //private BrowserPanel browserPanel;
+    private RightPanel rightPanel;
     private SubjectListPanel subjectListPanel;
     private FlashcardListPanel flashcardListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
+    //@FXML
+    //private StackPane browserPlaceholder;
+
     @FXML
-    private StackPane browserPlaceholder;
+    private StackPane rightMostPlaceholder;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -116,8 +120,15 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         // right panel
-        browserPanel = new BrowserPanel(logic.selectedFlashcardProperty());
-        browserPlaceholder.getChildren().add(browserPanel.getRoot());
+        //browserPanel = new BrowserPanel(logic.selectedFlashcardProperty());
+        //browserPlaceholder.getChildren().add(browserPanel.getRoot());
+        //rightPanel = new RightPanel(logic.selectedFlashcardProperty());
+        //rightPanel = new RightPanel(logic::setSelectedFlashcard);
+        //contentPanelPlaceholder.getChildren().add(rightPanel.getRoot());
+
+        // right panel - topic & content
+        rightPanel = new RightPanel(logic.selectedFlashcardProperty());
+        rightMostPlaceholder.getChildren().add(rightPanel.getRoot());
 
         // left panel - subject
         subjectListPanel = new SubjectListPanel(logic.getFilteredSubjectList(), logic.selectedSubjectProperty(),
