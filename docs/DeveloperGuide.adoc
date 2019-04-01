@@ -252,20 +252,121 @@ It ia stored internally and implements the following operations:
 * `FlashCards#c()` -- (change) Closes the flash cards in the current flashcard and move on to the next flashcard selected/in line.
 
 
-=== Modes of Quizzing feature
+=== Quizzing by Subject
+A subject that is selected will have all the flashcards pertaining to it shown.
+This mode will help users focus on a specific subject before their tests/exams/quizzes.
+
+==== Current Implementation
+The FlashCards UI is divided into three panels from left to right – Subjects, Flashcards, and Content. +
+
+* Subjects Panel (facilitated by `SubjectListPanel`): +
+Displays:
+** Subject tag
+
+* Flashcards Panel (facilitated by `FlashcardListPanel`): +
+Displays information in this order:
+** Topic of flashcard
+** Difficulty level of flashcard
+** (Optional) Deadline to memorize flashcard
+** Subject displayed as a colour-coded tag
+
+* Content Panel (facilitated by `RightPanel`): +
+This panel is further sectioned into 2:
+** Topic of flashcard
+** Content of flashcard
+
+
+Upon adding a flashcard with the `add` command, (e.g. `add t/Pythagoras Theorem diff/1 c/a^2 + b^2 = c^2 d/30-03-2019 s/Math`),
+the subject tag "Math" will be added to a `UniqueSubjectList` and subsequently displayed in the `SubjectListPanel`. +
+
+An example scenario of adding a flashcard and displaying the flashcards for each subject is shown below.
+
+===== Step 1: Adding a Flashcard
+There are 2 possible cases when adding a flashcard: +
+
+*1. Subject tag is unique among other flashcards* +
+The Subject tag will be added to the `UniqueSubjectList`.
+
+Shown below is the adding mechanism of a flashcard with a unique subject among other flashcards is added: +
+
+Step 1 -- Each time a flashcard is added using the Logic component's `AddCommand()`, the adding will be facilitated by `addSubject()` in the Model component.
+
+Step 2 -- The Model component's `addSubject()` will use `SubjectBook` 's `addSubject()` to add the subject to a list containing only unique subjects.
+
+Step 3 -- `SubjectBook` will create a `UniqueSubjectList` object that stores all unique subjects.
+
+Step 4 -- The `UniqueSubjectList` object will invoke its `addSubject()` function. This function will check if the current `UniqueSubjectList` object contains the subject tag of the current flashcard to be added.
+Since it is unique in this scenario, the subject tag of the current flashcard will be added to this `UniqueSubjectList` object.
+
+Step 5 -- The `SubjectListPanel` then displays this newly added subject.
+
++
+The following sequence diagram depicts what happens in this scenario: +
+<< SEQUENCE DIAGRAM >>
+
+*2. Subject tag already exists in other flashcards* +
+No Subject tag is added to the `UniqueSubjectList`.
+
+Shown below is the adding mechanism of a flashcard whose subject already exists in other flashcards is added:
+
+Step 1 -- Each time a flashcard is added using the Logic component's `AddCommand()`, the adding will be facilitated by `addSubject()` in the Model component.
+
+Step 2 -- The Model component's `addSubject()` will use `SubjectBook` 's `addSubject()` to add the subject to a list containing only unique subjects.
+
+Step 3 -- `SubjectBook` will create a `UniqueSubjectList` object that stores all unique subjects.
+
+Step 4 -- The `UniqueSubjectList` object will invoke its `addSubject()` function. This function will check if the current `UniqueSubjectList` object contains the subject tag of the current flashcard to be added.
+Since it is not unique in this scenario, the subject tag *will not* be added to the `UniqueSubjectList` object.
+
+Step 5 -- The `SubjectListPanel` remains unchanged.
+
+
+The following sequence diagram depicts what happens in this scenario: +
+<< SEQUENCE DIAGRAM >>
+
+
+===== Step 2: Displaying Flashcards According to Subjects
+After a flashcard is added, the following sequence of events will happen: +
+
+Step 1 -- The UI component's `MainWindow` will create a new `SubjectListPanel` object that takes in and invokes:
+
+* Logic component's `getFilteredSubjectList()` -- returns `filteredSubjects` which contains a list of unique subjects
+* Logic component's `selectedSubjectProperty()` -- returns the `selectedSubject` tag clicked by the user
+* Logic component's `setSelectedSubject()` -- replaces previously selected subject with the newly selected subject
+
+Step 2 -- In `SubjectListPanel`, `setItems()` and `setCellFactory()` of JavaFX will populate the panel with the unique subject list from `getFilteredSubjectList()`.
+
+Step 3 -- The UI component's `MainWindow` will create a new `FlashcardListPanel` object that takes in and invokes:
+
+* Logic component's `getFilteredFlashcardList()` -- returns `filteredFlashcards` which contains a list of unique flashcards
+* Logic component's `selectedSubjectProperty()` -- returns the `selectedSubject` tag clicked by the user
+
+Step 4 -- In `FlashcardListPanel`, `setItems()` and `setCellFactory()` of JavaFX will populate the panel with the unique flashcard list from `getFilteredFlashcardList()`.
+
+Step 5 -- A listener is attached to the `selectedSubjectProperty` value passed into `FlashcardListPanel` in order to detect if another subject is selected.
+
+Step 6 -- When a new subject is selected, `FlashcardListPanel` invokes `updateFlashcardList()`.
+It matches the subject tag of flashcards from `getFilteredFlashcardList()` with the newly selected subject.
+If the subject tag matches, this flashcard is added to a `newFlashcardList`.
+
+Step 7 -- The flashcard panel is then populated with flashcards from `newFlashcardList` using `setItems()` and `setCellFactory()` of JavaFX.
+
+
+The following sequence diagram depicts what happens in this scenario: +
+<< SEQUENCE DIAGRAM >>
+
+==== Design Considerations
+asdf
+
+
+=== Quizzing by Frequency
+This mode will be largely focused on weaker concepts and cards with higher frequency of being chosen from the database “FlashCards”. The frequency level can be toggled in this mode for the user to focus more on weaker concepts or strengthen their concepts. This mode is encouraged when exam dates are drawing near.
+
 ==== Current Implementation
 
-The Modes of Quizzing feature is facilitated by `FlashCards`.
-For each flashcard the user has, he/she can create flash cards specifically for the topic. The user can also choose the testing mode he/she wishes to be tested on. These are the different modes available:
 
-* `"Subject" Knowledge Testing Mode`
--- From the pool of flash cards under the selected flashcard, the user will choose the number of flash cards and there will be a mixture of frequency levels from the flashcard pool. This mode will focus on a specific flashcard and can be used for revision before mini quizzes held in school.
+==== Design Considerations
 
-* `"Focus" Subject Testing Mode`
--- This mode will be largely focused on weaker concepts and cards with higher frequency of being chosen from the database “FlashCards”. The frequency level can be toggled in this mode for the user to focus more on weaker concepts or strengthen their concepts. This mode is encouraged when exam dates are drawing near.
-
-* `"Random" Mass Testing Mode`
--- After selecting the number of cards to be tested, random flash cards will be chosen from the database “FlashCards” with varying frequency for the user to quiz himself/herself. This mode is encouraged if the user has free time or to pass time when travelling.
 
 === Shelf-Life of FlashCards
 ==== Current Implementation
