@@ -268,7 +268,7 @@ Displays information in this order:
 ** Topic of flashcard
 ** Difficulty level of flashcard
 ** (Optional) Deadline to memorize flashcard
-** Subject displayed as a colour-coded tag
+** Subject tag displayed as a coloured tag
 
 * Content Panel (facilitated by `RightPanel`): +
 This panel is further sectioned into 2:
@@ -277,12 +277,12 @@ This panel is further sectioned into 2:
 
 
 Upon adding a flashcard with the `add` command, (e.g. `add t/Pythagoras Theorem diff/1 c/a^2 + b^2 = c^2 d/30-03-2019 s/Math`),
-the subject tag "Math" will be added to a `UniqueSubjectList` and subsequently displayed in the `SubjectListPanel`. +
+the subject tag "Math" will be added to a `SubjectBook` and `UniqueSubjectList` before being in the `SubjectListPanel`. +
 
 An example scenario of adding a flashcard and displaying the flashcards for each subject is shown below.
 
-===== Step 1: Adding a Flashcard
-There are 2 possible cases when adding a flashcard: +
+*Step 1: Adding a Flashcard* +
+There are 2 possible cases when adding a flashcard:
 
 *1. Subject tag is unique among other flashcards* +
 The Subject tag will be added to the `UniqueSubjectList`.
@@ -325,7 +325,8 @@ The following sequence diagram depicts what happens in this scenario: +
 << SEQUENCE DIAGRAM >>
 
 
-===== Step 2: Displaying Flashcards According to Subjects
+*Step 2: Displaying Flashcards According to Subjects*
+
 After a flashcard is added, the following sequence of events will happen: +
 
 Step 1 -- The UI component's `MainWindow` will create a new `SubjectListPanel` object that takes in and invokes:
