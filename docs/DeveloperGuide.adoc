@@ -279,55 +279,54 @@ This panel is further sectioned into 2:
 Upon adding a flashcard with the `add` command, (e.g. `add t/Pythagoras Theorem diff/1 c/a^2 + b^2 = c^2 d/30-03-2019 s/Math`),
 the subject tag "Math" will be added to a `SubjectBook` and `UniqueSubjectList` before being in the `SubjectListPanel`. +
 
-An example scenario of adding a flashcard and displaying the flashcards for each subject is shown below.
+An example scenario of adding a flashcard (Step 1) and displaying the flashcards for each subject (Step 2) is shown below.
 
 *Step 1: Adding a Flashcard* +
 There are 2 possible cases when adding a flashcard:
 
-*1. Subject tag is unique among other flashcards* +
+1. *Subject tag is unique among other flashcards* +
 The Subject tag will be added to the `UniqueSubjectList`.
-
++
 Shown below is the adding mechanism of a flashcard with a unique subject among other flashcards is added: +
-
++
 Step 1 -- Each time a flashcard is added using the Logic component's `AddCommand()`, the adding will be facilitated by `addSubject()` in the Model component.
-
++
 Step 2 -- The Model component's `addSubject()` will use `SubjectBook` 's `addSubject()` to add the subject to a list containing only unique subjects.
-
++
 Step 3 -- `SubjectBook` will create a `UniqueSubjectList` object that stores all unique subjects.
-
++
 Step 4 -- The `UniqueSubjectList` object will invoke its `addSubject()` function. This function will check if the current `UniqueSubjectList` object contains the subject tag of the current flashcard to be added.
 Since it is unique in this scenario, the subject tag of the current flashcard will be added to this `UniqueSubjectList` object.
-
++
 Step 5 -- The `SubjectListPanel` then displays this newly added subject.
 
 +
 The following sequence diagram depicts what happens in this scenario: +
 << SEQUENCE DIAGRAM >>
 
-*2. Subject tag already exists in other flashcards* +
+2. *Subject tag already exists in other flashcards* +
 No Subject tag is added to the `UniqueSubjectList`.
-
++
 Shown below is the adding mechanism of a flashcard whose subject already exists in other flashcards is added:
-
++
 Step 1 -- Each time a flashcard is added using the Logic component's `AddCommand()`, the adding will be facilitated by `addSubject()` in the Model component.
-
++
 Step 2 -- The Model component's `addSubject()` will use `SubjectBook` 's `addSubject()` to add the subject to a list containing only unique subjects.
-
++
 Step 3 -- `SubjectBook` will create a `UniqueSubjectList` object that stores all unique subjects.
-
++
 Step 4 -- The `UniqueSubjectList` object will invoke its `addSubject()` function. This function will check if the current `UniqueSubjectList` object contains the subject tag of the current flashcard to be added.
 Since it is not unique in this scenario, the subject tag *will not* be added to the `UniqueSubjectList` object.
-
++
 Step 5 -- The `SubjectListPanel` remains unchanged.
 
-
++
 The following sequence diagram depicts what happens in this scenario: +
 << SEQUENCE DIAGRAM >>
 
 
-*Step 2: Displaying Flashcards According to Subjects*
-
-After a flashcard is added, the following sequence of events will happen: +
+*Step 2: Displaying Flashcards According to Subjects* +
+After a flashcard is added, the following sequence of events will happen:
 
 Step 1 -- The UI component's `MainWindow` will create a new `SubjectListPanel` object that takes in and invokes:
 
