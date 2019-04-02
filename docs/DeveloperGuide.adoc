@@ -276,8 +276,8 @@ This panel is further sectioned into 2:
 ** Content of flashcard
 
 
-Upon adding a flashcard with the `add` command, (e.g. `add t/Pythagoras Theorem diff/1 c/a^2 + b^2 = c^2 d/30-03-2019 s/Math`),
-the subject tag "Math" will be added to a `SubjectBook` and `UniqueSubjectList` before being in the `SubjectListPanel`. +
+Upon adding a flashcard with the `add` command, (e.g. `add t/Pythagoras Theorem diff/1 c/a^2 + b^2 = c^2 s/Math`),
+the subject tag "Math" will be added to a `SubjectBook` and `UniqueSubjectList` before being displayed in the `SubjectListPanel`. +
 
 An example scenario of adding a flashcard (Step 1) and displaying the flashcards for each subject (Step 2) is shown below.
 
@@ -289,16 +289,16 @@ The Subject tag will be added to the `UniqueSubjectList`.
 +
 Shown below is the adding mechanism of a flashcard with a unique subject among other flashcards is added: +
 +
-Step 1 -- Each time a flashcard is added using the Logic component's `AddCommand()`, the adding will be facilitated by `addSubject()` in the Model component.
+* Each time a flashcard is added using the Logic component's `AddCommand()`, the adding will be facilitated by `addSubject()` in the Model component.
 +
-Step 2 -- The Model component's `addSubject()` will use `SubjectBook` 's `addSubject()` to add the subject to a list containing only unique subjects.
+* The Model component's `addSubject()` will use `SubjectBook` 's `addSubject()` to add the subject to a list containing only unique subjects.
 +
-Step 3 -- `SubjectBook` will create a `UniqueSubjectList` object that stores all unique subjects.
+* `SubjectBook` will create a `UniqueSubjectList` object that stores all unique subjects.
 +
-Step 4 -- The `UniqueSubjectList` object will invoke its `addSubject()` function. This function will check if the current `UniqueSubjectList` object contains the subject tag of the current flashcard to be added.
+* The `UniqueSubjectList` object will invoke its `addSubject()` function. This function will check if the current `UniqueSubjectList` object contains the subject tag of the current flashcard to be added.
 Since it is unique in this scenario, the subject tag of the current flashcard will be added to this `UniqueSubjectList` object.
 +
-Step 5 -- The `SubjectListPanel` then displays this newly added subject.
+* The `SubjectListPanel` then displays this newly added subject.
 +
 
 2. *Subject tag already exists in other flashcards* +
@@ -306,16 +306,16 @@ No Subject tag is added to the `UniqueSubjectList`.
 +
 Shown below is the adding mechanism of a flashcard whose subject already exists in other flashcards is added:
 +
-Step 1 -- Each time a flashcard is added using the Logic component's `AddCommand()`, the adding will be facilitated by `addSubject()` in the Model component.
+* Each time a flashcard is added using the Logic component's `AddCommand()`, the adding will be facilitated by `addSubject()` in the Model component.
 +
-Step 2 -- The Model component's `addSubject()` will use `SubjectBook` 's `addSubject()` to add the subject to a list containing only unique subjects.
+* The Model component's `addSubject()` will use `SubjectBook` 's `addSubject()` to add the subject to a list containing only unique subjects.
 +
-Step 3 -- `SubjectBook` will create a `UniqueSubjectList` object that stores all unique subjects.
+* `SubjectBook` will create a `UniqueSubjectList` object that stores all unique subjects.
 +
-Step 4 -- The `UniqueSubjectList` object will invoke its `addSubject()` function. This function will check if the current `UniqueSubjectList` object contains the subject tag of the current flashcard to be added.
+* The `UniqueSubjectList` object will invoke its `addSubject()` function. This function will check if the current `UniqueSubjectList` object contains the subject tag of the current flashcard to be added.
 Since it is not unique in this scenario, the subject tag *will not* be added to the `UniqueSubjectList` object.
 +
-Step 5 -- The `SubjectListPanel` remains unchanged.
+* The `SubjectListPanel` remains unchanged.
 
 
 The following sequence diagram summarises what happens in this Step 1: +
@@ -323,35 +323,35 @@ The following sequence diagram summarises what happens in this Step 1: +
 image::SubjectQuizzingFeature-addSubject.png[width="800"]
 Figure: Sequence Diagram of successfully adding a flashcard +
 
-* Blue: Logic and Model component
-* Yellow: JavaFX component
+* Blue: -- Logic and Model component
+* Yellow -- JavaFX component
 
 
 *Step 2: Displaying Flashcards According to Subjects* +
 After a flashcard is added, the following sequence of events will happen:
 
-Step 1 -- The UI component's `MainWindow` will create a new `SubjectListPanel` object that takes in and invokes:
+* The UI component's `MainWindow` will create a new `SubjectListPanel` object that takes in and invokes:
 
-* Logic component's `getFilteredSubjectList()` -- returns `filteredSubjects` which contains a list of unique subjects
-* Logic component's `selectedSubjectProperty()` -- returns the `selectedSubject` tag clicked by the user
-* Logic component's `setSelectedSubject()` -- replaces previously selected subject with the newly selected subject
+** Logic component's `getFilteredSubjectList()` -- returns `filteredSubjects` which contains a list of unique subjects
+** Logic component's `selectedSubjectProperty()` -- returns the `selectedSubject` tag clicked by the user
+** Logic component's `setSelectedSubject()` -- replaces previously selected subject with the newly selected subject
 
-Step 2 -- In `SubjectListPanel`, `setItems()` and `setCellFactory()` of JavaFX will populate the panel with the unique subject list from `getFilteredSubjectList()`.
+* In `SubjectListPanel`, `setItems()` and `setCellFactory()` of JavaFX will populate the panel with the unique subject list from `getFilteredSubjectList()`.
 
-Step 3 -- The UI component's `MainWindow` will create a new `FlashcardListPanel` object that takes in and invokes:
+* The UI component's `MainWindow` will create a new `FlashcardListPanel` object that takes in and invokes:
 
-* Logic component's `getFilteredFlashcardList()` -- returns `filteredFlashcards` which contains a list of unique flashcards
-* Logic component's `selectedSubjectProperty()` -- returns the `selectedSubject` tag clicked by the user
+** Logic component's `getFilteredFlashcardList()` -- returns `filteredFlashcards` which contains a list of unique flashcards
+** Logic component's `selectedSubjectProperty()` -- returns the `selectedSubject` tag clicked by the user
 
-Step 4 -- In `FlashcardListPanel`, `setItems()` and `setCellFactory()` of JavaFX will populate the panel with the unique flashcard list from `getFilteredFlashcardList()`.
+* In `FlashcardListPanel`, `setItems()` and `setCellFactory()` of JavaFX will populate the panel with the unique flashcard list from `getFilteredFlashcardList()`.
 
-Step 5 -- A listener is attached to the `selectedSubjectProperty` value passed into `FlashcardListPanel` in order to detect if another subject is selected.
+* A listener is attached to the `selectedSubjectProperty` value passed into `FlashcardListPanel` in order to detect if another subject is selected.
 
-Step 6 -- When a new subject is selected, `FlashcardListPanel` invokes `updateFlashcardList()`.
+* When a new subject is selected, `FlashcardListPanel` invokes `updateFlashcardList()`.
 It matches the subject tag of flashcards from `getFilteredFlashcardList()` with the newly selected subject.
 If the subject tag matches, this flashcard is added to a `newFlashcardList`.
 
-Step 7 -- The flashcard panel is then populated with flashcards from `newFlashcardList` using `setItems()` and `setCellFactory()` of JavaFX.
+* The flashcard panel is then populated with flashcards from `newFlashcardList` using `setItems()` and `setCellFactory()` of JavaFX.
 
 
 The following sequence diagram summarizes what happens in Step 2: +
@@ -359,12 +359,12 @@ The following sequence diagram summarizes what happens in Step 2: +
 image::SubjectQuizzingFeature-UI.png[width="800"]
 Figure: Sequence Diagram of displaying flashcards according to subject +
 
-* Purple: UI component
-* Blue: Model component
-* Yellow: JavaFX component
+* Purple -- UI component
+* Blue -- Model component
+* Yellow -- JavaFX component
 
 ==== Design Considerations
-asdf
+
 
 
 === Quizzing by Frequency
