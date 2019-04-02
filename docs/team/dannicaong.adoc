@@ -9,50 +9,78 @@
 
 == Overview
 
-FlashCards is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+This portfolio is written to document the process of developing FlashCards throughout the course of one semester in a team of 3 members.
+My team chose to morph the basic Address Book into FlashCards and my role was to design and write the code for the *deadline* features as well as the *GUI display* of the flashcards.
+
+FlashCards is a desktop flash book application written in Java which targets mainly secondary school students.
+It is specially designed to cater to users a platform to digitize and store their notes in one place.
+The user interacts with the application using a Command Line Interface (CLI) and it has a Graphical User Interface (GUI) created with JavaFX.
+
+The following sections illustrate these enhancements in more details, as well as the relevant sections I have added to the user and developer guides in relation to these enhancements.
 
 == Summary of contributions
+This sections summarises my coding, documentation and other relevant contributions to the team project.
 
-* *Major enhancement*: added *the ability to undo/redo previous commands*
-** What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+* *Major enhancement 1*: added *the ability to add deadlines to flashcards* (Pull requests https://github.com/cs2113-ay1819s2-m11-3/main/pull/12[#12], https://github.com/cs2113-ay1819s2-m11-3/main/pull/13[#13], https://github.com/cs2113-ay1819s2-m11-3/main/pull/14[#14])
+** What it does: The *deadline* command allows the user to add deadline or exam dates to a specified flashcard. The feature also includes an internal Calendar which will count the number of days left before the deadline and display it below the deadline.
+** Justification: This feature improves the product significantly as it serves as a reminder to the user about the upcoming deadlines or exams.
+** Highlights: This enhancement does not affect existing commands and commands to be added in future. It is an independent command and it can only be added after the selected flashcards exist in the FlashBook. This gives the user the choice to decide if he/she wants to assign a deadline to the flashcard.
+Also, if the user wants to update the existing deadline, he can enter the command again with a different date and this new date will override the existing date.
+Implementation of the command was simple and straightforward, however, implementing the Java.util.Calendar together with it was a challenge as the system has to check if the date entered is valid before accepting it.
+** Credits: Help from [https://docs.oracle.com/javase/7/docs/api/java/util/Calendar.html[Oracle Java Class Calendar]]
+* *Minor enhancement*: Added tests for *deadline* command.
+* *Code contributed*: [https://github.com/cs2113-ay1819s2-m11-3/main/blob/master/src/main/java/seedu/address/logic/commands/DeadlineCommand.java[Functional code]] [https://github.com/cs2113-ay1819s2-m11-3/main/blob/master/src/test/java/seedu/address/logic/commands/DeadlineCommandTest.java[Test code]]
 
-* *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
-
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Major enhancement 2*: added *GUI display of topic and content* (Pull request https://github.com/cs2113-ay1819s2-m11-3/main/pull/80[#80])
+** What it does: The *GUI display* allows the user to alternate between the topic and the content of the flashcard.
+** Justification: The physical copy of a flashcard has two sides, and to simulate that in the application, I added two buttons for *topic* and *content* respectively. This allows the user to switch between topic and content easily.
+** Highlights: -
+** Credits: -
+* *Minor enhancement*: Changed the background of GUI display to black for the text to stand out (Pull request https://github.com/cs2113-ay1819s2-m11-3/main/pull/86[#86])
+* *Code contributed*: [https://github.com/cs2113-ay1819s2-m11-3/main/blob/master/src/main/java/seedu/address/ui/RightPanel.java[Functional code in Java]] [https://github.com/cs2113-ay1819s2-m11-3/main/blob/master/src/main/resources/view/RightPanel.fxml[Functional code in FXML]]
 
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
-** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
-** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
-** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
-** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
+*** Managed releases version 1.2 to 1.3 (2 releases) on Github.
+*** Set up relevant project repositories (e.g. Organisation repository, Issue Tracker, Travis, Coveralls)
 
-_{you can add/remove categories in the list above}_
+** Enhancements to existing features:
+*** Added alias and relevant tests for 5 commands (Pull requests https://github.com/cs2113-ay1819s2-m11-3/main/pull/9[#9])
+*** Added new StackPane and split the window into 3 placeholders (Pull request https://github.com/cs2113-ay1819s2-m11-3/main/pull/30[#30])
+*** Refactored Subjects to Flashcards (Pull requests https://github.com/cs2113-ay1819s2-m11-3/main/pull/43[#43])
+*** Refactored Name to Topic, Phone to Difficulty, Address to Content and AddressBook to FlashBook (Pull requests https://github.com/cs2113-ay1819s2-m11-3/main/pull/45[#45]
+*** Edited relevant fields (Email) (Pull request https://github.com/cs2113-ay1819s2-m11-3/main/pull/46[#46])
+*** Merged PRs after merge conflicts (Pull request https://github.com/cs2113-ay1819s2-m11-3/main/pull/14[#14], https://github.com/cs2113-ay1819s2-m11-3/main/pull/48[#48])
+
+** Documentation:
+*** Did cosmetic tweaks to existing contents of the User Guide: (Pull requests https://github.com/cs2113-ay1819s2-m11-3/main/pull/3[#3], https://github.com/cs2113-ay1819s2-m11-3/main/pull/9[#9], https://github.com/cs2113-ay1819s2-m11-3/main/pull/10[#10],
+https://github.com/cs2113-ay1819s2-m11-3/main/pull/20[#20], https://github.com/cs2113-ay1819s2-m11-3/main/pull/45[#45])
+*** Did cosmetic tweaks to existing contents of the Developer Guide: (Pull requests https://github.com/cs2113-ay1819s2-m11-3/main/pull/3[#3], https://github.com/cs2113-ay1819s2-m11-3/main/pull/8[#8], https://github.com/cs2113-ay1819s2-m11-3/main/pull/43[#43],
+https://github.com/cs2113-ay1819s2-m11-3/main/pull/45[#45], https://github.com/cs2113-ay1819s2-m11-3/main/pull/86[#86])
+*** Added relevant information and links to relevant documentations (e.g. Build.gradle, README etc) (Pull request https://github.com/cs2113-ay1819s2-m11-3/main/pull/3[#3], https://github.com/cs2113-ay1819s2-m11-3/main/pull/4[#4], https://github.com/cs2113-ay1819s2-m11-3/main/pull/16[#16], https://github.com/cs2113-ay1819s2-m11-3/main/pull/18[#18])
+*** Managed relevant documentations (e.g. User Guide, Developer Guide etc.) by ensuring everything is well-documented.
+
+** Community:
+*** PRs reviewed (with non-trivial review comments):
+https://github.com/cs2113-ay1819s2-m11-3/main/pull/34[#34]
+https://github.com/cs2113-ay1819s2-m11-3/main/pull/35[#35]
+https://github.com/cs2113-ay1819s2-m11-3/main/pull/67[#67]
+https://github.com/cs2113-ay1819s2-m11-3/main/pull/73[#73]
+https://github.com/cs2113-ay1819s2-m11-3/main/pull/76[#76]
+https://github.com/cs2113-ay1819s2-m11-3/main/pull/79[#79]
+
+** Tools: -
 
 == Contributions to the User Guide
-
 
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=undoredo]
-
-include::../UserGuide.adoc[tag=dataencryption]
+include::../UserGuide.adoc[tag=add]
+include::../UserGuide.adoc[tag=edit]
+include::../UserGuide.adoc[tag=clear]
 
 == Contributions to the Developer Guide
 
@@ -60,13 +88,13 @@ include::../UserGuide.adoc[tag=dataencryption]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
+** Came up with the three features which were further implemented by my team mates.
 
-include::../DeveloperGuide.adoc[tag=dataencryption]
+include::../DeveloperGuide.adoc[tag=implementation]
+include::../DeveloperGuide.adoc[tag=shelf-life-of-flashcards]
 
 
-== PROJECT: PowerPointLabs
 
----
+//== PROJECT: PowerPointLabs
 
-_{Optionally, you may include other projects in your portfolio.}_
+//---
