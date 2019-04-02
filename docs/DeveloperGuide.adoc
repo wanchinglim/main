@@ -296,7 +296,7 @@ Step 3. The user executes `deadline 1 d/...` or `exam 1 d/...` to add a new dead
 image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
 
 [NOTE]
-If a command fails its execution, it will not call `Model#commitAddressBook()`, so the flash book state will not be saved into the `addressBookStateList`.
+If a command fails its execution, it will not call `Model#commitFlashBook()`, so the flash book state will not be saved into the `flashBookStateList`.
 
 Step 4. The user now decides that the deadline/exam is over and do not wish to save the flashcard in the flash card. By executing the `clear` command, he can delete all the respective flash cards under the specified flashcard. The `clear` command will call `Logic#Clear()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous flash card state, and clear all the respective flash cards of the specified flashcard.
 
@@ -337,16 +337,21 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Need to have additional internal calendar for the auto deletion.
 * **Alternative 2:** Manual deletion of the flash cards.
 ** Pros: Allow the user to have the choice of keeping the flash cards or removing it.
-** Cons: Might be too troublesome for some users.
+** Cons: Might be troublesome for some users.
+
+Alternative 1 is chosen to prevent overloading of overdue flashcards, which will take up excess storage if the user does not manually delete.
 
 ===== Aspect: Data structure to support the deadline/exam commands
 
 * **Alternative 1 (current choice):** Implement an internal calendar to calculate the number of days left.
 ** Pros: Auto deletion of flash cards.
 ** Cons: Need to pay extra caution for Leap years.
-* **Alternative 2:** Use the `clear` or `clearall` functions.
+* **Alternative 2:** Use the `clear` or `clearall` function to manually delete.
 ** Pros: Give the user the choice to keep or delete.
-** Cons: Troublesome for users.
+** Cons: Might be troublesome for some users.
+
+Alternative 1 is chosen to prevent overloading of overdue flashcards, which will take up excess storage if the user does not manually delete.
+
 // end::undoredo[]
 
 // tag::dataencryption[]
@@ -675,7 +680,7 @@ image::getting-started-ui-result-after.png[width="200"]
 *** Do read the commits one at a time if you feel overwhelmed.
 ****
 
-. Modify the link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] to show the total number of people in the address book.
+. Modify the link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] to show the total number of people in the flash book.
 +
 **Before**
 +
@@ -700,7 +705,7 @@ image::getting-started-ui-status-after.png[width="500"]
 [discrete]
 ==== `Storage` component
 
-*Scenario:* You are in charge of `storage`. For your next project milestone, your team plans to implement a new feature of saving the flash book to the cloud. However, the current implementation of the application constantly saves the address book after the execution of each command, which is not ideal if the user is working on limited internet connection. Your team decided that the application should instead save the changes to a temporary local backup file first, and only upload to the cloud after the user closes the application. Your job is to implement a backup API for the flash book storage.
+*Scenario:* You are in charge of `storage`. For your next project milestone, your team plans to implement a new feature of saving the flash book to the cloud. However, the current implementation of the application constantly saves the flash book after the execution of each command, which is not ideal if the user is working on limited internet connection. Your team decided that the application should instead save the changes to a temporary local backup file first, and only upload to the cloud after the user closes the application. Your job is to implement a backup API for the flash book storage.
 
 [TIP]
 Do take a look at <<Design-Storage>> before attempting to modify the `Storage` component.
@@ -709,8 +714,8 @@ Do take a look at <<Design-Storage>> before attempting to modify the `Storage` c
 +
 ****
 * Hint
-** Add the API method in link:{repoURL}/src/main/java/seedu/address/storage/AddressBookStorage.java[`AddressBookStorage`] interface.
-** Implement the logic in link:{repoURL}/src/main/java/seedu/address/storage/StorageManager.java[`StorageManager`] and link:{repoURL}/src/main/java/seedu/address/storage/JsonAddressBookStorage.java[`JsonAddressBookStorage`] class.
+** Add the API method in link:{repoURL}/src/main/java/seedu/address/storage/FlashBookStorage.java[`FlashBookStorage`] interface.
+** Implement the logic in link:{repoURL}/src/main/java/seedu/address/storage/StorageManager.java[`StorageManager`] and link:{repoURL}/src/main/java/seedu/address/storage/JsonFlashBookStorage.java[`JsonFlashBookStorage`] class.
 * Solution
 ** See this https://github.com/se-edu/addressbook-level4/pull/594[PR] for the full solution.
 ****
@@ -720,7 +725,7 @@ Do take a look at <<Design-Storage>> before attempting to modify the `Storage` c
 
 By creating this command, you will get a chance to learn how to implement a feature end-to-end, touching all major components of the app.
 
-*Scenario:* You are a software maintainer for `addressbook`, as the former developer team has moved on to new projects. The current users of your application have a list of new feature requests that they hope the software will eventually have. The most popular request is to allow adding additional comments/notes about a particular contact, by providing a flexible `remark` field for each contact, rather than relying on tags alone. After designing the specification for the `remark` command, you are convinced that this feature is worth implementing. Your job is to implement the `remark` command.
+*Scenario:* You are a software maintainer for `flashbook`, as the former developer team has moved on to new projects. The current users of your application have a list of new feature requests that they hope the software will eventually have. The most popular request is to allow adding additional comments/notes about a particular contact, by providing a flexible `remark` field for each contact, rather than relying on tags alone. After designing the specification for the `remark` command, you are convinced that this feature is worth implementing. Your job is to implement the `remark` command.
 
 ==== Description
 Edits the remark for a flashcard specified in the `INDEX`. +

@@ -25,6 +25,7 @@
                                 <buttons>
                                     <!--<Button mnemonicParsing="false" text="Topic" onAction="#handleChangeToTopic"/>-->
                                     <!--<Button mnemonicParsing="false" text="Content" onAction="#handleChangeToContent"/>-->
+                                    <Button mnemonicParsing="false" text="Topic and Content" />
                                     <Button mnemonicParsing="false" text="Topic"/>
                                     <Button mnemonicParsing="false" text="Content"/>
                                 </buttons>
@@ -38,14 +39,14 @@
                     <!--<Label fx:id="selectedFlashcardContent" style="-fx-text-fill: black;"/>-->
                 <!--</children>-->
         <!--</AnchorPane>-->
-        <StackPane fx:id="topicAnchorPane" minHeight="200.0" minWidth="500.0" style="-fx-background-color: grey;">
+        <StackPane fx:id="topicAnchorPane" minHeight="200.0" minWidth="500.0" style="-fx-background-color: black;">
             <children>
-                <Label fx:id="selectedFlashcardTopic" style="-fx-text-fill: black;"/>
+                <Label fx:id="selectedFlashcardTopic" style="-fx-text-fill: white;"/>
             </children>
         </StackPane>
-        <StackPane fx:id="contentAnchorPane" minHeight="250.0" minWidth="500.0" style="-fx-background-color: grey;">
+        <StackPane fx:id="contentAnchorPane" minHeight="250.0" minWidth="500.0" style="-fx-background-color: black;">
             <children>
-                <Label fx:id="selectedFlashcardContent" style="-fx-text-fill: black;"/>
+                <Label fx:id="selectedFlashcardContent" style="-fx-text-fill: white;"/>
             </children>
         </StackPane>
     </items>
