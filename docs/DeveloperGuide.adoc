@@ -17,13 +17,10 @@ endif::[]
 
 By: `Team M11-3`      Since: `Jan 2019`      Licence: `MIT`
 
-== Intrduction
-
-Flashcard
-
 == Setting up
 
 === Prerequisites
+The following are some prerequisites required:
 
 . *JDK `9`* or later
 +
@@ -39,6 +36,7 @@ Do not disable them. If you have disabled them, go to `File` > `Settings` > `Plu
 
 
 === Setting up the project in your computer
+Follow the steps below to set up the project:
 
 . Fork this repo, and clone the fork to your computer
 . Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
@@ -57,6 +55,7 @@ This will generate all resources required by the application and tests.
 . Repeat this for the test folder as well (e.g. check link:{repoURL}/src/test/java/seedu/address/ui/HelpWindowTest.java[`HelpWindowTest.java`] for code errors, and if so, resolve it the same way)
 
 === Verifying the setup
+Follow the steps below to verify the setup:
 
 . Run the `seedu.address.MainApp` and try a few commands
 . <<Testing,Run the tests>> to ensure they all pass.
@@ -239,7 +238,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-// tag::undoredo[]
+// tag::togglefeature[]
 === Toggle feature
 
 The toggle feature is facilitated by `FlashCards`.
@@ -298,6 +297,9 @@ Flashcard with next 1 will be displayed for the example above. +
 ** Pros: Saves the user the step of having to select the index of choice.
 ** Cons: Might be too troublesome for some users who wants to being from a flashcard index that is large.
 
+// end::togglefeature[]
+
+// tag::quizzingfeature[]
 === Modes of Quizzing feature
 The Modes of Quizzing feature is facilitated by `FlashCards`.
 For each flashcard the user has, he/she can create flash cards specifically for the topic. The user can also choose the testing mode he/she wishes to be tested on. These are the different modes available: +
@@ -333,6 +335,7 @@ image::SortCommandSD.png[width="800"]
 ** Pros: Can view more flashcards at once.
 ** Cons: Difficult to implement.
 
+// end::quizzingfeature[]
 === Shelf-Life of FlashCards
 ==== Current Implementation
 
@@ -412,7 +415,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 * **Alternative 2:** Use the `clear` or `clearall` functions.
 ** Pros: Give the user the choice to keep or delete.
 ** Cons: Troublesome for users.
-// end::undoredo[]
+
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption
