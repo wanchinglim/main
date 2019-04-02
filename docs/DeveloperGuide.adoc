@@ -292,13 +292,6 @@ Flashcard with next 1 will be displayed for the example above. +
 
 // end::togglefeature[]
 
-// tag::quizzingfeature[]
-
-=== Modes of Quizzing feature
-The Modes of Quizzing feature is facilitated by `FlashCards`.
-For each flashcard the user has, he/she can create flash cards specifically for the topic. The user can also choose the testing mode he/she wishes to be tested on. These are the different modes available: +
-=======
-
 // tag::quizzingbysubject[]
 === Quizzing by Subject
 A subject that is selected will have all the flashcards pertaining to it shown.
@@ -457,7 +450,6 @@ image::SortCommandSD.png[width="800"]
 ** Pros: Can view more flashcards at once.
 ** Cons: Difficult to implement.
 
-// end::quizzingfeature[]
 === Shelf-Life of FlashCards
 ==== Current Implementation
 
