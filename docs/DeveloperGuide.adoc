@@ -17,6 +17,10 @@ endif::[]
 
 By: `Team M11-3`      Since: `Jan 2019`      Licence: `MIT`
 
+== Intrduction
+
+Flashcard
+
 == Setting up
 
 === Prerequisites
@@ -212,10 +216,6 @@ The `Model`,
 * exposes an unmodifiable `ObservableList<Flashcard>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
-[NOTE]
-As a more OOP model, we can store a `Tag` list in `Flash Book`, which `Flashcard` can reference. This would allow `Flash Book` to only require one `Tag` object per unique `Tag`, instead of each `Flashcard` needing their own `Tag` object. An example of how such a model may look like is given below. +
- +
-image:ModelClassBetterOopDiagram.png[width="800"]
 
 [[Design-Storage]]
 === Storage component
@@ -241,31 +241,97 @@ This section describes some noteworthy details on how certain features are imple
 
 // tag::undoredo[]
 === Toggle feature
-==== Current Implementation
 
 The toggle feature is facilitated by `FlashCards`.
 It ia stored internally and implements the following operations:
 
-* `FlashCards#n()` -- (next) Opens the next flash card in line.
-* `FlashCards#p()` -- (previous) Restore the previous flash card.
-* `FlashCards#s()` -- (skip) Skip the current flash card and move on to the next. The flash card skipped will move to the back of the line.
-* `FlashCards#c()` -- (change) Closes the flash cards in the current flashcard and move on to the next flashcard selected/in line.
+* `Flashcards#next()` -- Opens the next flash card in line.
+* `Flashcards#previous()` --  Restore the previous flash card.
 
-
-=== Modes of Quizzing feature
 ==== Current Implementation
 
+The toggling feature is mainly facilitated by 2 classes, `NextCommand` and `PreviousCommand`. For either commands to work, `SelectCommand` is first executed to retrieve the choice of `Index` of the flashcard to begin toggling.
+Following that, `NextCommand` or `PreviousCommand` can be called interchangeably to toggle the flashcard being displayed in the rightmost panel.
+
+For `NextCommand`, the following operations are implemented:
+
+* `NextCommand#getNextInteger(Index index)` -- retrieves the current flash card's Index from `SelectCommand` class.
+* `NextCommand#setNextInteger(Index index, int start)` --  pass the index currently being used in `NextCommand` to `PreviousCommand`.
+
+Similarly, for `PreviousCommand`, the following operations are implemented:
+
+* `PreviousCommand#getPreviousIndex(Index index)` -- retrieves the current flash card's Index from `SelectCommand` class.
+* `NextCommand#setPreviousInteger(Index index, int start)` -- pass the index currently being used in `PreviousCommand` to `NextCommand`.
+
+The sequence diagram below illustrates the execution of `SelectCommand` and how the index will be passed to both `NextCommand` and `PreviousCommand` class.
+
+image::selectCommandSD.png[width="800"]
+
+After `SelectCommand` is being called, `NextCommand` or `PreviousCommand` can be called interchangeably. +
+
+The sequence diagram belows illustrates the execution of `NextCommand` and how the index value will be passed to `PreviousCommand` class. +
+
+image::nextCommandSD.png[width="800"]
+
+To execute toggling of next flashcard, execute the following commands: +
+
+1) `select 2` [2 is just an example, choose index of choice] +
+2) `next` +
+Flashcard with next 3 will be displayed for the example above. +
+
+The sequence diagram below illustrates the execution of `PreviousCommand` and how the index value will be passed to `NextCommand` class. +
+
+image::previousCommandSD.png[width="800"]
+
+To execute toggling of previous flashcard, execute the following commands: +
+
+1) `select 2` [2 is just an example, choose index of choice] +
+2) `previous` +
+Flashcard with next 1 will be displayed for the example above. +
+
+==== Design Consideration
+
+* **Alternative 1 (current choice):** Obtain the index after select command.
+** Pros: Easy to implement and convenient for the user.
+** Cons: Have to manually select the first card to choose from.
+* **Alternative 2:** Toggling will begin from the first index.
+** Pros: Saves the user the step of having to select the index of choice.
+** Cons: Might be too troublesome for some users who wants to being from a flashcard index that is large.
+
+=== Modes of Quizzing feature
 The Modes of Quizzing feature is facilitated by `FlashCards`.
-For each flashcard the user has, he/she can create flash cards specifically for the topic. The user can also choose the testing mode he/she wishes to be tested on. These are the different modes available:
+For each flashcard the user has, he/she can create flash cards specifically for the topic. The user can also choose the testing mode he/she wishes to be tested on. These are the different modes available: +
 
-* `"Subject" Knowledge Testing Mode`
--- From the pool of flash cards under the selected flashcard, the user will choose the number of flash cards and there will be a mixture of frequency levels from the flashcard pool. This mode will focus on a specific flashcard and can be used for revision before mini quizzes held in school.
+1) `"Subject" Testing Mode` +
+2) `"Focus" Testing Mode`
 
-* `"Focus" Subject Testing Mode`
--- This mode will be largely focused on weaker concepts and cards with higher frequency of being chosen from the database “FlashCards”. The frequency level can be toggled in this mode for the user to focus more on weaker concepts or strengthen their concepts. This mode is encouraged when exam dates are drawing near.
+==== `"Subject" Testing Mode`
 
-* `"Random" Mass Testing Mode`
--- After selecting the number of cards to be tested, random flash cards will be chosen from the database “FlashCards” with varying frequency for the user to quiz himself/herself. This mode is encouraged if the user has free time or to pass time when travelling.
+This mode will be largely focused on viewing flash cards based on a particular subject. From the pool of flash cards, the user can choose to select all flash cards that are under the same subject. This mode will focus on a specific subject and can be used for revision before mini quizzes of that particular subject.
+
+===== Current Implementation
+===== Design Consideration
+
+==== `"Focus" Testing Mode`
+This mode will be largely focused on viewing flashcard based on a chosen difficulty. Flashcards are added with a difficulty level set by the user. The difficulty level can be toggled in this mode for the user to focus more on difficult concepts or easier concepts. This mode can be used along side `"Subject" Testing Mode` to get a further filtered list of flashcards with both chosen subject and difficulty.
+
+===== Current Implementation
+This mode of quizzing is facilitated by `SortCommand`. This command filters all the flashcard with the same difficulty level. +
+When a flashcard is added, user must input a difficulty level 1 (easy), 2 (medium) or 3 (difficult) for each flashcard. +
+The `SortCommand` will help students to focus on one chosen difficulty level, helping them prioritize their time well.
+
+The sequence diagram below illustrate how `SortCommand` is executed.
+
+image::SortCommandSD.png[width="800"]
+
+===== Design Consideration
+
+* **Alternative 1 (current choice):** Filters flashcard and displays all flashcard with chosen difficulty.
+** Pros: Easy to implement.
+** Cons: Only get to see flashcards under 1 difficulty level.
+* **Alternative 2:** Displays flashcards in ascending or descending difficulty level.
+** Pros: Can view more flashcards at once.
+** Cons: Difficult to implement.
 
 === Shelf-Life of FlashCards
 ==== Current Implementation
@@ -301,7 +367,7 @@ Step 4. The user now decides that the deadline/exam is over and do not wish to s
 
 Step 5: Alternatively, the user can execute the `clearall` command which will delete all the flash cards in the FlashCards. The `clearall` command will call `Logic#Clearall()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous flash card state, and clear all the respective flash cards in FlashCards.
 
-image::UndoRedoExecuteUndoStateListDiagram.png[width="800"]
+image::undoredoExecuteUndoStateListDiagram.png[width="800"]
 
 [NOTE]
 If the `currentStatePointer` is at index 0, pointing to the initial flash book state, then there are no previous flash book states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
