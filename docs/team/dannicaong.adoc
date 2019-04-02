@@ -90,8 +90,8 @@ include::../UserGuide.adoc[tag=clear]
 
 ** Came up with the three features which were further implemented by my team mates.
 
-include::../DeveloperGuide.adoc[tag=implementation]
-include::../DeveloperGuide.adoc[tag=shelf-life-of-flashcards]
+include::../DeveloperGuide.adoc[tag=Implementation]
+include::../DeveloperGuide.adoc[tag=ShelfLifeofFlashcards]
 
 
 
