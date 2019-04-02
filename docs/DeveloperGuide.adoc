@@ -263,7 +263,7 @@ After `SelectCommand` is being called, `NextCommand` or `PreviousCommand` can be
 
 The sequence diagram belows illustrates the execution of `NextCommand` and how the index value will be passed to `PreviousCommand` class. +
 
-image::nextCommandSD.png[width="800"]
+image::NextCommandSD.png[width="800"]
 
 To execute toggling of next flashcard, execute the following commands: +
 
@@ -273,7 +273,7 @@ Flashcard with next 3 will be displayed for the example above. +
 
 The sequence diagram below illustrates the execution of `PreviousCommand` and how the index value will be passed to `NextCommand` class. +
 
-image::previousCommandSD.png[width="800"]
+image::PreviousCommandSD.png[width="800"]
 
 To execute toggling of previous flashcard, execute the following commands: +
 
@@ -314,7 +314,6 @@ Displays information in this order:
 This panel is further sectioned into 2:
 ** Topic of flashcard
 ** Content of flashcard
-
 
 Upon adding a flashcard with the `add` command, (e.g. `add t/Pythagoras Theorem diff/1 c/a^2 + b^2 = c^2 s/Math`),
 the subject tag "Math" will be added to a `SubjectBook` and `UniqueSubjectList` before being displayed in the `SubjectListPanel`. +
@@ -449,9 +448,6 @@ image::SortCommandSD.png[width="800"]
 * **Alternative 2:** Displays flashcards in ascending or descending difficulty level.
 ** Pros: Can view more flashcards at once.
 ** Cons: Difficult to implement.
-
-* `"Random" Mass Testing Mode` [Coming in v1.4]
--- After selecting the number of cards to be tested, random flash cards will be chosen from the database “FlashCards” with varying frequency for the user to quiz himself/herself. This mode is encouraged if the user has free time or to pass time when travelling.
 
 === Shelf-Life of FlashCards
 ==== Current Implementation
