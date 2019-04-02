@@ -30,17 +30,17 @@ On the next start up, the subject panel will contain the subject list that exist
 * *Other contributions*:
 
 ** Project management:
-*** Managed relevant documentations (e.g. UserGuide, AboutUs etc.) by ensuring everything is correct and well-documented.
+*** Managed relevant documentations (e.g. User Guide etc.) by ensuring everything is correct and well-documented.
 ** Enhancements to existing features:
 *** Updated tags to have different colours (Pull request https://github.com/cs2113-ay1819s2-m11-3/main/pull/6[#6])
 *** Enhanced `AddCommand()` to check for unique subjects before adding the subject to a `UniqueSubjectList` object
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User and Developer Guide: https://github.com/cs2113-ay1819s2-m11-3/main/pull/77/files[UserGuide #77]
+*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com/cs2113-ay1819s2-m11-3/main/pull/77/files[#77]
 **** Ensured the consistency in language
 **** Ensured there were no spelling and grammatical errors
 **** Tidied up the formatting of documents
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
+*** PRs reviewed (with non-trivial review comments): https://github.com/cs2113-ay1819s2-m11-3/main/pull/30[#30] https://github.com/cs2113-ay1819s2-m11-3/main/pull/80[#80] https://github.com/cs2113-ay1819s2-m11-3/main/pull/86[#86]
 
 
 == Contributions to the User Guide
