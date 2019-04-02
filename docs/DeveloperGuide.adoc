@@ -285,7 +285,7 @@ An example scenario of adding a flashcard (Step 1) and displaying the flashcards
 There are 2 possible cases when adding a flashcard:
 
 1. *Subject tag is unique among other flashcards* +
-The Subject tag will be added to the `UniqueSubjectList`.
+The Subject tag will be added to the `UniqueSubjectList` object.
 +
 Shown below is the adding mechanism of a flashcard with a unique subject among other flashcards is added: +
 +
@@ -302,7 +302,7 @@ Since it is unique in this scenario, the subject tag of the current flashcard wi
 +
 
 2. *Subject tag already exists in other flashcards* +
-No Subject tag is added to the `UniqueSubjectList`.
+No Subject tag is added to the `UniqueSubjectList` object.
 +
 Shown below is the adding mechanism of a flashcard whose subject already exists in other flashcards is added:
 +
