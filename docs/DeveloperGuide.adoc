@@ -273,7 +273,7 @@ After `SelectCommand` is being called, `NextCommand` or `PreviousCommand` can be
 
 The sequence diagram belows illustrates the execution of `NextCommand` and how the index value will be passed to `PreviousCommand` class. +
 
-image::nextCommandSD.png[width="800"]
+image::NextCommandSD.png[width="800"]
 
 To execute toggling of next flashcard, execute the following commands: +
 
@@ -283,7 +283,7 @@ Flashcard with next 3 will be displayed for the example above. +
 
 The sequence diagram below illustrates the execution of `PreviousCommand` and how the index value will be passed to `NextCommand` class. +
 
-image::previousCommandSD.png[width="800"]
+image::PreviousCommandSD.png[width="800"]
 
 To execute toggling of previous flashcard, execute the following commands: +
 
@@ -305,7 +305,10 @@ The Modes of Quizzing feature is facilitated by `FlashCards`.
 For each flashcard the user has, he/she can create flash cards specifically for the topic. The user can also choose the testing mode he/she wishes to be tested on. These are the different modes available: +
 
 1) `"Subject" Testing Mode` +
-2) `"Focus" Testing Mode`
+2) `"Focus" Testing Mode` +
+3) `"Random" Testing Mode` [Coming in v1.4]
+-- After selecting the number of cards to be tested, random flash cards will be chosen from the database “FlashCards” with varying frequency for the user to quiz himself/herself. This mode is encouraged if the user has free time or to pass time when travelling.
+
 
 ==== `"Subject" Testing Mode`
 
@@ -334,9 +337,6 @@ image::SortCommandSD.png[width="800"]
 * **Alternative 2:** Displays flashcards in ascending or descending difficulty level.
 ** Pros: Can view more flashcards at once.
 ** Cons: Difficult to implement.
-
-* `"Random" Mass Testing Mode` [Coming in v1.4]
--- After selecting the number of cards to be tested, random flash cards will be chosen from the database “FlashCards” with varying frequency for the user to quiz himself/herself. This mode is encouraged if the user has free time or to pass time when travelling.
 
 === Shelf-Life of FlashCards
 ==== Current Implementation
