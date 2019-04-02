@@ -281,7 +281,7 @@ the subject tag "Math" will be added to a `SubjectBook` and `UniqueSubjectList` 
 
 An example scenario of adding a flashcard (Step 1) and displaying the flashcards for each subject (Step 2) is shown below.
 
-*Step 1: Adding a Flashcard* +
+===== Step 1: Adding a Flashcard
 There are 2 possible cases when adding a flashcard:
 
 1. *Subject tag is unique among other flashcards* +
@@ -327,7 +327,7 @@ Figure: Sequence Diagram of successfully adding a flashcard +
 * Yellow -- JavaFX component
 
 
-*Step 2: Displaying Flashcards According to Subjects* +
+===== Step 2: Displaying Flashcards According to Subjects
 After a flashcard is added, the following sequence of events will happen:
 
 * The UI component's `MainWindow` will create a new `SubjectListPanel` object that takes in and invokes:
@@ -364,7 +364,29 @@ Figure: Sequence Diagram of displaying flashcards according to subject +
 * Yellow -- JavaFX component
 
 ==== Design Considerations
+===== Aspect: When to add a unique subject to the `UniqueSubjectList` object
+* **Alternative 1 (current choice):** Check if subject is unique in `addSubject()` of `UniqueSubjectList`
+** Pros: Supports code reusability.
+** Cons: More tedious to implement.
+* **Alternative 2:** Check if subject is unique in `AddCommand()`
+** Pros: Easy to implement and faster way of checking.
+** Cons: Does not support code reusability.
 
+===== Aspect: Populating subjects list on application start up
+* **Alternative 1 (current choice):** Populate the subject list after the flashcard list is populated
+** Pros: No need additional storage for subject list
+** Cons: Harder to implement.
+* **Alternative 2:** Populate subject list using what was stored in `SubjectBook`
+** Pros: Easy to implement. Populates subject list the same way as how flashcard list is populated.
+** Cons: Need to create additional storage for subject list.
+
+===== Aspect: Displaying subject name as a text label or a coloured subject tag
+* **Alternative 1 (current choice):** Text label
+** Pros: Easier to implement and UI is not overly colourful which makes it easier for users' eyes to adapt.
+** Cons: Inconsistency when displaying subject (i.e. plain text in `SubjectListPanel` but coloured tag in `FlashcardListPanel`).
+* **Alternative 2:** Coloured subject tag
+** Pros: More consistency when displaying subject in `SubjectListPanel` and `FlashcardListPanel`.
+** Cons: Harder to implement. Might also be harsher on the users' eyes and they might not know where to focus on.
 
 
 === Quizzing by Frequency
