@@ -17,6 +17,10 @@ endif::[]
 
 By: `Team M11-3`      Since: `Jan 2019`      Licence: `MIT`
 
+== Intrduction
+
+Flashcard
+
 == Setting up
 
 === Prerequisites
@@ -212,10 +216,6 @@ The `Model`,
 * exposes an unmodifiable `ObservableList<Flashcard>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
-[NOTE]
-As a more OOP model, we can store a `Tag` list in `Flash Book`, which `Flashcard` can reference. This would allow `Flash Book` to only require one `Tag` object per unique `Tag`, instead of each `Flashcard` needing their own `Tag` object. An example of how such a model may look like is given below. +
- +
-image:ModelClassBetterOopDiagram.png[width="800"]
 
 [[Design-Storage]]
 === Storage component
@@ -242,14 +242,54 @@ This section describes some noteworthy details on how certain features are imple
 // tag::undoredo[]
 === Toggle feature
 ==== Current Implementation
+The toggling feature is mainly facilitated by 2 classes, `NextCommand` and `PreviousCommand`. For either commands to work, `SelectCommand` is first executed to retrieve the choice of `Index` of the flashcard to begin toggling.
+Following that, `NextCommand` or `PreviousCommand` can be called interchangeably to toggle the flashcard being displayed in the rightmost panel.
 
-The toggle feature is facilitated by `FlashCards`.
-It ia stored internally and implements the following operations:
+For `NextCommand`, the following operations are implemented:
 
-* `FlashCards#n()` -- (next) Opens the next flash card in line.
-* `FlashCards#p()` -- (previous) Restore the previous flash card.
-* `FlashCards#s()` -- (skip) Skip the current flash card and move on to the next. The flash card skipped will move to the back of the line.
-* `FlashCards#c()` -- (change) Closes the flash cards in the current flashcard and move on to the next flashcard selected/in line.
+* `NextCommand#getNextInteger(Index index)` -- retrieves the current flash card's Index from `SelectCommand` class.
+* `NextCommand#setNextInteger(Index index, int start)` --  pass the index currently being used in `NextCommand` to `PreviousCommand`.
+
+Similarly, for `PreviousCommand`, the following operations are implemented:
+
+* `PreviousCommand#getPreviousIndex(Index index)` -- retrieves the current flash card's Index from `SelectCommand` class.
+* `NextCommand#setPreviousInteger(Index index, int start)` -- pass the index currently being used in `PreviousCommand` to `NextCommand`.
+
+The sequence diagram below illustrates the execution of `SelectCommand` and how the index will be passed to both `NextCommand` and `PreviousCommand` class.
+
+image::selectCommandSD.png[width="800"]
+
+After `SelectCommand` is being called, `NextCommand` or `PreviousCommand` can be called interchangeably. +
+
+The sequence diagram belows illustrates the execution of `NextCommand` and how the index value will be passed to `PreviousCommand` class. +
+
+image::nextCommandSD.png[width="800"]
+
+To execute toggling of next flashcard, execute the following commands: +
+
+1) `select 2` [2 is just an example, choose index of choice] +
+2) `next` +
+Flashcard with next 3 will be displayed for the example above. +
+
+The sequence diagram below illustrates the execution of `PreviousCommand` and how the index value will be passed to `NextCommand` class. +
+
+image::previousCommandSD.png[width="800"]
+
+To execute toggling of previous flashcard, execute the following commands: +
+
+1) `select 2` [2 is just an example, choose index of choice] +
+2) `previous` +
+Flashcard with next 1 will be displayed for the example above. +
+
+==== Design Considerations
+
+* **Alternative 1 (current choice):** Obtain the index after select command.
+** Pros: Easy to implement and convenient for the user.
+** Cons: Have to manually select the first card to choose from.
+* **Alternative 2:** Toggling will begin from the first index.
+** Pros: Saves the user the step of having to select the index of choice.
+** Cons: Might be too troublesome for some users who wants to being from a flashcard index that is large.
+
 
 // tag::quizzingbysubject[]
 === Quizzing by Subject
@@ -390,20 +430,35 @@ Figure: Sequence Diagram of displaying flashcards according to subject +
 
 // end::quizzingbysubject[]
 
-=== Quizzing by Frequency
-This mode will be largely focused on weaker concepts and cards with higher frequency of being chosen from the database “FlashCards”. The frequency level can be toggled in this mode for the user to focus more on weaker concepts or strengthen their concepts. This mode is encouraged when exam dates are drawing near.
+=== Quizzing by Difficulty
+This mode will be largely focused on viewing flashcard based on a chosen difficulty. Flashcards are added with a difficulty level set by the user. The difficulty level can be toggled in this mode for the user to focus more on difficult concepts or easier concepts. This mode can be used along side `"Subject" Testing Mode` to get a further filtered list of flashcards with both chosen subject and difficulty.
 
 ==== Current Implementation
+This mode of quizzing is facilitated by `SortCommand`. This command filters all the flashcard with the same difficulty level. +
+When a flashcard is added, user must input a difficulty level 1 (easy), 2 (medium) or 3 (difficult) for each flashcard. +
+The `SortCommand` will help students to focus on one chosen difficulty level, helping them prioritize their time well.
 
+The sequence diagram below illustrate how `SortCommand` is executed.
+
+image::SortCommandSD.png[width="800"]
 
 ==== Design Considerations
+* **Alternative 1 (current choice):** Filters flashcard and displays all flashcard with chosen difficulty.
+** Pros: Easy to implement.
+** Cons: Only get to see flashcards under 1 difficulty level.
+* **Alternative 2:** Displays flashcards in ascending or descending difficulty level.
+** Pros: Can view more flashcards at once.
+** Cons: Difficult to implement.
 
+* `"Random" Mass Testing Mode` [Coming in v1.4]
+-- After selecting the number of cards to be tested, random flash cards will be chosen from the database “FlashCards” with varying frequency for the user to quiz himself/herself. This mode is encouraged if the user has free time or to pass time when travelling.
 
 === Shelf-Life of FlashCards
 ==== Current Implementation
 
 The user can determine how long the flash cards will exist in the database “FlashCards”.
 The following operations are available:
+
 * `FlashCards#clearall()` -- Clears the entire database.
 * `FlashCards#clear()` -- Clears a specific flashcard when in "Subject" Knowledge Testing Mode.
 * `FlashCards#deadline()` or `FlashCards#exam()` -- Adds a deadline/exam for the specified flashcard.
@@ -427,13 +482,13 @@ Step 3. The user executes `deadline 1 d/...` or `exam 1 d/...` to add a new dead
 image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
 
 [NOTE]
-If a command fails its execution, it will not call `Model#commitAddressBook()`, so the flash book state will not be saved into the `addressBookStateList`.
+If a command fails its execution, it will not call `Model#commitFlashBook()`, so the flash book state will not be saved into the `flashBookStateList`.
 
 Step 4. The user now decides that the deadline/exam is over and do not wish to save the flashcard in the flash card. By executing the `clear` command, he can delete all the respective flash cards under the specified flashcard. The `clear` command will call `Logic#Clear()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous flash card state, and clear all the respective flash cards of the specified flashcard.
 
 Step 5: Alternatively, the user can execute the `clearall` command which will delete all the flash cards in the FlashCards. The `clearall` command will call `Logic#Clearall()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous flash card state, and clear all the respective flash cards in FlashCards.
 
-image::UndoRedoExecuteUndoStateListDiagram.png[width="800"]
+image::undoredoExecuteUndoStateListDiagram.png[width="800"]
 
 [NOTE]
 If the `currentStatePointer` is at index 0, pointing to the initial flash book state, then there are no previous flash book states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
@@ -468,16 +523,21 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Need to have additional internal calendar for the auto deletion.
 * **Alternative 2:** Manual deletion of the flash cards.
 ** Pros: Allow the user to have the choice of keeping the flash cards or removing it.
-** Cons: Might be too troublesome for some users.
+** Cons: Might be troublesome for some users.
+
+Alternative 1 is chosen to prevent overloading of overdue flashcards, which will take up excess storage if the user does not manually delete.
 
 ===== Aspect: Data structure to support the deadline/exam commands
 
 * **Alternative 1 (current choice):** Implement an internal calendar to calculate the number of days left.
 ** Pros: Auto deletion of flash cards.
 ** Cons: Need to pay extra caution for Leap years.
-* **Alternative 2:** Use the `clear` or `clearall` functions.
+* **Alternative 2:** Use the `clear` or `clearall` function to manually delete.
 ** Pros: Give the user the choice to keep or delete.
-** Cons: Troublesome for users.
+** Cons: Might be troublesome for some users.
+
+Alternative 1 is chosen to prevent overloading of overdue flashcards, which will take up excess storage if the user does not manually delete.
+
 // end::undoredo[]
 
 // tag::dataencryption[]
@@ -806,7 +866,7 @@ image::getting-started-ui-result-after.png[width="200"]
 *** Do read the commits one at a time if you feel overwhelmed.
 ****
 
-. Modify the link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] to show the total number of people in the address book.
+. Modify the link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] to show the total number of people in the flash book.
 +
 **Before**
 +
@@ -831,7 +891,7 @@ image::getting-started-ui-status-after.png[width="500"]
 [discrete]
 ==== `Storage` component
 
-*Scenario:* You are in charge of `storage`. For your next project milestone, your team plans to implement a new feature of saving the flash book to the cloud. However, the current implementation of the application constantly saves the address book after the execution of each command, which is not ideal if the user is working on limited internet connection. Your team decided that the application should instead save the changes to a temporary local backup file first, and only upload to the cloud after the user closes the application. Your job is to implement a backup API for the flash book storage.
+*Scenario:* You are in charge of `storage`. For your next project milestone, your team plans to implement a new feature of saving the flash book to the cloud. However, the current implementation of the application constantly saves the flash book after the execution of each command, which is not ideal if the user is working on limited internet connection. Your team decided that the application should instead save the changes to a temporary local backup file first, and only upload to the cloud after the user closes the application. Your job is to implement a backup API for the flash book storage.
 
 [TIP]
 Do take a look at <<Design-Storage>> before attempting to modify the `Storage` component.
@@ -840,8 +900,8 @@ Do take a look at <<Design-Storage>> before attempting to modify the `Storage` c
 +
 ****
 * Hint
-** Add the API method in link:{repoURL}/src/main/java/seedu/address/storage/AddressBookStorage.java[`AddressBookStorage`] interface.
-** Implement the logic in link:{repoURL}/src/main/java/seedu/address/storage/StorageManager.java[`StorageManager`] and link:{repoURL}/src/main/java/seedu/address/storage/JsonAddressBookStorage.java[`JsonAddressBookStorage`] class.
+** Add the API method in link:{repoURL}/src/main/java/seedu/address/storage/FlashBookStorage.java[`FlashBookStorage`] interface.
+** Implement the logic in link:{repoURL}/src/main/java/seedu/address/storage/StorageManager.java[`StorageManager`] and link:{repoURL}/src/main/java/seedu/address/storage/JsonFlashBookStorage.java[`JsonFlashBookStorage`] class.
 * Solution
 ** See this https://github.com/se-edu/addressbook-level4/pull/594[PR] for the full solution.
 ****
@@ -851,7 +911,7 @@ Do take a look at <<Design-Storage>> before attempting to modify the `Storage` c
 
 By creating this command, you will get a chance to learn how to implement a feature end-to-end, touching all major components of the app.
 
-*Scenario:* You are a software maintainer for `addressbook`, as the former developer team has moved on to new projects. The current users of your application have a list of new feature requests that they hope the software will eventually have. The most popular request is to allow adding additional comments/notes about a particular contact, by providing a flexible `remark` field for each contact, rather than relying on tags alone. After designing the specification for the `remark` command, you are convinced that this feature is worth implementing. Your job is to implement the `remark` command.
+*Scenario:* You are a software maintainer for `flashbook`, as the former developer team has moved on to new projects. The current users of your application have a list of new feature requests that they hope the software will eventually have. The most popular request is to allow adding additional comments/notes about a particular contact, by providing a flexible `remark` field for each contact, rather than relying on tags alone. After designing the specification for the `remark` command, you are convinced that this feature is worth implementing. Your job is to implement the `remark` command.
 
 ==== Description
 Edits the remark for a flashcard specified in the `INDEX`. +
