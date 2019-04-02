@@ -299,10 +299,7 @@ Step 4 -- The `UniqueSubjectList` object will invoke its `addSubject()` function
 Since it is unique in this scenario, the subject tag of the current flashcard will be added to this `UniqueSubjectList` object.
 +
 Step 5 -- The `SubjectListPanel` then displays this newly added subject.
-
 +
-The following sequence diagram depicts what happens in this scenario: +
-<< SEQUENCE DIAGRAM >>
 
 2. *Subject tag already exists in other flashcards* +
 No Subject tag is added to the `UniqueSubjectList`.
@@ -320,9 +317,14 @@ Since it is not unique in this scenario, the subject tag *will not* be added to 
 +
 Step 5 -- The `SubjectListPanel` remains unchanged.
 
-+
-The following sequence diagram depicts what happens in this scenario: +
-<< SEQUENCE DIAGRAM >>
+
+The following sequence diagram summarises what happens in this Step 1: +
+
+image::SubjectQuizzingFeature-addSubject.png[width="800"]
+Figure: Sequence Diagram of successfully adding a flashcard +
+
+* Blue: Logic and Model component
+* Yellow: JavaFX component
 
 
 *Step 2: Displaying Flashcards According to Subjects* +
@@ -352,8 +354,14 @@ If the subject tag matches, this flashcard is added to a `newFlashcardList`.
 Step 7 -- The flashcard panel is then populated with flashcards from `newFlashcardList` using `setItems()` and `setCellFactory()` of JavaFX.
 
 
-The following sequence diagram depicts what happens in this scenario: +
-<< SEQUENCE DIAGRAM >>
+The following sequence diagram summarizes what happens in Step 2: +
+
+image::SubjectQuizzingFeature-UI.png[width="800"]
+Figure: Sequence Diagram of displaying flashcards according to subject +
+
+* Purple: UI component
+* Blue: Model component
+* Yellow: JavaFX component
 
 ==== Design Considerations
 asdf
