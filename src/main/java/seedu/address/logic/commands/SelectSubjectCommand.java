@@ -28,6 +28,8 @@ public class SelectSubjectCommand extends Command {
 
     private static boolean isSelectSubjectCommandCalled = false;
 
+    private final String defaultOption = "all";
+
     public SelectSubjectCommand(SubjectTag targetSubject) {
         this.targetSubject = targetSubject;
         isSelectSubjectCommandCalled = true;
@@ -47,11 +49,16 @@ public class SelectSubjectCommand extends Command {
 
         List<SubjectTag> filteredSubjectBook = model.getFilteredSubjectList();
 
-        if (!filteredSubjectBook.contains(targetSubject)) {
+        if (!filteredSubjectBook.contains(targetSubject) && targetSubject.subjectName != defaultOption) {
             throw new CommandException(Messages.MESSAGE_INVALID_SUBJECT);
         }
 
-        model.setSelectedSubject(targetSubject);
+        if (targetSubject.subjectName == defaultOption) {
+            model.getFilteredFlashcardList();
+        } else {
+            model.setSelectedSubject(targetSubject);
+        }
+
         return new CommandResult(String.format(MESSAGE_SELECT_SUBJECT_SUCCESS, targetSubject));
 
     }
