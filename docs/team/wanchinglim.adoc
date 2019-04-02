@@ -14,25 +14,28 @@ It also helps them manage all their notes by keeping them in a single applicatio
 
 == Summary of contributions
 
-* *Major enhancement*: Added the ability for *GUI* to *display only flashcards belonging to the selected subject*
-** What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+* *Major enhancement*: Made enhancement to *GUI*
+** What it does: Allows the user to select a certain subject and only flashcards belonging to that subject will be listed.
+** Justification: This feature helps the user filter flashcards based on their subject with the ability to click via the GUI.
+It can help them to focus on a particular subject's notes when studying.
+** Highlights: This enhancement affects the existing GUI and `add` command.
+It gives the user a better user experience and helps them study more effectively.
+Furthermore, no separate storage is needed even though the subject list is seemingly saved every time the user exits.
+On the next start up, the subject panel will contain the subject list that existed before the user exited the application.
 
 * *Minor enhancement*: Added colours to different subject tags so the same subject will have the same colour. This helps users to differentiate flashcards better based on the subject when all flashcards are listed.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*: [https://github.com/cs2113-ay1819s2-m11-3/main/pull/73[Functional code]]
 
 * *Other contributions*:
 
 ** Project management:
 *** Managed relevant documentations (e.g. UserGuide, AboutUs etc.) by ensuring everything is correct and well-documented.
 ** Enhancements to existing features:
-*** Updated tags to have different colours (Pull requests https://github.com[#33], https://github.com[#34])
+*** Updated tags to have different colours (Pull request https://github.com/cs2113-ay1819s2-m11-3/main/pull/6[#6])
 *** Enhanced `AddCommand()` to check for unique subjects before adding the subject to a `UniqueSubjectList` object
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User and Developer Guide: https://github.com[#14]
+*** Did cosmetic tweaks to existing contents of the User and Developer Guide: https://github.com/cs2113-ay1819s2-m11-3/main/pull/77/files[UserGuide #77]
 **** Ensured the consistency in language
 **** Ensured there were no spelling and grammatical errors
 **** Tidied up the formatting of documents
@@ -59,13 +62,4 @@ include::../UserGuide.adoc[tag=delete]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=]
-
-include::../DeveloperGuide.adoc[tag=]
-
-
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_
+include::../DeveloperGuide.adoc[tag=quizzingbysubject]
