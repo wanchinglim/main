@@ -28,7 +28,7 @@ More importantly, FlashCards is *optimized for those who prefer to work with a C
 .  Copy the file to the folder you want to use as the home folder for this FlashCard application.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
-image::Ui.png[width="790"]
+image::UI copy.png[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
@@ -89,32 +89,31 @@ Displays the list of commands.
 Format: `help`
 
 //don't need to put examples but maybe can put pictures if necessary.
-
+// tag::add[]
 === Adding a subject or flashcard: `add`
 
 Adds a flashcard with subject and data field. +
-Format: `add t/TOPIC diff/DIFFICULTY c/CONTENT d/DEADLINE s/SUBJECT`
+Format: `add t/TOPIC diff/DIFFICULTY c/CONTENT s/SUBJECT`
 
 * `TOPIC`: Title of the flashcard.
 * `DIFFICULTY`: Difficulty level of the flashcard's content indicated by a positive integer 1, 2, or 3 only.
 * `CONTENT`: Content of the flashcard.
-* `DEADLINE`: Date of when the flashcard should be memorised by in the format (dd-mm-yyyy).
 * `SUBJECT`: Subject of the flashcard.
 
 
 *Examples:*
 
-* `add t/Pythagoras Theorem diff/1 c/a^2 + b^2 = c^2 d/30-03-2019 s/Math` +
+* `add t/Pythagoras Theorem diff/1 c/a^2 + b^2 = c^2 s/Math` +
 Adds a flashcard named "Pythagoras Theorem" under the subject "Math" to the list of flashcards.
-It has a difficulty level of "1" with the content "a^2 + b^2 = c^2" and should be memorised by "30-03-2019".
+It has a difficulty level of "1" with the content "a^2 + b^2 = c^2".
 
-* `add t/Photosynthesis diff/1 c/A chemical reaction that takes place inside a plant, producing food for the plant to survive d/01-04-2019 s/Science` +
+* `add t/Photosynthesis diff/1 c/A chemical reaction that takes place inside a plant, producing food for the plant to survive s/Science` +
 Adds a flashcard named "Photosynthesis" under the subject "Science" to the list of flashcards.
-It has a difficulty level of "1" with the content "A chemical reaction that takes place inside a plant, producing food for the plant to survive" and should be memorised by "01-04-2019".
+It has a difficulty level of "1" with the content "A chemical reaction that takes place inside a plant, producing food for the plant to survive".
 
 
 The flashcard that was just added will be displayed.
-
+// end::add[]
 === Listing all flashcards categorized by subjects : `list` or `l`
 
 Displays an indexed list of flashcards categorized by subjects. +
@@ -122,6 +121,7 @@ Format: `list` or `l`
 
 Subject tags will be colour-coded. Same subject tags will have the same colour.
 
+// tag::edit[]
 === Editing a flashcard : `edit` or `e`
 
 Edits the content of a flashcard. +
@@ -143,7 +143,7 @@ Edits flashcard with index "1" and replaces its existing subject with "Science".
 Edits flashcard with index "2" and replaces its existing content with "The quick brown fox".
 
 The edited flashcard will be updated and displayed in the list of flashcards.
-
+// end::edit[]
 === Finding a flashcard based on topic: `find` or `f`
 
 Find flashcards based on the given keyword. +
@@ -171,7 +171,7 @@ Returns any flashcards whose topic contains `sun` or `fox` such as "Brown fox" a
 
 
 The flashcard(s) whose topic matches any of the keywords given will be displayed in the list of flashcards.
-
+// tag::delete[]
 === Deleting a flashcard : `delete` or `d`
 
 Deletes the specified flashcard. +
@@ -201,7 +201,7 @@ Find flashcards with keywords "Pythagoras" and "Theorem". +
 Deletes the specified flashcard at index 1.
 
 The updated list of flashcards will be displayed.
-
+// end::delete[]
 === Selecting a flashcard : `select`
 
 Selects the flashcard identified by the index number used in the displayed flashcards list. +
@@ -230,6 +230,7 @@ Find flashcards with the keyword "definition". +
 `select 1` +
 Selects the 1st flashcard in the displayed results of the `find` command.
 
+// tag==togglemode[]
 === Viewing the next flashcard : `next` or `n`
 
 Views the next flashcard in line. +
@@ -284,6 +285,7 @@ Displays the content of this flashcard.
 
 The previous flashcard in line will be selected and its content will be displayed.
 
+// end::togglemode[]
 === Listing entered commands : `history`
 
 Lists all the commands that you have entered in reverse chronological order. +
