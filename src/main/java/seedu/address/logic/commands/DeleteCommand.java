@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
@@ -10,6 +11,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.flashcard.Flashcard;
+import seedu.address.model.flashcard.TopicContainsSubjectPredicate;
 
 /**
  * Deletes a flashcard identified using it's displayed index from the flash book.
@@ -43,7 +45,15 @@ public class DeleteCommand extends Command {
 
         Flashcard flashcardToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteFlashcard(flashcardToDelete);
+
+        model.updateFilteredFlashcardList(new
+                TopicContainsSubjectPredicate(Arrays.asList(flashcardToDelete.getSubjectName())));
+        if (model.getFilteredFlashcardList().size() == 0) {
+            model.deleteSubject(flashcardToDelete.getSubject());
+        }
         model.commitFlashBook();
+        model.updateFilteredFlashcardList(Model.PREDICATE_SHOW_ALL_FLASHCARDS);
+        model.getFilteredSubjectList();
         return new CommandResult(String.format(MESSAGE_DELETE_FLASHCARD_SUCCESS, flashcardToDelete));
     }
 

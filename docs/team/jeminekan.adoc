@@ -15,21 +15,29 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 == Summary of contributions
 
 * *Major enhancement*: added *Toggle feature*
-** What it does: allows the user to navigate between flashcard easily with a next and previous command.
-** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+** What it does: It allows the user to navigate between flashcard easily with a next and previous command.
+** Justification: This feature improves the navigation process for viewing the flashcard. Instead of always selecting a flashcard by index, users can just command next or previous to toggle through the flashbook.
+** Highlights:  This enhancement is designed to work with other commands as well as other commands that will be added in the future. It incorporates algorithms and operating styles thought in this module.
 
-* *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
+* *Major enhancement*: added *Sort feature*
+** What it does: It allows the user to view all flashcards of a certain difficulty.
+** Justification: This feature provides a filtered flashbook for users to focus on only reading flashcards with selected difficulty. This commands also allows users to search for flashcards of that difficulty.
+** Highlights:  This enhancement is designed to work with other commands as well as other commands that will be added in the future. It focuses mainly on the logic and model segment of the code to produce the desired outcome. I had to use various Java built-in libraries to achieve this.
+** Credits: This code was inspired by the find command that was provided in address book 4.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+
+* *Minor enhancement*: Added a status bar for total number of flashcards that the flashbook contains.
+* *Minor enhancement*: Added a `selectSubject` command to allow users to choose the subject.
+
+* *Code contributed*: [https://nuscs2113-ay1819s2.github.io/dashboard-beta/#search=jemine&sort=displayName&since=2019-02-10&until=2019-04-01&timeframe=day&reverse=false&groupSelect=groupByRepos&breakdown=false&tabAuthor=jemine1998&tabRepo=CS2113-AY1819S2-M11-3_main_master[Functional code]]
+//[https://github.com[Test code]] _{give links to collated code files}_
 
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+*** Managed releases `v1.1` - `v1.3` (3 releases) on GitHub
 ** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
+*** Added a status for number of flashcards(Pull requests https://github.com[#33], https://github.com[#34])
 *** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
 ** Documentation:
 *** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
@@ -38,9 +46,6 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 *** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
 *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
 *** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
-** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
 
 _{you can add/remove categories in the list above}_
 
@@ -51,9 +56,9 @@ _{you can add/remove categories in the list above}_
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=undoredo]
+include::../UserGuide.adoc[tag=togglemode]
 
-include::../UserGuide.adoc[tag=dataencryption]
+
 
 == Contributions to the Developer Guide
 
@@ -61,10 +66,9 @@ include::../UserGuide.adoc[tag=dataencryption]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
+include::../DeveloperGuide.adoc[tag=togglefeature]
 
-include::../DeveloperGuide.adoc[tag=dataencryption]
-
+include::../DeveloperGuide.adoc[tag=quizzingfeature]
 
 == PROJECT: PowerPointLabs
 

@@ -119,6 +119,11 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredSubjectList(PREDICATE_SHOW_ALL_SUBJECTS);
     }
 
+    @Override
+    public void deleteSubject(SubjectTag subject) {
+        subjectBook.deleteSubject(subject);
+    }
+
     /**
      * Selected subject in the filtered subject list.
      * null if no subject is selected.

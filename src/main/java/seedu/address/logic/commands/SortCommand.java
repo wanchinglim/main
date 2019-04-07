@@ -2,11 +2,13 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Arrays;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.flashcard.TopicContainsDifficultyPredicate;
-
+import seedu.address.model.flashcard.TopicContainsDoublePredicate;
 
 /**
  * Finds and lists all flashcards in FlashCards whose name contains any of the argument keywords.
@@ -23,14 +25,24 @@ public class SortCommand extends Command {
 
     private final TopicContainsDifficultyPredicate predicate;
 
-    public SortCommand(TopicContainsDifficultyPredicate predicate) {
+    private final String[] difficultyName;
+
+    public SortCommand(TopicContainsDifficultyPredicate predicate, String[] difficultyName) {
         this.predicate = predicate;
+        this.difficultyName = difficultyName;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        model.updateFilteredFlashcardList(predicate);
+        if (SelectSubjectCommand.getSelectSubject() == null) {
+            model.updateFilteredFlashcardList(predicate);
+        } else {
+            String name = SelectSubjectCommand.getSelectSubject().toString().trim();
+            String[] subjectName = name.split("\\s+");
+            model.updateFilteredFlashcardList(new TopicContainsDoublePredicate(Arrays.asList(subjectName),
+                    Arrays.asList(difficultyName)));
+        }
 
         return new CommandResult(
                 String.format(Messages.MESSAGE_FLASHCARDS_LISTED_OVERVIEW, model.getFilteredFlashcardList().size()));

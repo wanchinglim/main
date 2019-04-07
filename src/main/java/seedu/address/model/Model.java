@@ -35,10 +35,15 @@ public interface Model {
     ReadOnlyProperty<SubjectTag> selectedSubjectProperty();
 
     /**
-     * Adds the given flashcard.
+     * Adds the given subject
      * {@code flashcard} must not already exist in the flash book.
      */
     void addSubject(SubjectTag subject);
+
+    /**
+     * Deletes the given subject.
+     */
+    void deleteSubject(SubjectTag subject);
 
     /**
      * Sets the selected subject in the filtered subject list.

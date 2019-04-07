@@ -55,6 +55,7 @@ public class AddCommand extends Command {
         model.addFlashcard(toAdd);
         model.addSubject(toAdd.getSubject());
         model.commitFlashBook();
+        model.setSelectedSubject(toAdd.getSubject());
         model.setSelectedFlashcard(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }

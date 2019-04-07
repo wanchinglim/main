@@ -17,13 +17,10 @@ endif::[]
 
 By: `Team M11-3`      Since: `Jan 2019`      Licence: `MIT`
 
-== Intrduction
-
-Flashcard
-
 == Setting up
 
 === Prerequisites
+The following are some prerequisites required:
 
 . *JDK `9`* or later
 +
@@ -39,6 +36,7 @@ Do not disable them. If you have disabled them, go to `File` > `Settings` > `Plu
 
 
 === Setting up the project in your computer
+Follow the steps below to set up the project:
 
 . Fork this repo, and clone the fork to your computer
 . Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
@@ -57,6 +55,7 @@ This will generate all resources required by the application and tests.
 . Repeat this for the test folder as well (e.g. check link:{repoURL}/src/test/java/seedu/address/ui/HelpWindowTest.java[`HelpWindowTest.java`] for code errors, and if so, resolve it the same way)
 
 === Verifying the setup
+Follow the steps below to verify the setup:
 
 . Run the `seedu.address.MainApp` and try a few commands
 . <<Testing,Run the tests>> to ensure they all pass.
@@ -239,19 +238,9 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-// tag::undoredo[]
+// tag::togglefeature[]
 === Toggle feature
-
-The toggle feature is facilitated by `FlashCards`.
-It ia stored internally and implements the following operations:
-
-
-* `Flashcards#n(next)` -- Opens the next flash card in line.
-* `Flashcards#p(previous)` --  Restore the previous flash card.
-
-
 ==== Current Implementation
-
 The toggling feature is mainly facilitated by 2 classes, `NextCommand` and `PreviousCommand`. For either commands to work, `SelectCommand` is first executed to retrieve the choice of `Index` of the flashcard to begin toggling.
 Following that, `NextCommand` or `PreviousCommand` can be called interchangeably to toggle the flashcard being displayed in the rightmost panel.
 
@@ -273,7 +262,7 @@ After `SelectCommand` is being called, `NextCommand` or `PreviousCommand` can be
 
 The sequence diagram belows illustrates the execution of `NextCommand` and how the index value will be passed to `PreviousCommand` class. +
 
-image::nextCommandSD.png[width="800"]
+image::NextCommandSD.png[width="800"]
 
 To execute toggling of next flashcard, execute the following commands: +
 
@@ -283,7 +272,7 @@ Flashcard with next 3 will be displayed for the example above. +
 
 The sequence diagram below illustrates the execution of `PreviousCommand` and how the index value will be passed to `NextCommand` class. +
 
-image::previousCommandSD.png[width="800"]
+image::PreviousCommandSD.png[width="800"]
 
 To execute toggling of previous flashcard, execute the following commands: +
 
@@ -291,7 +280,7 @@ To execute toggling of previous flashcard, execute the following commands: +
 2) `previous` +
 Flashcard with next 1 will be displayed for the example above. +
 
-==== Design Consideration
+==== Design Considerations
 
 * **Alternative 1 (current choice):** Obtain the index after select command.
 ** Pros: Easy to implement and convenient for the user.
@@ -300,24 +289,158 @@ Flashcard with next 1 will be displayed for the example above. +
 ** Pros: Saves the user the step of having to select the index of choice.
 ** Cons: Might be too troublesome for some users who wants to being from a flashcard index that is large.
 
+
+// end::togglefeature[]
+
+// tag::quizzingfeature[]
+
 === Modes of Quizzing feature
 The Modes of Quizzing feature is facilitated by `FlashCards`.
 For each flashcard the user has, he/she can create flash cards specifically for the topic. The user can also choose the testing mode he/she wishes to be tested on. These are the different modes available: +
+=======
 
-1) `"Subject" Testing Mode` +
-2) `"Focus" Testing Mode`
+// tag::quizzingbysubject[]
+=== Quizzing by Subject
+A subject that is selected will have all the flashcards pertaining to it shown.
+This mode will help users focus on a specific subject before their tests/exams/quizzes.
 
-==== `"Subject" Testing Mode`
+==== Current Implementation
+The FlashCards UI is divided into three panels from left to right – Subjects, Flashcards, and Content. +
 
-This mode will be largely focused on viewing flash cards based on a particular subject. From the pool of flash cards, the user can choose to select all flash cards that are under the same subject. This mode will focus on a specific subject and can be used for revision before mini quizzes of that particular subject.
+* Subjects Panel (facilitated by `SubjectListPanel`): +
+Displays:
+** Subject tag
 
-===== Current Implementation
-===== Design Consideration
+* Flashcards Panel (facilitated by `FlashcardListPanel`): +
+Displays information in this order:
+** Topic of flashcard
+** Difficulty level of flashcard
+** (Optional) Deadline to memorize flashcard
+** Subject tag displayed as a coloured tag
 
-==== `"Focus" Testing Mode`
+* Content Panel (facilitated by `RightPanel`): +
+This panel is further sectioned into 2:
+** Topic of flashcard
+** Content of flashcard
+
+Upon adding a flashcard with the `add` command, (e.g. `add t/Pythagoras Theorem diff/1 c/a^2 + b^2 = c^2 s/Math`),
+the subject tag "Math" will be added to a `SubjectBook` and `UniqueSubjectList` before being displayed in the `SubjectListPanel`. +
+
+An example scenario of adding a flashcard (Step 1) and displaying the flashcards for each subject (Step 2) is shown below.
+
+===== Step 1: Adding a Flashcard
+There are 2 possible cases when adding a flashcard:
+
+1. *Subject tag is unique among other flashcards* +
+The Subject tag will be added to the `UniqueSubjectList` object.
++
+Shown below is the adding mechanism of a flashcard with a unique subject among other flashcards is added: +
++
+* Each time a flashcard is added using the Logic component's `AddCommand()`, the adding will be facilitated by `addSubject()` in the Model component.
++
+* The Model component's `addSubject()` will use `SubjectBook` 's `addSubject()` to add the subject to a list containing only unique subjects.
++
+* `SubjectBook` will create a `UniqueSubjectList` object that stores all unique subjects.
++
+* The `UniqueSubjectList` object will invoke its `addSubject()` function. This function will check if the current `UniqueSubjectList` object contains the subject tag of the current flashcard to be added.
+Since it is unique in this scenario, the subject tag of the current flashcard will be added to this `UniqueSubjectList` object.
++
+* The `SubjectListPanel` then displays this newly added subject.
++
+
+2. *Subject tag already exists in other flashcards* +
+No Subject tag is added to the `UniqueSubjectList` object.
++
+Shown below is the adding mechanism of a flashcard whose subject already exists in other flashcards is added:
++
+* Each time a flashcard is added using the Logic component's `AddCommand()`, the adding will be facilitated by `addSubject()` in the Model component.
++
+* The Model component's `addSubject()` will use `SubjectBook` 's `addSubject()` to add the subject to a list containing only unique subjects.
++
+* `SubjectBook` will create a `UniqueSubjectList` object that stores all unique subjects.
++
+* The `UniqueSubjectList` object will invoke its `addSubject()` function. This function will check if the current `UniqueSubjectList` object contains the subject tag of the current flashcard to be added.
+Since it is not unique in this scenario, the subject tag *will not* be added to the `UniqueSubjectList` object.
++
+* The `SubjectListPanel` remains unchanged.
+
+
+The following sequence diagram summarises what happens in this Step 1: +
+
+image::SubjectQuizzingFeature-addSubject.png[width="800"]
+Figure: Sequence Diagram of successfully adding a flashcard +
+
+* Blue: -- Logic and Model component
+* Yellow -- JavaFX component
+
+
+===== Step 2: Displaying Flashcards According to Subjects
+After a flashcard is added, the following sequence of events will happen:
+
+* The UI component's `MainWindow` will create a new `SubjectListPanel` object that takes in and invokes:
+
+** Logic component's `getFilteredSubjectList()` -- returns `filteredSubjects` which contains a list of unique subjects
+** Logic component's `selectedSubjectProperty()` -- returns the `selectedSubject` tag clicked by the user
+** Logic component's `setSelectedSubject()` -- replaces previously selected subject with the newly selected subject
+
+* In `SubjectListPanel`, `setItems()` and `setCellFactory()` of JavaFX will populate the panel with the unique subject list from `getFilteredSubjectList()`.
+
+* The UI component's `MainWindow` will create a new `FlashcardListPanel` object that takes in and invokes:
+
+** Logic component's `getFilteredFlashcardList()` -- returns `filteredFlashcards` which contains a list of unique flashcards
+** Logic component's `selectedSubjectProperty()` -- returns the `selectedSubject` tag clicked by the user
+
+* In `FlashcardListPanel`, `setItems()` and `setCellFactory()` of JavaFX will populate the panel with the unique flashcard list from `getFilteredFlashcardList()`.
+
+* A listener is attached to the `selectedSubjectProperty` value passed into `FlashcardListPanel` in order to detect if another subject is selected.
+
+* When a new subject is selected, `FlashcardListPanel` invokes `updateFlashcardList()`.
+It matches the subject tag of flashcards from `getFilteredFlashcardList()` with the newly selected subject.
+If the subject tag matches, this flashcard is added to a `newFlashcardList`.
+
+* The flashcard panel is then populated with flashcards from `newFlashcardList` using `setItems()` and `setCellFactory()` of JavaFX.
+
+
+The following sequence diagram summarizes what happens in Step 2: +
+
+image::SubjectQuizzingFeature-UI.png[width="800"]
+Figure: Sequence Diagram of displaying flashcards according to subject +
+
+* Purple -- UI component
+* Blue -- Model component
+* Yellow -- JavaFX component
+
+==== Design Considerations
+===== Aspect: When to add a unique subject to the `UniqueSubjectList` object
+* **Alternative 1 (current choice):** Check if subject is unique in `addSubject()` of `UniqueSubjectList`
+** Pros: Supports code reusability.
+** Cons: More tedious to implement.
+* **Alternative 2:** Check if subject is unique in `AddCommand()`
+** Pros: Easy to implement and faster way of checking.
+** Cons: Does not support code reusability.
+
+===== Aspect: Populating subjects list on application start up
+* **Alternative 1 (current choice):** Populate the subject list after the flashcard list is populated
+** Pros: No need additional storage for subject list
+** Cons: Harder to implement.
+* **Alternative 2:** Populate subject list using what was stored in `SubjectBook`
+** Pros: Easy to implement. Populates subject list the same way as how flashcard list is populated.
+** Cons: Need to create additional storage for subject list.
+
+===== Aspect: Displaying subject name as a text label or a coloured subject tag
+* **Alternative 1 (current choice):** Text label
+** Pros: Easier to implement and UI is not overly colourful which makes it easier for users' eyes to adapt.
+** Cons: Inconsistency when displaying subject (i.e. plain text in `SubjectListPanel` but coloured tag in `FlashcardListPanel`).
+* **Alternative 2:** Coloured subject tag
+** Pros: More consistency when displaying subject in `SubjectListPanel` and `FlashcardListPanel`.
+** Cons: Harder to implement. Might also be harsher on the users' eyes and they might not know where to focus on.
+
+// end::quizzingbysubject[]
+
+=== Quizzing by Difficulty
 This mode will be largely focused on viewing flashcard based on a chosen difficulty. Flashcards are added with a difficulty level set by the user. The difficulty level can be toggled in this mode for the user to focus more on difficult concepts or easier concepts. This mode can be used along side `"Subject" Testing Mode` to get a further filtered list of flashcards with both chosen subject and difficulty.
 
-===== Current Implementation
+==== Current Implementation
 This mode of quizzing is facilitated by `SortCommand`. This command filters all the flashcard with the same difficulty level. +
 When a flashcard is added, user must input a difficulty level 1 (easy), 2 (medium) or 3 (difficult) for each flashcard. +
 The `SortCommand` will help students to focus on one chosen difficulty level, helping them prioritize their time well.
@@ -326,8 +449,7 @@ The sequence diagram below illustrate how `SortCommand` is executed.
 
 image::SortCommandSD.png[width="800"]
 
-===== Design Consideration
-
+==== Design Considerations
 * **Alternative 1 (current choice):** Filters flashcard and displays all flashcard with chosen difficulty.
 ** Pros: Easy to implement.
 ** Cons: Only get to see flashcards under 1 difficulty level.
@@ -335,9 +457,7 @@ image::SortCommandSD.png[width="800"]
 ** Pros: Can view more flashcards at once.
 ** Cons: Difficult to implement.
 
-* `"Random" Mass Testing Mode` [Coming in v1.4]
--- After selecting the number of cards to be tested, random flash cards will be chosen from the database “FlashCards” with varying frequency for the user to quiz himself/herself. This mode is encouraged if the user has free time or to pass time when travelling.
-
+// end::quizzingfeature[]
 === Shelf-Life of FlashCards
 ==== Current Implementation
 

@@ -16,9 +16,15 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all flashcards";
 
+    public String getStatus() {
+        return "default";
+    }
+
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
+        SelectSubjectCommand.listCommandCalled();
+        model.setSelectedSubject(null);
         model.updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
         return new CommandResult(MESSAGE_SUCCESS);
     }

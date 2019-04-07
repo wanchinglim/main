@@ -76,6 +76,14 @@ public class SubjectBook implements ReadOnlySubjectBook {
     }
 
     /**
+     * Deletes a subject to the subject book.
+     */
+    public void deleteSubject(SubjectTag subject) {
+        subjects.remove(subject);
+        indicateModified();
+    }
+
+    /**
      * Replaces the contents of the flashcard list with {@code flashcards}.
      * {@code flashcards} must not contain duplicate flashcards.
      */

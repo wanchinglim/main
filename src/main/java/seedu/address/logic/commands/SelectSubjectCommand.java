@@ -2,12 +2,14 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.flashcard.TopicContainsSubjectPredicate;
 import seedu.address.model.tag.SubjectTag;
 
 /**
@@ -26,21 +28,30 @@ public class SelectSubjectCommand extends Command {
 
     private static SubjectTag targetSubject;
 
-    private static boolean isSelectSubjectCommandCalled = false;
+    private static SubjectTag selectSubject = null;
 
-    private final String defaultOption = "all";
+    private static TopicContainsSubjectPredicate predicate;
 
-    public SelectSubjectCommand(SubjectTag targetSubject) {
+    private String[] keywords;
+
+
+
+    public SelectSubjectCommand(SubjectTag targetSubject, String[] keywords) {
         this.targetSubject = targetSubject;
-        isSelectSubjectCommandCalled = true;
+        this.keywords = keywords;
+        selectSubject = targetSubject;
     }
 
-    public static SubjectTag getTargetSubject() {
-        return targetSubject;
+    public static TopicContainsSubjectPredicate getPredicate() {
+        return predicate;
     }
 
-    public static boolean isIsSelectSubjectCommandCalled() {
-        return isSelectSubjectCommandCalled;
+    public static void listCommandCalled() {
+        selectSubject = null;
+    }
+
+    public static SubjectTag getSelectSubject() {
+        return selectSubject;
     }
 
     @Override
@@ -48,16 +59,13 @@ public class SelectSubjectCommand extends Command {
         requireNonNull(model);
 
         List<SubjectTag> filteredSubjectBook = model.getFilteredSubjectList();
+        predicate = new TopicContainsSubjectPredicate(Arrays.asList(keywords));
 
-        if (!filteredSubjectBook.contains(targetSubject) && targetSubject.subjectName != defaultOption) {
+        if (!filteredSubjectBook.contains(targetSubject)) {
             throw new CommandException(Messages.MESSAGE_INVALID_SUBJECT);
         }
-
-        if (targetSubject.subjectName == defaultOption) {
-            model.getFilteredFlashcardList();
-        } else {
-            model.setSelectedSubject(targetSubject);
-        }
+        model.setSelectedSubject(targetSubject);
+        model.updateFilteredFlashcardList(predicate);
 
         return new CommandResult(String.format(MESSAGE_SELECT_SUBJECT_SUCCESS, targetSubject));
 

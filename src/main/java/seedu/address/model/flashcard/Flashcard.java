@@ -28,6 +28,7 @@ public class Flashcard {
     private SubjectTag subject;
     private Index index;
 
+    private String subjectName;
 
     /**
      * Every field must be present and not null.
@@ -44,6 +45,7 @@ public class Flashcard {
             this.subject = s;
             break;
         }
+        this.subjectName = subjectTag.toString();
     }
 
     public Topic getTopic() {
@@ -64,6 +66,10 @@ public class Flashcard {
 
     public SubjectTag getSubject() {
         return subject;
+    }
+
+    public String getSubjectName() {
+        return subjectName;
     }
 
     /**
