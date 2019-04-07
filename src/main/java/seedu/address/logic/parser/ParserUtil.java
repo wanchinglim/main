@@ -137,6 +137,7 @@ public class ParserUtil {
         String trimmedSubject = subject.trim();
         SubjectTag subjectTag = new SubjectTag(trimmedSubject);
 
+
         return subjectTag;
     }
 

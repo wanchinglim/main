@@ -19,8 +19,9 @@ public class SelectSubjectCommandParser implements Parser<SelectSubjectCommand> 
     public SelectSubjectCommand parse(String args) throws ParseException {
         try {
             SubjectTag subjectTag = ParserUtil.parseSubject(args);
-
-            return new SelectSubjectCommand(subjectTag);
+            String trimmedArgs = args.trim();
+            String[] nameKeywords = trimmedArgs.split("\\s+");
+            return new SelectSubjectCommand(subjectTag, nameKeywords);
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_SUBJECT, SelectSubjectCommand.MESSAGE_USAGE), pe);
