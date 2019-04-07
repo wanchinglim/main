@@ -11,6 +11,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.SelectSubjectCommand;
 import seedu.address.model.tag.SubjectTag;
 
 /**
@@ -51,6 +52,7 @@ public class SubjectListPanel extends UiPart<Region> {
                 int index = subjectListView.getItems().indexOf(newValue);
                 subjectListView.scrollTo(index);
                 subjectListView.getSelectionModel().clearAndSelect(index);
+                new SelectSubjectCommand(newValue, newValue.toString().split("\\s+"));
             }
         });
     }

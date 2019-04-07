@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_FLASHCARDS;
 
 import java.util.List;
 
@@ -50,6 +49,7 @@ public class DeadlineCommand extends Command {
         requireNonNull(index);
         requireNonNull(deadline);
 
+
         this.index = index;
         this.deadline = deadline;
     }
@@ -74,8 +74,6 @@ public class DeadlineCommand extends Command {
             throw new AssertionError("The target flashcard cannot be missing");
         }
 
-        //model.updateFlashcard(flashcardToEdit, editedFlashcard);
-        model.updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
         model.commitFlashBook();
 
         return new CommandResult(generateSuccessMessage(editedFlashcard));

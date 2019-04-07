@@ -27,7 +27,7 @@ public class SortCommandParser implements Parser<SortCommand> {
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
 
-        return new SortCommand(new TopicContainsDifficultyPredicate(Arrays.asList(nameKeywords)));
+        return new SortCommand(new TopicContainsDifficultyPredicate(Arrays.asList(nameKeywords)), nameKeywords);
     }
 
 }
