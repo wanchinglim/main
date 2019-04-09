@@ -119,23 +119,20 @@
 
 package seedu.address.ui;
 
-//import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.logging.Logger;
 
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-//import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.Logic;
-//import seedu.address.logic.commands.SelectSubjectCommand;
 import seedu.address.model.flashcard.Flashcard;
-//import seedu.address.model.flashcard.TopicContainsSubjectPredicate;
 import seedu.address.model.tag.SubjectTag;
 
 /**
@@ -148,7 +145,15 @@ public class FlashcardListPanel extends UiPart<Region> {
     @FXML
     private ListView<Flashcard> flashcardListView;
 
-    private Logic logic;
+    private FilteredList<Flashcard> filteredList;
+
+    private ObservableList<SubjectTag> subjectListView;
+
+    private ObservableValue<SubjectTag> s;
+    private ObservableValue<Flashcard> f;
+    private ObservableList<Flashcard> list = FXCollections.observableArrayList();
+    private ObservableList<Flashcard> newFlashcardList = FXCollections.observableArrayList();
+
 
     public FlashcardListPanel(ObservableList<SubjectTag> subjectList,
                               ObservableList<Flashcard> flashcardList,
@@ -163,19 +168,19 @@ public class FlashcardListPanel extends UiPart<Region> {
             onSelectedFlashcardChange.accept(newValue);
         });
 
-        /**
-         * selectedSubject.addListener((observable, oldValue, newValue) -> {
-         *     if (newValue == null) {
-         *          flashcardListView.getSelectionModel().clearSelection();
-         *     } else {
-         *          ObservableList<Flashcard> newList= new FilteredList<Flashcard>(flashcardList, new
-         *          TopicContainsSubjectPredicate(Arrays.asList(newValue.toString().split("\\s+"))));
-         *          flashcardListView.setItems(newList);
-         *          flashcardListView.setCellFactory(listView -> new FlashcardListViewCell());
-         *     }
-         *
-         * });
-          */
+        selectedSubject.addListener((observable, oldValue, newValue) -> {
+            if (newValue == null) {
+                flashcardListView.getSelectionModel().clearSelection();
+            } else {
+                this.newFlashcardList.clear();
+                this.newFlashcardList = updateFlashcardList(newValue, flashcardList);
+                flashcardListView.setItems(newFlashcardList);
+                flashcardListView.setCellFactory(listView -> new FlashcardListViewCell());
+            }
+
+        });
+
+
 
 
         selectedFlashcard.addListener((observable, oldValue, newValue) -> {
@@ -213,5 +218,19 @@ public class FlashcardListPanel extends UiPart<Region> {
             }
         }
     }
+
+    /**
+     * Updates list of flashcards to be displayed in FlashcardListPanel based on selected subject
+     */
+    private ObservableList<Flashcard> updateFlashcardList(SubjectTag subject,
+                                                          ObservableList<Flashcard> flashcardList) {
+        for (Flashcard f : flashcardList) {
+            if (subject.equals(f.getSubject())) {
+                list.add(f);
+            }
+        }
+        return list;
+    }
+
 
 }
