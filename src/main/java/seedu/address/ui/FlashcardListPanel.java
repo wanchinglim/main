@@ -119,10 +119,6 @@
 
 package seedu.address.ui;
 
-import java.util.Objects;
-import java.util.function.Consumer;
-import java.util.logging.Logger;
-
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -134,6 +130,10 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.flashcard.Flashcard;
 import seedu.address.model.tag.SubjectTag;
+
+import java.util.Objects;
+import java.util.function.Consumer;
+import java.util.logging.Logger;
 
 /**
  * Panel containing the list of persons.
@@ -155,8 +155,7 @@ public class FlashcardListPanel extends UiPart<Region> {
     private ObservableList<Flashcard> newFlashcardList = FXCollections.observableArrayList();
 
 
-    public FlashcardListPanel(ObservableList<SubjectTag> subjectList,
-                              ObservableList<Flashcard> flashcardList,
+    public FlashcardListPanel(ObservableList<Flashcard> flashcardList,
                               ObservableValue<SubjectTag> selectedSubject,
                               ObservableValue<Flashcard> selectedFlashcard,
                               Consumer<Flashcard> onSelectedFlashcardChange) {
@@ -179,8 +178,6 @@ public class FlashcardListPanel extends UiPart<Region> {
             }
 
         });
-
-
 
 
         selectedFlashcard.addListener((observable, oldValue, newValue) -> {
