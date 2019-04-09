@@ -1,9 +1,5 @@
 package seedu.address.logic;
 
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.logging.Logger;
-
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -19,6 +15,10 @@ import seedu.address.model.flashcard.Flashcard;
 import seedu.address.model.subject.ReadOnlySubjectBook;
 import seedu.address.model.tag.SubjectTag;
 import seedu.address.storage.Storage;
+
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.logging.Logger;
 
 /**
  * The main LogicManager of the app.
@@ -99,6 +99,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Flashcard> getFilteredFlashcardList() {
         return model.getFilteredFlashcardList();
+    }
+
+    @Override
+    public ObservableList<Flashcard> getUpdatedFlashcardList() {
+        return model.getUpdatedFlashcardList();
     }
 
     @Override

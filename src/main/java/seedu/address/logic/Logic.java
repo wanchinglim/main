@@ -1,7 +1,5 @@
 package seedu.address.logic;
 
-import java.nio.file.Path;
-
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -12,6 +10,8 @@ import seedu.address.model.ReadOnlyFlashBook;
 import seedu.address.model.flashcard.Flashcard;
 import seedu.address.model.subject.ReadOnlySubjectBook;
 import seedu.address.model.tag.SubjectTag;
+
+import java.nio.file.Path;
 
 /**
  * API of the Logic component
@@ -65,6 +65,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of flashcards */
     ObservableList<Flashcard> getFilteredFlashcardList();
+
+    /** Returns an unmodifiable view of the filtered list of flashcards */
+    ObservableList<Flashcard> getUpdatedFlashcardList();
 
     /**
      * Returns an unmodifiable view of the list of commands entered by the user.
