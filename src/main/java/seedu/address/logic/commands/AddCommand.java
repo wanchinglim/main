@@ -27,7 +27,7 @@ public class AddCommand extends Command {
             + PREFIX_SUBJECT + "SUBJECT\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TOPIC + "pythagoras theorem "
-            + PREFIX_DIFFICULTY + "123 "
+            + PREFIX_DIFFICULTY + "1 "
             + PREFIX_CONTENT + "a^2 + b^2 = c^2 "
             + PREFIX_SUBJECT + "math";
 
@@ -55,6 +55,7 @@ public class AddCommand extends Command {
         model.addFlashcard(toAdd);
         model.addSubject(toAdd.getSubject());
         model.commitFlashBook();
+        model.setSelectedSubject(toAdd.getSubject());
         model.setSelectedFlashcard(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }

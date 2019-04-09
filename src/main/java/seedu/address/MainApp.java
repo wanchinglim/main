@@ -66,6 +66,9 @@ public class MainApp extends Application {
         SubjectBookStorage subjectBookStorage = new JsonSubjectBookStorage(userPrefs.getSubjectBookFilePath());
         storage = new StorageManager(flashBookStorage, userPrefsStorage);
 
+        storage = new StorageManager(new JsonFlashBookStorage(userPrefs.getFlashBookFilePath()),
+                new JsonUserPrefsStorage(config.getUserPrefsFilePath()));
+
         initLogging(config);
 
         model = initModelManager(storage, userPrefs);

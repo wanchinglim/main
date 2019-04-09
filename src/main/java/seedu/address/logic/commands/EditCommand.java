@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DIFFICULTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TOPIC;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_FLASHCARDS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -82,7 +81,6 @@ public class EditCommand extends Command {
         }
 
         model.setFlashcard(flashcardToEdit, editedFlashcard);
-        model.updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
         model.commitFlashBook();
         return new CommandResult(String.format(MESSAGE_EDIT_FLASHCARD_SUCCESS, editedFlashcard));
     }

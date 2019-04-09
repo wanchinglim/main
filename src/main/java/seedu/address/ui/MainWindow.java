@@ -136,6 +136,13 @@ public class MainWindow extends UiPart<Stage> {
         flashcardListPanelPlaceholder.getChildren().add(subjectListPanel.getRoot());
 
         // middle panel - flashcards
+
+        /**
+         * flashcardListPanel = new FlashcardListPanel(
+         *  logic.getFilteredFlashcardList(),
+         *  logic.selectedFlashcardProperty(), logic::setSelectedFlashcard);
+          */
+
         flashcardListPanel = new FlashcardListPanel(logic.getFilteredSubjectList(),
                 logic.getFilteredFlashcardList(), logic.selectedSubjectProperty(),
                 logic.selectedFlashcardProperty(), logic::setSelectedFlashcard);

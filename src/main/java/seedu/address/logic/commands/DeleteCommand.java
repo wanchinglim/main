@@ -42,8 +42,28 @@ public class DeleteCommand extends Command {
         }
 
         Flashcard flashcardToDelete = lastShownList.get(targetIndex.getZeroBased());
+
+        /**
+         * int count=0;
+         * for (Flashcard f:) {
+         *    if (f.getSubject() == flashcardToDelete.getSubject()) {
+         *                 count++;
+         *     }
+         *  }
+         *
+         * FilteredList<Flashcard> remainingFlashcards = new FilteredList<>(model.getFilteredFlashcardList(),new
+         *     TopicContainsSubjectPredicate(Arrays.asList(flashcardToDelete.getSubjectName())));
+         *
+         * if (count == 1) {
+         *      model.deleteSubject(flashcardToDelete.getSubject());
+         * }
+         */
+
+
         model.deleteFlashcard(flashcardToDelete);
         model.commitFlashBook();
+        model.updateFilteredFlashcardList(Model.PREDICATE_SHOW_ALL_FLASHCARDS);
+        model.getFilteredSubjectList();
         return new CommandResult(String.format(MESSAGE_DELETE_FLASHCARD_SUCCESS, flashcardToDelete));
     }
 
