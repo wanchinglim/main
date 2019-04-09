@@ -1,15 +1,15 @@
 package seedu.address.testutil;
 
-import seedu.address.model.flashcard.Flashcard;
-import seedu.address.model.subject.SubjectBook;
-import seedu.address.model.tag.SubjectTag;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import seedu.address.model.subject.SubjectBook;
+import seedu.address.model.tag.SubjectTag;
 
+/**
+ * A utility class containing a list of {@code SubjectTag} objects to be used in tests.
+ */
 public class TypicalSubjects {
 
     public static final SubjectTag ENGLISH = new SubjectTagBuilder().withTags("english").build();
@@ -21,7 +21,7 @@ public class TypicalSubjects {
     public static final SubjectTag HISTORY = new SubjectTagBuilder().withTags("history").build();
 
 
-    // Manually added
+    /*// Manually added
     public static final Flashcard HOON = new FlashcardBuilder().withTopic("Hoon Meier").withDifficulty("3")
             .withContent("little india").build();
     public static final Flashcard IDA = new FlashcardBuilder().withTopic("Ida Mueller").withDifficulty("1")
@@ -36,7 +36,7 @@ public class TypicalSubjects {
                     .withContent(VALID_CONTENT_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
                     .build();
 
-    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
+    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER*/
 
     private TypicalSubjects() {} // prevents instantiation
 

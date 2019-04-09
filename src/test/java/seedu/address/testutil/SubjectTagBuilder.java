@@ -1,19 +1,11 @@
 package seedu.address.testutil;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.ObservableSet;
-import seedu.address.model.flashcard.Flashcard;
-import seedu.address.model.flashcard.Content;
-import seedu.address.model.flashcard.Deadline;
-import seedu.address.model.flashcard.Difficulty;
-import seedu.address.model.flashcard.Topic;
-import seedu.address.model.subject.SubjectBook;
-import seedu.address.model.tag.SubjectTag;
-import seedu.address.model.util.SampleDataUtil;
-
 import java.util.HashSet;
 import java.util.Set;
+
+import seedu.address.model.flashcard.Flashcard;
+import seedu.address.model.tag.SubjectTag;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building SubjectTag objects.
