@@ -1,5 +1,13 @@
 package seedu.address.model;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.nio.file.Path;
+import java.util.Objects;
+import java.util.function.Predicate;
+import java.util.logging.Logger;
+
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -15,14 +23,6 @@ import seedu.address.model.flashcard.exceptions.FlashcardNotFoundException;
 import seedu.address.model.subject.ReadOnlySubjectBook;
 import seedu.address.model.subject.SubjectBook;
 import seedu.address.model.tag.SubjectTag;
-
-import java.nio.file.Path;
-import java.util.Objects;
-import java.util.function.Predicate;
-import java.util.logging.Logger;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * Represents the in-memory model of the flash book data.
