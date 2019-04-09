@@ -262,6 +262,8 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public ObservableList<Flashcard> getUpdatedFlashcardList() {
 
+        updatedFlashcardList.clear();
+
         for (Flashcard f : filteredFlashcards) {
             if (selectedSubject.getValue().equals(f.getSubject())) {
                 updatedFlashcardList.add(f);
