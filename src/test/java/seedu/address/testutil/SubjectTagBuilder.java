@@ -13,6 +13,7 @@ import seedu.address.model.util.SampleDataUtil;
 public class SubjectTagBuilder {
 
     private Set<SubjectTag> tags;
+    private SubjectTag tempTag;
 
     public SubjectTagBuilder() {
         tags = new HashSet<>();
@@ -33,9 +34,15 @@ public class SubjectTagBuilder {
         return this;
     }
 
-
+    /**
+     * Builds a subject tag
+     */
     public SubjectTag build() {
-        return new SubjectTag(tags.toString());
+        for (SubjectTag s : tags) {
+            this.tempTag = s;
+            break;
+        }
+        return new SubjectTag(tempTag.toString());
     }
 
 }
