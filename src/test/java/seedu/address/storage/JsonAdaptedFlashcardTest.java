@@ -2,7 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
 import static seedu.address.storage.JsonAdaptedFlashcard.MISSING_FIELD_MESSAGE_FORMAT;
-import static seedu.address.testutil.TypicalFlashcards.BENSON;
+import static seedu.address.testutil.TypicalFlashcards.ENGLISH;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,18 +23,18 @@ public class JsonAdaptedFlashcardTest {
     //private static final String INVALID_DEADLINE = "24@December_2019";
     private static final String INVALID_TAG = "#friend";
 
-    private static final String VALID_TOPIC = BENSON.getTopic().toString();
-    private static final String VALID_DIFFICULTY = BENSON.getDifficulty().toString();
-    private static final String VALID_CONTENT = BENSON.getContent().toString();
-    private static final String VALID_DEADLINE = BENSON.getDeadline().toString();
-    private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
+    private static final String VALID_TOPIC = ENGLISH.getTopic().toString();
+    private static final String VALID_DIFFICULTY = ENGLISH.getDifficulty().toString();
+    private static final String VALID_CONTENT = ENGLISH.getContent().toString();
+    private static final String VALID_DEADLINE = ENGLISH.getDeadline().toString();
+    private static final List<JsonAdaptedTag> VALID_TAGS = ENGLISH.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
 
     @Test
     public void toModelType_validFlashcardDetails_returnsFlashcard() throws Exception {
-        JsonAdaptedFlashcard subject = new JsonAdaptedFlashcard(BENSON);
-        assertEquals(BENSON, subject.toModelType());
+        JsonAdaptedFlashcard subject = new JsonAdaptedFlashcard(ENGLISH);
+        assertEquals(ENGLISH, subject.toModelType());
     }
 
     @Test

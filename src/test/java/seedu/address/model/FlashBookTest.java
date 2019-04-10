@@ -5,7 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTENT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.testutil.TypicalFlashcards.ALICE;
+import static seedu.address.testutil.TypicalFlashcards.ENGLISH;
 import static seedu.address.testutil.TypicalFlashcards.getTypicalFlashBook;
 
 import java.util.Arrays;
@@ -53,9 +53,9 @@ public class FlashBookTest {
     @Test
     public void resetData_withDuplicateFlashcards_throwsDuplicateFlashcardException() {
         // Two flashcards with the same identity fields
-        Flashcard editedAlice = new FlashcardBuilder(ALICE).withContent(VALID_CONTENT_BOB).withTags(VALID_TAG_HUSBAND)
+        Flashcard editedAlice = new FlashcardBuilder(ENGLISH).withContent(VALID_CONTENT_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        List<Flashcard> newFlashcards = Arrays.asList(ALICE, editedAlice);
+        List<Flashcard> newFlashcards = Arrays.asList(ENGLISH, editedAlice);
         FlashBookStub newData = new FlashBookStub(newFlashcards);
 
         thrown.expect(DuplicateFlashcardException.class);
@@ -70,19 +70,19 @@ public class FlashBookTest {
 
     @Test
     public void hasFlashcard_flashcardNotInFlashBook_returnsFalse() {
-        assertFalse(flashBook.hasFlashcard(ALICE));
+        assertFalse(flashBook.hasFlashcard(ENGLISH));
     }
 
     @Test
     public void hasFlashcard_flashcardInFlashBook_returnsTrue() {
-        flashBook.addFlashcard(ALICE);
-        assertTrue(flashBook.hasFlashcard(ALICE));
+        flashBook.addFlashcard(ENGLISH);
+        assertTrue(flashBook.hasFlashcard(ENGLISH));
     }
 
     @Test
     public void hasFlashcard_flashcardWithSameIdentityFieldsInFlashBook_returnsTrue() {
-        flashBook.addFlashcard(ALICE);
-        Flashcard editedAlice = new FlashcardBuilder(ALICE).withContent(VALID_CONTENT_BOB).withTags(VALID_TAG_HUSBAND)
+        flashBook.addFlashcard(ENGLISH);
+        Flashcard editedAlice = new FlashcardBuilder(ENGLISH).withContent(VALID_CONTENT_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(flashBook.hasFlashcard(editedAlice));
     }
@@ -98,7 +98,7 @@ public class FlashBookTest {
         SimpleIntegerProperty counter = new SimpleIntegerProperty();
         InvalidationListener listener = observable -> counter.set(counter.get() + 1);
         flashBook.addListener(listener);
-        flashBook.addFlashcard(ALICE);
+        flashBook.addFlashcard(ENGLISH);
         assertEquals(1, counter.get());
     }
 
@@ -108,7 +108,7 @@ public class FlashBookTest {
         InvalidationListener listener = observable -> counter.set(counter.get() + 1);
         flashBook.addListener(listener);
         flashBook.removeListener(listener);
-        flashBook.addFlashcard(ALICE);
+        flashBook.addFlashcard(ENGLISH);
         assertEquals(0, counter.get());
     }
 
