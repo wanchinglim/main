@@ -26,7 +26,6 @@ public class Flashcard {
     private final Set<SubjectTag> subjectTag = new HashSet<>();
 
     private SubjectTag subject;
-    private Index index;
 
     private String subjectName;
 
