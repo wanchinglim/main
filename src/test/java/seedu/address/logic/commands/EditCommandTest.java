@@ -1,12 +1,12 @@
 package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
+//import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_CHINESE;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_ENGLISH;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DIFFICULTY_CHINESE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_ENGLISH;
+//import static seedu.address.logic.commands.CommandTestUtil.VALID_DIFFICULTY_CHINESE;
+//import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_ENGLISH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_CHINESE;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -16,11 +16,13 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_FLASHCARD;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_FLASHCARD;
 import static seedu.address.testutil.TypicalSubjects.getTypicalSubjectBook;
 
+import java.util.Arrays;
+
 import org.junit.Test;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
-
 import seedu.address.logic.commands.EditCommand.EditFlashcardDescriptor;
 import seedu.address.model.FlashBook;
 import seedu.address.model.Model;
@@ -31,8 +33,6 @@ import seedu.address.model.flashcard.TopicContainsKeywordsPredicate;
 import seedu.address.model.tag.SubjectTag;
 import seedu.address.testutil.EditFlashcardDescriptorBuilder;
 import seedu.address.testutil.FlashcardBuilder;
-
-import java.util.Arrays;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for EditCommand.
@@ -51,7 +51,8 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_FLASHCARD_SUCCESS, editedFlashcard);
 
-        Model expectedModel = new ModelManager(model.getSubjectBook(), new FlashBook(model.getFlashBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getSubjectBook(),
+                new FlashBook(model.getFlashBook()), new UserPrefs());
         expectedModel.setFlashcard(model.getFilteredFlashcardList().get(0), editedFlashcard);
         expectedModel.commitFlashBook();
 
@@ -83,7 +84,8 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_FLASHCARD_SUCCESS, editedFlashcard);
 
-        Model expectedModel = new ModelManager(model.getSubjectBook(), new FlashBook(model.getFlashBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getSubjectBook(),
+                new FlashBook(model.getFlashBook()), new UserPrefs());
         expectedModel.setFlashcard(lastFlashcard, editedFlashcard);
         expectedModel.commitFlashBook();
 
@@ -98,7 +100,8 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_FLASHCARD_SUCCESS, editedFlashcard);
 
-        Model expectedModel = new ModelManager(model.getSubjectBook(), new FlashBook(model.getFlashBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getSubjectBook(),
+                new FlashBook(model.getFlashBook()), new UserPrefs());
         expectedModel.commitFlashBook();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -116,7 +119,8 @@ public class EditCommandTest {
                 new EditFlashcardDescriptorBuilder().withTopic(VALID_TOPIC_CHINESE).build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_FLASHCARD_SUCCESS, editedFlashcard);
-        Model expectedModel = new ModelManager(model.getSubjectBook(), new FlashBook(model.getFlashBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getSubjectBook(),
+                new FlashBook(model.getFlashBook()), new UserPrefs());
 
         final String[] splitName = flashcardInFilteredList.getTopic().fullTopic.split("\\s+");
         expectedModel.updateFilteredFlashcardList(new TopicContainsKeywordsPredicate(Arrays.asList(splitName[0])));
@@ -187,7 +191,8 @@ public class EditCommandTest {
         EditFlashcardDescriptor descriptor = new EditFlashcardDescriptorBuilder(editedFlashcard).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_FLASHCARD, descriptor);
         model.setSelectedSubject(new SubjectTag("english"));
-        Model expectedModel = new ModelManager(model.getSubjectBook(), new FlashBook(model.getFlashBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getSubjectBook(),
+                new FlashBook(model.getFlashBook()), new UserPrefs());
         expectedModel.setFlashcard(flashcardToEdit, editedFlashcard);
         expectedModel.commitFlashBook();
 
@@ -232,7 +237,8 @@ public class EditCommandTest {
         Flashcard editedFlashcard = new FlashcardBuilder().build();
         EditFlashcardDescriptor descriptor = new EditFlashcardDescriptorBuilder(editedFlashcard).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_FLASHCARD, descriptor);
-        Model expectedModel = new ModelManager(model.getSubjectBook(), new FlashBook(model.getFlashBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getSubjectBook(),
+                new FlashBook(model.getFlashBook()), new UserPrefs());
 
         showFlashcardAtIndex(model, INDEX_SECOND_FLASHCARD);
         Flashcard flashcardToEdit = model.getFilteredFlashcardList().get(INDEX_FIRST_FLASHCARD.getZeroBased());
