@@ -17,7 +17,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.FlashBook;
 import seedu.address.model.Model;
-import seedu.address.model.flashcard.Deadline;
+//import seedu.address.model.flashcard.Deadline;
 import seedu.address.model.flashcard.Flashcard;
 import seedu.address.model.flashcard.TopicContainsKeywordsPredicate;
 import seedu.address.testutil.EditFlashcardDescriptorBuilder;
@@ -27,44 +27,44 @@ import seedu.address.testutil.EditFlashcardDescriptorBuilder;
  */
 public class CommandTestUtil {
 
-    public static final String VALID_TOPIC_AMY = "Amy Bee";
-    public static final String VALID_TOPIC_BOB = "Bob Choo";
-    public static final String VALID_DIFFICULTY_AMY = "2";
-    public static final String VALID_DIFFICULTY_BOB = "3";
-    public static final String VALID_CONTENT_AMY = "Block 312, Amy Street 1";
-    public static final String VALID_CONTENT_BOB = "Block 123, Bobby Street 3";
-    public static final String VALID_TAG_HUSBAND = "husband";
-    public static final String VALID_TAG_FRIEND = "friend";
-    public static final Deadline VALID_DEADLINE_AMY = new Deadline("31 December 2099");
-    public static final Deadline VALID_DEADLINE_BOB = new Deadline("31 December 2099");
+    public static final String VALID_TOPIC_ENGLISH = "Brown Fox";
+    public static final String VALID_TOPIC_CHINESE = "Ni hao ma";
+    public static final String VALID_DIFFICULTY_ENGLISH = "1";
+    public static final String VALID_DIFFICULTY_CHINESE = "2";
+    public static final String VALID_CONTENT_ENGLISH = "The quick brown fox jumps over the lazy dog";
+    public static final String VALID_CONTENT_CHINESE = "Hao";
+    public static final String VALID_TAG_ENGLISH = "english";
+    public static final String VALID_TAG_CHINESE = "chinese";
+    //public static final Deadline VALID_DEADLINE_AMY = new Deadline("31 December 2099");
+    //public static final Deadline VALID_DEADLINE_BOB = new Deadline("31 December 2099");
 
-    public static final String TOPIC_DESC_AMY = " " + PREFIX_TOPIC + VALID_TOPIC_AMY;
-    public static final String TOPIC_DESC_BOB = " " + PREFIX_TOPIC + VALID_TOPIC_BOB;
-    public static final String DIFFICULTY_DESC_AMY = " " + PREFIX_DIFFICULTY + VALID_DIFFICULTY_AMY;
-    public static final String DIFFICULTY_DESC_BOB = " " + PREFIX_DIFFICULTY + VALID_DIFFICULTY_BOB;
-    public static final String CONTENT_DESC_AMY = " " + PREFIX_CONTENT + VALID_CONTENT_AMY;
-    public static final String CONTENT_DESC_BOB = " " + PREFIX_CONTENT + VALID_CONTENT_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_SUBJECT + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_SUBJECT + VALID_TAG_HUSBAND;
+    public static final String TOPIC_DESC_ENGLISH = " " + PREFIX_TOPIC + VALID_TOPIC_ENGLISH;
+    public static final String TOPIC_DESC_CHINESE = " " + PREFIX_TOPIC + VALID_TOPIC_CHINESE;
+    public static final String DIFFICULTY_DESC_ENGLISH = " " + PREFIX_DIFFICULTY + VALID_DIFFICULTY_ENGLISH;
+    public static final String DIFFICULTY_DESC_CHINESE = " " + PREFIX_DIFFICULTY + VALID_DIFFICULTY_CHINESE;
+    public static final String CONTENT_DESC_ENGLISH = " " + PREFIX_CONTENT + VALID_CONTENT_ENGLISH;
+    public static final String CONTENT_DESC_CHINESE = " " + PREFIX_CONTENT + VALID_CONTENT_CHINESE;
+    public static final String TAG_DESC_CHINESE = " " + PREFIX_SUBJECT + VALID_TAG_CHINESE;
+    public static final String TAG_DESC_ENGLISH = " " + PREFIX_SUBJECT + VALID_TAG_ENGLISH;
 
-    public static final String INVALID_TOPIC_DESC = " " + PREFIX_TOPIC + "James&"; // '&' not allowed in names
-    public static final String INVALID_DIFFICULTY_DESC = " " + PREFIX_DIFFICULTY + "911a"; // 'a' not allowed in phones
+    public static final String INVALID_TOPIC_DESC = " " + PREFIX_TOPIC + "English&"; // '&' not allowed in names
+    public static final String INVALID_DIFFICULTY_DESC = " " + PREFIX_DIFFICULTY + "2a"; // 'a' not allowed in phones
     public static final String INVALID_CONTENT_DESC = " " + PREFIX_CONTENT; // empty string not allowed for addresses
-    public static final String INVALID_TAG_DESC = " " + PREFIX_SUBJECT + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_TAG_DESC = " " + PREFIX_SUBJECT + "english*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditFlashcardDescriptor DESC_AMY;
-    public static final EditCommand.EditFlashcardDescriptor DESC_BOB;
+    public static final EditCommand.EditFlashcardDescriptor DESC_ENGLISH;
+    public static final EditCommand.EditFlashcardDescriptor DESC_CHINESE;
 
     static {
-        DESC_AMY = new EditFlashcardDescriptorBuilder().withTopic(VALID_TOPIC_AMY)
-                .withDifficulty(VALID_DIFFICULTY_AMY).withContent(VALID_CONTENT_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
-        DESC_BOB = new EditFlashcardDescriptorBuilder().withTopic(VALID_TOPIC_BOB)
-                .withDifficulty(VALID_DIFFICULTY_BOB).withContent(VALID_CONTENT_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_ENGLISH = new EditFlashcardDescriptorBuilder().withTopic(VALID_TOPIC_ENGLISH)
+                .withDifficulty(VALID_DIFFICULTY_ENGLISH).withContent(VALID_CONTENT_ENGLISH)
+                .withTags(VALID_TAG_CHINESE).build();
+        DESC_CHINESE = new EditFlashcardDescriptorBuilder().withTopic(VALID_TOPIC_CHINESE)
+                .withDifficulty(VALID_DIFFICULTY_CHINESE).withContent(VALID_CONTENT_CHINESE)
+                .withTags(VALID_TAG_ENGLISH, VALID_TAG_CHINESE).build();
     }
 
     /**
