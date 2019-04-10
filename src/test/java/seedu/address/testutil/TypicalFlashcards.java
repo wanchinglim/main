@@ -25,9 +25,9 @@ public class TypicalFlashcards {
             .withContent("The quick brown fox jumps over the lazy dog")
             .withDifficulty("1")
             .withTags("english").build();
-    public static final Flashcard CHINESE = new FlashcardBuilder().withTopic("Test")
-            .withContent("testing")
-            .withDifficulty("1")
+    public static final Flashcard CHINESE = new FlashcardBuilder().withTopic("Ni hao ma")
+            .withContent("Hao")
+            .withDifficulty("2")
             .withTags("chinese").build();
     public static final Flashcard MATH = new FlashcardBuilder().withTopic("Pythagoras Theorem")
             .withDifficulty("1")
