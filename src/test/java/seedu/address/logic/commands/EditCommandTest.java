@@ -3,11 +3,11 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertFalse;
 //import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
-//import static seedu.address.logic.commands.CommandTestUtil.VALID_DIFFICULTY_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_CHINESE;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_ENGLISH;
+//import static seedu.address.logic.commands.CommandTestUtil.VALID_DIFFICULTY_CHINESE;
 //import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-//import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_BOB;
+//import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_CHINESE;
 //import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 //import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 //import static seedu.address.logic.commands.CommandTestUtil.showFlashcardAtIndex;
@@ -59,11 +59,13 @@ public class EditCommandTest {
         Flashcard lastFlashcard = model.getFilteredFlashcardList().get(indexLastSubject.getZeroBased());
 
         FlashcardBuilder subjectInList = new FlashcardBuilder(lastFlashcard);
-        Flashcard editedFlashcard = subjectInList.withTopic(VALID_TOPIC_BOB).withDifficulty(VALID_DIFFICULTY_BOB)
+        Flashcard editedFlashcard = subjectInList.withTopic(VALID_TOPIC_CHINESE)
+        .withDifficulty(VALID_DIFFICULTY_CHINESE)
                 .withTags(VALID_TAG_HUSBAND).build();
 
-        EditCommand.EditFlashcardDescriptor descriptor = new EditFlashcardDescriptorBuilder().withTopic(VALID_TOPIC_BOB)
-                .withDifficulty(VALID_DIFFICULTY_BOB).withTags(VALID_TAG_HUSBAND).build();
+        EditCommand.EditFlashcardDescriptor descriptor = new EditFlashcardDescriptorBuilder()
+        .withTopic(VALID_TOPIC_CHINESE)
+                .withDifficulty(VALID_DIFFICULTY_CHINESE).withTags(VALID_TAG_HUSBAND).build();
         EditCommand editCommand = new EditCommand(indexLastSubject, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_FLASHCARD_SUCCESS, editedFlashcard);
@@ -93,9 +95,10 @@ public class EditCommandTest {
         showFlashcardAtIndex(model, INDEX_FIRST_FLASHCARD);
 
         Flashcard flashcardInFilteredList = model.getFilteredFlashcardList().get(INDEX_FIRST_FLASHCARD.getZeroBased());
-        Flashcard editedFlashcard = new FlashcardBuilder(flashcardInFilteredList).withTopic(VALID_TOPIC_BOB).build();
+        Flashcard editedFlashcard = new FlashcardBuilder(flashcardInFilteredList)
+        .withTopic(VALID_TOPIC_CHINESE).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_FLASHCARD,
-                new EditFlashcardDescriptorBuilder().withTopic(VALID_TOPIC_BOB).build());
+                new EditFlashcardDescriptorBuilder().withTopic(VALID_TOPIC_CHINESE).build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_FLASHCARD_SUCCESS, editedFlashcard);
 
@@ -131,7 +134,8 @@ public class EditCommandTest {
     @Test
     public void execute_invalidFlashcardIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredFlashcardList().size() + 1);
-        EditFlashcardDescriptor descriptor = new EditFlashcardDescriptorBuilder().withTopic(VALID_TOPIC_BOB).build();
+        EditFlashcardDescriptor descriptor = new EditFlashcardDescriptorBuilder()
+        .withTopic(VALID_TOPIC_CHINESE).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editCommand, model, commandHistory, Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
@@ -149,7 +153,7 @@ public class EditCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getFlashBook().getFlashcardList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
-                new EditFlashcardDescriptorBuilder().withTopic(VALID_TOPIC_BOB).build());
+                new EditFlashcardDescriptorBuilder().withTopic(VALID_TOPIC_CHINESE).build());
 
         assertCommandFailure(editCommand, model, commandHistory, Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
     }
@@ -180,7 +184,7 @@ public class EditCommandTest {
     public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredFlashcardList().size() + 1);
         EditFlashcardDescriptor descriptor = new EditFlashcardDescriptorBuilder()
-                .withTopic(VALID_TOPIC_BOB).build();
+                .withTopic(VALID_TOPIC_CHINESE).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
         // execution failed -> flash book state not added into model
@@ -225,10 +229,10 @@ public class EditCommandTest {
 
     @Test
     public void equals() {
-        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_FLASHCARD, DESC_AMY);
+        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_FLASHCARD, DESC_ENGLISH);
 
         // same values -> returns true
-        EditFlashcardDescriptor copyDescriptor = new EditFlashcardDescriptor(DESC_AMY);
+        EditFlashcardDescriptor copyDescriptor = new EditFlashcardDescriptor(DESC_ENGLISH);
         EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_FLASHCARD, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
@@ -242,10 +246,10 @@ public class EditCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_FLASHCARD, DESC_AMY)));
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_FLASHCARD, DESC_ENGLISH)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_FLASHCARD, DESC_BOB)));
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_FLASHCARD, DESC_CHINESE)));
     }
 
 }
