@@ -60,7 +60,6 @@ public class EditCommandTest {
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 
-    // problem
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
         model.setSelectedSubject(new SubjectTag("english"));
@@ -136,11 +135,10 @@ public class EditCommandTest {
 
     @Test
     public void execute_duplicateFlashcardUnfilteredList_failure() {
-        model.setSelectedSubject(new SubjectTag("english"));
-
         Flashcard firstFlashcard = model.getFilteredFlashcardList().get(INDEX_FIRST_FLASHCARD.getZeroBased());
         EditFlashcardDescriptor descriptor = new EditFlashcardDescriptorBuilder(firstFlashcard).build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_FLASHCARD, descriptor);
+        model.setSelectedSubject(new SubjectTag("english"));
         assertCommandFailure(editCommand, model, commandHistory, EditCommand.MESSAGE_DUPLICATE_FLASHCARD);
     }
 
