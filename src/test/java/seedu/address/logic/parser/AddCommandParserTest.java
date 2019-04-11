@@ -18,12 +18,12 @@ import static seedu.address.logic.commands.CommandTestUtil.TOPIC_DESC_ENGLISH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTENT_CHINESE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DIFFICULTY_CHINESE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CHINESE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_ENGLISH;
+//import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_ENGLISH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_CHINESE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalFlashcards.CHINESE;
-import static seedu.address.testutil.TypicalFlashcards.ENGLISH;
+//import static seedu.address.testutil.TypicalFlashcards.ENGLISH;
 
 import org.junit.Test;
 
@@ -57,22 +57,15 @@ public class AddCommandParserTest {
         // multiple contents - last content accepted
         assertParseSuccess(parser, TOPIC_DESC_CHINESE + DIFFICULTY_DESC_CHINESE + CONTENT_DESC_ENGLISH
                 + CONTENT_DESC_CHINESE + TAG_DESC_CHINESE, new AddCommand(expectedFlashcard));
-
-        // multiple tags - all accepted
-        Flashcard expectedFlashcardMultipleTags =
-                new FlashcardBuilder(CHINESE).withTags(VALID_TAG_CHINESE, VALID_TAG_ENGLISH)
-                .build();
-        assertParseSuccess(parser, TOPIC_DESC_CHINESE + DIFFICULTY_DESC_CHINESE + CONTENT_DESC_CHINESE
-                + TAG_DESC_ENGLISH + TAG_DESC_CHINESE, new AddCommand(expectedFlashcardMultipleTags));
     }
 
-    @Test
+    /*@Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
         Flashcard expectedFlashcard = new FlashcardBuilder(ENGLISH).withTags().build();
         assertParseSuccess(parser, TOPIC_DESC_ENGLISH + DIFFICULTY_DESC_ENGLISH + CONTENT_DESC_ENGLISH,
                 new AddCommand(expectedFlashcard));
-    }
+    }*/
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
