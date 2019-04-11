@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTENT_CHINESE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTENT_ENGLISH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_ENGLISH;
 import static seedu.address.testutil.TypicalFlashcards.CHINESE;
 import static seedu.address.testutil.TypicalFlashcards.ENGLISH;
@@ -46,11 +47,11 @@ public class UniqueFlashcardListTest {
     @Test
     public void contains_flashcardWithSameIdentityFieldsInList_returnsTrue() {
         uniqueFlashcardList.add(ENGLISH);
-        Flashcard editedAlice = new FlashcardBuilder(ENGLISH)
-                .withContent(VALID_CONTENT_CHINESE)
+        Flashcard editedEnglish = new FlashcardBuilder(ENGLISH)
+                .withContent(VALID_CONTENT_ENGLISH)
                 .withTags(VALID_TAG_ENGLISH)
                 .build();
-        assertTrue(uniqueFlashcardList.contains(editedAlice));
+        assertTrue(uniqueFlashcardList.contains(editedEnglish));
     }
 
     @Test
