@@ -1,16 +1,17 @@
 package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertFalse;
-//import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_CHINESE;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_ENGLISH;
-//import static seedu.address.logic.commands.CommandTestUtil.VALID_DIFFICULTY_CHINESE;
-//import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_ENGLISH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DIFFICULTY_CHINESE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_ENGLISH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_CHINESE;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showFlashcardAtIndex;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_FLASHCARDS;
 import static seedu.address.testutil.TypicalFlashcards.getTypicalFlashBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_FLASHCARD;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_FLASHCARD;
@@ -18,6 +19,7 @@ import static seedu.address.testutil.TypicalSubjects.getTypicalSubjectBook;
 
 import java.util.Arrays;
 
+import javafx.collections.ObservableList;
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
@@ -60,10 +62,14 @@ public class EditCommandTest {
     }
 
     // problem
-    /*@Test
+    @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
+        model.setSelectedSubject(new SubjectTag("english"));
+        ObservableList<Flashcard> updatedFlashcardList = model.getUpdatedFlashcardList();
+
         Index indexLastSubject = Index.fromOneBased(model.getFilteredFlashcardList().size());
         Flashcard lastFlashcard = model.getFilteredFlashcardList().get(indexLastSubject.getZeroBased());
+        int atUpdated = updatedFlashcardList.indexOf(lastFlashcard);
 
         FlashcardBuilder subjectInList = new FlashcardBuilder(lastFlashcard);
 
@@ -78,19 +84,18 @@ public class EditCommandTest {
                 .withDifficulty(VALID_DIFFICULTY_CHINESE)
                 .withTags(VALID_TAG_ENGLISH)
                 .build();
-        EditCommand editCommand = new EditCommand(indexLastSubject, descriptor);
-
-        model.setSelectedSubject(new SubjectTag("english"));
+        EditCommand editCommand = new EditCommand(Index.fromZeroBased(atUpdated), descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_FLASHCARD_SUCCESS, editedFlashcard);
 
         Model expectedModel = new ModelManager(model.getSubjectBook(),
                 new FlashBook(model.getFlashBook()), new UserPrefs());
+        expectedModel.setSelectedSubject(new SubjectTag("english"));
         expectedModel.setFlashcard(lastFlashcard, editedFlashcard);
         expectedModel.commitFlashBook();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
-    }*/
+    }
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
@@ -130,15 +135,15 @@ public class EditCommandTest {
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 
-    // problem
-    /*@Test
+    @Test
     public void execute_duplicateFlashcardUnfilteredList_failure() {
+        model.setSelectedSubject(new SubjectTag("english"));
+
         Flashcard firstFlashcard = model.getFilteredFlashcardList().get(INDEX_FIRST_FLASHCARD.getZeroBased());
         EditFlashcardDescriptor descriptor = new EditFlashcardDescriptorBuilder(firstFlashcard).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_FLASHCARD, descriptor);
-
+        EditCommand editCommand = new EditCommand(INDEX_SECOND_FLASHCARD, descriptor);
         assertCommandFailure(editCommand, model, commandHistory, EditCommand.MESSAGE_DUPLICATE_FLASHCARD);
-    }*/
+    }
 
     @Test
     public void execute_duplicateFlashcardFilteredList_failure() {
@@ -232,8 +237,10 @@ public class EditCommandTest {
      * 4. Redo the edit. This ensures {@code RedoCommand} edits the flashcard object regardless of indexing.
      */
     // problem
-    /*@Test
+    @Test
     public void executeUndoRedo_validIndexFilteredList_sameFlashcardEdited() throws Exception {
+        model.setSelectedSubject(new SubjectTag("chinese"));
+
         Flashcard editedFlashcard = new FlashcardBuilder().build();
         EditFlashcardDescriptor descriptor = new EditFlashcardDescriptorBuilder(editedFlashcard).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_FLASHCARD, descriptor);
@@ -242,8 +249,12 @@ public class EditCommandTest {
 
         showFlashcardAtIndex(model, INDEX_SECOND_FLASHCARD);
         Flashcard flashcardToEdit = model.getFilteredFlashcardList().get(INDEX_FIRST_FLASHCARD.getZeroBased());
+
+        final String[] splitName = flashcardToEdit.getTopic().fullTopic.split("\\s+");
+        expectedModel.updateFilteredFlashcardList(new TopicContainsKeywordsPredicate(Arrays.asList(splitName[0])));
         expectedModel.setFlashcard(flashcardToEdit, editedFlashcard);
         expectedModel.commitFlashBook();
+        expectedModel.updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
 
         // edit -> edits second flashcard in unfiltered flashcard list / first flashcard in filtered flashcard list
         editCommand.execute(model, commandHistory);
@@ -256,7 +267,7 @@ public class EditCommandTest {
         // redo -> edits same second flashcard in unfiltered flashcard list
         expectedModel.redoFlashBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
-    }*/
+    }
 
     @Test
     public void equals() {
