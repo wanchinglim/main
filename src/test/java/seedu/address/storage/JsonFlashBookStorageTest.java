@@ -1,11 +1,10 @@
-/*
 package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static seedu.address.testutil.TypicalFlashcards.ALICE;
-import static seedu.address.testutil.TypicalFlashcards.HOON;
-import static seedu.address.testutil.TypicalFlashcards.IDA;
+import static seedu.address.testutil.TypicalFlashcards.CS2101;
+import static seedu.address.testutil.TypicalFlashcards.CS2113T;
+import static seedu.address.testutil.TypicalFlashcards.ENGLISH;
 import static seedu.address.testutil.TypicalFlashcards.getTypicalFlashBook;
 
 import java.io.IOException;
@@ -85,14 +84,14 @@ public class JsonFlashBookStorageTest {
         assertEquals(original, new FlashBook(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addFlashcard(HOON);
-        original.removeFlashcard(ALICE);
+        original.addFlashcard(CS2101);
+        original.removeFlashcard(ENGLISH);
         jsonFlashBookStorage.saveFlashBook(original, filePath);
         readBack = jsonFlashBookStorage.readFlashBook(filePath).get();
         assertEquals(original, new FlashBook(readBack));
 
         // Save and read without specifying file path
-        original.addFlashcard(IDA);
+        original.addFlashcard(CS2113T);
         jsonFlashBookStorage.saveFlashBook(original); // file path not specified
         readBack = jsonFlashBookStorage.readFlashBook().get(); // file path not specified
         assertEquals(original, new FlashBook(readBack));
@@ -105,10 +104,9 @@ public class JsonFlashBookStorageTest {
         saveFlashBook(null, "SomeFile.json");
     }
 
-    */
-/**
+    /**
      * Saves {@code flashBook} at the specified {@code filePath}.
-     *//*
+     */
 
     private void saveFlashBook(ReadOnlyFlashBook flashBook, String filePath) {
         try {
@@ -125,4 +123,4 @@ public class JsonFlashBookStorageTest {
         saveFlashBook(new FlashBook(), null);
     }
 }
-*/
+
