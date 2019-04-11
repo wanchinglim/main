@@ -19,9 +19,9 @@ import static seedu.address.testutil.TypicalSubjects.getTypicalSubjectBook;
 
 import java.util.Arrays;
 
-import javafx.collections.ObservableList;
 import org.junit.Test;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
@@ -35,7 +35,6 @@ import seedu.address.model.flashcard.TopicContainsKeywordsPredicate;
 import seedu.address.model.tag.SubjectTag;
 import seedu.address.testutil.EditFlashcardDescriptorBuilder;
 import seedu.address.testutil.FlashcardBuilder;
-
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for EditCommand.
  */
