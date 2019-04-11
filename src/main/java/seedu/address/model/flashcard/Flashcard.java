@@ -89,7 +89,7 @@ public class Flashcard {
 
         return otherFlashcard != null
                 && otherFlashcard.getTopic().equals(getTopic())
-                && otherFlashcard.getDifficulty().equals(getDifficulty());
+                && otherFlashcard.getContent().equals(getContent());
     }
 
     /**
