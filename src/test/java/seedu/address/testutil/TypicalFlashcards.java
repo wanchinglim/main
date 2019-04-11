@@ -47,13 +47,17 @@ public class TypicalFlashcards {
             .withContent("Gained independence in 1965")
             .withDeadline("21 August 2022").build();
 
-    /*// Manually added
-    public static final Flashcard HOON = new FlashcardBuilder().withTopic("Hoon Meier").withDifficulty("3")
-            .withContent("little india").build();
-    public static final Flashcard IDA = new FlashcardBuilder().withTopic("Ida Mueller").withDifficulty("1")
-            .withContent("chicago ave").build();
+    // Manually added
+    public static final Flashcard CS2101 = new FlashcardBuilder().withTopic("Communication Skills")
+            .withDifficulty("2")
+            .withContent("People have different styles of communication")
+            .build();
+    public static final Flashcard CS2113T = new FlashcardBuilder().withTopic("Inheritance")
+            .withDifficulty("1")
+            .withContent("Child class inherits parent class")
+            .build();
 
-    // Manually added - Flashcard's details found in {@code CommandTestUtil}
+    /*// Manually added - Flashcard's details found in {@code CommandTestUtil}
     public static final Flashcard AMY =
             new FlashcardBuilder().withTopic(VALID_TOPIC_AMY).withDifficulty(VALID_DIFFICULTY_AMY)
             .withContent(VALID_CONTENT_AMY).withTags(VALID_TAG_FRIEND).build();
