@@ -3,6 +3,7 @@ package seedu.address.model.flashcard;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTENT_CHINESE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTENT_ENGLISH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DIFFICULTY_CHINESE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CHINESE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_ENGLISH;
@@ -35,26 +36,33 @@ public class FlashcardTest {
         // null -> returns false
         assertFalse(ENGLISH.isSameFlashcard(null));
 
-        // different difficulty -> returns false
-        Flashcard editedAlice =
-                new FlashcardBuilder(ENGLISH).withDifficulty(VALID_DIFFICULTY_CHINESE).build();
-        assertFalse(ENGLISH.isSameFlashcard(editedAlice));
+        // different content -> returns false
+        Flashcard editedEnglish =
+                new FlashcardBuilder(ENGLISH).withContent(VALID_CONTENT_CHINESE).build();
+        assertFalse(ENGLISH.isSameFlashcard(editedEnglish));
 
         // different topic -> returns false
-        editedAlice = new FlashcardBuilder(ENGLISH).withTopic(VALID_TOPIC_CHINESE).build();
-        assertFalse(ENGLISH.isSameFlashcard(editedAlice));
+        editedEnglish = new FlashcardBuilder(ENGLISH).withTopic(VALID_TOPIC_CHINESE).build();
+        assertFalse(ENGLISH.isSameFlashcard(editedEnglish));
 
-        // same topic, same difficulty, different attributes -> returns true
-        editedAlice = new FlashcardBuilder(ENGLISH).withContent(VALID_CONTENT_CHINESE)
+        // same topic, same difficulty, different attributes -> returns false
+        editedEnglish = new FlashcardBuilder(ENGLISH).withContent(VALID_CONTENT_CHINESE)
                 .withTags(VALID_TAG_ENGLISH).build();
-        assertTrue(ENGLISH.isSameFlashcard(editedAlice));
+        assertFalse(ENGLISH.isSameFlashcard(editedEnglish));
 
-        // same topic, same difficulty, different attributes -> returns true
-        editedAlice = new FlashcardBuilder(ENGLISH)
+        // same topic, same difficulty, different attributes -> returns false
+        editedEnglish = new FlashcardBuilder(ENGLISH)
                 .withContent(VALID_CONTENT_CHINESE)
                 .withTags(VALID_TAG_ENGLISH)
                 .build();
-        assertTrue(ENGLISH.isSameFlashcard(editedAlice));
+        assertFalse(ENGLISH.isSameFlashcard(editedEnglish));
+
+        // same topic, same content, different attributes -> returns true
+        editedEnglish = new FlashcardBuilder(ENGLISH)
+                .withContent(VALID_CONTENT_ENGLISH)
+                .withTags(VALID_TAG_CHINESE)
+                .build();
+        assertTrue(ENGLISH.isSameFlashcard(editedEnglish));
     }
 
     @Test
