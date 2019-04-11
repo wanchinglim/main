@@ -4,6 +4,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalFlashcards.getTypicalFlashBook;
 import static seedu.address.testutil.TypicalSubjects.getTypicalSubjectBook;
+
 import org.junit.Before;
 
 import org.junit.Test;
@@ -15,11 +16,9 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.flashcard.Flashcard;
 import seedu.address.testutil.FlashcardBuilder;
 
-
- /**
- * Contains integration tests (interaction with the Model) for {@code AddCommand}.
- */
-
+/**
+ *Contains integration tests (interaction with the Model) for {@code AddCommand}.
+*/
 public class AddCommandIntegrationTest {
 
     private Model model;
