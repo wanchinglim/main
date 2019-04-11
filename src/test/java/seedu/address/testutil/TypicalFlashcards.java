@@ -31,30 +31,36 @@ public class TypicalFlashcards {
             .withTags("chinese").build();
     public static final Flashcard MATH = new FlashcardBuilder().withTopic("Pythagoras Theorem")
             .withDifficulty("1")
-            .withContent("a^2 + b^2 = c^2").build();
+            .withContent("a^2 + b^2 = c^2")
+            .withTags("math").build();
     public static final Flashcard CHEMISTRY = new FlashcardBuilder().withTopic("Acids")
             .withDifficulty("1")
             .withContent("This is acidic.")
             .withTags("chemistry").build();
     public static final Flashcard PHYSICS = new FlashcardBuilder().withTopic("Force")
             .withDifficulty("1")
-            .withContent("F = ma").build();
+            .withContent("F = ma")
+            .withTags("physics").build();
     public static final Flashcard GEOGRAPHY = new FlashcardBuilder().withTopic("Human Geography")
             .withDifficulty("2")
-            .withContent("Food").build();
+            .withContent("Food")
+            .withTags("geography").build();
     public static final Flashcard HISTORY = new FlashcardBuilder().withTopic("Singapore")
             .withDifficulty("1")
             .withContent("Gained independence in 1965")
+            .withTags("english")
             .withDeadline("21 August 2022").build();
 
     // Manually added
     public static final Flashcard CS2101 = new FlashcardBuilder().withTopic("Communication Skills")
             .withDifficulty("2")
             .withContent("People have different styles of communication")
+            .withTags("cs2101")
             .build();
     public static final Flashcard CS2113T = new FlashcardBuilder().withTopic("Inheritance")
             .withDifficulty("1")
             .withContent("Child class inherits parent class")
+            .withTags("cs2113T")
             .build();
 
     /*// Manually added - Flashcard's details found in {@code CommandTestUtil}
