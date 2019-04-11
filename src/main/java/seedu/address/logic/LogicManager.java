@@ -102,6 +102,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableList<Flashcard> getUpdatedFlashcardList() {
+        return model.getUpdatedFlashcardList();
+    }
+
+    @Override
     public ObservableList<String> getHistory() {
         return history.getHistory();
     }

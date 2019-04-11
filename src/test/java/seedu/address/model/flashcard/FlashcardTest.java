@@ -2,12 +2,14 @@ package seedu.address.model.flashcard;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTENT_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DIFFICULTY_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_BOB;
-import static seedu.address.testutil.TypicalFlashcards.ALICE;
-import static seedu.address.testutil.TypicalFlashcards.BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTENT_CHINESE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTENT_ENGLISH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DIFFICULTY_CHINESE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CHINESE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_ENGLISH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_CHINESE;
+import static seedu.address.testutil.TypicalFlashcards.CHINESE;
+import static seedu.address.testutil.TypicalFlashcards.ENGLISH;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -29,62 +31,72 @@ public class FlashcardTest {
     @Test
     public void isSameFlashcard() {
         // same object -> returns true
-        assertTrue(ALICE.isSameFlashcard(ALICE));
+        assertTrue(ENGLISH.isSameFlashcard(ENGLISH));
 
         // null -> returns false
-        assertFalse(ALICE.isSameFlashcard(null));
+        assertFalse(ENGLISH.isSameFlashcard(null));
 
-        // different difficulty -> returns false
-        Flashcard editedAlice =
-                new FlashcardBuilder(ALICE).withDifficulty(VALID_DIFFICULTY_BOB).build();
-        assertFalse(ALICE.isSameFlashcard(editedAlice));
+        // different content -> returns false
+        Flashcard editedEnglish =
+                new FlashcardBuilder(ENGLISH).withContent(VALID_CONTENT_CHINESE).build();
+        assertFalse(ENGLISH.isSameFlashcard(editedEnglish));
 
         // different topic -> returns false
-        editedAlice = new FlashcardBuilder(ALICE).withTopic(VALID_TOPIC_BOB).build();
-        assertFalse(ALICE.isSameFlashcard(editedAlice));
+        editedEnglish = new FlashcardBuilder(ENGLISH).withTopic(VALID_TOPIC_CHINESE).build();
+        assertFalse(ENGLISH.isSameFlashcard(editedEnglish));
 
-        // same topic, same difficulty, different attributes -> returns true
-        editedAlice = new FlashcardBuilder(ALICE).withContent(VALID_CONTENT_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALICE.isSameFlashcard(editedAlice));
+        // same topic, same difficulty, different attributes -> returns false
+        editedEnglish = new FlashcardBuilder(ENGLISH).withContent(VALID_CONTENT_CHINESE)
+                .withTags(VALID_TAG_ENGLISH).build();
+        assertFalse(ENGLISH.isSameFlashcard(editedEnglish));
 
-        // same topic, same difficulty, different attributes -> returns true
-        editedAlice = new FlashcardBuilder(ALICE).withContent(VALID_CONTENT_BOB).withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALICE.isSameFlashcard(editedAlice));
+        // same topic, same difficulty, different attributes -> returns false
+        editedEnglish = new FlashcardBuilder(ENGLISH)
+                .withContent(VALID_CONTENT_CHINESE)
+                .withTags(VALID_TAG_ENGLISH)
+                .build();
+        assertFalse(ENGLISH.isSameFlashcard(editedEnglish));
+
+        // same topic, same content, different attributes -> returns true
+        editedEnglish = new FlashcardBuilder(ENGLISH)
+                .withContent(VALID_CONTENT_ENGLISH)
+                .withTags(VALID_TAG_CHINESE)
+                .build();
+        assertTrue(ENGLISH.isSameFlashcard(editedEnglish));
     }
 
     @Test
     public void equals() {
         // same values -> returns true
-        Flashcard aliceCopy = new FlashcardBuilder(ALICE).build();
-        assertTrue(ALICE.equals(aliceCopy));
+        Flashcard englishCopy = new FlashcardBuilder(ENGLISH).build();
+        assertTrue(ENGLISH.equals(englishCopy));
 
         // same object -> returns true
-        assertTrue(ALICE.equals(ALICE));
+        assertTrue(ENGLISH.equals(ENGLISH));
 
         // null -> returns false
-        assertFalse(ALICE.equals(null));
+        assertFalse(ENGLISH.equals(null));
 
         // different type -> returns false
-        assertFalse(ALICE.equals(5));
+        assertFalse(ENGLISH.equals(5));
 
         // different flashcard -> returns false
-        assertFalse(ALICE.equals(BOB));
+        assertFalse(ENGLISH.equals(CHINESE));
 
         // different topic -> returns false
-        Flashcard editedAlice = new FlashcardBuilder(ALICE).withTopic(VALID_TOPIC_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        Flashcard editedEnglish = new FlashcardBuilder(ENGLISH).withTopic(VALID_TOPIC_CHINESE).build();
+        assertFalse(ENGLISH.equals(editedEnglish));
 
         // different difficulty -> returns false
-        editedAlice = new FlashcardBuilder(ALICE).withDifficulty(VALID_DIFFICULTY_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        editedEnglish = new FlashcardBuilder(ENGLISH).withDifficulty(VALID_DIFFICULTY_CHINESE).build();
+        assertFalse(ENGLISH.equals(editedEnglish));
 
         // different content -> returns false
-        editedAlice = new FlashcardBuilder(ALICE).withContent(VALID_CONTENT_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        editedEnglish = new FlashcardBuilder(ENGLISH).withContent(VALID_CONTENT_CHINESE).build();
+        assertFalse(ENGLISH.equals(editedEnglish));
 
         // different tags -> returns false
-        editedAlice = new FlashcardBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
-        assertFalse(ALICE.equals(editedAlice));
+        editedEnglish = new FlashcardBuilder(ENGLISH).withTags(VALID_TAG_CHINESE).build();
+        assertFalse(ENGLISH.equals(editedEnglish));
     }
 }

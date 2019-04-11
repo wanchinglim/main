@@ -1,46 +1,46 @@
 {
   "_comment": "FlashBook save file which contains the same Flashcard values as in TypicalFlashcards#getTypicalFlashBook()",
   "flashcards": [ {
-    "topic" : "Alice Pauline",
-    "difficulty" : "2",
-    "content" : "123, Jurong West Ave 6, #08-111",
-    "tagged" : [ "friends" ],
-    "deadline": "12 November 2020"
-  }, {
-    "topic" : "Benson Meier",
-    "difficulty" : "3",
-    "content" : "311, Clementi Ave 2, #02-25",
-    "tagged" : [ "owesMoney", "friends" ],
-    "deadline": "12 November 2020"
-  }, {
-    "topic" : "Carl Kurz",
-    "difficulty" : "3",
-    "content" : "wall street",
-    "tagged" : [ ],
-    "deadline": "12 November 2020"
-  }, {
-    "topic" : "Daniel Meier",
+    "topic" : "Brown Fox",
     "difficulty" : "1",
-    "content" : "10th street",
-    "tagged" : [ "friends" ],
-    "deadline": "12 November 2020"
+    "content" : "The quick brown fox jumps over the lazy dog",
+    "tagged" : [ "english" ],
+    "deadline": ""
   }, {
-    "topic" : "Elle Meyer",
+    "topic" : "Ni hao ma",
     "difficulty" : "2",
-    "content" : "michegan ave",
-    "tagged" : [ ],
-    "deadline": "12 November 2020"
+    "content" : "Hao",
+    "tagged" : [ "chinese" ],
+    "deadline": ""
   }, {
-    "topic" : "Fiona Kunz",
-    "difficulty" : "3",
-    "content" : "little tokyo",
-    "tagged" : [ ],
-    "deadline": "12 November 2020"
+    "topic" : "Pythagoras Theorem",
+    "difficulty" : "1",
+    "content" : "a^2 + b^2 = c^2",
+    "tagged" : [ "math" ],
+    "deadline": ""
   }, {
-    "topic" : "George Best",
-    "difficulty" : "3",
-    "content" : "4th street",
-    "tagged" : [ ],
-    "deadline": "12 November 2020"
+    "topic" : "Acids",
+    "difficulty" : "1",
+    "content" : "This is acidic.",
+    "tagged" : [ "chemistry" ],
+    "deadline": ""
+  }, {
+    "topic" : "Force",
+    "difficulty" : "1",
+    "content" : "F = ma",
+    "tagged" : [ "physics" ],
+    "deadline": ""
+  }, {
+    "topic" : "Human Geography",
+    "difficulty" : "2",
+    "content" : "Food",
+    "tagged" : [ "geography" ],
+    "deadline": ""
+  }, {
+    "topic" : "Singapore",
+    "difficulty" : "1",
+    "content" : "Gained independence in 1965",
+    "tagged" : [ "english" ],
+    "deadline": "21 August 2022"
   } ]
 }

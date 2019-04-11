@@ -17,6 +17,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+
 /**
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
@@ -136,15 +137,7 @@ public class MainWindow extends UiPart<Stage> {
         flashcardListPanelPlaceholder.getChildren().add(subjectListPanel.getRoot());
 
         // middle panel - flashcards
-
-        /**
-         * flashcardListPanel = new FlashcardListPanel(
-         *  logic.getFilteredFlashcardList(),
-         *  logic.selectedFlashcardProperty(), logic::setSelectedFlashcard);
-          */
-
-        flashcardListPanel = new FlashcardListPanel(logic.getFilteredSubjectList(),
-                logic.getFilteredFlashcardList(), logic.selectedSubjectProperty(),
+        flashcardListPanel = new FlashcardListPanel(logic.getFilteredFlashcardList(), logic.selectedSubjectProperty(),
                 logic.selectedFlashcardProperty(), logic::setSelectedFlashcard);
         cardPlaceholder.getChildren().add(flashcardListPanel.getRoot());
 
