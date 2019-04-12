@@ -1,0 +1,30 @@
+{
+	"authors": [
+		{
+			"githubId": "wanchinglim",
+			"displayName": "LIM...ING",
+			"authorNames": [
+				"wanchinglim",
+				"Wanching",
+				"Lim Wan Ching"
+			]
+		},
+		{
+			"githubId": "jemine1998",
+			"displayName": "JEM...KAN",
+			"authorNames": [
+                "jemine1998",
+                "Jemine Kan"
+			]
+		},
+		{
+			"githubId": "dannong",
+			"displayName": "DAN...YUN",
+			"authorNames": [
+				"dannong",
+                "dannica ong",
+                "Dannica Ong"
+			]
+		}
+	]
+}

@@ -66,6 +66,9 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of flashcards */
     ObservableList<Flashcard> getFilteredFlashcardList();
 
+    /** Returns an unmodifiable view of the filtered list of flashcards */
+    ObservableList<Flashcard> getUpdatedFlashcardList();
+
     /**
      * Returns an unmodifiable view of the list of commands entered by the user.
      * The list is ordered from the least recent command to the most recent command.

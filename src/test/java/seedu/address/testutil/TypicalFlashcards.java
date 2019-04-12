@@ -1,13 +1,13 @@
 package seedu.address.testutil;
-
-import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTENT_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTENT_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DIFFICULTY_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DIFFICULTY_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_BOB;
+//
+//import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTENT_AMY;
+//import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTENT_BOB;
+//import static seedu.address.logic.commands.CommandTestUtil.VALID_DIFFICULTY_AMY;
+//import static seedu.address.logic.commands.CommandTestUtil.VALID_DIFFICULTY_BOB;
+//import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+//import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+//import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_AMY;
+//import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_BOB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,39 +21,56 @@ import seedu.address.model.flashcard.Flashcard;
  */
 public class TypicalFlashcards {
 
-    public static final Flashcard ALICE = new FlashcardBuilder().withTopic("Alice Pauline")
-            .withContent("123, Jurong West Ave 6, #08-111")
+    public static final Flashcard ENGLISH = new FlashcardBuilder().withTopic("Brown Fox")
+            .withContent("The quick brown fox jumps over the lazy dog")
+            .withDifficulty("1")
+            .withTags("english").build();
+    public static final Flashcard CHINESE = new FlashcardBuilder().withTopic("Ni hao ma")
+            .withContent("Hao")
             .withDifficulty("2")
-            .withTags("friends").build();
-    public static final Flashcard BENSON = new FlashcardBuilder().withTopic("Benson Meier")
-            .withContent("311, Clementi Ave 2, #02-25")
-            .withDifficulty("3")
-            .withTags("owesMoney", "friends").build();
-    public static final Flashcard CARL = new FlashcardBuilder().withTopic("Carl Kurz").withDifficulty("3")
-            .withContent("wall street").build();
-    public static final Flashcard DANIEL = new FlashcardBuilder().withTopic("Daniel Meier").withDifficulty("1")
-            .withContent("10th street").withTags("friends").build();
-    public static final Flashcard ELLE = new FlashcardBuilder().withTopic("Elle Meyer").withDifficulty("2")
-            .withContent("michegan ave").build();
-    public static final Flashcard FIONA = new FlashcardBuilder().withTopic("Fiona Kunz").withDifficulty("3")
-            .withContent("little tokyo").build();
-    public static final Flashcard GEORGE = new FlashcardBuilder().withTopic("George Best").withDifficulty("3")
-            .withContent("4th street").withDeadline("21 August 2022").build();
+            .withTags("chinese").build();
+    public static final Flashcard MATH = new FlashcardBuilder().withTopic("Pythagoras Theorem")
+            .withDifficulty("1")
+            .withContent("a^2 + b^2 = c^2")
+            .withTags("math").build();
+    public static final Flashcard CHEMISTRY = new FlashcardBuilder().withTopic("Acids")
+            .withDifficulty("1")
+            .withContent("This is acidic.")
+            .withTags("chemistry").build();
+    public static final Flashcard PHYSICS = new FlashcardBuilder().withTopic("Force")
+            .withDifficulty("1")
+            .withContent("F = ma")
+            .withTags("physics").build();
+    public static final Flashcard GEOGRAPHY = new FlashcardBuilder().withTopic("Human Geography")
+            .withDifficulty("2")
+            .withContent("Food")
+            .withTags("geography").build();
+    public static final Flashcard HISTORY = new FlashcardBuilder().withTopic("Singapore")
+            .withDifficulty("1")
+            .withContent("Gained independence in 1965")
+            .withTags("english")
+            .withDeadline("21 August 2022").build();
 
     // Manually added
-    public static final Flashcard HOON = new FlashcardBuilder().withTopic("Hoon Meier").withDifficulty("3")
-            .withContent("little india").build();
-    public static final Flashcard IDA = new FlashcardBuilder().withTopic("Ida Mueller").withDifficulty("1")
-            .withContent("chicago ave").build();
+    public static final Flashcard CS2101 = new FlashcardBuilder().withTopic("Communication Skills")
+            .withDifficulty("2")
+            .withContent("People have different styles of communication")
+            .withTags("cs2101")
+            .build();
+    public static final Flashcard CS2113T = new FlashcardBuilder().withTopic("Inheritance")
+            .withDifficulty("1")
+            .withContent("Child class inherits parent class")
+            .withTags("cs2113T")
+            .build();
 
-    // Manually added - Flashcard's details found in {@code CommandTestUtil}
+    /*// Manually added - Flashcard's details found in {@code CommandTestUtil}
     public static final Flashcard AMY =
             new FlashcardBuilder().withTopic(VALID_TOPIC_AMY).withDifficulty(VALID_DIFFICULTY_AMY)
             .withContent(VALID_CONTENT_AMY).withTags(VALID_TAG_FRIEND).build();
     public static final Flashcard BOB =
             new FlashcardBuilder().withTopic(VALID_TOPIC_BOB).withDifficulty(VALID_DIFFICULTY_BOB)
             .withContent(VALID_CONTENT_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
-            .build();
+            .build();*/
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
@@ -63,14 +80,14 @@ public class TypicalFlashcards {
      * Returns an {@code FlashBook} with all the typical subjects.
      */
     public static FlashBook getTypicalFlashBook() {
-        FlashBook ab = new FlashBook();
+        FlashBook fb = new FlashBook();
         for (Flashcard flashcard : getTypicalFlashcards()) {
-            ab.addFlashcard(flashcard);
+            fb.addFlashcard(flashcard);
         }
-        return ab;
+        return fb;
     }
 
     public static List<Flashcard> getTypicalFlashcards() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(ENGLISH, CHINESE, MATH, CHEMISTRY, PHYSICS, GEOGRAPHY, HISTORY));
     }
 }

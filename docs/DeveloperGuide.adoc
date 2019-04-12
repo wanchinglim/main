@@ -292,13 +292,6 @@ Flashcard with next 1 will be displayed for the example above. +
 
 // end::togglefeature[]
 
-// tag::quizzingfeature[]
-
-=== Modes of Quizzing feature
-The Modes of Quizzing feature is facilitated by `FlashCards`.
-For each flashcard the user has, he/she can create flash cards specifically for the topic. The user can also choose the testing mode he/she wishes to be tested on. These are the different modes available: +
-=======
-
 // tag::quizzingbysubject[]
 === Quizzing by Subject
 A subject that is selected will have all the flashcards pertaining to it shown.
@@ -457,7 +450,6 @@ image::SortCommandSD.png[width="800"]
 ** Pros: Can view more flashcards at once.
 ** Cons: Difficult to implement.
 
-// end::quizzingfeature[]
 === Shelf-Life of FlashCards
 ==== Current Implementation
 
@@ -884,7 +876,7 @@ image::getting-started-ui-status-after.png[width="500"]
 ****
 * Hints
 ** link:{repoURL}/src/main/resources/view/StatusBarFooter.fxml[`StatusBarFooter.fxml`] will need a new `StatusBar`. Be sure to set the `GridPane.columnIndex` properly for each `StatusBar` to avoid misalignment!
-** link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] needs to initialize the status bar on application start, and to update it accordingly whenever the address book is updated.
+** link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] needs to initialize the status bar on application start, and to update it accordingly whenever the flash book is updated.
 * Solution
 ** Modify the constructor of link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] to take in the number of flashcards when the application just started.
 ** Use link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter#handleAddressBookChangedEvent(AddressBookChangedEvent)`] to update the number of flashcards whenever there are new changes to the addressbook.
@@ -977,7 +969,7 @@ We have to properly encapsulate the remark in our link:{repoURL}/src/main/java/s
 
 **Main:**
 
-. Add `Remark` to model component (you can copy from link:{repoURL}/src/main/java/seedu/address/model/flashcard/Address.java[`Address`], remove the regex and change the names accordingly).
+. Add `Remark` to model component (you can copy from link:{repoURL}/src/main/java/seedu/address/model/flashcard/Flashcard.java[`Flashcard`], remove the regex and change the names accordingly).
 . Modify `RemarkCommand` to now take in a `Remark` instead of a `String`.
 
 **Tests:**
@@ -1066,21 +1058,21 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |New User |See usage instructions |Refer to instructions when I forget how to use the App
 
-|`* * *` |New User |Create a new account |Only see flash cards and flashcards that are related and customised for me
+|`* * *` |New User |Create a new account |Only see flash cards and flashcards that are customised by me
 
 |`* * *` |User |Login |
 
-|`* * *` |User |Add a new flash card |
+|`* * *` |User |Add a new flash card |Insert a new unique flashcard
 
 |`* * *` |User |Edit a flash card |Change my mistakes
 
-|`* * *` |User |Delete a flash card |Remove notes that I no longer need
+|`* * *` |User |Delete a flash card |Remove flashcards that I no longer need
 
 |`* * *` |User |List flash cards categorized by flashcards |Have an overview of the flash cards I currently have
 
-|`* * *` |User |Find a flash card |Locate the flash card i need without going through the entire list
+|`* * *` |User |Find a flash card |Locate the flash card I need without going through the entire list
 
-|`* *` |User |Categorize each flash card by importance |Prioritise which information to study/memorise first
+|`* *` |User |Categorize each flash card by importance |Prioritise which information to study or memorise first
 
 |`* *` |User |Retrieve a recently deleted flash card |Retrieve the flash card which I might have accidentally deleted
 
@@ -1272,7 +1264,7 @@ These instructions only provide a starting point for testers to work on; testers
 
 .. Download the jar file and copy into an empty folder
 .. Double-click the jar file +
-   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   Expected: Shows the GUI with a set of sample flashcards. The window size may not be optimum.
 
 . Saving window preferences
 
