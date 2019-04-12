@@ -20,10 +20,10 @@ public class SampleDataUtil {
     public static final Deadline EMPTY_DEADLINE = new Deadline("");
     public static Flashcard[] getSampleFlashcards() {
         return new Flashcard[] {
-            new Flashcard(new Topic("Pythagoras Theorem"), new Difficulty("123"),
+            new Flashcard(new Topic("Pythagoras Theorem"), new Difficulty("1"),
                 new Content("a^2 + b^2 = c^2"), EMPTY_DEADLINE,
                 getTagSet("math")),
-            new Flashcard(new Topic("Photosynthesis"), new Difficulty("123"),
+            new Flashcard(new Topic("Photosynthesis"), new Difficulty("1"),
                 new Content("Happens in plants"), EMPTY_DEADLINE,
                 getTagSet("science"))
         };
