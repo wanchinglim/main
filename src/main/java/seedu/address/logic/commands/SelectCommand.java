@@ -36,13 +36,13 @@ public class SelectCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        List<Flashcard> filteredFlashcardList = model.getUpdatedFlashcardList();
+        List<Flashcard> updatedFlashcardList = model.getUpdatedFlashcardList();
 
-        if (targetIndex.getZeroBased() >= filteredFlashcardList.size()) {
+        if (targetIndex.getZeroBased() >= updatedFlashcardList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
         }
 
-        model.setSelectedFlashcard(filteredFlashcardList.get(targetIndex.getZeroBased()));
+        model.setSelectedFlashcard(updatedFlashcardList.get(targetIndex.getZeroBased()));
         model.setSelectedSubject(model.getSelectedFlashcard().getSubject());
         return new CommandResult(String.format(MESSAGE_SELECT_FLASHCARD_SUCCESS, targetIndex.getOneBased()));
 
