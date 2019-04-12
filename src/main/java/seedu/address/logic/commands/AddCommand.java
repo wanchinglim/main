@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DIFFICULTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TOPIC;
 
+import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -55,6 +56,7 @@ public class AddCommand extends Command {
         model.addFlashcard(toAdd);
         model.addSubject(toAdd.getSubject());
         model.commitFlashBook();
+        ObservableList<Flashcard> f = model.getUpdatedFlashcardList();
         model.setSelectedSubject(toAdd.getSubject());
         model.setSelectedFlashcard(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));

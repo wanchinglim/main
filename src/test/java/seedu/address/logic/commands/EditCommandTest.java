@@ -64,6 +64,7 @@ public class EditCommandTest {
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
         model.setSelectedSubject(new SubjectTag("english"));
         ObservableList<Flashcard> updatedFlashcardList = model.getUpdatedFlashcardList();
+        model.setSelectedSubject(new SubjectTag("english"));
 
         Index indexLastSubject = Index.fromOneBased(model.getFilteredFlashcardList().size());
         Flashcard lastFlashcard = model.getFilteredFlashcardList().get(indexLastSubject.getZeroBased());
