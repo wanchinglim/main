@@ -1056,25 +1056,48 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
+
 |`* * *` |New User |See usage instructions |Refer to instructions when I forget how to use the App
-
-|`* * *` |New User |Create a new account |Only see flash cards and flashcards that are customised by me
-
-|`* * *` |User |Login |
 
 |`* * *` |User |Add a new flash card |Insert a new unique flashcard
 
 |`* * *` |User |Edit a flash card |Change my mistakes
 
-|`* * *` |User |Delete a flash card |Remove flashcards that I no longer need
+|`* * *` |User |Delete a flash card through its index|Remove flashcards that I no longer need
 
-|`* * *` |User |List flash cards categorized by flashcards |Have an overview of the flash cards I currently have
+|`* * *` |User |List flash cards categorized by flashcards |Have an overview of the flashcards I currently have
 
-|`* * *` |User |Find a flash card |Locate the flash card I need without going through the entire list
+|`* * *` |User |Find a flash card |Locate the flashcard I need without going through the entire list
 
-|`* *` |User |Categorize each flash card by importance |Prioritise which information to study or memorise first
+|`* * *` |User |Add a deadline or exam date to a flashcard |Aware of when the content is needed
 
-|`* *` |User |Retrieve a recently deleted flash card |Retrieve the flash card which I might have accidentally deleted
+|`* * *` |User |Add a countdown calendar for my flashcards |Aware of how many days left to be familiar with the content
+
+|`* * *` |User |Delete unnecessary flashcards automatically |Prevent overloading of flashcards
+
+|`* * *` |User |Sort the flash cards according to Difficulty |Categorise the flashcards according to the difficulty levels
+
+|`* * *` |User |Categorise the flash cards according to Subjects |Split the flashcards into respective subjects
+
+|`* * *` |User |Have a overview of Subject, Flashcard, Topic and Content |Sees the entire flashbook in a glance
+
+|`* * *` |User |View next flashcard |Navigate through the flashcard list
+
+|`* * *` |User |View previous flashcard |Navigate through the flashcard list
+
+|`* * *` |User |View number of flashcards |Shows the number of flashcards
+
+|`* * *` |User |View topic and content of flashcard separately |Shows only one at each time
+
+|`* * *` |User |Alias for commands |Reduce the time to input each long command
+
+|`* *` |User |Categorize each flashcard by importance |Prioritise which information to study or memorise first
+
+|`* *` |User |Retrieve a recently deleted flashcard |Retrieve the flashcard which I might have accidentally deleted
+
+|`*` |New User |Create a new account |Only see flash cards and flashcards that are customised by me
+
+|`*` |User |Login |
 
 |=======================================================================
 
