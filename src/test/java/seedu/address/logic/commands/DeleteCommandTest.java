@@ -13,7 +13,6 @@ import static seedu.address.testutil.TypicalSubjects.getTypicalSubjectBook;
 
 import java.util.Arrays;
 
-import javafx.collections.ObservableList;
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
