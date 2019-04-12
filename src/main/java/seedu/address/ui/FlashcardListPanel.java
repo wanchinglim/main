@@ -155,8 +155,7 @@ public class FlashcardListPanel extends UiPart<Region> {
     private ObservableList<Flashcard> newFlashcardList = FXCollections.observableArrayList();
 
 
-    public FlashcardListPanel(ObservableList<SubjectTag> subjectList,
-                              ObservableList<Flashcard> flashcardList,
+    public FlashcardListPanel(ObservableList<Flashcard> flashcardList,
                               ObservableValue<SubjectTag> selectedSubject,
                               ObservableValue<Flashcard> selectedFlashcard,
                               Consumer<Flashcard> onSelectedFlashcardChange) {
@@ -179,8 +178,6 @@ public class FlashcardListPanel extends UiPart<Region> {
             }
 
         });
-
-
 
 
         selectedFlashcard.addListener((observable, oldValue, newValue) -> {

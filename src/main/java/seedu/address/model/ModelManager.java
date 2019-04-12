@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -36,6 +37,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final SimpleObjectProperty<Flashcard> selectedFlashcard = new SimpleObjectProperty<>();
     private final SimpleObjectProperty<SubjectTag> selectedSubject = new SimpleObjectProperty<>();
     private final FilteredList<SubjectTag> filteredSubjects;
+    private ObservableList<Flashcard> updatedFlashcardList = FXCollections.observableArrayList();
 
     /**
      * Initializes a ModelManager with the given flashBook and userPrefs.
@@ -53,7 +55,6 @@ public class ModelManager extends ComponentManager implements Model {
         filteredFlashcards.addListener(this::ensureSelectedFlashcardIsValid);
         filteredSubjects = new FilteredList<>(this.subjectBook.getSubjectList());
         filteredSubjects.addListener(this::ensureSelectedSubjectIsValid);
-
     }
 
     public ModelManager() {
@@ -252,6 +253,24 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public ObservableList<Flashcard> getFilteredFlashcardList() {
         return filteredFlashcards;
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Flashcard} backed by the internal list of
+     * {@code versionedFlashBook}
+     */
+    @Override
+    public ObservableList<Flashcard> getUpdatedFlashcardList() {
+
+        updatedFlashcardList.clear();
+
+        for (Flashcard f : filteredFlashcards) {
+            if (selectedSubject.getValue().equals(f.getSubject())) {
+                updatedFlashcardList.add(f);
+            }
+        }
+
+        return updatedFlashcardList;
     }
 
     @Override
