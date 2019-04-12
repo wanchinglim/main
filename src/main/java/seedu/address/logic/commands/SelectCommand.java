@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
@@ -36,13 +37,14 @@ public class SelectCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        List<Flashcard> filteredFlashcardList = model.getFilteredFlashcardList();
+        List<Flashcard> filteredFlashcardList = model.getUpdatedFlashcardList();
 
         if (targetIndex.getZeroBased() >= filteredFlashcardList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
         }
 
         model.setSelectedFlashcard(filteredFlashcardList.get(targetIndex.getZeroBased()));
+        model.setSelectedSubject(model.getSelectedFlashcard().getSubject());
         return new CommandResult(String.format(MESSAGE_SELECT_FLASHCARD_SUCCESS, targetIndex.getOneBased()));
 
     }
