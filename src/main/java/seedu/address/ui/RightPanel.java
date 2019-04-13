@@ -1,15 +1,7 @@
 package seedu.address.ui;
 
-import static java.util.Objects.requireNonNull;
-
-import java.beans.EventHandler;
-import java.net.URL;
-
-import javax.swing.*;
-
-import com.google.common.eventbus.Subscribe;
-
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
@@ -17,13 +9,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.web.WebView;
-import seedu.address.MainApp;
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.ui.ShowContentRequestEvent;
-import seedu.address.commons.events.ui.ShowTopicRequestEvent;
 import seedu.address.model.flashcard.Flashcard;
-import javafx.event.ActionEvent;
+
 
 /**
  * Panel containing the topic and content of flashcards.
@@ -44,21 +31,30 @@ public class RightPanel extends UiPart<Region> {
 
     @FXML
     private WebView browser;
+
     @FXML
     private SplitPane rightMostPane;
+
     @FXML
     private AnchorPane buttonAnchorPane;
+
     @FXML
     private StackPane contentAnchorPane;
+
+    //@FXML
     //private AnchorPane contentAnchorPane;
+
     @FXML
     private StackPane topicAnchorPane;
+
     @FXML
     private Label selectedFlashcardTopic;
+
     @FXML
     private Label selectedFlashcardContent;
+
     @FXML
-    private Label defaultPage;
+    private Label welcomeMessage;
 
     public RightPanel(ObservableValue<Flashcard> selectedFlashcard) {
         super(FXML);
@@ -80,7 +76,7 @@ public class RightPanel extends UiPart<Region> {
         topicIsShowing = true;
         selectedFlashcardTopic.setVisible(true);
         selectedFlashcardContent.setVisible(false);
-        defaultPage.setVisible(false);
+        welcomeMessage.setVisible(false);
     }
 
     @FXML
@@ -88,7 +84,7 @@ public class RightPanel extends UiPart<Region> {
         topicIsShowing = false;
         selectedFlashcardTopic.setVisible(false);
         selectedFlashcardContent.setVisible(true);
-        defaultPage.setVisible(false);
+        welcomeMessage.setVisible(false);
     }
 
     private void loadFlashcardPage(Flashcard flashcard) {
@@ -97,7 +93,7 @@ public class RightPanel extends UiPart<Region> {
         selectedFlashcardContent.setText(flashcard.getContent().toString());
         selectedFlashcardTopic.setVisible(true);
         selectedFlashcardContent.setVisible(false);
-        defaultPage.setVisible(false);
+        welcomeMessage.setVisible(false);
     }
 
     //public void loadPage(String url) {
@@ -105,7 +101,7 @@ public class RightPanel extends UiPart<Region> {
 
     private void loadDefaultPage() {
           //loadPage(DEFAULT_PAGE.toExternalForm());
-        defaultPage.setVisible(true);
+        welcomeMessage.setVisible(true);
 
     }
 }
