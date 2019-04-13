@@ -125,7 +125,7 @@ Subject tags will be colour-coded. Same subject tags will have the same colour.
 // tag::edit[]
 === Editing a flashcard: `edit` or `e`
 
-Edits the content of a flashcard. +
+Edits field(s) of a specified flashcard. +
 
 Enter the index of the flashcard to edit, followed by the field(s) you wish to edit. +
 Format: `edit INDEX [t/TOPIC] [diff/DIFFICULTY] [c/CONTENT] [d/DEADLINE] [s/SUBJECT]` +
@@ -138,7 +138,7 @@ must be present. +
 
 *Steps to edit a flashcard:* +
 
-* Click on a subject; or +
+* Click on a subject in the subjects panel; or +
 * Enter the `selectSubject` command to select a subject (see Section 3.9.); then +
 * Use the `edit` command to edit a flashcard +
 
@@ -146,10 +146,10 @@ must be present. +
 
 ** *Editing 1 field*
 *** After clicking on a subject e.g. Math, flashcards that are tagged under "Math" will be displayed in the flashcards panel. +
-Next, enter `edit 1 s/Science` or `e 1 s/Science` to edit the flashcard with index "1", and replace its existing subject with "Science".
+Next, enter `edit 1 s/Science` or `e 1 s/Science` to edit the flashcard with index "1". It will replace its existing subject with "Science".
 
 *** After entering this command `selectSubject English`, all flashcards that are tagged under "English" will be displayed in the flashcards panel. +
-Next, enter `edit 2 c/The quick brown fox` or `e 2 c/The quick brown fox` to edit the flashcard with index "2", and replace its existing content with "The quick brown fox".
+Next, enter `edit 2 c/The quick brown fox` or `e 2 c/The quick brown fox` to edit the flashcard with index "2". It will replace its existing content with "The quick brown fox".
 
 ** *Editing more than 1 field*
 *** After clicking on a subject e.g. Math, flashcards that are tagged under "Math" will be displayed in the flashcards panel. +
@@ -202,7 +202,7 @@ Format: `delete INDEX` +
 
 *Steps to delete a flashcard:* +
 
-* Click on a subject; or +
+* Click on a subject in the subjects panel; or +
 * Enter the `selectSubject` command to select a subject (see Section 3.9.); then +
 * Use the `delete` command to delete a flashcard +
 
@@ -233,7 +233,7 @@ Format: `select INDEX` +
 
 *Steps to select a flashcard:* +
 
-* Click on a subject; or +
+* Click on a subject in the subjects panel; or +
 * Enter the `selectSubject` command to select a subject (see Section 3.9.); then +
 * Use the `select` command to select a flashcard +
 
