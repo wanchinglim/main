@@ -18,8 +18,13 @@ By: `Team M11-3`      Since: `Jan 2019`      Licence: `MIT`
 
 == Introduction
 
-FlashCards is for those who *prefer to use a desktop app for managing their notes*.
-More importantly, FlashCards is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, FlashCards can let you retrieve and access your notes for various subjects faster than sieving through your hardcopied notes. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+FlashCards is for those who *prefer to use a desktop application to manage their notes*.
+More importantly, FlashCards is *optimized for those who are comfortable working with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI).
+
+With FlashCards, you no longer need to worry about sieving through your hard copied notes for various subjects just to find the ones you want.
+You can have all your notes categorized neatly in one platform and be easily accessible at your fingertips!
+
+Read on to get started!
 
 == Quick Start
 
@@ -56,19 +61,6 @@ It has a difficulty level of `1` with the content `a^2 + b^2 = c^2` and should b
 e.g. in `add t/TOPIC`, `TOPIC` is a parameter which can be used as `add t/Pythagoras Theorem`.
 * Parameters can be in any order e.g. if the command specifies `t/TOPIC c/CONTENT`, `c/CONTENT t/TOPIC` is also acceptable.
 ====
-
-=== Creating an account: `create`
-
-Create an account for the user. +
-Supports multiple users. +
-Format: `create <username>`
-
-* Subsequent adding of flashcards will be tagged to the same user account.
-
-Examples:
-
-* `create John Doe`
-A new user account called "John Doe" is created.
 
 === Logging in: `login`
 
@@ -394,6 +386,19 @@ Format: `clear` or `c`
 
 Exits the program. +
 Format: `exit`
+
+=== Creating an account (coming in v2.0)
+
+Creates an account for the user. +
+
+This feature will support multiple users and all operations carried out will be tagged to the same user account.
+
+=== Logging in (coming in v2.0)
+
+Enables users who already have an account to log in. +
+
+This feature will support multiple users and all operations carried out will only pertain to the current user account.
+
 
 === Saving the data
 
