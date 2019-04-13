@@ -300,18 +300,18 @@ This mode will help users to focus on a particular subject's notes when studying
 ==== Current Implementation
 The FlashCards UI is divided into three panels from left to right – Subjects, Flashcards, and Content. +
 
-1. *Subjects Panel* (facilitated by `SubjectListPanel`): +
+1. *Subjects Panel* (facilitated by `SubjectListPanel` class): +
 Displays:
 ** Subject tag
 
-2. *Flashcards Panel* (facilitated by `FlashcardListPanel`): +
+2. *Flashcards Panel* (facilitated by `FlashcardListPanel` class): +
 Displays information in this order:
 ** Topic of flashcard
 ** Difficulty level of flashcard
 ** (Optional) Deadline to memorize flashcard
 ** Subject tag displayed as a coloured tag
 
-3. *Content Panel* (facilitated by `RightPanel`): +
+3. *Content Panel* (facilitated by `RightPanel` class): +
 This panel is further sectioned into 2:
 ** Topic of flashcard
 ** Content of flashcard
@@ -341,7 +341,7 @@ Shown below is the adding mechanism of a flashcard with a unique subject among o
 * The `UniqueSubjectList` object will invoke its `addSubject()` function. This function will check if the current `UniqueSubjectList` object contains the subject tag of the current flashcard to be added.
 Since it is unique in this scenario, the subject tag of the current flashcard will be added to this `UniqueSubjectList` object.
 +
-* The `SubjectListPanel` then displays this newly added subject.
+* The `SubjectListPanel` class then displays this newly added subject in the subjects panel.
 +
 
 2. *Subject tag already exists in other flashcards* +
@@ -358,7 +358,7 @@ Shown below is the adding mechanism of a flashcard whose subject already exists 
 * The `UniqueSubjectList` object will invoke its `addSubject()` function. This function will check if the current `UniqueSubjectList` object contains the subject tag of the current flashcard to be added.
 Since it is not unique in this scenario, the subject tag *will not* be added to this `UniqueSubjectList` object.
 +
-* The `SubjectListPanel` remains unchanged.
+* The subjects panel remains unchanged.
 
 
 The following sequence diagram summarises what happens in Step 1: +
@@ -373,30 +373,30 @@ _Figure: Sequence Diagram of adding a flashcard successfully_ +
 ===== Step 2: Displaying flashcards according to subjects
 After a flashcard is added, the following sequence of events will happen:
 
-* The UI component's `MainWindow` class will create a new `SubjectListPanel` object that takes in and invokes:
+1. The UI component's `MainWindow` class will create a new `SubjectListPanel` object that takes in and invokes:
 
-** Logic component's `getFilteredSubjectList()` -- returns `filteredSubjects` which contains the list of unique subjects
-** Logic component's `selectedSubjectProperty()` -- returns the `selectedSubject` tag clicked by the user
-** Logic component's `setSelectedSubject()` -- replaces previously selected subject with the newly selected subject
+* Logic component's `getFilteredSubjectList()` -- returns `filteredSubjects` which contains the list of unique subjects
+* Logic component's `selectedSubjectProperty()` -- returns the `selectedSubject` tag clicked by the user
+* Logic component's `setSelectedSubject()` -- replaces previously selected subject with the newly selected subject
 
-* In the `SubjectListPanel` class,
-** The functions `setItems()` and `setCellFactory()` of JavaFX will populate the panel with the unique subject list from `getFilteredSubjectList()`.
+2. In the `SubjectListPanel` class
+* `setItems()` and `setCellFactory()` of JavaFX will populate the subjects panel with the unique subject list from `getFilteredSubjectList()`.
 
-* The UI component's `MainWindow` class will create a new `FlashcardListPanel` object that takes in and invokes:
+3. The UI component's `MainWindow` class will create a new `FlashcardListPanel` object that takes in and invokes:
 
-** Logic component's `getFilteredFlashcardList()` -- returns `filteredFlashcards` which contains the list of unique flashcards
-** Logic component's `selectedSubjectProperty()` -- returns the `selectedSubject` tag clicked by the user
+* Logic component's `getFilteredFlashcardList()` -- returns `filteredFlashcards` which contains the list of unique flashcards
+* Logic component's `selectedSubjectProperty()` -- returns the `selectedSubject` tag clicked by the user
 
-* In the `FlashcardListPanel` class,
-** The functions `setItems()` and `setCellFactory()` of JavaFX will populate the panel with the unique flashcard list from `getFilteredFlashcardList()`.
+4. In the `FlashcardListPanel` class
+* `setItems()` and `setCellFactory()` of JavaFX will populate the flashcards panel with the unique flashcard list from `getFilteredFlashcardList()`.
 
-** A listener is attached to the `selectedSubjectProperty` value passed into this panel in order to detect when another subject is selected.
+* A listener is attached to the `selectedSubjectProperty` value passed into this panel in order to detect when another subject is selected.
 
-** When another subject is selected, the class invokes `updateFlashcardList()`.
+* When another subject is selected, the class invokes `updateFlashcardList()`.
 It matches the subject tag of flashcards from `getFilteredFlashcardList()` with the newly selected subject.
 If the subject tag matches, this flashcard is added to a `newFlashcardList` object.
 
-** The flashcard panel is then populated with flashcards from the `newFlashcardList` object using `setItems()` and `setCellFactory()` of JavaFX.
+* The flashcard panel is then populated with flashcards from the `newFlashcardList` object using `setItems()` and `setCellFactory()` of JavaFX.
 
 
 The following sequence diagram summarizes what happens in Step 2: +
