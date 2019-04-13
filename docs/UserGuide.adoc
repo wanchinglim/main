@@ -62,18 +62,6 @@ e.g. in `add t/TOPIC`, `TOPIC` is a parameter which can be used as `add t/Pythag
 * Parameters can be in any order e.g. if the command specifies `t/TOPIC c/CONTENT`, `c/CONTENT t/TOPIC` is also acceptable.
 ====
 
-=== Logging in: `login`
-
-Login to the user account to perform operations pertaining to your own flashcards. +
-Secures the data with a password. +
-Supports multiple users. +
-Format: `login <username> <password>`
-
-Examples:
-
-* `login John Doe john123`
-The user can login using the username and password to be "John Doe" and "john123" respectively.
-
 === Viewing help : `help`
 
 Displays the list of commands.
