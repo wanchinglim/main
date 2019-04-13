@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.text.Font?>
 
 <SplitPane fx:id="rightMostPane" dividerPositions="0.1" orientation="VERTICAL" prefHeight="50.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
     <!--<WebView fx:id="browser" opacity="0.0"/>-->
@@ -54,11 +53,7 @@
             <children>
                 <Label fx:id="selectedFlashcardTopic" lineSpacing="12.0" style="-fx-text-fill: white; -fx-font-size: 22;" styleClass="cell_big_label" textAlignment="CENTER" wrapText="true" />
                 <Label fx:id="selectedFlashcardContent" lineSpacing="12.0" style="-fx-text-fill: white; -fx-font-size: 22;" styleClass="cell_big_label" textAlignment="CENTER" wrapText="true" />
-                <Label fx:id="welcomeMessage" lineSpacing="12.0" style="-fx-text-fill: white; -fx-text-size: 22; -fx-font-size: 22;" styleClass="cell_big_label" text="Welcome to FlashBook. Get started by adding a flashcard." textAlignment="CENTER" wrapText="true">
-                    <font>
-                        <Font size="36.0" />
-                    </font>
-                </Label>
+                <Label fx:id="welcomeMessage" lineSpacing="12.0" style="-fx-text-fill: white; -fx-text-size: 22; -fx-font-size: 22; -fx-background-color: cornflowerblue;" styleClass="cell_big_label" text="Welcome to FlashBook. Having troubles with memorising? Get started by adding a flashcard!" textAlignment="CENTER" wrapText="true" />
             </children>
         </StackPane>
         <!--<StackPane fx:id="contentAnchorPane" minHeight="250.0" minWidth="500.0" style="-fx-background-color: black;">-->
