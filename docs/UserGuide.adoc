@@ -375,6 +375,12 @@ Format: `clear` or `c`
 Exits the program. +
 Format: `exit`
 
+=== Saving the data
+
+FlashCards data is saved in the hard disk automatically after any command that changes the data. +
+
+There is no need to save manually.
+
 === Creating an account (coming in v2.0)
 
 Creates an account for the user. +
@@ -386,13 +392,6 @@ This feature will support multiple users and all operations carried out will be 
 Enables users who already have an account to log in. +
 
 This feature will support multiple users and all operations carried out will only pertain to the current user account.
-
-
-=== Saving the data
-
-FlashCards data is saved in the hard disk automatically after any command that changes the data. +
-
-There is no need to save manually.
 
 == FAQ
 
