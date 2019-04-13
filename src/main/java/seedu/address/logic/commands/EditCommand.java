@@ -85,6 +85,7 @@ public class EditCommand extends Command {
 
         model.setFlashcard(flashcardToEdit, editedFlashcard);
         model.commitFlashBook();
+        model.setSelectedSubject(editedFlashcard.getSubject());
         return new CommandResult(String.format(MESSAGE_EDIT_FLASHCARD_SUCCESS, editedFlashcard));
     }
 
@@ -131,8 +132,11 @@ public class EditCommand extends Command {
 
         private Topic topic;
         private Difficulty difficulty;
+        private Deadline deadline;
         private Content content;
-        private Set<SubjectTag> tags;
+        private Set<SubjectTag> subjectTag;
+        private SubjectTag subject;
+        private String subjectName;
 
         public EditFlashcardDescriptor() {}
 
@@ -143,15 +147,23 @@ public class EditCommand extends Command {
         public EditFlashcardDescriptor(EditFlashcardDescriptor toCopy) {
             setTopic(toCopy.topic);
             setDifficulty(toCopy.difficulty);
+            setDeadline(toCopy.deadline);
             setContent(toCopy.content);
-            setTags(toCopy.tags);
+            setTags(toCopy.subjectTag);
+            /*if (!toCopy.subjectTag.isEmpty()) {
+                for (SubjectTag s : toCopy.subjectTag) {
+                    setSubject(s);
+                    setSubjectName(s);
+                    break;
+                }
+            }*/
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(topic, difficulty, content, tags);
+            return CollectionUtil.isAnyNonNull(topic, difficulty, content, subjectTag);
         }
 
         public void setTopic(Topic topic) {
@@ -170,6 +182,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(difficulty);
         }
 
+        public void setDeadline(Deadline deadline) {
+            this.deadline = deadline;
+        }
+
+        public Optional<Deadline> getDeadline() {
+            return Optional.ofNullable(deadline);
+        }
+
         public void setContent(Content content) {
             this.content = content;
         }
@@ -178,12 +198,28 @@ public class EditCommand extends Command {
             return Optional.ofNullable(content);
         }
 
+        public void setSubject(SubjectTag subject) {
+            this.subject = subject;
+        }
+
+        public Optional<SubjectTag> getSubject() {
+            return Optional.ofNullable(subject);
+        }
+
+        public void setSubjectName(SubjectTag subjectTag) {
+            this.subjectName = subjectTag.toString();
+        }
+
+        public Optional<String> getSubjectName() {
+            return Optional.ofNullable(subjectName);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
          */
         public void setTags(Set<SubjectTag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+            this.subjectTag = (tags != null) ? new HashSet<>(tags) : null;
         }
 
         /**
@@ -192,7 +228,7 @@ public class EditCommand extends Command {
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
         public Optional<Set<SubjectTag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+            return (subjectTag != null) ? Optional.of(Collections.unmodifiableSet(subjectTag)) : Optional.empty();
         }
 
         @Override

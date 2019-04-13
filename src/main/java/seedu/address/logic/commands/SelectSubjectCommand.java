@@ -65,7 +65,6 @@ public class SelectSubjectCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_SUBJECT);
         }
         model.setSelectedSubject(targetSubject);
-        model.updateFilteredFlashcardList(predicate);
 
         return new CommandResult(String.format(MESSAGE_SELECT_SUBJECT_SUCCESS, targetSubject));
 
