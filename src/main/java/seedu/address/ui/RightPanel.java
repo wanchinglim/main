@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.net.URL;
 
-import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -52,14 +51,14 @@ public class RightPanel extends UiPart<Region> {
 
         // Load flashcard page when selected flashcard changes.
         selectedFlashcard.addListener((observable, oldValue, newValue) -> {
-            if (newValue == null) {
-                loadDefaultPage();
-                return;
-            }
+            //if (newValue == null) {
+            //    loadDefaultPage();
+            //    return;
+            //}
             loadFlashcardPage(newValue);
         });
 
-        loadDefaultPage();
+        //loadDefaultPage();
     }
 
     private void loadFlashcardPage(Flashcard flashcard) {
@@ -68,10 +67,10 @@ public class RightPanel extends UiPart<Region> {
         selectedFlashcardContent.setText(flashcard.getContent().toString());
     }
 
-    public void loadPage(String url) {
-        Platform.runLater(() -> browser.getEngine().load(url));
-    }
-    private void loadDefaultPage() {
-        loadPage(DEFAULT_PAGE.toExternalForm());
-    }
+    //public void loadPage(String url) {
+    //    Platform.runLater(() -> browser.getEngine().load(url));
+
+    //private void loadDefaultPage() {
+    //      loadPage(DEFAULT_PAGE.toExternalForm());
+    //}
 }

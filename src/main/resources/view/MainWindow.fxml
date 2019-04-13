@@ -60,7 +60,7 @@
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
-            <StackPane fx:id="subjectListPanelPlaceholder" VBox.vgrow="ALWAYS" minWidth="340" prefWidth="340"/>
+            <StackPane fx:id="subjectListPanelPlaceholder" VBox.vgrow="ALWAYS" minWidth="340" prefWidth="340" minHeight="650" prefHeight="650"/>
           </StackPane>
           </VBox>
           <!--<StackPane fx:id="browserPlaceholder" prefWidth="340" >-->
