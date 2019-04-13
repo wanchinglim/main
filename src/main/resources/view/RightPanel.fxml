@@ -22,8 +22,10 @@
                                     <!--<Button mnemonicParsing="false" text="Topic" onAction="#handleChangeToTopic"/>-->
                                     <!--<Button mnemonicParsing="false" text="Content" onAction="#handleChangeToContent"/>-->
                                     <!--<Button mnemonicParsing="false" text="Topic and Content" />-->
-                                    <Button mnemonicParsing="false" text="Topic" />
-                                    <Button mnemonicParsing="false" text="Content" />
+                                    <Button mnemonicParsing="false" text="Topic" onAction="#handleTopicEvent"/>
+                                    <Button mnemonicParsing="false" text="Content" onAction="#handleContentEvent"/>
+                                    <!--<Button mnemonicParsing="false" text="Topic"/>-->
+                                    <!--<Button mnemonicParsing="false" text="Content"/>-->
                                 </buttons>
                      <effect>
                         <InnerShadow />
@@ -48,10 +50,11 @@
                 <!--<Label fx:id="selectedFlashcardContent" style="-fx-text-fill: white;"/>-->
             <!--</children>-->
         <!--</StackPane>-->
-        <StackPane fx:id="topicAnchorPane" minHeight="600.0" minWidth="500.0" style="-fx-background-color: black;">
+        <StackPane fx:id="topicAnchorPane" minHeight="250.0" minWidth="500.0" style="-fx-background-color: black;">
             <children>
                 <Label fx:id="selectedFlashcardTopic" style="-fx-text-fill: white;" styleClass="cell_big_label" wrapText="true" textAlignment="CENTER" />
                 <Label fx:id="selectedFlashcardContent" style="-fx-text-fill: white;" styleClass="cell_big_label" wrapText="true" textAlignment="CENTER"/>
+                <Label fx:id="defaultPage" style="-fx-text-fill: white;" styleClass="cell_big_label" wrapText="true" textAlignment="CENTER" text="Welcome to FlashBook. Get started by adding a flashcard."/>
             </children>
         </StackPane>
         <!--<StackPane fx:id="contentAnchorPane" minHeight="250.0" minWidth="500.0" style="-fx-background-color: black;">-->
