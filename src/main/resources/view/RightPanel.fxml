@@ -22,8 +22,8 @@
                                     <!--<Button mnemonicParsing="false" text="Topic" onAction="#handleChangeToTopic"/>-->
                                     <!--<Button mnemonicParsing="false" text="Content" onAction="#handleChangeToContent"/>-->
                                     <!--<Button mnemonicParsing="false" text="Topic and Content" />-->
-                                    <Button mnemonicParsing="false" text="Topic" onAction="#handleTopicEvent"/>
-                                    <Button mnemonicParsing="false" text="Content" onAction="#handleContentEvent"/>
+                                    <Button mnemonicParsing="true" text="_Topic" onAction="#handleTopicEvent"/>
+                                    <Button mnemonicParsing="true" text="_Content" onAction="#handleContentEvent"/>
                                     <!--<Button mnemonicParsing="false" text="Topic"/>-->
                                     <!--<Button mnemonicParsing="false" text="Content"/>-->
                                 </buttons>
