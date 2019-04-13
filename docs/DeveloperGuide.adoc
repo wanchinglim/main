@@ -320,7 +320,7 @@ image::UI copy.png[width=800]
 _Figure. GUI of FlashCards_
 
 Upon adding a flashcard with the `add` command, (e.g. `add t/Pythagoras Theorem diff/1 c/a^2 + b^2 = c^2 s/Math`),
-the subject tag "Math" will be added to a `SubjectBook` object and `UniqueSubjectList` object before being displayed in the `SubjectListPanel`. +
+the subject tag "Math" will be added to a `SubjectBook` object and `UniqueSubjectList` object before being displayed in the subjects panel. +
 
 An example scenario of adding a flashcard (Step 1) and displaying the flashcards for each subject (Step 2) is shown below.
 
