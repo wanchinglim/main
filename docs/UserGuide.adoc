@@ -126,17 +126,17 @@ must be present. +
 
 ** *Editing 1 field*
 *** After clicking on a subject e.g. Math, flashcards that are tagged under "Math" will be displayed in the flashcards panel. +
-Next, enter `edit 1 s/Science` or `e 1 s/Science` to edit the flashcard with index "1". It will replace its existing subject with "Science".
+Next, enter `edit 1 s/Science` or `e 1 s/Science` to edit the flashcard with index "1". It will replace the flashcard's existing subject with "Science".
 
 *** After entering this command `selectSubject English`, all flashcards that are tagged under "English" will be displayed in the flashcards panel. +
-Next, enter `edit 2 c/The quick brown fox` or `e 2 c/The quick brown fox` to edit the flashcard with index "2". It will replace its existing content with "The quick brown fox".
+Next, enter `edit 2 c/The quick brown fox` or `e 2 c/The quick brown fox` to edit the flashcard with index "2". It will replace the flashcard's existing content with "The quick brown fox".
 
 ** *Editing more than 1 field*
 *** After clicking on a subject e.g. Math, flashcards that are tagged under "Math" will be displayed in the flashcards panel. +
-Next, enter `edit 1 c/Plants s/Science` or `e 1 c/Plants s/Science` to edit the flashcard with index "1". It will replace its existing content with "Plants" and subject with "Science".
+Next, enter `edit 1 c/Plants s/Science` or `e 1 c/Plants s/Science` to edit the flashcard with index "1". It will replace the flashcard's existing content with "Plants" and subject with "Science".
 
 *** After entering this command `selectSubject English`, all flashcards that are tagged under "English" will be displayed in the flashcards panel. +
-Next, enter `edit 1 t/Brown Fox diff/1` or `e 1 t/Brown Fox diff/1` to edit the flashcard with index "1". It will replace its existing topic with "Brown Fox" and difficulty level with "1".
+Next, enter `edit 1 t/Brown Fox diff/1` or `e 1 t/Brown Fox diff/1` to edit the flashcard with index "1". It will replace the flashcard's existing topic with "Brown Fox" and difficulty level with "1".
 
 The edited flashcard will be updated and displayed in the flashcards panel.
 // end::edit[]
