@@ -9,11 +9,13 @@ import org.junit.Before;
 
 import org.junit.Test;
 
+import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.flashcard.Flashcard;
+import seedu.address.model.tag.SubjectTag;
 import seedu.address.testutil.FlashcardBuilder;
 
 /**
@@ -38,6 +40,10 @@ public class AddCommandIntegrationTest {
         expectedModel.addFlashcard(validFlashcard);
         expectedModel.addSubject(validFlashcard.getSubject());
         expectedModel.commitFlashBook();
+        expectedModel.setSelectedSubject(new SubjectTag("english"));
+        ObservableList<Flashcard> f = expectedModel.getUpdatedFlashcardList();
+        model.setSelectedSubject(new SubjectTag("english"));
+        f = model.getUpdatedFlashcardList();
         expectedModel.setSelectedSubject(validFlashcard.getSubject());
         expectedModel.setSelectedFlashcard(validFlashcard);
 

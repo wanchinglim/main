@@ -141,10 +141,6 @@ public class ModelManager extends ComponentManager implements Model {
      */
     @Override
     public void setSelectedSubject(SubjectTag subject) {
-        if (subject != null && !filteredSubjects.contains(subject)) {
-            throw new FlashcardNotFoundException();
-        }
-
         selectedSubject.setValue(subject);
     }
 
@@ -267,6 +263,13 @@ public class ModelManager extends ComponentManager implements Model {
         for (Flashcard f : filteredFlashcards) {
             if (selectedSubject.getValue().equals(f.getSubject())) {
                 updatedFlashcardList.add(f);
+            }
+        }
+
+        for (SubjectTag s : filteredSubjects) {
+            if (!s.equals(selectedSubject.get())) {
+                setSelectedSubject(s);
+                break;
             }
         }
 
