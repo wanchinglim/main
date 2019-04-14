@@ -1113,7 +1113,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`*` |User |Login |Perform actions that only pertain to my account
 
-|`*` |User |Encrypt my data |Ensure my data's security
+|`*` |User |Encrypt my data |Ensure my data is secure
 |=======================================================================
 
 
@@ -1157,6 +1157,7 @@ Use case ends.
 +
 Use case ends.
 
+[discrete]
 === Use case: Selecting a Flashcard
 
 *MSS*
@@ -1166,6 +1167,7 @@ Use case ends.
 +
 Use case ends.
 
+[discrete]
 === Use case: Viewing Flashcards Based on Subject
 
 *MSS*
