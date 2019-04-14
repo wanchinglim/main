@@ -30,7 +30,7 @@ public class DeadlineCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_DEADLINE + "[DEADLINE]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_DEADLINE + "04 April 2028";
+            + PREFIX_DEADLINE + "04-02-2019";
 
     public static final String MESSAGE_ADD_DEADLINE_SUCCESS = "Added deadline to Flashcard: %1$s";
     public static final String MESSAGE_DELETE_DEADLINE_SUCCESS = "Removed deadline from Flashcard: %1$s";
