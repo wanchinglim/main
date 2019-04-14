@@ -456,9 +456,9 @@ image::SortCommandSD.png[width="800"]
 The user can determine how long the flash cards will exist in the database “FlashCards”.
 The following operations are available:
 
-* `FlashCards#clearall()` -- Clears the entire database.
+* `FlashCards#clear()` -- Clears the entire database.
 * `FlashCards#clear()` -- Clears a specific flashcard when in "Subject" Knowledge Testing Mode.
-* `FlashCards#deadline()` or `FlashCards#exam()` -- Adds a deadline/exam for the specified flashcard.
+* `FlashCards#deadline()` or `FlashCards#note()` -- Adds a deadline/note for the specified flashcard.
 
 For easier modes of implementation, the user can also choose to set a date whereby the flash cards would be unavailable thereafter. To activate this function, the user can type in `deadline` or `exam`, followed by the index and the date. For example, in the event where the user knows the specific exam date for the selected flashcard, he/she can set the exam date under the “Subject Details” and the flash cards will be available for another month after the exam before the auto deletion function is activated.
 
