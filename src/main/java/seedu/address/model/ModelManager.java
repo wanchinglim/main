@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -36,6 +37,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final SimpleObjectProperty<Flashcard> selectedFlashcard = new SimpleObjectProperty<>();
     private final SimpleObjectProperty<SubjectTag> selectedSubject = new SimpleObjectProperty<>();
     private final FilteredList<SubjectTag> filteredSubjects;
+    private ObservableList<Flashcard> updatedFlashcardList = FXCollections.observableArrayList();
 
     /**
      * Initializes a ModelManager with the given flashBook and userPrefs.
@@ -53,7 +55,6 @@ public class ModelManager extends ComponentManager implements Model {
         filteredFlashcards.addListener(this::ensureSelectedFlashcardIsValid);
         filteredSubjects = new FilteredList<>(this.subjectBook.getSubjectList());
         filteredSubjects.addListener(this::ensureSelectedSubjectIsValid);
-
     }
 
     public ModelManager() {
@@ -140,10 +141,6 @@ public class ModelManager extends ComponentManager implements Model {
      */
     @Override
     public void setSelectedSubject(SubjectTag subject) {
-        if (subject != null && !filteredSubjects.contains(subject)) {
-            throw new FlashcardNotFoundException();
-        }
-
         selectedSubject.setValue(subject);
     }
 
@@ -162,11 +159,11 @@ public class ModelManager extends ComponentManager implements Model {
     /**
      * Replaces flash book data with the data in {@code flashBook}.
      *
-     * @param subjectBook
+     * @param subjects
      */
     @Override
-    public void setSubjectBook(SubjectBook subjectBook) {
-        subjectBook.resetData(subjectBook);
+    public void setSubjectBook(SubjectBook subjects) {
+        subjectBook.resetData(subjects);
     }
 
 
@@ -198,6 +195,11 @@ public class ModelManager extends ComponentManager implements Model {
                 selectedSubject.setValue(change.getFrom() > 0 ? change.getList().get(change.getFrom() - 1) : null);
             }
         }
+    }
+
+    @Override
+    public SubjectTag getSelectedSubject() {
+        return selectedSubject.get();
     }
 
 
@@ -243,6 +245,7 @@ public class ModelManager extends ComponentManager implements Model {
         versionedFlashBook.setFlashcard(target, editedFlashcard);
     }
 
+
     //=========== Filtered Flashcard List Accessors =============================================================
 
     /**
@@ -252,6 +255,31 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public ObservableList<Flashcard> getFilteredFlashcardList() {
         return filteredFlashcards;
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Flashcard} backed by the internal list of
+     * {@code versionedFlashBook}
+     */
+    @Override
+    public ObservableList<Flashcard> getUpdatedFlashcardList() {
+
+        updatedFlashcardList.clear();
+
+        for (Flashcard f : filteredFlashcards) {
+            if (selectedSubject.getValue().equals(f.getSubject())) {
+                updatedFlashcardList.add(f);
+            }
+        }
+
+        for (SubjectTag s : filteredSubjects) {
+            if (!s.equals(selectedSubject.get())) {
+                setSelectedSubject(s);
+                break;
+            }
+        }
+
+        return updatedFlashcardList;
     }
 
     @Override

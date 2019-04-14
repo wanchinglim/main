@@ -18,8 +18,13 @@ By: `Team M11-3`      Since: `Jan 2019`      Licence: `MIT`
 
 == Introduction
 
-FlashCards is for those who *prefer to use a desktop app for managing their notes*.
-More importantly, FlashCards is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, FlashCards can let you retrieve and access your notes for various subjects faster than sieving through your hardcopied notes. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+FlashCards is for those who *prefer to use a desktop application to manage their notes*.
+More importantly, FlashCards is *optimized for those who are comfortable working with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI).
+
+With FlashCards, you no longer need to worry about sieving through your hard copied notes for various subjects just to find the ones you want.
+You can have all your notes categorized neatly in one platform and be easily accessible at your fingertips!
+
+Read on to get started!
 
 == Quick Start
 
@@ -28,7 +33,7 @@ More importantly, FlashCards is *optimized for those who prefer to work with a C
 .  Copy the file to the folder you want to use as the home folder for this FlashCard application.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
-image::UI copy.png[width="790"]
+image::UIFINAL.png[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
@@ -57,31 +62,6 @@ e.g. in `add t/TOPIC`, `TOPIC` is a parameter which can be used as `add t/Pythag
 * Parameters can be in any order e.g. if the command specifies `t/TOPIC c/CONTENT`, `c/CONTENT t/TOPIC` is also acceptable.
 ====
 
-=== Creating an account: `create`
-
-Create an account for the user. +
-Supports multiple users. +
-Format: `create <username>`
-
-* Subsequent adding of flashcards will be tagged to the same user account.
-
-Examples:
-
-* `create John Doe`
-A new user account called "John Doe" is created.
-
-=== Logging in: `login`
-
-Login to the user account to perform operations pertaining to your own flashcards. +
-Secures the data with a password. +
-Supports multiple users. +
-Format: `login <username> <password>`
-
-Examples:
-
-* `login John Doe john123`
-The user can login using the username and password to be "John Doe" and "john123" respectively.
-
 === Viewing help : `help`
 
 Displays the list of commands.
@@ -90,9 +70,9 @@ Format: `help`
 
 //don't need to put examples but maybe can put pictures if necessary.
 // tag::add[]
-=== Adding a subject or flashcard: `add`
+=== Adding a flashcard: `add`
 
-Adds a flashcard with subject and data field. +
+Adds a flashcard. +
 Format: `add t/TOPIC diff/DIFFICULTY c/CONTENT s/SUBJECT`
 
 * `TOPIC`: Title of the flashcard.
@@ -105,16 +85,17 @@ Format: `add t/TOPIC diff/DIFFICULTY c/CONTENT s/SUBJECT`
 
 * `add t/Pythagoras Theorem diff/1 c/a^2 + b^2 = c^2 s/Math` +
 Adds a flashcard named "Pythagoras Theorem" under the subject "Math" to the list of flashcards.
-It has a difficulty level of "1" with the content "a^2 + b^2 = c^2".
+It has the content "a^2 + b^2 = c^2" and a difficulty level of "1".
 
 * `add t/Photosynthesis diff/1 c/A chemical reaction that takes place inside a plant, producing food for the plant to survive s/Science` +
 Adds a flashcard named "Photosynthesis" under the subject "Science" to the list of flashcards.
-It has a difficulty level of "1" with the content "A chemical reaction that takes place inside a plant, producing food for the plant to survive".
+It has the content "A chemical reaction that takes place inside a plant, producing food for the plant to survive" and a difficulty level of "1".
 
 
-The flashcard that was just added will be displayed.
+The flashcard that was just added will be displayed in the flashcards panel.
 // end::add[]
-=== Listing all flashcards categorized by subjects : `list` or `l`
+
+=== Listing all flashcards categorized by subjects: `list` or `l`
 
 Displays an indexed list of flashcards categorized by subjects. +
 Format: `list` or `l`
@@ -122,28 +103,44 @@ Format: `list` or `l`
 Subject tags will be colour-coded. Same subject tags will have the same colour.
 
 // tag::edit[]
-=== Editing a flashcard : `edit` or `e`
+=== Editing a flashcard: `edit` or `e`
 
-Edits the content of a flashcard. +
-Enter the index of the flashcard to edit. +
+Edits field(s) of a specified flashcard. +
+
+Enter the index of the flashcard to edit, followed by the field(s) you wish to edit. +
 Format: `edit INDEX [t/TOPIC] [diff/DIFFICULTY] [c/CONTENT] [d/DEADLINE] [s/SUBJECT]` +
 
 
-* `INDEX`: Index number of the flashcard to be edited. This index number will be shown in the displayed list of flashcards.
+* `INDEX`: Index number of the flashcard to be edited. This index number will be shown in the displayed list of flashcards in the flashcards panel.
 *Must be a positive integer* such as 1, 2, 3, ... +
 * `[t/TOPIC] [diff/DIFFICULTY] [c/CONTENT] [d/DEADLINE] [s/SUBJECT]`: *At least one* of these fields enclosed in [ ]
 must be present. +
 
+*Steps to edit a flashcard:* +
+
+* Click on a subject in the subjects panel; or +
+* Enter the `selectSubject` command to select a subject (see Section 3.9.); then +
+* Use the `edit` command to edit a flashcard +
 
 *Examples:* +
 
-* `edit 1 s/Science` +
-Edits flashcard with index "1" and replaces its existing subject with "Science".
-* `e 2 c/The quick brown fox` +
-Edits flashcard with index "2" and replaces its existing content with "The quick brown fox".
+** *Editing 1 field*
+*** After clicking on a subject e.g. Math, flashcards that are tagged under "Math" will be displayed in the flashcards panel. +
+Next, enter `edit 1 s/Science` or `e 1 s/Science` to edit the flashcard with index "1". It will replace the flashcard's existing subject with "Science".
 
-The edited flashcard will be updated and displayed in the list of flashcards.
+*** After entering this command `selectSubject English`, all flashcards that are tagged under "English" will be displayed in the flashcards panel. +
+Next, enter `edit 2 c/The quick brown fox` or `e 2 c/The quick brown fox` to edit the flashcard with index "2". It will replace the flashcard's existing content with "The quick brown fox".
+
+** *Editing more than 1 field*
+*** After clicking on a subject e.g. Math, flashcards that are tagged under "Math" will be displayed in the flashcards panel. +
+Next, enter `edit 1 c/Plants s/Science` or `e 1 c/Plants s/Science` to edit the flashcard with index "1". It will replace the flashcard's existing content with "Plants" and subject with "Science".
+
+*** After entering this command `selectSubject English`, all flashcards that are tagged under "English" will be displayed in the flashcards panel. +
+Next, enter `edit 1 t/Brown Fox diff/1` or `e 1 t/Brown Fox diff/1` to edit the flashcard with index "1". It will replace the flashcard's existing topic with "Brown Fox" and difficulty level with "1".
+
+The edited flashcard will be updated and displayed in the flashcards panel.
 // end::edit[]
+
 === Finding a flashcard based on topic: `find` or `f`
 
 Find flashcards based on the given keyword. +
@@ -172,9 +169,11 @@ Returns any flashcards whose topic contains `sun` or `fox` such as "Brown fox" a
 
 The flashcard(s) whose topic matches any of the keywords given will be displayed in the list of flashcards.
 // tag::delete[]
-=== Deleting a flashcard : `delete` or `d`
+
+=== Deleting a flashcard: `delete` or `d`
 
 Deletes the specified flashcard. +
+
 Enter the index of a flashcard to be deleted. +
 Format: `delete INDEX` +
 
@@ -183,28 +182,41 @@ Format: `delete INDEX` +
 
 *Steps to delete a flashcard:* +
 
-* Use the `list` command (see section 3.5) to display the list of all flashcards; or +
-* Use the `find` command (see section 3.7) to find a flashcard based on its topic. +
-* Select the index of the flashcard to delete. +
-
+* Click on a subject in the subjects panel; or +
+* Enter the `selectSubject` command to select a subject (see Section 3.9.); then +
+* Use the `delete` command to delete a flashcard +
 
 *Examples:* +
 
-* `list` +
-Lists all flashcards. +
-`delete 2` +
-Deletes the specified flashcard at index 2.
+* After clicking on a subject e.g. Math, flashcards that are tagged under "Math" will be displayed in the flashcards panel. +
+Next, enter `delete 2` or `d 2` to delete the specified flashcard at index 2.
 
-* `f Pythagoras Theorem` +
-Find flashcards with keywords "Pythagoras" and "Theorem". +
-`d 1` +
-Deletes the specified flashcard at index 1.
+* After entering this command `selectSubject English`, all flashcards that are tagged under "English" will be displayed in the flashcards panel. +
+Next, enter `delete 1` or `d 1` to delete the specified flashcard at index 1.
 
-The updated list of flashcards will be displayed.
+The updated list of flashcards will be displayed in the flashcards panel.
 // end::delete[]
-=== Selecting a flashcard : `select`
 
-Selects the flashcard identified by the index number used in the displayed flashcards list. +
+// tag::selectSubject[]
+=== Selecting a subject: `selectSubject`
+
+Selects the subject identified by the name used in the displayed list of subjects.+
+Format: `selectSubject SUBJECT` +
+
+* `SUBJECT`: Subject to be selected. This subject name can be found in the displayed list of subjects on the left panel.
+*Must be a subject that is already in the subject list* +
+
+*Steps to select a subject:* +
+* Enter the `selectSubject` command to select a subject;
+
+*Examples:* +
+* Enter this command `selectSubject English`, all flashcards that are tagged under "English" will be displayed in the flashcards panel.
+// end::selectSubject[]
+
+// tag::selectFlashcard[]
+=== Selecting a flashcard: `select`
+
+Selects the flashcard identified by the index number used in the displayed list of flashcards. +
 Format: `select INDEX` +
 
 * `INDEX`: Index number of the flashcard to be selected. This index number will be shown in the displayed list of flashcards.
@@ -213,25 +225,22 @@ Format: `select INDEX` +
 
 *Steps to select a flashcard:* +
 
-* Use the `list` command (see Section 3.5) to display the list of all flashcards; or +
-* Use the `find` command (see Section 3.7) to find a flashcard based on its topic. +
-* Select the index of the flashcard. +
+* Click on a subject in the subjects panel; or +
+* Enter the `selectSubject` command to select a subject (see Section 3.9.); then +
+* Use the `select` command to select a flashcard +
 
 
 *Examples:* +
 
-* `list` +
-Lists all flashcards. +
-`select 2` +
-Selects the 2nd flashcard in the list.
+* After clicking on a subject e.g. Math, flashcards that are tagged under "Math" will be displayed in the flashcards panel. +
+Next, enter `select 2` to select the 2nd flashcard of the subject "Math" in the flashcards panel.
 
-* `find definition` +
-Find flashcards with the keyword "definition". +
-`select 1` +
-Selects the 1st flashcard in the displayed results of the `find` command.
+* After entering this command `selectSubject English`, all flashcards that are tagged under "English" will be displayed in the flashcards panel. +
+Next, enter `select 1` to select the 1st flashcard of the subject "English" in the flashcards panel.
+// end::selectFlashcard[]
 
-// tag==togglemode[]
-=== Viewing the next flashcard : `next` or `n`
+// tag::togglemode[]
+=== Viewing the next flashcard: `next` or `n`
 
 Views the next flashcard in line. +
 Format: `next` or `n` +
@@ -240,25 +249,29 @@ Format: `next` or `n` +
 
 *Steps to view next flashcard:* +
 
-* Use the `select` command (see Section 3.9) to select a flashcard first. +
-* Use this `next` / `n` command to go to the next flashcard. +
+* First select the subject of the flashcards you want to toggle with `selectSubject` command. +
+* Next, use the `select` command (see Section 3.9) to select a flashcard first. +
+* Use `next` / `n` command to go to the next flashcard. +
 
 *Examples:* +
 
-* `select 2` +
-Selects the 2nd flashcard in the list. +
+* `selectSubject math` +
+ Selects all flashcards that is tagged under subject math. +
+`select 2` +
+Selects the 2nd flashcard in the filtered list. +
 `next` +
-Selects the next flashcard in the list (i.e. the 3rd flashcard); and +
-Displays the content of this flashcard.
-* `select 5` +
+Selects the next flashcard in the list (i.e. the 3rd flashcard); and displays the content of this flashcard.+
+
+* `selectSubject science` +
+ Selects all flashcards that is tagged under subject science. +
+`select 5` +
 Selects the 5th flashcard in the list. +
 `n` +
-Displays the next flashcard in the list (i.e. the 6th flashcard); and +
-Displays the content of this flashcard.
+Displays the next flashcard in the list (i.e. the 6th flashcard); and + displays the content of this flashcard.
 
 The next flashcard in line will be selected and its content will be displayed.
 
-=== Viewing the next flashcard : `previous` or `p`
+=== Viewing the next flashcard: `previous` or `p`
 
 Views the previous flashcard in line. +
 Format: `previous` or `p` +
@@ -267,26 +280,29 @@ Format: `previous` or `p` +
 
 *Steps to view previous flashcard:* +
 
+* First select the subject of the flashcards you want to toggle with `selectSubject` command. +
 * Use the `select` command (see Section 3.9) to select a flashcard first. +
 * Use this `previous` / `p` command to go to the previous flashcard. +
 
-*Examples: +
+*Examples:* +
 
-* `select 2` +
+* `selectSubject math` +
+Selects all flashcards that is tagged under subject math. +
+`select 2` +
 Selects the 2nd flashcard in the list. +
 `previous` +
-Selects the previous flashcard in the list (i.e. the 1st flashcard); and +
-Displays the content of this flashcard.
-* `select 5` +
+Selects the previous flashcard in the filtered list (i.e. the 1st flashcard); and displays the content of this flashcard.
+* `selectSubject science` +
+   Selects all flashcards that is tagged under subject science. +
+`select 5` +
 Selects the 5th flashcard in the list. +
 `p` +
-Selects the previous flashcard in the list (i.e. the 4th flashcard); and +
-Displays the content of this flashcard.
+Selects the previous flashcard in the list (i.e. the 4th flashcard); and displays the content of this flashcard.
 
 The previous flashcard in line will be selected and its content will be displayed.
 
 // end::togglemode[]
-=== Listing entered commands : `history`
+=== Listing entered commands: `history`
 
 Lists all the commands that you have entered in reverse chronological order. +
 Format: `history`
@@ -296,102 +312,37 @@ Format: `history`
 Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
 ====
 
-// tag::undoredo[]
-=== Undoing previous command : `undo`
-
-Restores the flashcard to the state before the previous _undoable_ command was executed. +
-Format: `undo`
-
-[NOTE]
-====
-Undoable commands: those commands that modify the flashcard's content (`add`, `delete`, `edit` and `clear`).
-====
-
-Examples:
-
-* `delete 1` +
-Deletes the 1st flashcard in the list. +
-`list` +
-Lists all flashcards. +
-`undo` +
-Reverses the `delete 1` command.
-
-
-* `select 1` +
-Selects the 1st flashcard in the list. +
-`list` +
-Lists all flashcards. +
-`undo` +
-The `undo` command fails as there are no undoable commands executed previously.
-
-* `delete 1` +
-Deletes the 1st flashcard in the list. +
-`clear` +
-Clear all flashcards. +
-`undo` +
-Reverses the `clear` command +
-`undo` +
-Reverses the `delete 1` command +
-
-
-=== Redoing the previously undone command : `redo`
-
-Reverses the most recent `undo` command. +
-Format: `redo`
-
-Examples:
-
-* `delete 1` +
-Deletes the 1st flashcard in the list. +
-`undo` +
-Reverses the `delete 1` command +
-`redo` +
-Reapplies the `delete 1` command +
-
-* `delete 1` +
-Deletes the 1st flashcard in the list. +
-`redo` +
-The `redo` command fails as there are no `undo` commands executed previously.
-
-* `delete 1` +
-Deletes the 1st flashcard in the list. +
-`clear` +
-Clears all flashcards. +
-`undo` +
-Reverses the `clear` command +
-`undo` +
-Reverses the `delete 1` command +
-`redo` +
-Reapplies the `delete 1` command +
-`redo` +
-Reapplies the `clear` command +
-
-// end::undoredo[]
-
-=== Clearing all flashcards : `clear` or `c`
+=== Clearing all flashcards: `clear` or `c`
 
 Clears all flashcards. +
 Format: `clear` or `c`
 
-=== Exiting the program : `exit`
+=== Exiting the program: `exit`
 
 Exits the program. +
 Format: `exit`
 
 === Saving the data
 
-FlashCards data are saved in the hard disk automatically after any command that changes the data. +
+FlashCards data is saved in the hard disk automatically after any command that changes the data. +
+
 There is no need to save manually.
 
-// tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
+=== Creating an account (coming in v2.0)
 
-_{explain how the user can enable/disable data encryption}_
-// end::dataencryption[]
+Creates an account for the user. +
+
+This feature will support multiple users and all operations carried out will be tagged to the same user account.
+
+=== Logging in (coming in v2.0)
+
+Enables users who already have an account to log in. +
+
+This feature will support multiple users and all operations carried out will only pertain to the current user account.
 
 == FAQ
 
-*Q*: How do I transfer my data to another Computer? +
+*Q: How do I transfer my data to another Computer?* +
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FlashCard Book folder.
 
 == Command Summary
@@ -411,7 +362,7 @@ e.g. `find Theorem` or `f sun fox`
 * *List* : `list` or `l`
 * *Next* : `next` or `n`
 * *Previous* : `previous` or `p`
-* *Redo* : `redo`
 * *Select* : `select INDEX` +
 e.g.`select 2`
-* *Undo* : `undo`
+* *Select Subject* : `selectSubject SUBJECT` +
+e.g. `selectSubject Math`

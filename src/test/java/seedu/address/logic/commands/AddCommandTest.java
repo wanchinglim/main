@@ -1,4 +1,3 @@
-/*
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
@@ -92,88 +91,88 @@ public class AddCommandTest {
         assertFalse(addAliceCommand.equals(addBobCommand));
     }
 
-    */
-/**
+
+    /**
      * A default model stub that have all of the methods failing.
-     *//*
-
+     */
     private class ModelStub implements Model {
-        */
-/**
-         * Returns the SubjectBook
-         *//*
 
+        /**
+         * Returns the SubjectBook
+         */
         @Override
         public ReadOnlySubjectBook getSubjectBook() {
             throw new AssertionError("This method should not be called.");
         }
 
-        */
-/**
+        /**
          * Returns an unmodifiable view of the filtered subject list
-         *//*
-
+         */
         @Override
         public ObservableList<SubjectTag> getFilteredSubjectList() {
             throw new AssertionError("This method should not be called.");
         }
 
-        */
-/**
+
+        /**
          * Selected subject in the filtered subject list.
          * null if no subject is selected.
-         *//*
-
+         */
         @Override
         public ReadOnlyProperty<SubjectTag> selectedSubjectProperty() {
             throw new AssertionError("This method should not be called.");
         }
 
-        */
-/**
+        /**
          * Adds the given flashcard.
          * {@code flashcard} must not already exist in the flash book.
          *
          * @param subject
-         *//*
+         */
 
         @Override
         public void addSubject(SubjectTag subject) {
             throw new AssertionError("This method should not be called.");
         }
 
-        */
-/**
+        /**
+         * Deletes the given subject.
+         *
+         * @param subject
+         */
+        @Override
+        public void deleteSubject(SubjectTag subject) {
+
+        }
+
+        /**
          * Sets the selected subject in the filtered subject list.
          *
          * @param subject
-         *//*
+         */
 
         @Override
         public void setSelectedSubject(SubjectTag subject) {
             throw new AssertionError("This method should not be called.");
         }
 
-        */
-/**
+        /**
          * Updates the filter of the filtered flashcard list to filter by the given {@code predicate}.
          *
          * @param predicate
          * @throws NullPointerException if {@code predicate} is null.
-         *//*
+         */
 
         @Override
         public void updateFilteredSubjectList(Predicate<SubjectTag> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
-        */
-/**
+        /**
          * Replaces flash book data with the data in {@code flashBook}.
          *
          * @param subjectBook
-         *//*
-
+         */
         @Override
         public void setSubjectBook(SubjectBook subjectBook) {
             throw new AssertionError("This method should not be called.");
@@ -210,6 +209,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public SubjectTag getSelectedSubject() {
+            return null;
+        }
+
+        @Override
         public void addFlashcard(Flashcard flashcard) {
             throw new AssertionError("This method should not be called.");
         }
@@ -242,6 +246,14 @@ public class AddCommandTest {
         @Override
         public ObservableList<Flashcard> getFilteredFlashcardList() {
             throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * Returns an unmodifiable view of the filtered flashcard list
+         */
+        @Override
+        public ObservableList<Flashcard> getUpdatedFlashcardList() {
+            return null;
         }
 
         @Override
@@ -290,11 +302,10 @@ public class AddCommandTest {
         }
     }
 
-    */
-/**
-     * A Model stub that contains a single flashcard.
-     *//*
 
+    /**
+     * A Model stub that contains a single flashcard.
+     */
     private class ModelStubWithFlashcard extends ModelStub {
         private final Flashcard flashcard;
 
@@ -310,13 +321,27 @@ public class AddCommandTest {
         }
     }
 
-    */
-/**
-     * A Model stub that always accept the flashcard being added.
-     *//*
 
+    /**
+     * A Model stub that always accept the flashcard being added.
+     */
     private class ModelStubAcceptingFlashcardAdded extends ModelStub {
         final ArrayList<Flashcard> flashcardsAdded = new ArrayList<>();
+
+        @Override
+        public void addSubject(SubjectTag subject) {
+            // called by {@code AddCommand#execute()}
+        }
+
+        @Override
+        public void setSelectedSubject(SubjectTag subject) {
+            // called by {@code AddCommand#execute()}
+        }
+
+        @Override
+        public void setSelectedFlashcard(Flashcard flashcard) {
+            // called by {@code AddCommand#execute()}
+        }
 
         @Override
         public boolean hasFlashcard(Flashcard flashcard) {
@@ -342,4 +367,4 @@ public class AddCommandTest {
     }
 
 }
-*/
+

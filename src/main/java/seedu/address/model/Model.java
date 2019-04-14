@@ -11,7 +11,6 @@ import seedu.address.model.subject.ReadOnlySubjectBook;
 import seedu.address.model.subject.SubjectBook;
 import seedu.address.model.tag.SubjectTag;
 
-
 /**
  * The API of the Model component.
  */
@@ -93,6 +92,8 @@ public interface Model {
      */
     void setFlashBookFilePath(Path flashBookFilePath);
 
+    SubjectTag getSelectedSubject();
+
     /**
      * Replaces flash book data with the data in {@code flashBook}.
      */
@@ -128,6 +129,9 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered flashcard list */
     ObservableList<Flashcard> getFilteredFlashcardList();
+
+    /** Returns an unmodifiable view of the filtered flashcard list */
+    ObservableList<Flashcard> getUpdatedFlashcardList();
 
     /**
      * Updates the filter of the filtered flashcard list to filter by the given {@code predicate}.

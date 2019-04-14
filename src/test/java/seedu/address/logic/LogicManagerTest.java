@@ -1,13 +1,12 @@
-/*
 package seedu.address.logic;
 
 import static org.junit.Assert.assertEquals;
-//import static seedu.address.commons.core.Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX;
-//import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.CONTENT_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.DIFFICULTY_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.TOPIC_DESC_AMY;
-import static seedu.address.testutil.TypicalFlashcards.AMY;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX;
+import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+//import static seedu.address.logic.commands.CommandTestUtil.CONTENT_DESC_ENGLISH;
+//import static seedu.address.logic.commands.CommandTestUtil.DIFFICULTY_DESC_ENGLISH;
+//import static seedu.address.logic.commands.CommandTestUtil.TOPIC_DESC_ENGLISH;
+//import static seedu.address.testutil.TypicalFlashcards.ENGLISH;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -17,8 +16,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
+//import seedu.address.logic.commands.AddCommand;
 
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -27,12 +26,12 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyFlashBook;
-//import seedu.address.model.UserPrefs;
-import seedu.address.model.flashcard.Flashcard;
+import seedu.address.model.UserPrefs;
+//import seedu.address.model.flashcard.Flashcard;
 import seedu.address.storage.JsonFlashBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
-import seedu.address.testutil.FlashcardBuilder;
+//import seedu.address.testutil.FlashcardBuilder;
 
 
 public class LogicManagerTest {
@@ -55,8 +54,8 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
     }
 
-    */
-/*@Test
+
+    @Test
     public void execute_invalidCommandFormat_throwsParseException() {
         String invalidCommand = "uicfhmowqewca";
         assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
@@ -68,7 +67,7 @@ public class LogicManagerTest {
         String deleteCommand = "delete 9";
         assertCommandException(deleteCommand, MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
         assertHistoryCorrect(deleteCommand);
-    }*//*
+    }
 
 
     @Test
@@ -78,7 +77,7 @@ public class LogicManagerTest {
         assertHistoryCorrect(listCommand);
     }
 
-    @Test
+    /*@Test
     public void execute_storageThrowsIoException_throwsCommandException() throws Exception {
         // Setup LogicManager with JsonFlashBookIoExceptionThrowingStub
         JsonFlashBookStorage addressBookStorage =
@@ -88,15 +87,16 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + TOPIC_DESC_AMY + DIFFICULTY_DESC_AMY + CONTENT_DESC_AMY;
-        Flashcard expectedFlashcard = new FlashcardBuilder(AMY).withTags().build();
+        String addCommand = AddCommand.COMMAND_WORD + TOPIC_DESC_ENGLISH + DIFFICULTY_DESC_ENGLISH
+                + CONTENT_DESC_ENGLISH;
+        Flashcard expectedFlashcard = new FlashcardBuilder(ENGLISH).withTags("english").build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addFlashcard(expectedFlashcard);
         expectedModel.commitFlashBook();
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
         assertCommandBehavior(CommandException.class, addCommand, expectedMessage, expectedModel);
         assertHistoryCorrect(addCommand);
-    }
+    }*/
 
     @Test
     public void getFilteredFlashcardList_modifyList_throwsUnsupportedOperationException() {
@@ -104,62 +104,55 @@ public class LogicManagerTest {
         logic.getFilteredFlashcardList().remove(0);
     }
 
-    */
-/**
+
+    /**
      * Executes the command, confirms that no exceptions are thrown and that the result message is correct.
      * Also confirms that {@code expectedModel} is as specified.
      * @see #assertCommandBehavior(Class, String, String, Model)
-     *//*
+     */
 
     private void assertCommandSuccess(String inputCommand, String expectedMessage, Model expectedModel) {
         assertCommandBehavior(null, inputCommand, expectedMessage, expectedModel);
     }
 
-    */
-/**
+    /**
      * Executes the command, confirms that a ParseException is thrown and that the result message is correct.
      * @see #assertCommandBehavior(Class, String, String, Model)
-     *//*
+     */
 
-    */
-/*private void assertParseException(String inputCommand, String expectedMessage) {
+    private void assertParseException(String inputCommand, String expectedMessage) {
         assertCommandFailure(inputCommand, ParseException.class, expectedMessage);
     }
 
-    *//*
-*/
-/**
+    /**
      * Executes the command, confirms that a CommandException is thrown and that the result message is correct.
      * @see #assertCommandBehavior(Class, String, String, Model)
-     *//*
-*/
-/*
+     */
     private void assertCommandException(String inputCommand, String expectedMessage) {
         assertCommandFailure(inputCommand, CommandException.class, expectedMessage);
-    }*//*
+    }
 
 
-    */
-/**
+
+    /**
      * Executes the command, confirms that the exception is thrown and that the result message is correct.
      * @see #assertCommandBehavior(Class, String, String, Model)
-     *//*
+     */
 
-    */
-/*private void assertCommandFailure(String inputCommand, Class<?> expectedException, String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getFlashBook(), new UserPrefs());
+
+    private void assertCommandFailure(String inputCommand, Class<?> expectedException, String expectedMessage) {
+        Model expectedModel = new ModelManager(model.getSubjectBook(), model.getFlashBook(), new UserPrefs());
         assertCommandBehavior(expectedException, inputCommand, expectedMessage, expectedModel);
-    }*//*
+    }
 
 
-    */
-/**
+
+    /**
      * Executes the command, confirms that the result message is correct and that the expected exception is thrown,
      * and also confirms that the following two parts of the LogicManager object's state are as expected:<br>
      *      - the internal model manager data are same as those in the {@code expectedModel} <br>
      *      - {@code expectedModel}'s flash book was saved to the storage file.
-     *//*
-
+     */
     private void assertCommandBehavior(Class<?> expectedException, String inputCommand,
                                            String expectedMessage, Model expectedModel) {
 
@@ -175,11 +168,11 @@ public class LogicManagerTest {
         assertEquals(expectedModel, model);
     }
 
-    */
-/**
+
+    /**
      * Asserts that the result display shows all the {@code expectedCommands} upon the execution of
      * {@code HistoryCommand}.
-     *//*
+     */
 
     private void assertHistoryCorrect(String... expectedCommands) {
         try {
@@ -192,10 +185,10 @@ public class LogicManagerTest {
         }
     }
 
-    */
-/**
+
+    /**
      * A stub class to throw an {@code IOException} when the save method is called.
-     *//*
+     */
 
     private static class JsonFlashBookIoExceptionThrowingStub extends JsonFlashBookStorage {
         private JsonFlashBookIoExceptionThrowingStub(Path filePath) {
@@ -208,4 +201,3 @@ public class LogicManagerTest {
         }
     }
 }
-*/

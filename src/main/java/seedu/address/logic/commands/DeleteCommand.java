@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
@@ -37,33 +38,22 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Flashcard> lastShownList = model.getFilteredFlashcardList();
 
+        ObservableList<Flashcard> updatedFlashcardList = model.getUpdatedFlashcardList();
+
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
         }
 
-        Flashcard flashcardToDelete = lastShownList.get(targetIndex.getZeroBased());
-
-        /**
-         * int count=0;
-         * for (Flashcard f:) {
-         *    if (f.getSubject() == flashcardToDelete.getSubject()) {
-         *                 count++;
-         *     }
-         *  }
-         *
-         * FilteredList<Flashcard> remainingFlashcards = new FilteredList<>(model.getFilteredFlashcardList(),new
-         *     TopicContainsSubjectPredicate(Arrays.asList(flashcardToDelete.getSubjectName())));
-         *
-         * if (count == 1) {
-         *      model.deleteSubject(flashcardToDelete.getSubject());
-         * }
-         */
-
+        Flashcard flashcardToDelete = updatedFlashcardList.get(targetIndex.getZeroBased());
+        if (updatedFlashcardList.size() == 1) {
+            model.deleteSubject(flashcardToDelete.getSubject());
+            model.updateFilteredSubjectList(Model.PREDICATE_SHOW_ALL_SUBJECTS);
+        }
 
         model.deleteFlashcard(flashcardToDelete);
         model.commitFlashBook();
+        model.setSelectedSubject(flashcardToDelete.getSubject());
         model.updateFilteredFlashcardList(Model.PREDICATE_SHOW_ALL_FLASHCARDS);
-        model.getFilteredSubjectList();
         return new CommandResult(String.format(MESSAGE_DELETE_FLASHCARD_SUCCESS, flashcardToDelete));
     }
 

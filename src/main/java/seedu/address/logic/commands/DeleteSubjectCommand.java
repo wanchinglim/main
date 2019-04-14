@@ -13,22 +13,22 @@ import seedu.address.model.flashcard.TopicContainsSubjectPredicate;
 import seedu.address.model.tag.SubjectTag;
 
 /**
- * Selects a flashcard identified using it's displayed index from the flash book.
+ * Deletes a selected Subject from the FlashBook.
  */
-public class SelectSubjectCommand extends Command {
+public class DeleteSubjectCommand extends Command {
 
-    public static final String COMMAND_WORD = "selectSubject";
+    public static final String COMMAND_WORD = "deleteSubject";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Selects all flashcards with identified subject.\n"
+            + ": Deletes all the flashcards with the identified subject.\n"
             + "Parameters: Subject (must be already in subject list panel)\n"
             + "Example: " + COMMAND_WORD + " science";
 
-    public static final String MESSAGE_SELECT_SUBJECT_SUCCESS = "Selected Subject: %1$s";
+    public static final String MESSAGE_DELETE_SUBJECT_SUCCESS = "Deleted Subject: %1$s";
 
     private static SubjectTag targetSubject;
 
-    private static SubjectTag selectSubject = null;
+    private static SubjectTag deleteSubject = null;
 
     private static TopicContainsSubjectPredicate predicate;
 
@@ -36,10 +36,10 @@ public class SelectSubjectCommand extends Command {
 
 
 
-    public SelectSubjectCommand(SubjectTag targetSubject, String[] keywords) {
+    public DeleteSubjectCommand(SubjectTag targetSubject, String[] keywords) {
         this.targetSubject = targetSubject;
         this.keywords = keywords;
-        selectSubject = targetSubject;
+        deleteSubject = targetSubject;
     }
 
     public static TopicContainsSubjectPredicate getPredicate() {
@@ -47,11 +47,11 @@ public class SelectSubjectCommand extends Command {
     }
 
     public static void listCommandCalled() {
-        selectSubject = null;
+        deleteSubject = null;
     }
 
-    public static SubjectTag getSelectSubject() {
-        return selectSubject;
+    public static SubjectTag getDeleteSubject() {
+        return deleteSubject;
     }
 
     @Override
@@ -64,16 +64,18 @@ public class SelectSubjectCommand extends Command {
         if (!filteredSubjectBook.contains(targetSubject)) {
             throw new CommandException(Messages.MESSAGE_INVALID_SUBJECT);
         }
-        model.setSelectedSubject(targetSubject);
+        model.deleteSubject(targetSubject);
 
-        return new CommandResult(String.format(MESSAGE_SELECT_SUBJECT_SUCCESS, targetSubject));
+
+        return new CommandResult(String.format(MESSAGE_DELETE_SUBJECT_SUCCESS, targetSubject));
 
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof SelectSubjectCommand // instanceof handles nulls
-                && targetSubject.equals(((SelectSubjectCommand) other).targetSubject)); // state check
+                || (other instanceof DeleteSubjectCommand // instanceof handles nulls
+                && targetSubject.equals(((DeleteSubjectCommand) other).targetSubject)); // state check
     }
 }
+

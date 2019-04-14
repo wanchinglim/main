@@ -17,6 +17,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+
 /**
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
@@ -37,6 +38,9 @@ public class MainWindow extends UiPart<Stage> {
     private FlashcardListPanel flashcardListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+
+    // Check status of RightPanel
+    private boolean topicIsShowing;
 
     //@FXML
     //private StackPane browserPlaceholder;
@@ -130,21 +134,15 @@ public class MainWindow extends UiPart<Stage> {
         rightPanel = new RightPanel(logic.selectedFlashcardProperty());
         rightMostPlaceholder.getChildren().add(rightPanel.getRoot());
 
+        topicIsShowing = true;
+
         // left panel - subject
         subjectListPanel = new SubjectListPanel(logic.getFilteredSubjectList(), logic.selectedSubjectProperty(),
                 logic::setSelectedSubject);
         flashcardListPanelPlaceholder.getChildren().add(subjectListPanel.getRoot());
 
         // middle panel - flashcards
-
-        /**
-         * flashcardListPanel = new FlashcardListPanel(
-         *  logic.getFilteredFlashcardList(),
-         *  logic.selectedFlashcardProperty(), logic::setSelectedFlashcard);
-          */
-
-        flashcardListPanel = new FlashcardListPanel(logic.getFilteredSubjectList(),
-                logic.getFilteredFlashcardList(), logic.selectedSubjectProperty(),
+        flashcardListPanel = new FlashcardListPanel(logic.getFilteredFlashcardList(), logic.selectedSubjectProperty(),
                 logic.selectedFlashcardProperty(), logic::setSelectedFlashcard);
         cardPlaceholder.getChildren().add(flashcardListPanel.getRoot());
 
@@ -198,6 +196,35 @@ public class MainWindow extends UiPart<Stage> {
         helpWindow.hide();
         primaryStage.hide();
     }
+
+    //@FXML
+    //public void handleRightPanelChangedEvent(RightPanelChangedEvent rpce) {
+    //if (topicIsShowing) {
+    //rightMostPlaceholder.setVisible(false);
+    //topicIsShowing = false;
+    //} else {
+    //rightMostPlaceholder.setVisible(true);
+    //topicIsShowing = true;
+    //}
+    //}
+
+    /**
+     * Handles the right most display from Content to Topic
+     */
+
+    //@FXML
+    //public void handleChangeToTopicEvent() {
+    //EventsCenter.getInstance().post(new ShowTopicRequestEvent());
+    //}
+
+    /**
+     * Handles the right most display from Topic to Content
+     */
+
+    //@FXML
+    //public void handleChangeToContentEvent() {
+    //EventsCenter.getInstance().post(new ShowContentRequestEvent());
+    //}
 
     public FlashcardListPanel getFlashcardListPanel() {
         return flashcardListPanel;

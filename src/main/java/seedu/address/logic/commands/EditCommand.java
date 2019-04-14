@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DIFFICULTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
@@ -13,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -25,6 +25,7 @@ import seedu.address.model.flashcard.Difficulty;
 import seedu.address.model.flashcard.Flashcard;
 import seedu.address.model.flashcard.Topic;
 import seedu.address.model.tag.SubjectTag;
+
 
 /**
  * Edits the details of an existing flashcard in the flash book.
@@ -43,7 +44,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_CONTENT + "CONTENT] "
             + "[" + PREFIX_SUBJECT + "SUBJECT]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_DIFFICULTY + "91234567 ";
+            + PREFIX_TOPIC + "NEW TOPIC NAME ";
 
     public static final String MESSAGE_EDIT_FLASHCARD_SUCCESS = "Edited Flashcard: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -69,11 +70,13 @@ public class EditCommand extends Command {
         requireNonNull(model);
         List<Flashcard> lastShownList = model.getFilteredFlashcardList();
 
+        ObservableList<Flashcard> updatedFlashcardList = model.getUpdatedFlashcardList();
+
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
         }
 
-        Flashcard flashcardToEdit = lastShownList.get(index.getZeroBased());
+        Flashcard flashcardToEdit = updatedFlashcardList.get(index.getZeroBased());
         Flashcard editedFlashcard = createEditedFlashcard(flashcardToEdit, editFlashcardDescriptor);
 
         if (!flashcardToEdit.isSameFlashcard(editedFlashcard) && model.hasFlashcard(editedFlashcard)) {
@@ -82,6 +85,7 @@ public class EditCommand extends Command {
 
         model.setFlashcard(flashcardToEdit, editedFlashcard);
         model.commitFlashBook();
+        model.setSelectedSubject(editedFlashcard.getSubject());
         return new CommandResult(String.format(MESSAGE_EDIT_FLASHCARD_SUCCESS, editedFlashcard));
     }
 
@@ -128,8 +132,11 @@ public class EditCommand extends Command {
 
         private Topic topic;
         private Difficulty difficulty;
+        private Deadline deadline;
         private Content content;
-        private Set<SubjectTag> tags;
+        private Set<SubjectTag> subjectTag;
+        private SubjectTag subject;
+        private String subjectName;
 
         public EditFlashcardDescriptor() {}
 
@@ -140,15 +147,23 @@ public class EditCommand extends Command {
         public EditFlashcardDescriptor(EditFlashcardDescriptor toCopy) {
             setTopic(toCopy.topic);
             setDifficulty(toCopy.difficulty);
+            setDeadline(toCopy.deadline);
             setContent(toCopy.content);
-            setTags(toCopy.tags);
+            setTags(toCopy.subjectTag);
+            /*if (!toCopy.subjectTag.isEmpty()) {
+                for (SubjectTag s : toCopy.subjectTag) {
+                    setSubject(s);
+                    setSubjectName(s);
+                    break;
+                }
+            }*/
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(topic, difficulty, content, tags);
+            return CollectionUtil.isAnyNonNull(topic, difficulty, content, subjectTag);
         }
 
         public void setTopic(Topic topic) {
@@ -167,6 +182,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(difficulty);
         }
 
+        public void setDeadline(Deadline deadline) {
+            this.deadline = deadline;
+        }
+
+        public Optional<Deadline> getDeadline() {
+            return Optional.ofNullable(deadline);
+        }
+
         public void setContent(Content content) {
             this.content = content;
         }
@@ -175,12 +198,28 @@ public class EditCommand extends Command {
             return Optional.ofNullable(content);
         }
 
+        public void setSubject(SubjectTag subject) {
+            this.subject = subject;
+        }
+
+        public Optional<SubjectTag> getSubject() {
+            return Optional.ofNullable(subject);
+        }
+
+        public void setSubjectName(SubjectTag subjectTag) {
+            this.subjectName = subjectTag.toString();
+        }
+
+        public Optional<String> getSubjectName() {
+            return Optional.ofNullable(subjectName);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
          */
         public void setTags(Set<SubjectTag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+            this.subjectTag = (tags != null) ? new HashSet<>(tags) : null;
         }
 
         /**
@@ -189,7 +228,7 @@ public class EditCommand extends Command {
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
         public Optional<Set<SubjectTag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+            return (subjectTag != null) ? Optional.of(Collections.unmodifiableSet(subjectTag)) : Optional.empty();
         }
 
         @Override

@@ -15,15 +15,9 @@ public class FlashcardCardTest extends GuiUnitTest {
 
     @Test
     public void display() {
-        // no tags
-        Flashcard flashcardWithNoTags = new FlashcardBuilder().withTags(new String[0]).build();
-        FlashcardCard flashcardCard = new FlashcardCard(flashcardWithNoTags, 1);
-        uiPartRule.setUiPart(flashcardCard);
-        assertCardDisplay(flashcardCard, flashcardWithNoTags, 1);
-
         // with tags
         Flashcard flashcardWithTags = new FlashcardBuilder().build();
-        flashcardCard = new FlashcardCard(flashcardWithTags, 2);
+        FlashcardCard flashcardCard = new FlashcardCard(flashcardWithTags, 2);
         uiPartRule.setUiPart(flashcardCard);
         assertCardDisplay(flashcardCard, flashcardWithTags, 2);
     }

@@ -4,9 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.address.testutil.TypicalFlashcards.AMY;
-import static seedu.address.testutil.TypicalFlashcards.BOB;
-import static seedu.address.testutil.TypicalFlashcards.CARL;
+import static seedu.address.testutil.TypicalFlashcards.CHINESE;
+import static seedu.address.testutil.TypicalFlashcards.ENGLISH;
+import static seedu.address.testutil.TypicalFlashcards.MATH;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -18,9 +18,9 @@ import seedu.address.testutil.FlashBookBuilder;
 
 public class VersionedFlashBookTest {
 
-    private final ReadOnlyFlashBook flashBookWithAmy = new FlashBookBuilder().withFlashcard(AMY).build();
-    private final ReadOnlyFlashBook flashBookWithBob = new FlashBookBuilder().withFlashcard(BOB).build();
-    private final ReadOnlyFlashBook flashBookWithCarl = new FlashBookBuilder().withFlashcard(CARL).build();
+    private final ReadOnlyFlashBook flashBookWithAmy = new FlashBookBuilder().withFlashcard(ENGLISH).build();
+    private final ReadOnlyFlashBook flashBookWithBob = new FlashBookBuilder().withFlashcard(CHINESE).build();
+    private final ReadOnlyFlashBook flashBookWithCarl = new FlashBookBuilder().withFlashcard(MATH).build();
     private final ReadOnlyFlashBook emptyFlashBook = new FlashBookBuilder().build();
 
     @Test

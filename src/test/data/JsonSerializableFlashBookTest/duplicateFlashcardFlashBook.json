@@ -1,14 +1,14 @@
 {
   "flashcards": [ {
-    "topic": "Alice Pauline",
-    "difficulty": "3",
-    "content": "123, Jurong West Ave 6, #08-111",
-    "tagged": [ "friends" ],
+    "topic": "Brown Fox",
+    "difficulty": "1",
+    "content": "The quick brown fox jumps over the lazy dog",
+    "tagged": [ "english" ],
     "deadline": "15 October 2021"
   }, {
-    "topic": "Alice Pauline",
+    "topic": "Brown Fox",
     "difficulty": "3",
-    "content": "4th street",
+    "content": "The quick brown fox jumps over the lazy dog",
     "deadline": "18 May 2021"
   } ]
 }
