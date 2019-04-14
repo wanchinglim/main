@@ -169,7 +169,8 @@ public class FlashcardListPanel extends UiPart<Region> {
 
         selectedSubject.addListener((observable, oldValue, newValue) -> {
             if (newValue == null) {
-                flashcardListView.getSelectionModel().clearSelection();
+                //flashcardListView.getSelectionModel().clearSelection();
+                flashcardListView.setItems(flashcardList);
             } else {
                 this.newFlashcardList.clear();
                 this.newFlashcardList = updateFlashcardList(newValue, flashcardList);
