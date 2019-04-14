@@ -1193,6 +1193,50 @@ Use case ends.
 
 
 [discrete]
+=== Use case: Selecting a Flash Card
+
+*MSS*
+
+1.  User enters the subject of the flash card to be displayed
+2.  FlashCards displays a list of flash cards belonging to the same subject
+3.  User selects the index of the flash card to view
+4. FlashCards displays the flash card of the chosen index
++
+Use case ends.
+
+[discrete]
+=== Use case: Viewing the next Flash Card
+
+*MSS*
+
+1.  User enters the subject of the flash card to be displayed
+2.  FlashCards displays a list of flash cards belonging to the same subject
+3.  User selects the index of the flash card to view
+4. FlashCards displays the flash card of the chosen index
+5. User enters next to view the flash card with the next index
+6. FlashCards displays the next flash card
+
++
+Use case ends.
+
+[discrete]
+=== Use case: Viewing the previous Flash Card
+
+*MSS*
+
+1.  User enters the subject of the flash card to be displayed
+2.  FlashCards displays a list of flash cards belonging to the same subject
+3.  User selects the index of the flash card to view
+4. FlashCards displays the flash card of the chosen index
+5. User enters previous to view the flash card with the previous index
+6. FlashCards displays the previous flash card
+
++
+Use case ends.
+
+
+
+[discrete]
 === Use case: Listing all Flash Cards categorized by Subjects
 
 *MSS*
