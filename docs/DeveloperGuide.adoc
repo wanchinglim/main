@@ -1123,7 +1123,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 (For all use cases below, the *System* is the `FlashCards` and the *Actor* is the `User`, unless specified otherwise)
 
 [discrete]
-=== Use case: Adding a Flashcard
+=== Use Case: Adding a Flashcard
 
 *MSS*
 
@@ -1133,7 +1133,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 Use case ends.
 
 [discrete]
-=== Use case: Editing a Flashcard
+=== Use Case: Editing a Flashcard
 
 *MSS*
 
@@ -1145,7 +1145,7 @@ Use case ends.
 Use case ends.
 
 [discrete]
-=== Use case: Deleting a Flashcard
+=== Use Case: Deleting a Flashcard
 
 *MSS*
 
@@ -1158,7 +1158,7 @@ Use case ends.
 Use case ends.
 
 [discrete]
-=== Use case: Selecting a Flashcard
+=== Use Case: Selecting a Flashcard
 
 *MSS*
 
@@ -1168,7 +1168,7 @@ Use case ends.
 Use case ends.
 
 [discrete]
-=== Use case: Viewing Flashcards Based on Subject
+=== Use Case: Viewing Flashcards Based on Subject
 
 *MSS*
 
@@ -1178,7 +1178,7 @@ Use case ends.
 Use case ends.
 
 [discrete]
-=== Use case: Finding a Flashcard
+=== Use Case: Finding a Flashcard
 
 *MSS*
 
@@ -1195,7 +1195,7 @@ Use case ends.
 Use case ends.
 
 [discrete]
-=== Use case: Create Account (coming in v2.0)
+=== Use Case: Create Account (coming in v2.0)
 
 *MSS*
 
@@ -1213,7 +1213,7 @@ Use case ends.
 Use case resumes at step 1.
 
 [discrete]
-=== Use case: Login (coming in v2.0)
+=== Use Case: Login (coming in v2.0)
 
 *MSS*
 
