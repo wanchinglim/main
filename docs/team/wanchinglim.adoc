@@ -12,7 +12,7 @@
 This portfolio serves as a documentation of my contributions to a desktop application my team and I developed in a software engineering module.
 The team consists of 3 members and the application was developed over the course of 6 weeks.
 Due to project constraints, the team needed to start from an existing code base (https://github.com/nusCS2113-AY1819S2/addressbook-level4[addressbook-level4])
-and the user has to interact with the application mainly through a Command Line Interface (CLI).
+and the user has to interact with the application mainly through the Command Line Interface (CLI).
 However, the user can also interact with the application through the Graphical User Interface (GUI) that is created with JavaFX.
 The entire application is written in Java, and has about 10k lines of code.
 
@@ -31,9 +31,9 @@ An overview of all my contributed code can be found https://nuscs2113-ay1819s2.g
 === Major Enhancement: GUI
 ** *What it does:* It allows the user to click a subject and only flashcards belonging to that subject will be listed.
 ** *Justification*: This feature helps users access their notes for any subject with just a click.
-Since flashcards are categorized based on their subject, users will be able to focus on a particular subject's notes when studying.
+Since the flashcards are categorized based on their subject, users will be able to focus on a particular subject's notes when studying.
 ** *Highlights:* This enhancement affects the existing GUI and `add` command.
-It helps the user to automatically categorize flashcards based on their subject without any additional steps.
+It helps the user to automatically categorize their flashcards based on the subject without any additional steps.
 As such, not only will notes pertaining to each subject be easily available to the user, it also offers a better user experience and increases their efficiency when studying for a subject.
 Furthermore, no separate storage is needed even though the list of subjects is seemingly saved every time the user exits.
 The subject panel will still contain the list of subjects that existed before the user exited the application.
@@ -46,7 +46,8 @@ The subject panel will still contain the list of subjects that existed before th
 
 === Other Contributions
 ** *Project management:*
-*** Managed relevant documentations (e.g. User Guide, About Us etc.) by ensuring everything is correct and well-documented.
+*** Managed relevant documentations (e.g. User Guide, About Us etc.)
+**** Ensured everything is correct and well-documented.
 ** *Enhancements to existing features:*
 *** Enhanced tagging feature to display different tags in different colours (Pull Request https://github.com/cs2113-ay1819s2-m11-3/main/pull/6[#6])
 *** Enhanced `add` command to check if the subject of the flashcard to be added is unique (Pull Request https://github.com/cs2113-ay1819s2-m11-3/main/pull/73[#73])
