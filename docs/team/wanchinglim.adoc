@@ -40,14 +40,14 @@ The subject panel will still contain the list of subjects that existed before th
 ** *Code contributed:*  Pull Requests https://github.com/cs2113-ay1819s2-m11-3/main/pull/73[#73] and https://github.com/cs2113-ay1819s2-m11-3/main/pull/94[#94]
 
 === Minor Enhancement: Tagging Feature
-** *What is it:* Added colours to each subject tag so that different tags will have different colours.
+** *What is it:* A unique colour was added to each subject tag so that different tags will have different colours.
 ** *Justification:* This helps users to differentiate flashcards better based on the subject tag colour when all flashcards are listed.
 ** *Code contributed:* Pull Request https://github.com/cs2113-ay1819s2-m11-3/main/pull/6[#6]
 
 === Other Contributions
 ** *Project management:*
 *** Managed relevant documentation (e.g. User Guide, About Us etc.)
-**** Ensured everything is correct and well-documented.
+**** Ensured everything is correct and well-documented
 ** *Enhancements to existing features:*
 *** Enhanced tagging feature to display different tags in different colours (Pull Request https://github.com/cs2113-ay1819s2-m11-3/main/pull/6[#6])
 *** Enhanced `add` command to check if the subject of the flashcard to be added is unique (Pull Request https://github.com/cs2113-ay1819s2-m11-3/main/pull/73[#73])
