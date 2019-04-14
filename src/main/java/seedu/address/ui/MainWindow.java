@@ -2,8 +2,6 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
-import com.google.common.eventbus.Subscribe;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -12,12 +10,8 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.model.RightPanelChangedEvent;
-import seedu.address.commons.events.ui.ShowContentRequestEvent;
-import seedu.address.commons.events.ui.ShowTopicRequestEvent;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -203,35 +197,35 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-//    @FXML
-//    public void handleRightPanelChangedEvent(RightPanelChangedEvent rpce) {
-//        if (topicIsShowing) {
-//            rightMostPlaceholder.setVisible(false);
-//            topicIsShowing = false;
-//        } else {
-//            rightMostPlaceholder.setVisible(true);
-//            topicIsShowing = true;
-//        }
-//    }
+    //@FXML
+    //public void handleRightPanelChangedEvent(RightPanelChangedEvent rpce) {
+    //if (topicIsShowing) {
+    //rightMostPlaceholder.setVisible(false);
+    //topicIsShowing = false;
+    //} else {
+    //rightMostPlaceholder.setVisible(true);
+    //topicIsShowing = true;
+    //}
+    //}
 
     /**
      * Handles the right most display from Content to Topic
      */
 
-//    @FXML
-//    public void handleChangeToTopicEvent() {
-//        EventsCenter.getInstance().post(new ShowTopicRequestEvent());
-//    }
-//
-//    /**
-//     * Handles the right most display from Topic to Content
-//     */
-//
-//    @FXML
-//    public void handleChangeToContentEvent() {
-//        EventsCenter.getInstance().post(new ShowContentRequestEvent());
-//    }
-//
+    //@FXML
+    //public void handleChangeToTopicEvent() {
+    //EventsCenter.getInstance().post(new ShowTopicRequestEvent());
+    //}
+
+    /**
+     * Handles the right most display from Topic to Content
+     */
+
+    //@FXML
+    //public void handleChangeToContentEvent() {
+    //EventsCenter.getInstance().post(new ShowContentRequestEvent());
+    //}
+
     public FlashcardListPanel getFlashcardListPanel() {
         return flashcardListPanel;
     }

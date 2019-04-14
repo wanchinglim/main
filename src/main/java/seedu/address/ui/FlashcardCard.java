@@ -48,7 +48,7 @@ public class FlashcardCard extends UiPart<Region> {
         this.flashcard = flashcard;
         id.setText(displayedIndex + ". ");
         topic.setText(flashcard.getTopic().fullTopic);
-        difficulty.setText("Difficulty Level: " + flashcard.getDifficulty().value);
+        difficulty.setText(flashcard.getDifficulty().value);
         //content.setText(flashcard.getContent().value);
         deadline.setText(flashcard.getDeadline().value);
         tagger(flashcard);

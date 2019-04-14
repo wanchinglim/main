@@ -18,7 +18,7 @@ import seedu.address.model.flashcard.Flashcard;
 
 public class RightPanel extends UiPart<Region> {
     //public static final URL DEFAULT_PAGE =
-            //requireNonNull(MainApp.class.getResource(FXML_FILE_FOLDER + "default.html"));
+    //requireNonNull(MainApp.class.getResource(FXML_FILE_FOLDER + "default.html"));
     //public static final String SEARCH_PAGE_URL = "https://se-education.org/dummy-search-page/?name=";
     //public static final String SEARCH_PAGE_URL = "https://cs2113-ay1819s2-m11-3.github.io/TopicContentPage.html";
     //public static final String DEFAULT_PAGE = "default.html";
@@ -27,7 +27,7 @@ public class RightPanel extends UiPart<Region> {
 
     private static final String FXML = "RightPanel.fxml";
 
-    public boolean topicIsShowing = true;
+    private boolean topicIsShowing = true;
 
     @FXML
     private WebView browser;
@@ -71,6 +71,11 @@ public class RightPanel extends UiPart<Region> {
         loadDefaultPage();
     }
 
+    /**
+     * Handles the Button Topic and displays Topic if it is initially displaying Content
+     * @param event
+     */
+
     @FXML
     private void handleTopicEvent(ActionEvent event) {
         topicIsShowing = true;
@@ -79,6 +84,11 @@ public class RightPanel extends UiPart<Region> {
         welcomeMessage.setVisible(false);
     }
 
+    /**
+     * Handles the Button Content and displays Content if it is initially displaying Topic
+     * @param event
+     */
+
     @FXML
     private void handleContentEvent(ActionEvent event) {
         topicIsShowing = false;
@@ -86,6 +96,11 @@ public class RightPanel extends UiPart<Region> {
         selectedFlashcardContent.setVisible(true);
         welcomeMessage.setVisible(false);
     }
+
+    /**
+     * Listen and update Topic and Content when a new flashcard is selected.
+     * @param flashcard
+     */
 
     private void loadFlashcardPage(Flashcard flashcard) {
         //loadPage(SEARCH_PAGE_URL + flashcard.getTopic().fullTopic);
@@ -96,11 +111,10 @@ public class RightPanel extends UiPart<Region> {
         welcomeMessage.setVisible(false);
     }
 
-    //public void loadPage(String url) {
-    //    Platform.runLater(() -> browser.getEngine().load(url));
+    //public void loadPage(String url) { Platform.runLater(() -> browser.getEngine().load(url));
 
     private void loadDefaultPage() {
-          //loadPage(DEFAULT_PAGE.toExternalForm());
+        //loadPage(DEFAULT_PAGE.toExternalForm());
         welcomeMessage.setVisible(true);
 
     }
