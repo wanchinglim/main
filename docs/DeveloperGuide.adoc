@@ -1194,8 +1194,6 @@ Use case ends.
 +
 Use case ends.
 
-[appendix]
-
 [discrete]
 === Use case: Create Account (coming in v2.0)
 
@@ -1232,6 +1230,7 @@ Use case ends.
 +
 Use case resumes at step 1.
 
+[appendix]
 == Non Functional Requirements
 
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
