@@ -14,7 +14,7 @@ The team consists of 3 members and the application was developed over the course
 Due to project constraints, the team needed to start from an existing code base (https://github.com/nusCS2113-AY1819S2/addressbook-level4[addressbook-level4])
 and the user has to interact with the application mainly through the Command Line Interface (CLI).
 However, the user can also interact with the application through the Graphical User Interface (GUI) that is created with JavaFX.
-The entire application is written in Java, and has about 10k lines of code.
+The entire application is written in Java and has about 10k lines of code.
 
 Our developed application is titled *FlashCards*.
 FlashCards is a desktop application that targets mainly secondary school students to help them memorise their notes.
@@ -25,7 +25,7 @@ The following sections will depict my contributions in greater detail, as well a
 
 == Summary of Contributions
 
-This section will document the summary of features that I have coded, other helpful contributions to this project, and documentations done for this application.
+This section will document the summary of features that I have coded, other helpful contributions to this project, and documentation done for this application.
 An overview of all my contributed code can be found https://nuscs2113-ay1819s2.github.io/dashboard-beta/#search=wanchinglim&sort=displayName&since=2019-02-10&until=2019-04-14&timeframe=day&reverse=false&repoSort=true[here].
 
 === Major Enhancement: GUI
@@ -46,7 +46,7 @@ The subject panel will still contain the list of subjects that existed before th
 
 === Other Contributions
 ** *Project management:*
-*** Managed relevant documentations (e.g. User Guide, About Us etc.)
+*** Managed relevant documentation (e.g. User Guide, About Us etc.)
 **** Ensured everything is correct and well-documented.
 ** *Enhancements to existing features:*
 *** Enhanced tagging feature to display different tags in different colours (Pull Request https://github.com/cs2113-ay1819s2-m11-3/main/pull/6[#6])
@@ -86,7 +86,7 @@ include::../UserGuide.adoc[tag=add]
 include::../UserGuide.adoc[tag=delete]
 
 === Other Contributions
-Due to space constraints, you can find the remaining documentations that I have done for the user guide in the links below:
+Due to space constraints, you can find the remaining documentation that I have done for the user guide in the links below:
 
 * https://cs2113-ay1819s2-m11-3.github.io/main/UserGuide.html#editing-a-flashcard-code-edit-code-or-code-e-code[Edit command]
 * https://cs2113-ay1819s2-m11-3.github.io/main/UserGuide.html#selecting-a-flashcard-code-select-code[Select command]
