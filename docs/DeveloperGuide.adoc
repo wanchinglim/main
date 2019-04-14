@@ -1042,16 +1042,16 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 *Target user profile*:
 
 * (Mainly) Secondary School students
-* Has a need to memorise notes across different flashcards
+* Has a need to memorise notes
 * Prefer digital notes over paper and pen
-* Reasonably comfortable with using CLI apps
+* Reasonably comfortable with using CLI applications
 
 *Value proposition*:
 
-* Digitizes notes for each flashcard
-* One-stop platform to get all one's notes for different flashcards
-* Help with the memorisation of notes through the use of flash cards (e.g. before exams)
-* Organised one's notes in one platform
+* Digitize notes
+* One-stop platform to access all of one's notes
+* Organize one's notes based on subjects
+* Help with the memorisation of notes through the use of flashcards (e.g. before exams)
 
 [appendix]
 == User Stories
@@ -1063,27 +1063,59 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |New User |See usage instructions |Refer to instructions when I forget how to use the App
 
-|`* * *` |New User |Create a new account |Only see flash cards and flashcards that are customised by me
-
-|`* * *` |User |Login |
-
 |`* * *` |User |Add a new flash card |Insert a new unique flashcard
 
 |`* * *` |User |Edit a flash card |Change my mistakes
 
-|`* * *` |User |Delete a flash card |Remove flashcards that I no longer need
+|`* * *` |User |Delete a flash card through its index|Remove flashcards that I no longer need
 
-|`* * *` |User |List flash cards categorized by flashcards |Have an overview of the flash cards I currently have
+|`* * *` |User |View flashcards categorized by subjects |Have an overview of the flashcards I currently have for a particular subject
 
-|`* * *` |User |Find a flash card |Locate the flash card I need without going through the entire list
+|`* * *` |User |Use the GUI |Perform certain operations easily with just a click
 
-|`* *` |User |Categorize each flash card by importance |Prioritise which information to study or memorise first
+|`* * *` |User |Identify my flashcards easily |Have a better user experience with the application
 
-|`* *` |User |Retrieve a recently deleted flash card |Retrieve the flash card which I might have accidentally deleted
+|`* * *` |User |Find a flash card |Locate the flashcard I need without going through the entire list
 
+|`* * *` |User |Add a deadline or exam date to a flashcard |Aware of when the content is needed
+
+|`* * *` |User |Add a countdown calendar for my flashcards |Aware of how many days left to be familiar with the content
+
+|`* * *` |User |Delete unnecessary flashcards automatically |Prevent overloading of flashcards
+
+|`* * *` |User |Sort the flash cards according to Difficulty |Categorise the flashcards according to the difficulty levels
+
+|`* * *` |User |Categorise the flash cards according to Subjects |Split the flashcards into respective subjects
+
+|`* * *` |User |Have a overview of Subject, Flashcard, Topic and Content |Sees the entire flashbook in a glance
+
+|`* * *` |User |View next flashcard |Navigate through the flashcard list
+
+|`* * *` |User |View previous flashcard |Navigate through the flashcard list
+
+|`* * *` |User |View number of flashcards |Shows the number of flashcards
+
+|`* * *` |User |View topic and content of flashcard separately |Shows only one at each time
+
+|`* * *` |User |Alias for commands |Reduce the time to input each long command
+
+|`* * *` |User |Hide the content of my flashcard |Quiz myself more effectively
+
+|`* * *` |User |Show the content of my flashcard |Quiz myself more effectively
+
+|`* *` |User |Categorize each flashcard by importance |Prioritise which information to study or memorise first
+
+|`* *` |User |Retrieve a recently deleted flashcard |Retrieve the flashcard which I might have accidentally deleted
+
+|`*` |User |Use an application that is not just monochromatic in colour |Have a better user experience
+
+|`*` |New User |Create a new account |Perform actions specific to the flashcards I created
+
+|`*` |User |Login |Perform actions that only pertain to my account
+
+|`*` |User |Encrypt my data |Ensure my data's security
 |=======================================================================
 
-_{More to be added in future versions of the developer guide}_
 
 [appendix]
 == Use Cases
@@ -1091,7 +1123,79 @@ _{More to be added in future versions of the developer guide}_
 (For all use cases below, the *System* is the `FlashCards` and the *Actor* is the `User`, unless specified otherwise)
 
 [discrete]
-=== Use case: Create Account
+=== Use case: Adding a Flashcard
+
+*MSS*
+
+1.  User enters data to add as a flashcard
+2.  FlashCards displays the flashcard that was just added
++
+Use case ends.
+
+[discrete]
+=== Use case: Editing a Flashcard
+
+*MSS*
+
+1. User selects a subject
+2. FlashCards displays the list of flashcards for that subject.
+3. User enters the index and fields of the flashcard to be edited
+4. FlashCards displays the updated list of flashcards
++
+Use case ends.
+
+[discrete]
+=== Use case: Deleting a Flashcard
+
+*MSS*
+
+
+1. User selects a subject
+2. FlashCards displays the list of flashcards for that subject.
+3. User enters the index of the flashcard to be deleted
+4. FlashCards displays the updated list of flashcards
++
+Use case ends.
+
+=== Use case: Selecting a Flashcard
+
+*MSS*
+
+1.  User selects a flashcard
+2.  FlashCards displays the topic and content in the Content panel.
++
+Use case ends.
+
+=== Use case: Viewing Flashcards Based on Subject
+
+*MSS*
+
+1.  User selects a subject
+2.  FlashCards displays the list of flashcards for that subject.
++
+Use case ends.
+
+[discrete]
+=== Use case: Finding a Flashcard
+
+*MSS*
+
+1.  User enters a keyword
+2.  FlashCards displays all flash cards that contains the given keyword
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. Keyword not found
++
+Use case ends.
+
+[appendix]
+
+[discrete]
+=== Use case: Create Account (coming in v2.0)
 
 *MSS*
 
@@ -1109,7 +1213,7 @@ Use case ends.
 Use case resumes at step 1.
 
 [discrete]
-=== Use case: Login
+=== Use case: Login (coming in v2.0)
 
 *MSS*
 
@@ -1126,82 +1230,6 @@ Use case ends.
 +
 Use case resumes at step 1.
 
-[discrete]
-=== Use case: Adding a Flash Card
-
-*MSS*
-
-1.  User enters flashcard and data to add as a flash card
-2.  FlashCards displays the flash card that was just added
-+
-Use case ends.
-
-[discrete]
-=== Use case: Editing a Flash Card
-
-*MSS*
-
-1.  User enters the flashcard of the flash card to be edited
-2.  FlashCards displays a list of flash cards belonging to the same flashcard
-3.  User selects the index of the flash card to edit
-4.  FlashCards prompts for new data
-5. User enters new data
-6. FlashCards displays the updated flash card
-+
-Use case ends.
-
-[discrete]
-=== Use case: Deleting a Flash Card
-
-*MSS*
-
-1.  User enters the flashcard of the flash card to be deleted
-2.  FlashCards displays a list of flash cards belonging to the same flashcard
-3.  User selects the index of the flash card to delete
-4.  FlashCards displays the updated list of flash cards
-+
-Use case ends.
-
-[discrete]
-=== Use case: Listing all Flash Cards categorized by Subjects
-
-*MSS*
-
-1.  FlashCards displays an indexed list of flash cards categorized by flashcards
-+
-Use case ends.
-
-[discrete]
-=== Use case: Finding a Flash Card
-
-*MSS*
-
-1.  User enters a keyword
-2.  FlashCards displays all flash cards that contains the given keyword
-+
-Use case ends.
-
-*Extensions*
-
-[none]
-* 1a. Keyword not found
-+
-Use case ends.
-
-[discrete]
-=== Use case: Clear all Data of a particular User
-
-*MSS*
-
-1.  User enters clear command
-2.  FlashCards clears all flash cards of the user
-+
-Use case ends.
-
-
-_{More use cases to be added in future versions of the developer guide}_
-
-[appendix]
 == Non Functional Requirements
 
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
@@ -1216,10 +1244,10 @@ The product will have a high performance speed of less than 2 seconds.
 The product will have a simple and user-friendly interface, making it easy even for new users using our application.
 
 === Portability Requirement
-The product can be used through both laptop and smartphone allowing users to use them on the go.
+The product can be used on both laptops and smart phones, allowing users to use them on the go.
 
 === Operational Requirement
-The system is capable of categorizing the cards based on the flashcards and allows easy access to cards when searching for one.
+The system is capable of categorizing the flashcards based on their subjects and allows easy access to flashcards when searching for one.
 
 === Technical Requirement
 The system should work on common operating systems such as Mac OS, Windows, Linux and Solaris platform.
@@ -1277,21 +1305,17 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
-_{ more test cases ... }_
-
 === Deleting a flashcard
 
 . Deleting a flashcard while all flashcards are listed
 
-.. Prerequisites: List all flashcards using the `list` command. Multiple flashcards in the list.
+.. Prerequisites: Select a subject via the GUI or `selectSubject` command.
 .. Test case: `delete 1` +
-   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   Expected: First flashcard is deleted from the filtered list. Details of the deleted flashcard shown in the status message. Timestamp in the status bar is updated.
 .. Test case: `delete 0` +
    Expected: No flashcard is deleted. Error details shown in the status message. Status bar remains the same.
-.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
+.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size), `delete a` (where a is any alphabet) +
    Expected: Similar to previous.
-
-_{ more test cases ... }_
 
 === Saving data
 
