@@ -9,7 +9,7 @@ public class DeadlineTest {
 
     @Test
     public void equals() {
-        Deadline deadline = new Deadline("01 January 2019");
+        Deadline deadline = new Deadline("01-01-2019");
 
         //same object -> returns true
         assertTrue(deadline.equals(deadline));
@@ -25,7 +25,7 @@ public class DeadlineTest {
         assertFalse(deadline.equals(null));
 
         //different flashcard -> returns false
-        Deadline differentDeadline = new Deadline("31 December 2019");
+        Deadline differentDeadline = new Deadline("31-12-2019");
         assertFalse(deadline.equals(differentDeadline));
     }
 }
