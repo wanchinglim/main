@@ -95,8 +95,8 @@ Due to space constraints, you can find the remaining documentation that I have d
 
 |===
 |_Given the original developer guide of the existing code base, we modified various sections and tailored it to suit our application.
-This guide contains all information regarding the development of this application, and the following will show an excerpt of it that was written by me.
-I took charge of the **Quizzing by Subject** section since it was the feature I developed for this project._
+This guide contains all the information regarding the development of this application, and the following will show an excerpt of it that was written by me.
+I took charge of the **Quizzing by Subject** section since it was the feature I had developed for this project._
 |===
 
 include::../DeveloperGuide.adoc[tag=quizzingbysubject]
