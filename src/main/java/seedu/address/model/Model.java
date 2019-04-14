@@ -5,7 +5,6 @@ import java.util.function.Predicate;
 
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.flashcard.Flashcard;
 import seedu.address.model.subject.ReadOnlySubjectBook;
@@ -127,8 +126,6 @@ public interface Model {
      * be the same as another existing flashcard in the flash book.
      */
     void setFlashcard(Flashcard target, Flashcard editedFlashcard);
-
-    void setFlashList(ObservableList<Flashcard> flashcards);
 
     /** Returns an unmodifiable view of the filtered flashcard list */
     ObservableList<Flashcard> getFilteredFlashcardList();

@@ -9,7 +9,6 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.flashcard.TopicContainsDifficultyPredicate;
 import seedu.address.model.flashcard.TopicContainsDoublePredicate;
-import seedu.address.model.flashcard.TopicContainsSubjectPredicate;
 import seedu.address.model.tag.SubjectTag;
 
 /**
@@ -43,7 +42,8 @@ public class SortCommand extends Command {
             SubjectTag currentSubject = model.getSelectedSubject();
             model.setSelectedSubject(null);
             String[] subjectName = currentSubject.toString().split("\\s+");
-            model.updateFilteredFlashcardList(new TopicContainsDoublePredicate(Arrays.asList(subjectName), Arrays.asList(difficultyName)));
+            model.updateFilteredFlashcardList(new TopicContainsDoublePredicate(Arrays.asList(subjectName),
+                    Arrays.asList(difficultyName)));
         }
 
         return new CommandResult(
