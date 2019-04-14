@@ -23,7 +23,7 @@ import seedu.address.model.flashcard.exceptions.FlashcardNotFoundException;
 public class DeadlineCommand extends Command {
 
     public static final String COMMAND_WORD = "deadline";
-    public static final String COMMAND_ALIAS = "exam";
+    public static final String COMMAND_ALIAS = "note";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the deadline/exam of a flashcard identified "
             + "by the index number used in the last flashcard listing."
