@@ -316,7 +316,7 @@ This panel is further sectioned into 2:
 ** Topic of flashcard
 ** Content of flashcard
 
-image::UI copy.png[width=800]
+image::UI_edited.png[width=800]
 _Figure. GUI of FlashCards_
 
 Upon adding a flashcard with the `add` command, (e.g. `add t/Pythagoras Theorem diff/1 c/a^2 + b^2 = c^2 s/Math`),
