@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -19,6 +20,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.FlashBookChangedEvent;
 import seedu.address.model.flashcard.Flashcard;
+import seedu.address.model.flashcard.TopicContainsDoublePredicate;
 import seedu.address.model.flashcard.exceptions.FlashcardNotFoundException;
 import seedu.address.model.subject.ReadOnlySubjectBook;
 import seedu.address.model.subject.SubjectBook;
@@ -159,11 +161,11 @@ public class ModelManager extends ComponentManager implements Model {
     /**
      * Replaces flash book data with the data in {@code flashBook}.
      *
-     * @param subjectBook
+     * @param subjects
      */
     @Override
-    public void setSubjectBook(SubjectBook subjectBook) {
-        subjectBook.resetData(subjectBook);
+    public void setSubjectBook(SubjectBook subjects) {
+        subjectBook.resetData(subjects);
     }
 
 
@@ -195,6 +197,11 @@ public class ModelManager extends ComponentManager implements Model {
                 selectedSubject.setValue(change.getFrom() > 0 ? change.getList().get(change.getFrom() - 1) : null);
             }
         }
+    }
+
+    @Override
+    public SubjectTag getSelectedSubject() {
+        return selectedSubject.get();
     }
 
 
@@ -238,6 +245,12 @@ public class ModelManager extends ComponentManager implements Model {
         requireAllNonNull(target, editedFlashcard);
 
         versionedFlashBook.setFlashcard(target, editedFlashcard);
+    }
+
+    @Override
+    public void setFlashList(ObservableList<Flashcard> flashcards) {
+        requireNonNull(flashcards);
+        versionedFlashBook.setFlashcards(flashcards);
     }
 
     //=========== Filtered Flashcard List Accessors =============================================================
